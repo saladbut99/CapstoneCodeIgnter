@@ -1,0 +1,263 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Roboto&display=swap');
+*{
+  margin:0px;
+  padding:0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+h1{
+  color:white;
+  font-size: 100px;
+}
+
+.bg {
+  background-image:   linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url('website/Banner.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  min-height: 500px;
+  background-attachment: fixed;
+}
+
+.bg{
+  animation-name: example;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes example {
+  0% {background-size:220vh; }
+  50% {background-size:210vh; background-position-y: top;}
+  100%  {background-size:220vh;}
+}
+
+
+.whitebg{
+  height: 100vh;
+  min-height: 500px;
+  transition: all 1s ease;
+}
+
+.reveal{
+  position: relative;
+  transform: translateY(100px);
+  opacity: 0;
+}
+
+.reveal.active{
+  transform: translateY(0px);
+  opacity: 1;
+}
+
+.button{
+  white-space: nowrap;
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 15px;
+  transition: all 0.3s ease 0s;
+  border: 5px solid #59CF02;
+  background: none;
+  color:  white;
+  cursor: pointer;
+  border-radius: 20px;
+}
+.button:hover{
+background-color: #59CF02;
+color:white;
+transition: 1s;
+}
+
+.loginbutton a :hover{
+  font-size: 85px;
+  transition: .2s;
+  text-shadow: 0px 0px 5px #000000, 0px 0px 5px #000000;
+
+}
+
+.formcontainer{
+  background-color: rgba(0,0,0,.7);
+  width: 100%;
+  border: 3px solid #00acee;
+   border-radius: 25px;
+
+}
+.formcontainer .form{
+  width: 100%;
+}
+.formcontainer .form .input_field{
+  margin-bottom: 4%;
+  align-items: center;
+  width: 100%;
+}
+.formcontainer .form .input_field label{
+  width: 170px;
+  color: black;
+  margin-right: 10px;
+  font-size: 17px;
+}
+.formcontainer .form .input_field .input{
+width: 70%;
+height: 60px;
+outline: none;
+border-radius: 20px;
+border:1px solid grey;
+font-size: 20px;
+padding: 8px 10px;
+transition: all 0.3 ease;
+}
+
+.formcontainer .form .input_field .input:focus{
+border: 3px solid  #59CF02;
+border-radius: 20px;
+transition: all 0.3 ease;
+}
+.formcontainer .form .input_field .button{
+  width: 35%;
+  height: 60px;
+  font-size: 20px;
+  transition: all 0.3s ease 0s;
+  border: 2px solid   #59CF02;
+  background: black;
+  color:  white;
+  cursor: pointer;
+  border-radius: 20px;
+  font-weight: bold;
+}
+.formcontainer .form .input_field .button:hover{
+    background: #59CF02;
+    color: white;
+}
+
+.login_a{
+  text-decoration: none;
+  color:white;
+    transition: all 0.3s ease 0s;
+}
+.login_a:hover{
+  color:#00acee;
+}
+.login_image{
+  width: 200px;
+  border-radius: 100%;
+  border: 1px solid rgba(105, 105, 105, 0.1)
+}
+.login_image:hover{
+  border: 5px solid #00acee;
+    transition: all 0.3s ease 0s;
+}
+
+
+.navbar{
+  
+  margin-bottom: 7%;
+}
+
+.nav b{
+  color: white;
+  padding-left: 20px;
+}
+.section{
+  transition: 0s background;
+}
+
+.section:hover {
+  background-color: rgba(3, 37, 108, .9);
+  color: white;
+  transition: all ease-in .3s;
+}
+
+.section1{
+  height: 80vh;
+  width: 70%;
+  margin-inline: auto;
+  margin-bottom: 10%;
+
+}
+.content{
+  border: 1px solid black;
+}
+
+.section1child{
+  height: 60vh;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.dashboard_div{
+  border:3px solid #00acee;
+  margin-bottom: 2%;
+  border-radius: 5%;
+  background-color: #fafdf3;
+  height: auto;
+  max-height: 90%;
+}
+
+.nav_img{
+  border-radius: 100%;
+  border: 3px solid white;
+}
+
+
+.registerbutton:hover{
+  color: white;
+}
+
+.backbutton svg:hover{
+  border-radius: 5px;
+  background: rgb(160, 157, 157);
+  color: rgb(255, 255, 255);
+  transform: scale(1.2);
+}
+
+.backbuttonpos{
+  position: absolute;
+  top: 15%;
+  left: 2%;
+}
+
+.menu{
+  background: rgb(255, 255, 255);
+  height: 16vh;
+  width: 12vw;
+  border: 1px solid black;
+  border-radius: 10px 0px 10px 10px;
+  position: absolute;
+  top: 14%;
+  right: 3%;
+  color: #1d1d1d;
+  display: none;
+}
+
+.menu::before{
+  content: '';
+  position: absolute;
+  top: -7px;
+  width: 12px;
+  right: 13px;
+  height: 12px;
+  background: white;
+  transform: rotate(45deg);
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  z-index: 1;
+}
