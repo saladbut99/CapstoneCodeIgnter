@@ -21,9 +21,9 @@
  <div class="navbar" style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(<?=base_url()?>/assets/images/banner.png);">
         <nav class="nav row w-100 align-items-center">
             <div class="col-10">
-                <a href="home" style="text-decoration: none;"><h1 style="color: black;" onclick="index.html"><b>Pulong</b></h1></a>
+                <a href="home" style="text-decoration: none; font-size:250%;"><b>Pulong</b></a>
             </div>
-            <div class="col-1 text-center">
+            <div class="col-1 text-center ">
                 <p style="color:white;">name</p>
             </div>
             <div class="col-1 text-center">

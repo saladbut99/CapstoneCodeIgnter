@@ -29,17 +29,19 @@ $routes->setAutoRoute(true);
  * --------------------------------------------------------------------
  */
 
-// We get a performance increase by specifying the default
-// route since we don't have to scan directories.
-//$routes->get('/', 'Home::index');
-//
- // $routes->add('admin','Admin::index');
-    //$routes->add('user','Admin\Users::index');
+$routes->add('homepage','MyIndex::showIndex');
+$routes->add('pupil_login','StudentLogin::index');
+$routes->add('teacher_login','TeacherLogin::index');
+$routes->add('admin_login','AdminLogin::index');
+
+//routes for admin page
 $routes->group('admin',function($routes){
-  $routes->add('home','Admin::index');
-  $routes->add('register','Admin::register');
-  $routes->add('viewlessons','Admin::viewlesson');
+ $routes->add('home','Admin::index');
+ $routes->add('register','Admin::register');
+ $routes->add('viewlessons','Admin::viewlesson');
 });
+
+
 
 /*
  * --------------------------------------------------------------------
