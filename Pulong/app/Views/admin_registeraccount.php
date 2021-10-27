@@ -31,16 +31,23 @@
 
                   <div class="form-outline mb-4 row align-items-center">
                     <label class="form-label col-4 p-0" for="form3Example1cg">FIRST NAME</label>
-                    <input type="text" id="teacher_firstname" name='teacher_firstname' class="form-control form-control-lg col" />
+                    <input type="text" id="teacher_firstname" name='teacher_firstname' class="form-control form-control-lg col" onblur="myFunction()"/>
 
                   </div>
 
                   <div class="form-outline mb-4 row align-items-center">
                     <label class="form-label col-4 p-0" for="form3Example3cg">LAST NAME</label>
-                    <input type="text" id="teacher_lastname" name='teacher_lastname' class="form-control form-control-lg col" />
-
+                    <input type="text" id="teacher_lastname" name='teacher_lastname' class="form-control form-control-lg col"  onblur="myFunction()"/>
                   </div>
 
+                  <div class="form-outline mb-4 row align-items-center">
+                        <label class="form-label col-4 p-0" for="form3Example3cg">USERNAME</label>
+                        <input type="text" id="teacher_username" name='teacher_username' class="form-control form-control-lg col" disabled />
+                  </div>
+                  <div class="form-outline mb-4 row align-items-center">
+                        <label class="form-label col-4 p-0" for="form3Example3cg">PASSWORD</label><br>
+                          <p class=" col p-0">Password is auto generated</p>
+                  </div>
 
                   <select class="form-select form-select-md mb-0" name='section_id'>
                   <option disabled selected style="color:grey">Section</option>
@@ -57,6 +64,19 @@
                   </div>
 
                 </form>
+
+                  <script type="text/javascript">
+
+                    function myFunction(){
+                      var firstname = document.getElementById("teacher_firstname").value;
+                      var split = firstname.split(" ");
+                      var joined = split.join('');
+                      var lastname = document.getElementById("teacher_lastname").value;
+                      var username = lastname+'.'+joined;
+                       document.getElementById("teacher_username").value = username;
+                    }
+                  </script>
+
 
               </div>
             </div>

@@ -42,7 +42,7 @@ class Admin extends BaseController
             'rules'=>'required|alpha',
             'label'=>'Teacher Lastname',
           ],
-        //  'section'=>'required',
+          'section'=>'required',
         ];
         if ($this->validate($rules)) {
             //Then do database insertion or loginuser
