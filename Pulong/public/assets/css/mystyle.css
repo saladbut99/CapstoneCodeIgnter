@@ -150,7 +150,7 @@ transition: all 0.3 ease;
 
 
 .navbar{
-  
+
   margin-bottom: 7%;
 }
 
@@ -260,4 +260,10 @@ transition: all 0.3 ease;
   border-top: 1px solid black;
   border-left: 1px solid black;
   z-index: 1;
+}
+
+.check:hover{
+  height: 100%;
+  background-color: green;
+  transition: all ease-in .3s;
 }

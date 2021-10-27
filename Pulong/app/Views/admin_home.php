@@ -42,7 +42,7 @@
                       </svg>
                       <br><br>
                       <p>View Lessons Uploaded by Teachers.</p>
-                    <a href="viewlessons" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> View Lesson</a>
+                    <a href="viewlesson" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> View Lesson</a>
                     </div>
             </div>
 

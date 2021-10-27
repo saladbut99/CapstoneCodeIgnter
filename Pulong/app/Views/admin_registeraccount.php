@@ -19,39 +19,41 @@
                 </div>
 
                 <h2 class="text-uppercase text-center mb-5 col-10">Register Teacher Account</h2>
+                <?php if (isset($validation)): ?>
+                  <center>
+                    <div class="text-danger">
+                      <?= $validation->listErrors() ?>
+                    </div>
+                  </center>
+                <?php endif; ?>
 
-                <form>
+                <form method="post">
 
                   <div class="form-outline mb-4 row align-items-center">
                     <label class="form-label col-4 p-0" for="form3Example1cg">FIRST NAME</label>
-                    <input type="text" id="firstname" class="form-control form-control-lg col" />
+                    <input type="text" id="teacher_firstname" name='teacher_firstname' class="form-control form-control-lg col" />
 
                   </div>
 
                   <div class="form-outline mb-4 row align-items-center">
                     <label class="form-label col-4 p-0" for="form3Example3cg">LAST NAME</label>
-                    <input type="text" id="lastname" class="form-control form-control-lg col" />
+                    <input type="text" id="teacher_lastname" name='teacher_lastname' class="form-control form-control-lg col" />
 
                   </div>
 
-                  <div class="form-outline mb-4 row align-items-center">
-                    <label class="form-label col-4 p-0" for="form3Example4cg">USERNAME</label>
-                    <input type="text" id="username" class="form-control form-control-lg col" />
 
-                  </div>
-
-                  <select class="form-select form-select-md mb-0">
-                    <option selected>SECTION</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                  <select class="form-select form-select-md mb-0" name='section_id'>
+                  <option disabled selected style="color:grey">Section</option>
+                  <?php $i=1; foreach ($section as $sec): ?>
+                    <option  value="<?= $i; $i++;?>"><?= $sec ?></option>
+                  <?php endforeach; ?>
                   </select>
 
                   <div class="form-check d-flex justify-content-center mb-5">
                   </div>
 
                   <div class="d-flex justify-content-center">
-                    <button type="button" class="btn btn-outline-success btn-block btn-lg registerbutton">Register</button>
+                    <button type="submit" class="btn btn-outline-success btn-block btn-lg registerbutton">Register</button>
                   </div>
 
                 </form>

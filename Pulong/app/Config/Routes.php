@@ -37,8 +37,10 @@ $routes->add('admin_login','AdminLogin::index');
 //routes for admin page
 $routes->group('admin',function($routes){
  $routes->add('home','Admin::index');
- $routes->add('register','Admin::register');
- $routes->add('viewlessons','Admin::viewlesson');
+ // $routes->add('register','Admin::register');
+ // $routes->add('viewlessons','Admin::viewlesson');
+ $routes->add('viewmodule','Admin::viewmodule');
+  $routes->add('viewcontent','Admin::viewcontent');
 });
 
 
