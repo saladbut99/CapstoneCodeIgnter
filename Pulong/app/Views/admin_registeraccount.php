@@ -1,7 +1,21 @@
 <?= $this->extend('layouts/main') ?>
 <?= $this->section('content') ?>
 
-
+<div class="navbar" style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(<?=base_url()?>/public/assets/images/banner.png);">
+       <nav class="nav row w-100 align-items-center">
+           <div class="col-10">
+               <a href="home" style="text-decoration: none; font-size:250%;"><b>Pulong</b></a>
+           </div>
+           <div class="col-1 text-center ">
+               <p style="color:white;">name</p>
+           </div>
+           <div class="col-1 text-center">
+               <div>
+                   <a href=""><img src="<?=base_url()?>/public/assets/images/admin.png" alt="" class="nav_img" height="60" width="60"></a>
+               </div>
+           </div>
+       </nav>
+   </div>
 <div class="mask d-flex align-items-center h-100 gradient-custom-3 mb-5">
       <div class="container h-100" >
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -42,7 +56,7 @@
 
                   <div class="form-outline mb-4 row align-items-center">
                         <label class="form-label col-4 p-0" for="form3Example3cg">USERNAME</label>
-                        <input type="text" id="teacher_username" name='teacher_username' class="form-control form-control-lg col" disabled />
+                        <input type="text" id="teacher_username" name='teacher_username' class="form-control form-control-lg col" readonly />
                   </div>
                   <div class="form-outline mb-4 row align-items-center">
                         <label class="form-label col-4 p-0" for="form3Example3cg">PASSWORD</label><br>
@@ -50,7 +64,7 @@
                   </div>
 
                   <select class="form-select form-select-md mb-0" name='section_id'>
-                  <option disabled selected style="color:grey">Section</option>
+                  <option disabled  selected style="color:grey">Section</option>
                   <?php $i=1; foreach ($section as $sec): ?>
                     <option  value="<?= $i; $i++;?>"><?= $sec ?></option>
                   <?php endforeach; ?>

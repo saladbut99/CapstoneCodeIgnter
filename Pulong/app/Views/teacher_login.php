@@ -17,17 +17,17 @@
 
                 <div class="col-md text-center">
 
-                      <a href="pupil_login"><img src="<?=base_url()?>/assets/images/student_logo.png" class="login_image"></a>
+                      <a href="pupil_login"><img src="<?=base_url()?>/public/assets/images/student_logo.png" class="login_image"></a>
                       <br>
                       <h1 href="pupil_login.php" style="font-size:30px;"><b>Pupil</b></h1>
                 </div>
                 <div class="col-md text-center">
-                      <a href="teacher_login"><img src="<?=base_url()?>/assets/images/teacher.png" class="login_image" alt="" style="border: 5px solid #59CF02;"></a>
+                      <a href="teacher_login"><img src="<?=base_url()?>/public/assets/images/teacher.png" class="login_image" alt="" style="border: 5px solid #59CF02;"></a>
                       <br>
                       <h1 href="pupil_login.php" style="font-size:30px;color: #59CF02;"><b>Teacher</b></h1>
                 </div>
                 <div class="col-md text-center">
-                      <a href="admin_login"><img src="<?=base_url()?>/assets/images/admin.png" class="login_image" alt=""></a>
+                      <a href="admin_login"><img src="<?=base_url()?>/public/assets/images/admin.png" class="login_image" alt=""></a>
                       <br>
                       <h1 href="pupil_login.php" style="font-size:30px;"><b>Admin</b></h1>
                 </div>

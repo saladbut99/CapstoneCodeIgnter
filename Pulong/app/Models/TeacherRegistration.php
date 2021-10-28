@@ -50,7 +50,8 @@ class TeacherRegistration extends Model
       $merge=$username;
       $finalmerge='.'.$merge;
       $mergeusername=$data['data']['teacher_lastname'].$finalmerge;
-      // $data['data']['teacher_username']=$mergeusername;
+      $getuser= $data['data']['teacher_username'];
+      $data['data']['teacher_username']=$getuser;
       $data['data']['teacher_password']=password_hash($mergeusername, PASSWORD_DEFAULT);
 
       $secid=$data['data']['section_id'];

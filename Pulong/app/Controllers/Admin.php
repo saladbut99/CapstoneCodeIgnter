@@ -42,7 +42,19 @@ class Admin extends BaseController
             'rules'=>'required|alpha',
             'label'=>'Teacher Lastname',
           ],
-          'section'=>'required',
+
+          'teacher_username'=>[
+            'rules'=>'is_unique[teacher.teacher_username]',
+            'label'=>'Teacher Username',
+            'errors'=>[
+                  'is_unique' => 'Username already taken please check for existing teacher account.',
+                ]
+          ],
+
+          'section_id'=>[
+            'rules'=>'required',
+            'label'=>'Section',
+          ],
         ];
         if ($this->validate($rules)) {
             //Then do database insertion or loginuser
