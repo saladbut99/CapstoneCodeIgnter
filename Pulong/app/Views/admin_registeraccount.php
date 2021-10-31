@@ -16,7 +16,7 @@
            </div>
        </nav>
    </div>
-<div class="mask d-flex align-items-center h-100 gradient-custom-3 mb-5">
+<div class="mask d-flex align-items-center h-100 gradient-custom-3 m-5 pb-5">
       <div class="container h-100" >
         <div class="row d-flex justify-content-center align-items-center h-100">
           <div class="col-12 col-md-9 col-lg-7 col-xl-6">
@@ -33,30 +33,49 @@
                 </div>
 
                 <h2 class="text-uppercase text-center mb-5 col-10">Register Teacher Account</h2>
-                <?php if (isset($validation)): ?>
-                  <center>
-                    <div class="text-danger">
-                      <?= $validation->listErrors() ?>
-                    </div>
-                  </center>
-                <?php endif; ?>
 
                 <form method="post">
 
                   <div class="form-outline mb-4 row align-items-center">
                     <label class="form-label col-4 p-0" for="form3Example1cg">FIRST NAME</label>
                     <input type="text" id="teacher_firstname" name='teacher_firstname' class="form-control form-control-lg col" onblur="myFunction()"/>
-
+                    <center>
+                    <div class="text-danger" style="margin-top:3%;">
+                      <?php if (isset($validation)): ?>
+                            <?php if ($validation->hasError('teacher_firstname')): ?>
+                                  <p>  <?= $validation->getError('teacher_firstname') ?></p>
+                            <?php endif; ?>
+                      <?php endif; ?>
+                    </div>
+                  </center>
                   </div>
 
                   <div class="form-outline mb-4 row align-items-center">
                     <label class="form-label col-4 p-0" for="form3Example3cg">LAST NAME</label>
                     <input type="text" id="teacher_lastname" name='teacher_lastname' class="form-control form-control-lg col"  onblur="myFunction()"/>
+                    <center>
+                    <div class="text-danger" style="margin-top:3%;">
+                      <?php if (isset($validation)): ?>
+                            <?php if ($validation->hasError('teacher_lastname')): ?>
+                                  <p>  <?= $validation->getError('teacher_lastname') ?></p>
+                            <?php endif; ?>
+                      <?php endif; ?>
+                    </div>
+                  </center>
                   </div>
 
                   <div class="form-outline mb-4 row align-items-center">
                         <label class="form-label col-4 p-0" for="form3Example3cg">USERNAME</label>
                         <input type="text" id="teacher_username" name='teacher_username' class="form-control form-control-lg col" readonly />
+                        <center>
+                        <div class="text-danger" style="margin-top:3%;">
+                          <?php if (isset($validation)): ?>
+                                <?php if ($validation->hasError('teacher_username')): ?>
+                                      <p>  <?= $validation->getError('teacher_username') ?></p>
+                                <?php endif; ?>
+                          <?php endif; ?>
+                        </div>
+                      </center>
                   </div>
                   <div class="form-outline mb-4 row align-items-center">
                         <label class="form-label col-4 p-0" for="form3Example3cg">PASSWORD</label><br>
@@ -69,6 +88,15 @@
                     <option  value="<?= $i; $i++;?>"><?= $sec ?></option>
                   <?php endforeach; ?>
                   </select>
+                  <center>
+                  <div class="text-danger" style="margin-top:3%;">
+                    <?php if (isset($validation)): ?>
+                          <?php if ($validation->hasError('section_id')): ?>
+                                <p>  <?= $validation->getError('section_id') ?></p>
+                          <?php endif; ?>
+                    <?php endif; ?>
+                  </div>
+                </center>
 
                   <div class="form-check d-flex justify-content-center mb-5">
                   </div>

@@ -151,7 +151,7 @@ transition: all 0.3 ease;
 
 .navbar{
 
-  margin-bottom: 7%;
+  margin-bottom: 4%;
 }
 
 .nav b{
@@ -262,8 +262,9 @@ transition: all 0.3 ease;
   z-index: 1;
 }
 
-.check:hover{
-  height: 100%;
+.check svg:hover{
+
   background-color: green;
   transition: all ease-in .3s;
+  fill:white;
 }

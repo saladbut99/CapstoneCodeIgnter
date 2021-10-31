@@ -59,7 +59,7 @@ class Admin extends BaseController
         if ($this->validate($rules)) {
             //Then do database insertion or loginuser
             $model->save($_POST);
-             return redirect()->to('admin/succes');
+             return redirect()->to('admin/success');
 
             // echo '<script type="text/javascript">
             //       alert("Account Creation Successful!");
@@ -97,7 +97,7 @@ class Admin extends BaseController
       return view('admin_viewcontent', $title);
     }
 
-    public function succes(){
+    public function success(){
       $title=[
         'meta_title'=>'Success'
       ];
