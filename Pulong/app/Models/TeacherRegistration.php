@@ -25,7 +25,7 @@ class TeacherRegistration extends Model
     //
     // protected $validationRules    = [];
     // protected $validationMessages = [];
-    // protected $skipValidation     = false;
+    // protected $skipValidation      = false;
 
     // //beforeinsert everytime you are going to insert checkName function is executed
      protected $beforeInsert = ['checkName'];

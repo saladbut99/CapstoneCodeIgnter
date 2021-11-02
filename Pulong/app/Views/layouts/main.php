@@ -13,7 +13,8 @@
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
         crossorigin="anonymous">
     </script>
-    <script src="jquery.js"></script>
+    <script src="<?php echo base_url('/public/assets/js/jquery.js'); ?>"></script>
+    
 
 </head>
 <body>
