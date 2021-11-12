@@ -4,7 +4,7 @@
 <div class="navbar" style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(<?=base_url()?>/public/assets/images/banner.png);">
        <nav class="nav row w-100 align-items-center">
            <div class="col-10">
-               <a href="home" style="text-decoration: none; font-size:250%;"><b>Pulong</b></a>
+               <a href="AdminDashboard" style="text-decoration: none; font-size:250%;"><b>Pulong</b></a>
            </div>
            <div class="col-1 text-center ">
                <p style="color:white;">name</p>
@@ -29,7 +29,7 @@
                   </svg>
                   <br><br>
                   <p>Register a Teacher Account.</p>
-                <a href="register" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> Register an Account</a>
+                <a href="AdminRegister" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> Register an Account</a>
                 </div>
             </div>
 
@@ -56,7 +56,7 @@
                       </svg>
                       <br><br>
                       <p>View Lessons Uploaded by Teachers.</p>
-                    <a href="viewlesson" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> View Lesson</a>
+                    <a href="AdminViewlessons" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> View Lesson</a>
                     </div>
             </div>
 

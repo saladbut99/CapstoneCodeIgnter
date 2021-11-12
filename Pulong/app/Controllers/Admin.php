@@ -59,7 +59,9 @@ class Admin extends BaseController
         if ($this->validate($rules)) {
             //Then do database insertion or loginuser
             $model->save($_POST);
-             return redirect()->to('admin/success');
+            $session = session();
+            $session->setFlashdata('success','Teacher Registration Successful ');
+             return redirect()->to('AdminRegister');
 
             // echo '<script type="text/javascript">
             //       alert("Account Creation Successful!");

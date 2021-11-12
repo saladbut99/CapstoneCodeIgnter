@@ -35,13 +35,14 @@ $routes->add('teacher_login','TeacherLogin::index');
 $routes->add('admin_login','AdminLogin::index');
 
 //routes for admin page
-$routes->group('admin',function($routes){
- $routes->add('home','Admin::index');
- // $routes->add('register','Admin::register');
- // $routes->add('viewlessons','Admin::viewlesson');
- $routes->add('viewmodule','Admin::viewmodule');
-  $routes->add('viewcontent','Admin::viewcontent');
-});
+// $routes->group('admin',function($routes){
+$routes->add('AdminDashboard','Admin::index');
+//$routes->add('AdminRegister','Admin::register');
+$routes->match(['get','post'],'AdminRegister','Admin::register');
+$routes->add('AdminViewlessons','Admin::viewlesson');
+$routes->add('AdminViewmodule','Admin::viewmodule');
+$routes->add('AdminViewcontent','Admin::viewcontent');
+// });
 
 
 

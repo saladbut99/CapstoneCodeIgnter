@@ -31,7 +31,7 @@ class TeacherRegistration extends Model
      protected $beforeInsert = ['checkName'];
 
     //$data variable below is the data that is being submitted
-    public function checkName(array $data){
+    protected function checkName(array $data){
 
       $data['data']['teacher_firstname'] = trim($data['data']['teacher_firstname']);
       $capital=$data['data']['teacher_firstname'];
