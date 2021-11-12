@@ -238,12 +238,12 @@ transition: all 0.3 ease;
 .menu{
   background: rgb(255, 255, 255);
   height: 16vh;
-  width: 12vw;
+  min-width: 12vw;
   border: 1px solid black;
   border-radius: 10px 0px 10px 10px;
   position: absolute;
   top: 14%;
-  right: 3%;
+  right: 4%;
   color: #1d1d1d;
   display: none;
 }
