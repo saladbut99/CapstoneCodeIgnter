@@ -30,19 +30,25 @@ $routes->setAutoRoute(true);
  */
 
 $routes->add('homepage','MyIndex::showIndex');
-$routes->add('pupil_login','StudentLogin::index');
-$routes->add('teacher_login','TeacherLogin::index');
-$routes->add('admin_login','AdminLogin::index');
+//$routes->match(['get','post'],'login','Users::index',['filter'=>'Noauth']);
+// $routes->add('pupil_login','Student::login');
+// $routes->add('teacher_login','Teacher::login');
+//$routes->add('admin_login','Admin::login');
+$routes->match(['get','post'],'admin_login','Admin::login');
+$routes->match(['get','post'],'teacher_login','Teacher::login');
+$routes->match(['get','post'],'pupil_login','Student::login');
+
 
 //routes for admin page
-// $routes->group('admin',function($routes){
-$routes->add('AdminDashboard','Admin::index');
-//$routes->add('AdminRegister','Admin::register');
-$routes->match(['get','post'],'AdminRegister','Admin::register');
-$routes->add('AdminViewlessons','Admin::viewlesson');
-$routes->add('AdminViewmodule','Admin::viewmodule');
-$routes->add('AdminViewcontent','Admin::viewcontent');
-// });
+$routes->group('admin', ["filter" => 'Auth'], function($routes){
+ $routes->add('home','Admin::index');
+ // $routes->add('register','Admin::register');
+ $routes->match(['get','post'],'register','Admin::register');
+  $routes->add('viewlessons','Admin::viewlesson');
+ $routes->add('viewmodule','Admin::viewmodule');
+  $routes->add('viewcontent','Admin::viewcontent');
+    $routes->get('logout', 'Admin::logout');
+});
 
 
 

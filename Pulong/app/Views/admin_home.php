@@ -4,21 +4,15 @@
 
 <div class="navbar" style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(<?=base_url()?>/public/assets/images/banner.png);">
        <nav class="nav row w-100 align-items-center">
-<<<<<<< HEAD
-           <div class="col-10">
-               <a href="AdminDashboard" style="text-decoration: none; font-size:250%;"><b>Pulong</b></a>
-=======
            <div class="col-7">
                <a href="home" style="text-decoration: none; font-size:250%;"><b>Pulong</b></a>
->>>>>>> c52cbc7b0313844aa2bfbd230e81393d85f3ec90
            </div>
            <div class="col-4 text-center pt-3">
-               <p style="color:white; text-align:right;">name</p>
+               <p style="color:white; text-align:right;"><?= session()->get('firstname') ?> <?= session()->get('lastname') ?></p>
            </div>
            <div class="col-1 p-0 text-center">
                <div style="margin-right: 0%;">
                    <a href="#" class="dropdown"><img src="<?=base_url()?>/public/assets/images/admin.png" alt="" class="nav_img" height="60" width="60"></a>
-                    
                 </div>
            </div>
        </nav>
@@ -26,12 +20,12 @@
    <div class="menu p-2 text-center">
       <div class="pt-3" style="cursor:pointer;">
         Update Password
-        </div>                            
-        <div class="" style="cursor:pointer;">
-        Logout              
-        </div>                            
+        </div>
+        <div class="">
+        <a href="logout">Logout</a>
+        </div>
    </div>
-   
+
 
 <center>
     <div class="formcontainer m-5 pb-5" style="max-width:80%; background-color: white; border:none;">
@@ -46,7 +40,7 @@
                   </svg>
                   <br><br>
                   <p>Register a Teacher Account.</p>
-                <a href="AdminRegister" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> Register an Account</a>
+                <a href="register" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> Register an Account</a>
                 </div>
             </div>
 
@@ -73,7 +67,7 @@
                       </svg>
                       <br><br>
                       <p>View Lessons Uploaded by Teachers.</p>
-                    <a href="AdminViewlessons" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> View Lesson</a>
+                    <a href="viewlessons" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> View Lesson</a>
                     </div>
             </div>
 

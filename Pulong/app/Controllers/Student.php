@@ -2,9 +2,10 @@
 
 namespace App\Controllers;
 
-class StudentLogin extends BaseController
+class Student extends BaseController
 {
-    public function index()
+
+    public function login()
     {
       return view('pupil_login');
     }

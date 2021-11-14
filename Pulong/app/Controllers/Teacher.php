@@ -2,9 +2,9 @@
 
 namespace App\Controllers;
 
-class TeacherLogin extends BaseController
+class Teacher extends BaseController
 {
-    public function index()
+    public function login()
     {
       return view('teacher_login');
     }

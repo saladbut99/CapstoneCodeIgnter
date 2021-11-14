@@ -33,22 +33,37 @@
                 </div>
           </div>
           <br><br><br>
+          <?php if (isset($validation)): ?>
+              <div class="col-12" style="margin-bottom:5%;">
+                <div class="alert alert-danger" role="aler">
+                  <?php if ($validation->hasError('password')): ?>
+                          <p>  <?= $validation->getError('password') ?></p>
+                  <?php endif; ?>
+                  <?php if ($validation->hasError('username')): ?>
+                          <p>  <?= $validation->getError('username') ?></p>
+                  <?php endif; ?>
+                    </div>
+                </div>
+            <?php endif; ?>
           <div class="row h-100 align-items-center">
             <div class="col-md text-center">
-                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+                <form action="pupil_login" method="post">
                   <div class="form">
-                    <span class="error"><?php// echo $mainErr;?></span>
+                    <div class="input_field">
+                      <input  type="text" name="usertype" class="input" readonly value="Pupil">
+                    </div>
+                    <span class="error">
                     <div class="input_field">
                       <input  type="text" name="email" class="input" placeholder="Username">
                     </div>
-                    <span class="error"><?php //echo $emailErr;?></span>
+                    <span class="error">
                     <div class="input_field">
                       <input  type="password" name="password"class="input" placeholder="Password">
                     </div>
-                    <span class="error"><?php// echo $passwordErr;?></span>
+                    <span class="error">
                     <center>
                       <div class="input_field" >
-                        <input type="submit" name="Submit" target="_self" class="button">
+                        <input type="submit" name="Submit" class="button">
                       </div>
                     </center>
             </div>

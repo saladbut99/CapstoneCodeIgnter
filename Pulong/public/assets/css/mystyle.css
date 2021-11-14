@@ -7,9 +7,10 @@
 }
 
 h1{
-  color:white;
+  color:black;
   font-size: 100px;
 }
+
 
 .bg {
   background-image:   linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url('website/Banner.png');
@@ -77,7 +78,7 @@ transition: 1s;
 }
 
 .formcontainer{
-  background-color: rgba(0,0,0,.7);
+  background-color: white;
   width: 100%;
   border: 3px solid #00acee;
    border-radius: 25px;
@@ -119,8 +120,8 @@ transition: all 0.3 ease;
   font-size: 20px;
   transition: all 0.3s ease 0s;
   border: 2px solid   #59CF02;
-  background: black;
-  color:  white;
+  background: white;
+  color:  black;
   cursor: pointer;
   border-radius: 20px;
   font-weight: bold;
@@ -132,7 +133,7 @@ transition: all 0.3 ease;
 
 .login_a{
   text-decoration: none;
-  color:white;
+  color:black;
     transition: all 0.3s ease 0s;
 }
 .login_a:hover{

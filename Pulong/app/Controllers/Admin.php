@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\TeacherRegistration;
-
+use App\Models\AdminModel;
 class Admin extends BaseController
 {
     public function index()
@@ -61,7 +61,7 @@ class Admin extends BaseController
             $model->save($_POST);
             $session = session();
             $session->setFlashdata('success','Teacher Registration Successful ');
-             return redirect()->to('AdminRegister');
+             return redirect()->to('admin/register');
 
             // echo '<script type="text/javascript">
             //       alert("Account Creation Successful!");
@@ -105,5 +105,69 @@ class Admin extends BaseController
       ];
         return view('admin_success',$title);
     }
+    public function login()
+    {
+      $data=[];
+        helper(['form']);
+        if ($this->request->getMethod()=='post') {
+          //lets to the validation
+          $rules=[
+
+            'username'=>[
+              'rules'=>'required|min_length[6]|max_length[50]',
+            ],
+            'password'=>[
+              'rules'=>'required|min_length[8]|max_length[255]|validateUser[username,password]',
+            ],
+          ];
+
+          $errors=[
+            'password'=>[
+              'validateUser'=> 'Username or Password does not match',
+            ]
+          ];
+
+          if (! $this->validate($rules, $errors)) {
+            $data['validation']=$this->validator;
+
+          }else {
+            //store user data into the database
+            $model = new AdminModel();
+            $user = $model->where('admin_username',$this->request->getVar('username'))
+                            ->first();
+          //get the value of the user type from the form after pass it to the array
+          $type=$this->request->getVar('usertype');
+          //this array bellow ang gamiton if naay user type
+          $this->setUserSession($user,$type);
+      //   $this->setUserSession($user);
+
+            // ];
+            // $model->save($newData);
+            // $session = session();
+            // $session->setFlashdata('success','Successful Registration');
+              //return redirect()->to('dashboard');
+              return redirect()->to('admin/home');
+           }
+
+        }
+      return view('admin_login',$data);
+    }
+private function setUserSession($user,$type){
+ $data = [
+   't_id'=> $user['admin_id'],
+   'firstname'=> $user['admin_firstname'],
+   'lastname'=> $user['admin_lastname'],
+   //'email'=> $user['email'],
+   'isLoggedIn'=> true,
+   'usertype'=> $type,
+ ];
+ session()->set($data);
+ return true;
+}
+public function logout(){
+    session()->destroy();
+    return redirect()->to('homepage');
+  }
+
 
 }
