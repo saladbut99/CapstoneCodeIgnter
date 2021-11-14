@@ -12,7 +12,7 @@
            </div>
            <div class="col-1 p-0 text-center">
                <div style="margin-right: 0%;">
-                   <a href="#" class="dropdown"><img src="<?=base_url()?>/public/assets/images/pupil.png" alt="" class="nav_img" height="60" width="60"></a>
+                   <a href="#" class="dropdown"><img src="<?=base_url()?>/public/assets/images/student_logo.png" alt="" class="nav_img" height="60" width="60"></a>
                 </div>
            </div>
        </nav>
@@ -21,14 +21,15 @@
       <div class="pt-3" style="cursor:pointer;">
         Update Password
         </div>
-        <div class="" style="cursor:pointer;">
-        Logout
+        <div class="">
+        <a href="logout">Logout</a>
         </div>
    </div>
 
 
 <center>
   <h1>PUPIL</h1>
+  <a href="view">View</a>
 </center>
 
 <script>

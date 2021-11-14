@@ -28,8 +28,8 @@
 
 
 <center>
-  <h1>Teacher</h1>
-  <a href="view">View</a>
+  <h1>Teacher VIew</h1>
+  <a href="home">Home</a>
   </center>
 
 <script>

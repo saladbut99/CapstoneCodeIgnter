@@ -8,6 +8,13 @@ class Admin extends BaseController
 {
     public function index()
     {
+      $type = session()->get('usertype');
+       if ($type!='Admin' && $type=='Teacher'){
+          return redirect()->to('teacher/home');
+        //  echo "hello";
+      }else if ($type!='Admin' && $type=='Pupil') {
+         return redirect()->to('pupil/home');
+       }
       $title=[
         'meta_title'=>'Admin | Home'
       ];
@@ -16,6 +23,13 @@ class Admin extends BaseController
     }
 
     public function register(){
+      $type = session()->get('usertype');
+       if ($type!='Admin' && $type=='Teacher'){
+          return redirect()->to('teacher/home');
+        //  echo "hello";
+      }else if ($type!='Admin' && $type=='Pupil') {
+         return redirect()->to('pupil/home');
+       }
       helper(['form']);
       $data=[
         'meta_title'=>'Admin | Register',
@@ -79,6 +93,13 @@ class Admin extends BaseController
     }
 
     public function viewlesson(){
+      $type = session()->get('usertype');
+       if ($type!='Admin' && $type=='Teacher'){
+          return redirect()->to('teacher/home');
+        //  echo "hello";
+      }else if ($type!='Admin' && $type=='Pupil') {
+         return redirect()->to('pupil/home');
+       }
       $title=[
         'meta_title'=>'Admin | View Lesson'
       ];
@@ -86,6 +107,13 @@ class Admin extends BaseController
     }
 
     public function viewmodule(){
+      $type = session()->get('usertype');
+       if ($type!='Admin' && $type=='Teacher'){
+          return redirect()->to('teacher/home');
+        //  echo "hello";
+      }else if ($type!='Admin' && $type=='Pupil') {
+         return redirect()->to('pupil/home');
+       }
       $title=[
         'meta_title'=>'Admin | Module'
       ];
@@ -93,6 +121,13 @@ class Admin extends BaseController
     }
 
     public function viewcontent(){
+      $type = session()->get('usertype');
+       if ($type!='Admin' && $type=='Teacher'){
+          return redirect()->to('teacher/home');
+        //  echo "hello";
+      }else if ($type!='Admin' && $type=='Pupil') {
+         return redirect()->to('pupil/home');
+       }
       $title=[
         'meta_title'=>'Admin | Content'
       ];

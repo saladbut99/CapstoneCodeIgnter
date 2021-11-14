@@ -54,7 +54,7 @@
                     </div>
                     <span class="error">
                     <div class="input_field">
-                      <input  type="text" name="email" class="input" placeholder="Username">
+                      <input  type="text" name="username" class="input" placeholder="Username">
                     </div>
                     <span class="error">
                     <div class="input_field">

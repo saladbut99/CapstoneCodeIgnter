@@ -4,10 +4,10 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class AdminModel extends Model
+class TeacherModel extends Model
 {
-    protected $table      = 'admin';
-    protected $primaryKey = 'admin_id';
+    protected $table      = 'teacher';
+    protected $primaryKey = 'teacher_id';
 
     protected $useAutoIncrement = true;
 
@@ -15,7 +15,7 @@ class AdminModel extends Model
     // protected $useSoftDeletes = true;
 
     //list of fields that can be manipulated from an outside class
-    protected $allowedFields = ['admin_firstname', 'admin_lastname','admin_username','teacher_password'];
+    protected $allowedFields = ['teacher_firstname', 'teacher_lastname','teacher_username','section_id', 'teacher_password'];
 
     //specify dates
     // protected $useTimestamps = true;
@@ -28,9 +28,9 @@ class AdminModel extends Model
     // protected $skipValidation      = false;
 
     // //beforeinsert everytime you are going to insert checkName function is executed
-    // protected $beforeInsert = ['checkName'];
-
-    //$data variable below is the data that is being submitted
+    //  protected $beforeInsert = ['checkName'];
+    //
+    // //$data variable below is the data that is being submitted
     // protected function checkName(array $data){
     //
     //   $data['data']['teacher_firstname'] = trim($data['data']['teacher_firstname']);
