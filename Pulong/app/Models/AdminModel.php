@@ -15,7 +15,7 @@ class AdminModel extends Model
     // protected $useSoftDeletes = true;
 
     //list of fields that can be manipulated from an outside class
-    protected $allowedFields = ['admin_firstname', 'admin_lastname','admin_username','teacher_password'];
+    protected $allowedFields = ['admin_firstname', 'admin_lastname','admin_username','admin_password'];
 
     //specify dates
     // protected $useTimestamps = true;
@@ -28,8 +28,8 @@ class AdminModel extends Model
     // protected $skipValidation      = false;
 
     // //beforeinsert everytime you are going to insert checkName function is executed
-    // protected $beforeInsert = ['checkName'];
-
+    // protected $beforeInsert = ['hashPassword'];
+     protected $beforeUpdate = ['hashPassword'];
     //$data variable below is the data that is being submitted
     // protected function checkName(array $data){
     //
@@ -60,10 +60,9 @@ class AdminModel extends Model
     //
     //   return $data;
     // }
-
-
-
-    // public function hashPassword(array $data){
-    //   $data['data']['password'] = password_hash($data['data']['password'], PASSWORD_DEFAULT);
-    // }
+    public function hashPassword(array $data){
+      $data['data']['admin_password'] = password_hash($data['data']['admin_password'], PASSWORD_DEFAULT);
+    //  echo "hellloo";
+      return $data;
+    }
 }

@@ -187,9 +187,11 @@ class Admin extends BaseController
         }
       return view('admin_login',$data);
     }
+
 private function setUserSession($user,$type){
  $data = [
    't_id'=> $user['admin_id'],
+   'username'=> $user['admin_username'],
    'firstname'=> $user['admin_firstname'],
    'lastname'=> $user['admin_lastname'],
    //'email'=> $user['email'],
@@ -199,9 +201,60 @@ private function setUserSession($user,$type){
  session()->set($data);
  return true;
 }
+
 public function logout(){
     session()->destroy();
     return redirect()->to('homepage');
+  }
+
+
+public function update(){
+    $type = session()->get('usertype');
+     if ($type!='Admin' && $type=='Teacher'){
+        return redirect()->to('teacher/home');
+      //  echo "hello";
+    }else if ($type!='Admin' && $type=='Pupil') {
+       return redirect()->to('pupil/home');
+     }
+    helper(['form']);
+    $data=[
+      'meta_title'=>'Admin | Update Password',
+    ];
+
+    if ($this->request->getMethod()=='post') {
+      $model = new AdminModel();
+      $rules=[
+        'password'=>[
+            'rules'=>'required|min_length[8]|max_length[255]',
+            'label'=>'Password',
+        ],
+        'password_confirm'=>[
+            'rules'=>'matches[password]',
+            'label'=>'Confirm Password',
+        ],
+      ];
+      if ($this->validate($rules)) {
+          //Then do database insertion or loginuser
+          $newData=[
+            'admin_id' => session()->get('t_id'),
+            'admin_password'=>$this->request->getPost('password'),
+
+          ];
+          $model->save($newData);
+          $session = session();
+          $session->setFlashdata('updatesuccess','Password Update Successful ');
+           return redirect()->to('admin/update');
+
+          // echo '<script type="text/javascript">
+          //       alert("Account Creation Successful!");
+          //       </script>';
+      }else{
+        //if validation is not successfull
+        //validator provies a list of errors
+        $data['validation']=$this->validator;
+      }
+    }
+     return view('admin_update', $data);
   }
 
 
