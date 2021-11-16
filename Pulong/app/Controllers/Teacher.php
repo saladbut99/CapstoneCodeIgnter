@@ -85,23 +85,72 @@ class Teacher extends BaseController
     }
     return view('teacher_login',$data);
   }
-    private function setUserSession($user,$type){
+private function setUserSession($user,$type){
      $data = [
        't_id'=> $user['teacher_id'],
        'firstname'=> $user['teacher_firstname'],
        'lastname'=> $user['teacher_lastname'],
-       //'email'=> $user['email'],
+       'username'=> $user['teacher_username'],
        'isLoggedIn'=> true,
        'usertype'=> $type,
      ];
      session()->set($data);
      return true;
-    }
+}
 
-    public function logout(){
+public function logout(){
         session()->destroy();
         return redirect()->to('homepage');
+  }
+
+public function update(){
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+      helper(['form']);
+      $data=[
+        'meta_title'=>'Teacher | Update Password',
+      ];
+
+      if ($this->request->getMethod()=='post') {
+        $model = new TeacherModel();
+        $rules=[
+          'password'=>[
+              'rules'=>'required|min_length[8]|max_length[255]',
+              'label'=>'Password',
+          ],
+          'password_confirm'=>[
+              'rules'=>'matches[password]',
+              'label'=>'Confirm Password',
+          ],
+        ];
+        if ($this->validate($rules)) {
+            //Then do database insertion or loginuser
+            $newData=[
+              'teacher_id' => session()->get('t_id'),
+              'teacher_password'=>$this->request->getPost('password'),
+
+            ];
+            $model->save($newData);
+            $session = session();
+            $session->setFlashdata('updatesuccess','Password Update Successful ');
+             return redirect()->to('teacher/update');
+
+            // echo '<script type="text/javascript">
+            //       alert("Account Creation Successful!");
+            //       </script>';
+        }else{
+          //if validation is not successfull
+          //validator provies a list of errors
+          $data['validation']=$this->validator;
+        }
       }
+       return view('teacher_update', $data);
+}
 
 
 }

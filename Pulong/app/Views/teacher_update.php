@@ -11,7 +11,7 @@
            </div>
            <div class="col-1 p-0 text-center">
                <div style="margin-right: 0%;">
-                   <a href="#" class="dropdown"><img src="<?=base_url()?>/public/assets/images/admin.png" alt="" class="nav_img" height="60" width="60"></a>
+                   <a href="#" class="dropdown"><img src="<?=base_url()?>/public/assets/images/teacher.png" alt="" class="nav_img" height="60" width="60"></a>
                 </div>
            </div>
        </nav>
@@ -113,13 +113,18 @@
                       <label class="form-label col-4 p-0" for="form3Example3cg">NEW PASSWORD</label>
                       <input type="password" id="teacher_lastname" name='password' class="form-control form-control-lg col"  />
                       <center>
+
                     </div>
                     <div class="form-outline mb-4 row align-items-center">
                       <label class="form-label col-4 p-0" for="form3Example3cg">CONFIRM PASSWORD</label>
                       <input type="password" id="teacher_lastname" name='password_confirm' class="form-control form-control-lg col"  />
-                      <center
-                    </center>
-                    </div>
+                      <center>
+                      <div class="text-danger" style="margin-top:3%;">
+
+                  </div>
+                </center>
+
+              
 
                   <div class="d-flex justify-content-center">
                     <button type="submit" class="btn btn-outline-primary btn-block btn-lg registerbutton">Update</button>

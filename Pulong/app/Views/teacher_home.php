@@ -8,7 +8,7 @@
                <a href="home" style="text-decoration: none; font-size:250%;"><b>Pulong</b></a>
            </div>
            <div class="col-4 text-center pt-3">
-               <p style="color:white; text-align:right;">name</p>
+               <p style="color:white; text-align:right;"><?= session()->get('firstname') ?> <?= session()->get('lastname') ?></p>
            </div>
            <div class="col-1 p-0 text-center">
                <div style="margin-right: 0%;">
@@ -18,9 +18,9 @@
        </nav>
    </div>
    <div class="menu p-2 text-center">
-      <div class="pt-3" style="cursor:pointer;">
-        Update Password
-        </div>
+     <div class="pt-3" style="cursor:pointer;">
+       <a href="update">Update Password</a>
+       </div>
         <div class="">
         <a href="logout">Logout</a>
         </div>

@@ -26,7 +26,7 @@ class TeacherModel extends Model
     // protected $validationRules    = [];
     // protected $validationMessages = [];
     // protected $skipValidation      = false;
-
+    protected $beforeUpdate = ['hashPassword'];
     // //beforeinsert everytime you are going to insert checkName function is executed
     //  protected $beforeInsert = ['checkName'];
     //
@@ -61,9 +61,9 @@ class TeacherModel extends Model
     //   return $data;
     // }
 
-
-
-    // public function hashPassword(array $data){
-    //   $data['data']['password'] = password_hash($data['data']['password'], PASSWORD_DEFAULT);
-    // }
+    public function hashPassword(array $data){
+      $data['data']['teacher_password'] = password_hash($data['data']['teacher_password'], PASSWORD_DEFAULT);
+    //  echo "hellloo";
+      return $data;
+    }
 }
