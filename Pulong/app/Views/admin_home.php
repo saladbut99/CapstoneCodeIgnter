@@ -8,25 +8,24 @@
                <a href="home" style="text-decoration: none; font-size:250%;"><b>Pulong</b></a>
            </div>
            <div class="col-4 text-center pt-3">
-               <p style="color:white; text-align:right;">name</p>
+               <p style="color:white; text-align:right;"><?= session()->get('firstname') ?> <?= session()->get('lastname') ?></p>
            </div>
            <div class="col-1 p-0 text-center">
                <div style="margin-right: 0%;">
                    <a href="#" class="dropdown"><img src="<?=base_url()?>/public/assets/images/admin.png" alt="" class="nav_img" height="60" width="60"></a>
-                    
                 </div>
            </div>
        </nav>
    </div>
    <div class="menu p-2 text-center">
       <div class="pt-3" style="cursor:pointer;">
-        <p class="menup m-0">Update Password</p>
-        </div>                            
-        <div class="" style="cursor:pointer;">
-        <p class="menup m-0">Logout</p>              
-        </div>                            
+        <a href="update">Update Password</a>
+        </div>
+        <div class="">
+        <a href="logout">Logout</a>
+        </div>
    </div>
-   
+
 
 <center>
     <div class="formcontainer m-5 pb-5" style="max-width:80%; background-color: white; border:none;">
@@ -68,7 +67,7 @@
                       </svg>
                       <br><br>
                       <p>View Lessons Uploaded by Teachers.</p>
-                    <a href="viewlesson" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> View Lesson</a>
+                    <a href="viewlessons" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> View Lesson</a>
                     </div>
             </div>
 

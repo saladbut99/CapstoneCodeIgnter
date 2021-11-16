@@ -24,6 +24,8 @@ class Validation
         FormatRules::class,
         FileRules::class,
         CreditCardRules::class,
+        \App\Validations\AdminLogin::class,
+        \App\Validations\TeacherLogin::class,
     ];
 
     /**

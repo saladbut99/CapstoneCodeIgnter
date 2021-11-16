@@ -16,7 +16,6 @@
         <div class="row h-100 align-items-center">
 
                 <div class="col-md text-center">
-
                       <a href="pupil_login"><img src="<?=base_url()?>/public/assets/images/student_logo.png" class="login_image" ></a>
                       <br>
                       <h1 href="pupil_login.php" style="font-size:30px;"><b>Pupil</b></h1>
@@ -33,22 +32,39 @@
                 </div>
           </div>
           <br><br><br>
+
+                      <?php if (isset($validation)): ?>
+                          <div class="col-10" style="margin-bottom:5%;">
+                            <div class="alert alert-danger" role="aler">
+                              <?php if ($validation->hasError('password')): ?>
+                                      <p>  <?= $validation->getError('password') ?></p>
+                              <?php endif; ?>
+                              <?php if ($validation->hasError('username')): ?>
+                                      <p>  <?= $validation->getError('username') ?></p>
+                              <?php endif; ?>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+
+          <!-- <//?//php if (isempty($validation)): ?>
+                <//?php echo 'none' ?>
+          <//?php endif; ?> -->
           <div class="row h-100 align-items-center">
             <div class="col-md text-center">
-                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+                <form action="admin_login" method="post">
                   <div class="form">
-                    <span class="error"><?php// echo $mainErr;?></span>
                     <div class="input_field">
-                      <input  type="text" name="email" class="input" placeholder="Username">
+                      <input  type="text" name="usertype" class="input" readonly value="Admin">
                     </div>
-                    <span class="error"><?php //echo $emailErr;?></span>
+                    <div class="input_field">
+                      <input  type="text" name="username" class="input" placeholder="Username">
+                    </div>
                     <div class="input_field">
                       <input  type="password" name="password"class="input" placeholder="Password">
                     </div>
-                    <span class="error"><?php// echo $passwordErr;?></span>
                     <center>
                       <div class="input_field"  >
-                        <input type="submit" name="Submit" target="_self" class="button">
+                        <input type="submit" name="Login" class="button">
                       </div>
                     </center>
             </div>

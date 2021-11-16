@@ -7,9 +7,10 @@
 }
 
 h1{
-  color:white;
+  color:black;
   font-size: 100px;
 }
+
 
 .bg {
   background-image:   linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url('website/Banner.png');
@@ -77,7 +78,7 @@ transition: 1s;
 }
 
 .formcontainer{
-  background-color: rgba(0,0,0,.7);
+  background-color: white;
   width: 100%;
   border: 3px solid #00acee;
    border-radius: 25px;
@@ -119,8 +120,8 @@ transition: all 0.3 ease;
   font-size: 20px;
   transition: all 0.3s ease 0s;
   border: 2px solid   #59CF02;
-  background: black;
-  color:  white;
+  background: white;
+  color:  black;
   cursor: pointer;
   border-radius: 20px;
   font-weight: bold;
@@ -132,7 +133,7 @@ transition: all 0.3 ease;
 
 .login_a{
   text-decoration: none;
-  color:white;
+  color:black;
     transition: all 0.3s ease 0s;
 }
 .login_a:hover{
@@ -151,7 +152,7 @@ transition: all 0.3 ease;
 
 .navbar{
 
-  margin-bottom: 4%;
+  margin-bottom: 5%;
 }
 
 .nav b{
@@ -163,8 +164,8 @@ transition: all 0.3 ease;
 }
 
 .section:hover {
-  background-color: rgba(3, 37, 108, .9);
-  color: white;
+  background-color:#fafdf3;
+  color: black;
   transition: all ease-in .3s;
 }
 
@@ -207,7 +208,7 @@ transition: all 0.3 ease;
   border:3px solid #00acee;
   margin-bottom: 2%;
   border-radius: 5%;
-  background-color: #fafdf3;
+  background-color: white;
   height: auto;
   max-height: 90%;
 }
@@ -249,6 +250,7 @@ transition: all 0.3 ease;
   right: 4%;
   color: #1d1d1d;
   display: none;
+  z-index: 10;
 }
 
 .menup:hover{
@@ -268,6 +270,15 @@ transition: all 0.3 ease;
   border-top: 1px solid black;
   border-left: 1px solid black;
   z-index: 1;
+}
+
+.menu a{
+  text-decoration: none;
+  color: black;
+}
+
+.menu a:hover{
+  color: green;
 }
 
 .check svg:hover{

@@ -30,7 +30,7 @@
    });
    </script>
 <div class="mask d-flex align-items-center h-100 gradient-custom-3 m-5 pb-5">
-      <div class="container h-100" >
+      <div class="container-lg h-100" >
         <div class="row d-flex justify-content-center align-items-center h-100">
           <div class="col-12 col-md-9 col-lg-7 col-xl-6">
             <div class="card" style="border-radius: 15px; border:3px solid #00acee;width:100%;">
@@ -45,18 +45,31 @@
                     </a>
                 </div>
 
-                <h2 class="text-uppercase text-center mb-5 col-10">Register Teacher Account</h2>
-                <?php if (session()->get('success')): ?>
+                <h2 class="text-uppercase text-center mb-5 col-10">Update Password</h2>
+                <?php if (session()->get('updatesuccess')): ?>
                 <div class="alert alert-success" role="alert" style="margin-bottom:5%;">
-                    <h4><?= session()->get('success') ?></h4>
+                    <h4><?= session()->get('updatesuccess') ?></h4>
                 </div>
               <?php endif; ?>
               <br>
-                <form method="post" action="register">
+                <form method="post" action="update">
 
+                  <?php if (isset($validation)): ?>
+                      <div class="col-12" style="margin-bottom:5%;">
+                        <div class="alert alert-danger" role="aler">
+                          <?php if ($validation->hasError('password')): ?>
+                                  <p>  <?= $validation->getError('password') ?></p>
+                          <?php endif; ?>
+                          <?php if ($validation->hasError('password_confirm')): ?>
+                                  <p>  <?= $validation->getError('password_confirm') ?></p>
+                          <?php endif; ?>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                    
                   <div class="form-outline mb-4 row align-items-center">
                     <label class="form-label col-4 p-0" for="form3Example1cg">FIRST NAME</label>
-                    <input type="text" id="teacher_firstname" name='teacher_firstname' class="form-control form-control-lg col" onblur="myFunction()"/>
+                    <input type="text" id="teacher_firstname" name='teacher_firstname' class="form-control form-control-lg col"  readonly value="<?= session()->get('firstname') ?>"/>
                     <center>
                     <div class="text-danger" style="margin-top:3%;">
                       <?php if (isset($validation)): ?>
@@ -70,7 +83,7 @@
 
                   <div class="form-outline mb-4 row align-items-center">
                     <label class="form-label col-4 p-0" for="form3Example3cg">LAST NAME</label>
-                    <input type="text" id="teacher_lastname" name='teacher_lastname' class="form-control form-control-lg col"  onblur="myFunction()"/>
+                    <input type="text" id="teacher_lastname" name='teacher_lastname' class="form-control form-control-lg col"   readonly value="<?= session()->get('lastname')?>"/>
                     <center>
                     <div class="text-danger" style="margin-top:3%;">
                       <?php if (isset($validation)): ?>
@@ -84,7 +97,7 @@
 
                   <div class="form-outline mb-4 row align-items-center">
                         <label class="form-label col-4 p-0" for="form3Example3cg">USERNAME</label>
-                        <input type="text" id="teacher_username" name='teacher_username' class="form-control form-control-lg col" readonly />
+                        <input type="text" id="teacher_username" name='teacher_username' class="form-control form-control-lg col" readonly value="<?= session()->get('username')?>" />
                         <center>
                         <div class="text-danger" style="margin-top:3%;">
                           <?php if (isset($validation)): ?>
@@ -95,18 +108,33 @@
                         </div>
                       </center>
                   </div>
-                  <div class="form-outline mb-4 row align-items-center">
-                        <label class="form-label col-4 p-0" for="form3Example3cg">PASSWORD</label><br>
-                          <p class=" col p-0">Password is auto generated</p>
-                  </div>
 
-                  <select class="form-select form-select-md mb-0" name='section_id'>
-                  <option disabled  selected style="color:grey">Section</option>
-                  <?php $i=1; foreach ($section as $sec): ?>
-                    <option  value="<?= $i; $i++;?>"><?= $sec ?></option>
-                  <?php endforeach; ?>
-                  </select>
-                  <center>
+                    <div class="form-outline mb-4 row align-items-center">
+                      <label class="form-label col-4 p-0" for="form3Example3cg">NEW PASSWORD</label>
+                      <input type="password" id="teacher_lastname" name='password' class="form-control form-control-lg col"  />
+                      <center>
+                      <div class="text-danger" style="margin-top:3%;">
+                        <?php if (isset($validation)): ?>
+                              <?php if ($validation->hasError('teacher_lastname')): ?>
+                                    <p>  <?= $validation->getError('teacher_lastname') ?></p>
+                              <?php endif; ?>
+                        <?php endif; ?>
+                      </div>
+
+                    </div>
+                    <div class="form-outline mb-4 row align-items-center">
+                      <label class="form-label col-4 p-0" for="form3Example3cg">CONFIRM PASSWORD</label>
+                      <input type="password" id="teacher_lastname" name='password_confirm' class="form-control form-control-lg col"  />
+                      <center>
+                      <div class="text-danger" style="margin-top:3%;">
+                        <?php if (isset($validation)): ?>
+                              <?php if ($validation->hasError('teacher_lastname')): ?>
+                                    <p>  <?= $validation->getError('teacher_lastname') ?></p>
+                              <?php endif; ?>
+                        <?php endif; ?>
+                      </div>
+                    </center>
+                    </div>
                   <div class="text-danger" style="margin-top:3%;">
                     <?php if (isset($validation)): ?>
                           <?php if ($validation->hasError('section_id')): ?>
@@ -120,7 +148,7 @@
                   </div>
 
                   <div class="d-flex justify-content-center">
-                    <button type="submit" class="btn btn-outline-success btn-block btn-lg registerbutton">Register</button>
+                    <button type="submit" class="btn btn-outline-primary btn-block btn-lg registerbutton">Update</button>
                   </div>
 
                 </form>

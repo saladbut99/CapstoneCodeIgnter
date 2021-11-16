@@ -29,18 +29,49 @@ $routes->setAutoRoute(true);
  * --------------------------------------------------------------------
  */
 
-$routes->add('homepage','MyIndex::showIndex');
-$routes->add('pupil_login','StudentLogin::index');
-$routes->add('teacher_login','TeacherLogin::index');
-$routes->add('admin_login','AdminLogin::index');
+$routes->add('homepage','MyIndex::showIndex',['filter'=>'Noauth']);
+//$routes->match(['get','post'],'login','Users::index',['filter'=>'Noauth']);
+// $routes->add('pupil_login','Student::login');
+// $routes->add('teacher_login','Teacher::login');
+//$routes->add('admin_login','Admin::login');
+$routes->match(['get','post'],'admin_login','Admin::login',['filter'=>'Noauth']);
+$routes->match(['get','post'],'teacher_login','Teacher::login',['filter'=>'Noauth']);
+$routes->match(['get','post'],'pupil_login','Pupil::login',['filter'=>'Noauth']);
+
+
+
 
 //routes for admin page
-$routes->group('admin',function($routes){
+$routes->group('admin', ["filter" => 'Auth'], function($routes){
  $routes->add('home','Admin::index');
  // $routes->add('register','Admin::register');
- // $routes->add('viewlessons','Admin::viewlesson');
+ $routes->match(['get','post'],'register','Admin::register');
+  $routes->match(['get','post'],'update','Admin::update');
+  $routes->add('viewlessons','Admin::viewlesson');
  $routes->add('viewmodule','Admin::viewmodule');
   $routes->add('viewcontent','Admin::viewcontent');
+    $routes->get('logout', 'Admin::logout');
+});
+$routes->group('teacher', ["filter" => 'Auth'], function($routes){
+  $routes->add('home','Teacher::index');
+  $routes->add('view','Teacher::view');
+ // // $routes->add('register','Admin::register');
+ // $routes->match(['get','post'],'register','Admin::register');
+ //  $routes->add('viewlessons','Admin::viewlesson');
+ // $routes->add('viewmodule','Admin::viewmodule');
+ //  $routes->add('viewcontent','Admin::viewcontent');
+     $routes->get('logout', 'teacher::logout');
+});
+
+$routes->group('pupil', ["filter" => 'Auth'], function($routes){
+  $routes->add('home','Pupil::index');
+  $routes->add('view','Pupil::view');
+ // // $routes->add('register','Admin::register');
+ // $routes->match(['get','post'],'register','Admin::register');
+ //  $routes->add('viewlessons','Admin::viewlesson');
+ // $routes->add('viewmodule','Admin::viewmodule');
+ //  $routes->add('viewcontent','Admin::viewcontent');
+     $routes->get('logout', 'Pupil::logout');
 });
 
 
