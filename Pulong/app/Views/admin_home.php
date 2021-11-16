@@ -20,10 +20,10 @@
    </div>
    <div class="menu p-2 text-center">
       <div class="pt-3" style="cursor:pointer;">
-        Update Password
+        <p class="menup m-0">Update Password</p>
         </div>                            
         <div class="" style="cursor:pointer;">
-        Logout              
+        <p class="menup m-0">Logout</p>              
         </div>                            
    </div>
    

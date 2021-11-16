@@ -217,6 +217,9 @@ transition: all 0.3 ease;
   border: 3px solid white;
 }
 
+.nav_img:hover{
+  border: 3px solid rgb(0, 219, 0);
+}
 
 .registerbutton:hover{
   color: white;
@@ -247,6 +250,11 @@ transition: all 0.3 ease;
   color: #1d1d1d;
   display: none;
 }
+
+.menup:hover{
+  color: blue;
+}
+
 
 .menu::before{
   content: '';
