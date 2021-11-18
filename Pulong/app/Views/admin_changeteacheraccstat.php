@@ -18,9 +18,9 @@
        </nav>
    </div>
    <div class="menu p-2 text-center">
-      <div class="pt-3" style="cursor:pointer;">
-        Update Password
-        </div>
+     <div class="pt-3" style="cursor:pointer;">
+       <a href="update">Update Password</a>
+       </div>
         <div class="">
         <a href="logout">Logout</a>
         </div>
@@ -30,8 +30,44 @@
        $( ".menu").toggle();
    });
    </script>
+   <div class="container mt-5">
+     <div class="mt-3">
+        <table class="table table-bordered" id="users-list">
+          <thead>
+             <tr>
+                <th>Teacher Id</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Section Id</th>
+                <th>Section Name</th>
+             </tr>
+          </thead>
+          <tbody>
+             <?php if($users): ?>
+             <?php foreach($users as $user): ?>
+             <tr>
+                <td><?php echo $user['teacher_id']; ?></td>
+                <td><?php echo $user['teacher_firstname']; ?></td>
+                <td><?php echo $user['teacher_lastname']; ?></td>
+                <td><?php echo $user['section_id']; ?></td>
+                <td><?php echo $user['section_name']; ?></td>
+             </tr>
+            <?php endforeach; ?>
+            <?php endif; ?>
+          </tbody>
+        </table>
+     </div>
+   </div>
 
-<p>This page will show the list of teachers for updating their status.</p>
+   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+   <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+   <script>
+       $(document).ready( function () {
+         $('#users-list').DataTable();
+     } );
+   </script>
+
 
 
 <?= $this->endSection(); ?>

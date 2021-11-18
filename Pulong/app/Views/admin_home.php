@@ -53,7 +53,7 @@
                   </svg>
                   <br><br>
                   <p>Change Account Status of Teachers.</p>
-                <a href="#" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> Change Teacher Account Status</a>
+                <a href="accountstatus" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> Change Teacher Account Status</a>
                 </div>
             </div>
 

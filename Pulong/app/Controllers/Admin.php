@@ -257,5 +257,21 @@ public function update(){
      return view('admin_update', $data);
   }
 
+  public function accountstatus(){
+    $type = session()->get('usertype');
+     if ($type!='Admin' && $type=='Teacher'){
+        return redirect()->to('teacher/home');
+      //  echo "hello";
+    }else if ($type!='Admin' && $type=='Pupil') {
+       return redirect()->to('pupil/home');
+     }
+    $data=[
+      'meta_title'=>'Admin | Account Status'
+    ];
+    $userModel = new TeacherRegistration();
+    $data['users'] = $userModel->join('section', 'teacher.section_id = section.section_id')->orderBy('teacher_id', 'DESC')->findAll();
+    return view('admin_changeteacheraccstat', $data);
+  }
+
 
 }

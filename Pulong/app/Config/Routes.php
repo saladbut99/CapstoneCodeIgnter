@@ -45,12 +45,13 @@ $routes->match(['get','post'],'pupil_login','Pupil::login',['filter'=>'Noauth'])
 $routes->group('admin', ["filter" => 'Auth'], function($routes){
  $routes->add('home','Admin::index');
  // $routes->add('register','Admin::register');
- $routes->match(['get','post'],'register','Admin::register');
+  $routes->match(['get','post'],'register','Admin::register');
   $routes->match(['get','post'],'update','Admin::update');
   $routes->add('viewlessons','Admin::viewlesson');
- $routes->add('viewmodule','Admin::viewmodule');
+  $routes->add('accountstatus','Admin::accountstatus');
+  $routes->add('viewmodule','Admin::viewmodule');
   $routes->add('viewcontent','Admin::viewcontent');
-    $routes->get('logout', 'Admin::logout');
+  $routes->get('logout', 'Admin::logout');
 });
 $routes->group('teacher', ["filter" => 'Auth'], function($routes){
   $routes->add('home','Teacher::index');

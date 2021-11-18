@@ -27,6 +27,8 @@ class PupilModel extends Model
     // protected $validationMessages = [];
     // protected $skipValidation      = false;
 
+    protected $beforeUpdate = ['hashPassword'];
+
     // //beforeinsert everytime you are going to insert checkName function is executed
     //  protected $beforeInsert = ['checkName'];
     //
@@ -60,10 +62,9 @@ class PupilModel extends Model
     //
     //   return $data;
     // }
-
-
-
-    // public function hashPassword(array $data){
-    //   $data['data']['password'] = password_hash($data['data']['password'], PASSWORD_DEFAULT);
-    // }
+    public function hashPassword(array $data){
+      $data['data']['pupil_password'] = password_hash($data['data']['pupil_password'], PASSWORD_DEFAULT);
+    //  echo "hellloo";
+      return $data;
+    }
 }
