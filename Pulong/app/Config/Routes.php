@@ -57,6 +57,7 @@ $routes->group('teacher', ["filter" => 'Auth'], function($routes){
   $routes->add('home','Teacher::index');
   $routes->add('view','Teacher::view');
   $routes->match(['get','post'],'update','Teacher::update');
+    $routes->match(['get','post'],'register','Teacher::register');
  // // $routes->add('register','Admin::register');
  // $routes->match(['get','post'],'register','Admin::register');
  //  $routes->add('viewlessons','Admin::viewlesson');

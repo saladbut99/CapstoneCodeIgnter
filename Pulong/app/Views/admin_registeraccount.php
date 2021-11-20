@@ -55,7 +55,7 @@
                 <form method="post" action="register">
 
                   <div class="form-outline mb-4 row align-items-center">
-                    <label class="form-label col-4 p-0" for="form3Example1cg">FIRST NAME</label>
+                    <label class="form-label col-4 p-0" for="form3Example1cg">First Name</label>
                     <input type="text" id="teacher_firstname" name='teacher_firstname' class="form-control form-control-lg col" onblur="myFunction()"/>
                     <center>
                     <div class="text-danger" style="margin-top:3%;">
@@ -69,7 +69,7 @@
                   </div>
 
                   <div class="form-outline mb-4 row align-items-center">
-                    <label class="form-label col-4 p-0" for="form3Example3cg">LAST NAME</label>
+                    <label class="form-label col-4 p-0" for="form3Example3cg">Last Name</label>
                     <input type="text" id="teacher_lastname" name='teacher_lastname' class="form-control form-control-lg col"  onblur="myFunction()"/>
                     <center>
                     <div class="text-danger" style="margin-top:3%;">
@@ -83,7 +83,7 @@
                   </div>
 
                   <div class="form-outline mb-4 row align-items-center">
-                        <label class="form-label col-4 p-0" for="form3Example3cg">USERNAME</label>
+                        <label class="form-label col-4 p-0" for="form3Example3cg">Username</label>
                         <input type="text" id="teacher_username" name='teacher_username' class="form-control form-control-lg col" readonly />
                         <center>
                         <div class="text-danger" style="margin-top:3%;">
@@ -96,7 +96,7 @@
                       </center>
                   </div>
                   <div class="form-outline mb-4 row align-items-center">
-                        <label class="form-label col-4 p-0" for="form3Example3cg">PASSWORD</label><br>
+                        <label class="form-label col-4 p-0" for="form3Example3cg">Password</label><br>
                           <p class=" col p-0">Password is auto generated</p>
                   </div>
 
@@ -129,10 +129,18 @@
 
                     function myFunction(){
                       var firstname = document.getElementById("teacher_firstname").value;
-                      var split = firstname.split(" ");
+                    //  trim(firstname);
+                    var trimfirstname=firstname.trim();
+                      var split = trimfirstname.split(" ");
+                      for (let i = 0; i < split.length; i++) {
+                          split[i] = split[i][0].toUpperCase() + split[i].substr(1);
+                        }
                       var joined = split.join('');
+
                       var lastname = document.getElementById("teacher_lastname").value;
-                      var username = lastname+'.'+joined;
+                      var nameCapitalized = lastname.charAt(0).toUpperCase() + lastname.slice(1)
+                      var trimlastname=nameCapitalized.trim();
+                      var username = trimlastname+'.'+joined;
                        document.getElementById("teacher_username").value = username;
                     }
                   </script>

@@ -26,12 +26,6 @@
         </div>
    </div>
 
-
-  <center>
-  <h1>Teacher</h1>
-  <a href="view">View</a>
-  </center>
-
 <center>
     <div class="formcontainer m-5 pb-5" style="max-width:80%; background-color: white; border:none;">
       <div class="container  h-100">

@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\TeacherModel;
+use App\Models\PupilModel;
 
 class Teacher extends BaseController
 {
@@ -37,6 +38,101 @@ class Teacher extends BaseController
       ];
 
         return view('teacher_view', $title);
+    }
+    public function register()
+    {
+      $type = session()->get('usertype');
+       if ($type!='Teacher' && $type=='Admin'){
+          return redirect()->to('admin/home');
+        //  echo "hello";
+       }else if ($type!='Teacher' && $type=='Pupil') {
+         return redirect()->to('pupil/home');
+       }
+       helper(['form']);
+       $data=[
+         'meta_title'=>'Teacher | Register',
+       ];
+
+       $section=[
+         'Grade 1 - Rose','Grade 1 - Rosal', 'Grade 1 - Adelfa' ,'Grade 2 - Lily',  'Grade 2 - Gumamela',  'Grade 3 - Orchid',  'Grade 3 - Daisy'
+       ];
+       $data['section']=$section;
+
+
+       // if ($this->request->getMethod()=='post') {
+       //   $model = new TeacherRegistration();
+       //    $model->save($_POST);
+       // }
+       if ($this->request->getMethod()=='post') {
+         $model = new PupilModel();
+         $rules=[
+           'pupil_firstname'=> [
+             'rules'=>'required|alpha_space',
+             'label'=>'Pupil Firstname',
+           ],
+           'pupil_middlename'=> [
+             'rules'=>'required|alpha_space',
+             'label'=>'Pupil Middlename',
+           ],
+           'pupil_lastname'=>[
+             'rules'=>'required|alpha',
+             'label'=>'pupil Lastname',
+             'errors'=>[
+                   'alpha' => 'This field must not contain spaces.',
+                 ]
+           ],
+
+           'pupil_username'=>[
+             'rules'=>'is_unique[teacher.teacher_username]',
+             'label'=>'Teacher Username',
+             'errors'=>[
+                   'is_unique' => 'Username already taken please check for existing teacher account.',
+                 ]
+           ],
+           'pupil_address'=> [
+             'rules'=>'required',
+             'label'=>'Pupil Address',
+           ],
+           'pupil_firstname'=> [
+             'rules'=>'required|alpha_space',
+             'label'=>'Pupil Address',
+           ],
+           'pupil_father_name'=> [
+             'rules'=>'required|alpha_space',
+             'label'=>'Pupil Fathers Name',
+           ],
+           'pupil_mother_name'=> [
+             'rules'=>'required|alpha_space',
+             'label'=>'Pupil Mothers Name',
+           ],
+           'pupil_guardian_name'=> [
+             'rules'=>'required|alpha_space',
+             'label'=>'Pupil Guardians Name',
+           ],
+
+           'section_id'=>[
+             'rules'=>'required',
+             'label'=>'Section',
+           ],
+         ];
+         if ($this->validate($rules)) {
+             //Then do database insertion or loginuser
+             $model->save($_POST);
+             $session = session();
+             $session->setFlashdata('success','Pupil Registration Successful ');
+              return redirect()->to('teacher/register');
+
+             // echo '<script type="text/javascript">
+             //       alert("Account Creation Successful!");
+             //       </script>';
+         }else{
+           //if validation is not successfull
+           //validator provies a list of errors
+           $data['validation']=$this->validator;
+         }
+       }
+
+        return view('teacher_registeraccount', $data);
     }
     public function login(){
       $data=[];

@@ -35,12 +35,12 @@ class TeacherRegistration extends Model
 
       $data['data']['teacher_firstname'] = trim($data['data']['teacher_firstname']);
       $capital=$data['data']['teacher_firstname'];
-      $converted=ucfirst($capital);
+      $converted=ucwords($capital);
       $data['data']['teacher_firstname']=$converted;
 
       $data['data']['teacher_lastname'] = trim($data['data']['teacher_lastname']);
       $capital_last=$data['data']['teacher_lastname'];
-      $converted_last=ucfirst($capital_last);
+      $converted_last=ucwords($capital_last);
       $data['data']['teacher_lastname']=$converted_last;
 
       $explode=$data['data']['teacher_firstname'];

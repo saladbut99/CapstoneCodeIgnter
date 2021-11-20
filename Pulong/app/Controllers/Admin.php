@@ -55,6 +55,9 @@ class Admin extends BaseController
           'teacher_lastname'=>[
             'rules'=>'required|alpha',
             'label'=>'Teacher Lastname',
+            'errors'=>[
+                  'alpha' => 'This field must not contain spaces.',
+                ]
           ],
 
           'teacher_username'=>[
