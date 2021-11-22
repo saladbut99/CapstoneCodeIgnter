@@ -43,6 +43,25 @@
                         </a>
                     </div>
 
+                    <form action="">
+                    <div class="row mb-4 text-center">
+                       <div class="col">
+                        <center>
+                        <div class="form-group">
+                        <input type="text" style="width: 50%; text-align: center;" id="lessontitle" placeholder="TITLE" class="form-control mb-1" />
+                        <textarea class="form-control" style="width: 70%; text-align: center;" id="lessondescription" placeholder="Description" rows="4"></textarea>
+                        <label class="form-check-label mx-1" for="gradelevel" style="color:gray;"> Grade Level:   </label> <input type="number" style="width: 5%; text-align: center; border: solid 0.5px gray;" id="gradelevel" placeholder="" class="mt-1" /> <br>
+                        <button type="submit" class="btn btn-primary btn-block mb-4 mt-4">Submit</button>
+                      
+                      </center>
+                        </div>
+                      </div>
+                    </div>
+      
+
+                    </form>
+
+
                   </div>
                 </div>
               </div>
