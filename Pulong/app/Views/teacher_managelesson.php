@@ -1,21 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-    
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pulong</title>
-    <link rel="stylesheet" href="mystyle.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    <script
-        src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-        crossorigin="anonymous">
-    </script>
-    <script src="jquery.js"></script>
+<?= $this->extend('layouts/main'); ?>
 
-</head>
+<?= $this->section('content'); ?>
+
 
 <body>
  <div class="navbar" style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(<?=base_url()?>/public/assets/images/banner.png);">
@@ -24,12 +10,12 @@
                <a href="home" style="text-decoration: none; font-size:250%;"><b>Pulong</b></a>
            </div>
            <div class="col-4 text-center pt-3">
-               <p style="color:white; text-align:right;">name</p>
+               <p style="color:white; text-align:right;"><?= session()->get('firstname') ?> <?= session()->get('lastname') ?></p>
            </div>
            <div class="col-1 p-0 text-center">
                <div style="margin-right: 0%;">
-                   <a href="#" class="dropdown"><img src="website/teacher.png" alt="" class="nav_img" height="60" width="60"></a>
-                    
+                   <a href="#" class="dropdown"><img src="<?=base_url()?>/public/assets/images/teacher.png" alt="" class="nav_img" height="60" width="60"></a>
+
                 </div>
            </div>
        </nav>
@@ -37,12 +23,12 @@
    <div class="menu p-2 text-center">
       <div class="pt-3" style="cursor:pointer;">
         <p class="menup m-0">Update Password</p>
-        </div>                            
+        </div>
         <div class="" style="cursor:pointer;">
-        <p class="menup m-0">Logout</p>              
-        </div>                            
+        <p class="menup m-0">Logout</p>
+        </div>
    </div>
-   
+
 
 <center>
     <div class="formcontainer m-5 pb-5" style="max-width:80%; background-color: white; border:none;">
@@ -109,8 +95,8 @@
   });
 
   $(".addmod").click(function(){
-    window.location = $(this).attr('href');
-    alert("ADD MODULE");
+    window.location = 'addmodule';
+    
 });
 
   $(".remmod").click(function(){
@@ -135,6 +121,4 @@
       cursor: pointer;
     }
   </style>
-</body>
-
-</html>
+  <?= $this->endSection() ?>

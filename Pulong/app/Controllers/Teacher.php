@@ -248,7 +248,7 @@ public function update(){
        return view('teacher_update', $data);
 }
 
-public function viewlesson()
+public function managelesson()
 {
   $type = session()->get('usertype');
    if ($type!='Teacher' && $type=='Admin'){
@@ -258,10 +258,26 @@ public function viewlesson()
      return redirect()->to('pupil/home');
    }
   $title=[
-    'meta_title'=>'Teacher | View'
+    'meta_title'=>'Teacher | Manage Lessons'
   ];
 
-    return view('teacher_view', $title);
+    return view('teacher_managelesson', $title);
+}
+
+public function addmodule()
+{
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+  $title=[
+    'meta_title'=>'Teacher | Add Module'
+  ];
+
+    return view('teacher_addmodule', $title);
 }
 
 
