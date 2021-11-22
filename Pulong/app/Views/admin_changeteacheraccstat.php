@@ -31,7 +31,7 @@
    });
    </script>
 
-   <div class="container mt-5">
+   <div class="container mt-5" style="margin-bottom:5%;">
      <div class="mt-3">
        <div class="backbutton col-2">
            <a href="home" style="text-decoration: none; color: rgb(68, 68, 68);">
@@ -41,7 +41,7 @@
            </a>
        </div>
        <br>
-        <table class="table table-bordered" id="users-list">
+        <table class="table table-bordered" id="users-list" >
           <thead>
              <tr>
                 <th>Teacher Id</th>
@@ -49,6 +49,7 @@
                 <th>Lastname</th>
                 <th>Section Id</th>
                 <th>Section Name</th>
+                <th>Action</th>
              </tr>
           </thead>
           <tbody>
@@ -60,6 +61,7 @@
                 <td><?php echo $user['teacher_lastname']; ?></td>
                 <td><?php echo $user['section_id']; ?></td>
                 <td><?php echo $user['section_name']; ?></td>
+                <td style="text-align:center;"><a href="view/<?= $user['teacher_id'] ?>">Action</a></td>
              </tr>
             <?php endforeach; ?>
             <?php endif; ?>

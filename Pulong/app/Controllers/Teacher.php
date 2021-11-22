@@ -248,5 +248,21 @@ public function update(){
        return view('teacher_update', $data);
 }
 
+public function viewlesson()
+{
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+  $title=[
+    'meta_title'=>'Teacher | View'
+  ];
+
+    return view('teacher_view', $title);
+}
+
 
 }

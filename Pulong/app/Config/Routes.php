@@ -51,19 +51,21 @@ $routes->group('admin', ["filter" => 'Auth'], function($routes){
   $routes->add('accountstatus','Admin::accountstatus');
   $routes->add('viewmodule','Admin::viewmodule');
   $routes->add('viewcontent','Admin::viewcontent');
+  $routes->add('view/(:num)','Admin::viewuser/$1');
   $routes->get('logout', 'Admin::logout');
 });
+
 $routes->group('teacher', ["filter" => 'Auth'], function($routes){
   $routes->add('home','Teacher::index');
   $routes->add('view','Teacher::view');
   $routes->match(['get','post'],'update','Teacher::update');
-    $routes->match(['get','post'],'register','Teacher::register');
+  $routes->match(['get','post'],'register','Teacher::register');
  // // $routes->add('register','Admin::register');
  // $routes->match(['get','post'],'register','Admin::register');
- //  $routes->add('viewlessons','Admin::viewlesson');
+   $routes->add('viewlessons','Teacher::viewlesson');
  // $routes->add('viewmodule','Admin::viewmodule');
  //  $routes->add('viewcontent','Admin::viewcontent');
-     $routes->get('logout', 'Teacher::logout');
+    $routes->get('logout', 'Teacher::logout');
 });
 
 $routes->group('pupil', ["filter" => 'Auth'], function($routes){

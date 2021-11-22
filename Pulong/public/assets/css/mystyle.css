@@ -287,3 +287,7 @@ transition: all 0.3 ease;
   transition: all ease-in .3s;
   fill:white;
 }
+
+thead, th {
+  text-align: center;
+}
