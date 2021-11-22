@@ -17,6 +17,16 @@
            </div>
        </nav>
    </div>
+
+   <div class="menu p-2 text-center">
+     <div class="pt-3" style="cursor:pointer;">
+       <a href="update">Update Password</a>
+       </div>
+        <div class="">
+        <a href="logout">Logout</a>
+        </div>
+   </div>
+   
         <div class="mask d-flex align-items-center h-100 gradient-custom-3 mb-5">
           <div class="container h-100" >
             <div class="row d-flex justify-content-center align-items-center h-100">
@@ -212,6 +222,13 @@
              document.getElementById("pupil_username").value = username;
           }
         </script>
+
+<script>
+  $( ".dropdown" ).click(function() {
+    $( ".menu").toggle();
+});
+</script>
+
 
 </body>
 </html>
