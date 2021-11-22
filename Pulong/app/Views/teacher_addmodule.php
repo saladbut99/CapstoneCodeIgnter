@@ -29,8 +29,8 @@
 
         <div class="mask d-flex align-items-center h-100 gradient-custom-3 mb-5">
           <div class="container h-100" >
-            <div class="row d-flex justify-content-center align-items-center h-100">
-              <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+            <div class="row d-flex align-items-center h-100">
+              <div class="col-12 col-md-12 col-lg-12 col-xl-12">
                 <div class="card" style="border-radius: 15px; border:3px solid #00acee;width:100%;">
                   <div class="card-body p-5 row">
 
