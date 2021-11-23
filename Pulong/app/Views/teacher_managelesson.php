@@ -96,7 +96,7 @@
 
   $(".addmod").click(function(){
     window.location = 'addmodule';
-    
+    //
 });
 
   $(".remmod").click(function(){
@@ -106,8 +106,8 @@
 });
 
   $(".viewmod").click(function(){
-    window.location = $(this).attr('href');
-    alert("VIEW MODULE");
+    window.location = 'view'
+    
 });
 
   $(".upmod").click(function(){

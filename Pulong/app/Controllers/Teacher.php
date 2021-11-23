@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use App\Models\TeacherModel;
 use App\Models\PupilModel;
+use App\Models\LessonMaster;
+
 
 class Teacher extends BaseController
 {
@@ -33,11 +35,14 @@ class Teacher extends BaseController
        }else if ($type!='Teacher' && $type=='Pupil') {
          return redirect()->to('pupil/home');
        }
-      $title=[
+      $data=[
         'meta_title'=>'Teacher | View'
       ];
+      $userModel = new LessonMaster();
+      $data['users'] = $userModel->orderBy('lesson_id', 'ASC')->findAll();
 
-        return view('teacher_view', $title);
+
+        return view('teacher_view', $data);
     }
     public function register()
     {
@@ -273,11 +278,44 @@ public function addmodule()
    }else if ($type!='Teacher' && $type=='Pupil') {
      return redirect()->to('pupil/home');
    }
-  $title=[
+  $data=[
     'meta_title'=>'Teacher | Add Module'
   ];
+  helper(['form']);
+  if ($this->request->getMethod()=='post') {
+    $model = new LessonMaster();
+    $rules=[
+      'lesson_name'=> [
+        'rules'=>'required',
+        'label'=>'Module Title',
+      ],
+      'lesson_description'=>[
+        'rules'=>'required',
+        'label'=>'Module Description',
+      ],
 
-    return view('teacher_addmodule', $title);
+      'year_level'=>[
+        'rules'=>'required',
+        'label'=>'Grade Level',
+      ],
+
+    ];
+    if ($this->validate($rules)) {
+        //Then do database insertion or loginuser
+
+       $model->save($_POST);
+        $session = session();
+        $session->setFlashdata('success','Module Upload Completed');
+         return redirect()->to('teacher/addmodule');
+
+    }else{
+      //if validation is not successfull
+      //validator provies a list of errors
+      $data['validation']=$this->validator;
+    }
+  }
+
+    return view('teacher_addmodule', $data);
 }
 
 

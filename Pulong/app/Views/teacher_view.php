@@ -27,10 +27,44 @@
    </div>
 
 
-<center>
-  <h1>Teacher VIew</h1>
-  <a href="home">Home</a>
-  </center>
+   <div class="container mt-5" style="margin-bottom:5%;">
+     <div class="mt-3">
+       <div class="backbutton col-2">
+           <a href="home" style="text-decoration: none; color: rgb(68, 68, 68);">
+           <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
+               <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+           </svg>
+           </a>
+       </div>
+       <br>
+        <table class="table table-bordered" id="users-list" >
+          <thead>
+             <tr>
+                <th>Module Id</th>
+                <th>Module Name</th>
+             </tr>
+          </thead>
+          <tbody>
+             <?php if($users): ?>
+             <?php foreach($users as $user): ?>
+             <tr>
+                <td><?php echo $user['lesson_id']; ?></td>
+                <td><?php echo $user['lesson_name']; ?></td>
+             </tr>
+            <?php endforeach; ?>
+            <?php endif; ?>
+          </tbody>
+        </table>
+     </div>
+   </div>
+   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+   <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+   <script>
+       $(document).ready( function () {
+         $('#users-list').DataTable();
+     } );
+   </script>
 
 <script>
   $( ".dropdown" ).click(function() {
