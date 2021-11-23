@@ -63,7 +63,7 @@ $routes->group('teacher', ["filter" => 'Auth'], function($routes){
  // // $routes->add('register','Admin::register');
  // $routes->match(['get','post'],'register','Admin::register');
    $routes->add('manage','Teacher::managelesson');
-   $routes->add('addmodule','Teacher::addmodule');
+   $routes->match(['get','post'],'addmodule','Teacher::addmodule');
  // $routes->add('viewmodule','Admin::viewmodule');
  //  $routes->add('viewcontent','Admin::viewcontent');
     $routes->get('logout', 'Teacher::logout');
