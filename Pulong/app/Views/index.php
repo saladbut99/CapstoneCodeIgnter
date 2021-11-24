@@ -13,13 +13,13 @@
     <div class="container h-100">
       <div class="row h-100 align-items-center">
         <div class="col-md text-center">
-            <h1 style="font-size:90px;color:white;"><b>Welcome to Pulong</b></h1>
+            <h1 style="font-size:14vh;color:white;"><b>Welcome to Pulong</b></h1>
         </div>
         <div class="col-md-1 text-center">
 
         </div>
         <div class="col-md text-center loginbutton">
-            <a href="pupil_login" class="button text-decoration-none" style="font-size:80px;"><b>Log In</b></a>
+            <a href="pupil_login" class="button text-decoration-none">Log In</a>
         </div>
       </div>
     </div>
