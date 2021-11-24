@@ -54,9 +54,9 @@
             <?php endforeach; ?>
             <?php endif; ?>
           </tbody>
-        </table>
+        
 
-        <table class="table table-borderless" id="users-list" >
+        
           <thead style="text-align:left; font-size:3rem">
              <tr>
 
@@ -73,9 +73,9 @@
             <?php endforeach; ?>
             <?php endif; ?>
           </tbody>
-        </table>
+       
 
-        <table class="table table-borderless" id="users-list" >
+        
           <thead style="text-align:left; font-size:3rem">
              <tr>
 
