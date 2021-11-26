@@ -4,7 +4,9 @@ namespace App\Controllers;
 
 use App\Models\TeacherModel;
 use App\Models\PupilModel;
+use App\Models\PupilModelStatus;
 use App\Models\LessonMaster;
+use App\Models\CustomModel;
 
 
 class Teacher extends BaseController
@@ -81,15 +83,15 @@ class Teacher extends BaseController
            ],
            'pupil_lastname'=>[
              'rules'=>'required|alpha',
-             'label'=>'pupil Lastname',
+             'label'=>'Pupil Lastname',
              'errors'=>[
                    'alpha' => 'This field must not contain spaces.',
                  ]
            ],
 
            'pupil_username'=>[
-             'rules'=>'is_unique[teacher.teacher_username]',
-             'label'=>'Teacher Username',
+             'rules'=>'is_unique[pupil.pupil_username]|required',
+             'label'=>'Pupil Username',
              'errors'=>[
                    'is_unique' => 'Username already taken please check for existing teacher account.',
                  ]
@@ -122,6 +124,7 @@ class Teacher extends BaseController
          ];
          if ($this->validate($rules)) {
              //Then do database insertion or loginuser
+             $_POST['account_status']='Active';
              $model->save($_POST);
              $session = session();
              $session->setFlashdata('success','Pupil Registration Successful ');
@@ -316,6 +319,54 @@ public function addmodule()
   }
 
     return view('teacher_addmodule', $data);
+}
+
+public function viewuser($id){
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+  $data=[
+    'meta_title'=>'Admin | Account Status'
+  ];
+  $userModel = new PupilModelStatus();
+
+  $db = db_connect();
+  $model = new CustomModel($db);
+
+  $result=$model->getStatusPupil($id);
+
+  $inactive='Inactive';
+  $active='Active';
+
+  if (strcmp($result,'Inactive')==0) {
+      $userModel->set('account_status',$active)->where(['pupil_id'=>$id])->update();
+  }elseif (strcmp($result,'Active')==0) {
+    $userModel->set('account_status',$inactive)->where(['pupil_id'=>$id])->update();
+  }
+  $session = session();
+  $session->setFlashdata('updatesuccess','Account Change Successful ');
+   return redirect()->to('teacher/pupilaccountstatus');
+
+}
+
+public function accountstatus(){
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+  $data=[
+    'meta_title'=>'Teacher | Account Status'
+  ];
+  $userModel = new PupilModel();
+  $data['users'] = $userModel->join('section', 'pupil.section_id = section.section_id')->orderBy('pupil_id', 'DESC')->findAll();
+  return view('teacher_changeteacheraccstat', $data);
 }
 
 

@@ -53,5 +53,15 @@ class CustomModel{
       return $result2;
   }
 
+  function getStatusPupil($id){
+      $builder = $this->db->table('pupil');
+      $builder->select('account_status');
+      $builder->where('pupil_id ',$id);
+      $result = $builder->get()->getRow();
+      $result2=$result->account_status;
+    //  $result2=$result['account_status'];
+      return $result2;
+  }
+
 
 }

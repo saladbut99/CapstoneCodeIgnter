@@ -15,7 +15,7 @@ class PupilModel extends Model
     // protected $useSoftDeletes = true;
 
     //list of fields that can be manipulated from an outside class
-    protected $allowedFields = ['pupil_firstname', 'pupil_lastname','pupil_middlename','pupil_username','section_id', 'pupil_password','pupil_address','pupil_father_name','pupil_mother_name','pupil_guardian_name'];
+    protected $allowedFields = ['pupil_firstname', 'pupil_lastname','pupil_middlename','pupil_username','section_id', 'pupil_password','pupil_address','pupil_father_name','pupil_mother_name','pupil_guardian_name','account_status'];
 
     //specify dates
     // protected $useTimestamps = true;

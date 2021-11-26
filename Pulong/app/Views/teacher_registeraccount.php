@@ -26,7 +26,7 @@
         <a href="logout">Logout</a>
         </div>
    </div>
-   
+
         <div class="mask d-flex align-items-center h-100 gradient-custom-3 mb-5">
           <div class="container h-100" >
             <div class="row d-flex justify-content-center align-items-center h-100">
@@ -99,8 +99,8 @@
                         <center>
                         <div class="text-danger" style="margin-top:3%;">
                           <?php if (isset($validation)): ?>
-                                <?php if ($validation->hasError('pupi_username')): ?>
-                                      <p>  <?= $validation->getError('pupi_username') ?></p>
+                                <?php if ($validation->hasError('pupil_username')): ?>
+                                      <p>  <?= $validation->getError('pupil_username') ?></p>
                                 <?php endif; ?>
                           <?php endif; ?>
                         </div>

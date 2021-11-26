@@ -109,6 +109,10 @@
             "bPaginate": false,
             "bInfo" : false,
             "searching": false,
+            "language": {
+              "emptyTable": "No uploaded module for Grade 1"
+            },
+             "responsive": true,
          });
          $('#users-list2').DataTable({
             "bPaginate": false,
@@ -116,7 +120,8 @@
             "searching": false,
             "language": {
               "emptyTable": "No uploaded module for Grade 2"
-            }
+            },
+             "responsive": true,
          });
          $('#users-list3').DataTable({
             "bPaginate": false,
@@ -124,7 +129,8 @@
             "searching": false,
             "language": {
               "emptyTable": "No uploaded module for Grade 3"
-            }
+            },
+             "responsive": true,
          });
      } );
    </script>
