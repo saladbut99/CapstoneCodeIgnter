@@ -14,7 +14,7 @@
         crossorigin="anonymous">
     </script>
     <script src="<?php echo base_url('/public/assets/js/jquery.js'); ?>"></script>
-    
+
 
 </head>
 <body>

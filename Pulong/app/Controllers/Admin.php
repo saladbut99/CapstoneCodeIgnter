@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\TeacherRegistration;
 use App\Models\AdminModel;
+use App\Models\CustomModel;
 class Admin extends BaseController
 {
     public function index()
@@ -75,6 +76,7 @@ class Admin extends BaseController
         ];
         if ($this->validate($rules)) {
             //Then do database insertion or loginuser
+            $_POST['account_status']='Active';
             $model->save($_POST);
             $session = session();
             $session->setFlashdata('success','Teacher Registration Successful ');
@@ -288,10 +290,24 @@ public function update(){
       'meta_title'=>'Admin | Account Status'
     ];
     $userModel = new TeacherRegistration();
-    $data['users'] = $userModel->where(['teacher_id'=>$id])->findAll();
-    echo '<pre>';
-      print_r($data);
-    echo '<pre>';
+
+    $db = db_connect();
+    $model = new CustomModel($db);
+
+    $result=$model->getStatus($id);
+
+    $inactive='Inactive';
+    $active='Active';
+
+    if (strcmp($result,'Inactive')==0) {
+        $userModel->set('account_status',$active)->where(['teacher_id'=>$id])->update();
+    }elseif (strcmp($result,'Active')==0) {
+      $userModel->set('account_status',$inactive)->where(['teacher_id'=>$id])->update();
+    }
+    $session = session();
+    $session->setFlashdata('updatesuccess','Account Change Successful ');
+     return redirect()->to('admin/accountstatus');
+
   }
 
 

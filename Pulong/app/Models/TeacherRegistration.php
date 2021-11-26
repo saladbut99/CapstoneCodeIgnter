@@ -15,7 +15,7 @@ class TeacherRegistration extends Model
     // protected $useSoftDeletes = true;
 
     //list of fields that can be manipulated from an outside class
-    protected $allowedFields = ['teacher_firstname', 'teacher_lastname','teacher_username','section_id', 'teacher_password'];
+    protected $allowedFields = ['teacher_firstname', 'teacher_lastname','teacher_username','section_id', 'teacher_password','account_status'];
 
     //specify dates
     // protected $useTimestamps = true;

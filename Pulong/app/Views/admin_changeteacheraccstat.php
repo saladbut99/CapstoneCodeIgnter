@@ -2,6 +2,8 @@
 
 <?= $this->section('content') ?>
 
+
+
 <div class="navbar" style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(<?=base_url()?>/public/assets/images/banner.png);">
        <nav class="nav row w-100 align-items-center">
            <div class="col-7">
@@ -41,15 +43,21 @@
            </a>
        </div>
        <br>
+       <?php if (session()->get('updatesuccess')): ?>
+       <div class="alert alert-success" role="alert" style="margin-bottom:5%;">
+           <h4><?= session()->get('updatesuccess') ?></h4>
+       </div>
+     <?php endif; ?>
+       <br>
         <table class="table table-bordered" id="users-list" >
-          <thead>
+          <thead style="font-size:5px;">
              <tr>
-                <th>Teacher Id</th>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                <th>Section Id</th>
-                <th>Section Name</th>
-                <th>Action</th>
+                <th style="font-size:30px;">Teacher Id</th>
+                <th style="font-size:30px;">Firstname</th>
+                <th style="font-size:30px;">Lastname</th>
+                <th style="font-size:30px;">Section Name</th>
+                <th style="font-size:30px;">Status</th>
+                <th style="font-size:30px;">Action</th>
              </tr>
           </thead>
           <tbody>
@@ -59,9 +67,9 @@
                 <td><?php echo $user['teacher_id']; ?></td>
                 <td><?php echo $user['teacher_firstname']; ?></td>
                 <td><?php echo $user['teacher_lastname']; ?></td>
-                <td><?php echo $user['section_id']; ?></td>
                 <td><?php echo $user['section_name']; ?></td>
-                <td style="text-align:center;"><a href="view/<?= $user['teacher_id'] ?>">Action</a></td>
+                <td style="text-align:center;"><?php echo $user['account_status']; ?></td>
+                <td style="text-align:center;"><a href="view/<?= $user['teacher_id'] ?>" style="text-decoration:none; font-size:15px;" class="btn btn-primary">Change Status</a></td>
              </tr>
             <?php endforeach; ?>
             <?php endif; ?>
@@ -73,9 +81,22 @@
    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
    <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+
    <script>
        $(document).ready( function () {
-         $('#users-list').DataTable();
+         $('#users-list').DataTable({
+           "createdRow": function( row, data, dataIndex,cells ) {
+             if ( data[4] == "Inactive" ) {
+               $(cells[0]).addClass('red');
+              $(cells[1]).addClass('red');
+              $(cells[2]).addClass('red');
+              $(cells[3]).addClass('red');
+              $(cells[4]).addClass('red');
+
+             }
+
+           }
+         });
      } );
    </script>
 

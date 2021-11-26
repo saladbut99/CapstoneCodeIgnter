@@ -293,16 +293,24 @@ transition: all 0.3 ease;
 }
 
 thead, th {
-  text-align: center;
+  text-align: left;
+  font-size:3rem;
 }
 
+.red {
+  background-color: 	#888888 !important;
+   color: black !important;
+}
 
+.hello{
+  background-color: red;
+}
 
 @media only screen and (max-width: 600) {
   .login_image {
     width: 40px;
   }
-  
+
 }
 
 
@@ -311,14 +319,20 @@ thead, th {
     width: 50px;
   }
   .loginbutton{
-    
+
   }
-  
+
 }
 
 @media only screen and (max-width: 1325px) {
   .login_image {
     width: 80px;
   }
-  
+
+
+
+
+
+
+
 }

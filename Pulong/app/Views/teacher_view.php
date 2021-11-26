@@ -37,71 +37,95 @@
            </a>
        </div>
        <br>
-        <table class="table table-borderless" id="users-list" >
+       <?php if (!$users): ?>
+          <h1 style="text-align:center;">No Added Module</h1>
+      <?php else: ?>
+        <table class="table table-borderless" id="users-list"  style=" border-bottom: none;">
           <thead style="text-align:left; font-size:3rem">
              <tr>
-
                 <th>Grade 1</th>
              </tr>
           </thead>
-          <tbody>
+
              <?php if($users): ?>
              <?php foreach($users as $user): ?>
-             <tr>
 
-                <td style="text-align:left"><?php echo $user['lesson_name']; ?></td>
-             </tr>
+              <?php if ($user['year_level']==1): ?>
+                 <tr>
+                    <td style="text-align:left">  <?php echo $user['lesson_name']; ?></td>
+                  </tr>
+               <?php endif; ?>
+
             <?php endforeach; ?>
             <?php endif; ?>
-          </tbody>
-        
-
-        
+        </table>
+        <table class="table table-borderless" id="users-list2" style=" border-bottom: none;" >
           <thead style="text-align:left; font-size:3rem">
              <tr>
-
                 <th>Grade 2</th>
              </tr>
           </thead>
-          <tbody>
+
              <?php if($users): ?>
              <?php foreach($users as $user): ?>
-             <tr>
 
-                <td style="text-align:left"><?php echo $user['lesson_name']; ?></td>
-             </tr>
+
+               <?php if ($user['year_level']==2): ?>
+                 <tr>
+                    <td style="text-align:left">  <?php echo $user['lesson_name']; ?></td>
+                  </tr>
+              <?php endif; ?>
             <?php endforeach; ?>
             <?php endif; ?>
-          </tbody>
-       
-
-        
+        </table>
+        <table class="table table-borderless" id="users-list3" style=" border-bottom: none;" >
           <thead style="text-align:left; font-size:3rem">
              <tr>
-
                 <th>Grade 3</th>
              </tr>
           </thead>
-          <tbody>
              <?php if($users): ?>
              <?php foreach($users as $user): ?>
-             <tr>
+               <?php if ($user['year_level']==3): ?>
+                 <tr>
+                    <td style="text-align:left">  <?php echo $user['lesson_name']; ?></td>
+                  </tr>
+              <?php endif; ?>
 
-                <td style="text-align:left"><?php echo $user['lesson_name']; ?></td>
-             </tr>
             <?php endforeach; ?>
             <?php endif; ?>
-          </tbody>
         </table>
+       <?php endif; ?>
+
      </div>
    </div>
-   
+
    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
    <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
    <script>
        $(document).ready( function () {
-         $('#users-list').DataTable();
+         $('#users-list').DataTable({
+            "bPaginate": false,
+            "bInfo" : false,
+            "searching": false,
+         });
+         $('#users-list2').DataTable({
+            "bPaginate": false,
+            "bInfo" : false,
+            "searching": false,
+            "language": {
+              "emptyTable": "No uploaded module for Grade 2"
+            }
+         });
+         $('#users-list3').DataTable({
+            "bPaginate": false,
+            "bInfo" : false,
+            "searching": false,
+            "language": {
+              "emptyTable": "No uploaded module for Grade 3"
+            }
+         });
      } );
    </script>
 
