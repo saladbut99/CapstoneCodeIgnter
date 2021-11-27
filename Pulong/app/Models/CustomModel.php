@@ -22,12 +22,13 @@ class CustomModel{
 
 
   //getting the foriegn key
-  function showFK($fkid){
-    $builder=$this->db->table('posts');
-    $builder->select('post_author');
-    $builder->where('post_id ',$fkid);
-    $fk = $builder->get()->getResult();
-      return $fk;
+  function showFK($name){
+    $builder=$this->db->table('lesson_master');
+    $builder->where('lesson_name ',$name);
+    $result = $builder->get()->getRow();
+    $result2=$result->lesson_id;
+
+      return $result2;
   }
   function path($name){
     //$builder->insert('path',$name[path]);
@@ -42,6 +43,7 @@ class CustomModel{
     $builder=$this->db->table('users');
     $builder->insert($name);
   }
+
 
   function getStatus($id){
       $builder = $this->db->table('teacher');

@@ -7,6 +7,7 @@ use App\Models\PupilModel;
 use App\Models\PupilModelStatus;
 use App\Models\LessonMaster;
 use App\Models\CustomModel;
+use App\Models\TeacherLesson;
 
 
 class Teacher extends BaseController
@@ -40,7 +41,7 @@ class Teacher extends BaseController
       $data=[
         'meta_title'=>'Teacher | View'
       ];
-      $userModel = new TeacherModel();
+      $userModel = new LessonMaster();
       $data['users'] = $userModel->orderBy('lesson_id', 'ASC')->findAll();
 
 
@@ -298,8 +299,11 @@ public function addmodule()
     $model = new LessonMaster();
     $rules=[
       'lesson_name'=> [
-        'rules'=>'required',
+        'rules'=>'required|is_unique[lesson_master.lesson_name]',
         'label'=>'Module Title',
+        'errors'=>[
+          'is_unique'=>'Module Title already taken please check for existing module',
+        ]
       ],
       'lesson_description'=>[
         'rules'=>'required',
@@ -315,7 +319,29 @@ public function addmodule()
     if ($this->validate($rules)) {
         //Then do database insertion or loginuser
 
-       $model->save($_POST);
+        $model->save($_POST);
+
+        $db = db_connect();
+        $custommodel = new CustomModel($db);
+        $teacher_lesson=$custommodel->showFK($_POST['lesson_name']);
+        $teachermodel = new TeacherModel();
+        $getter = $teachermodel->select('teacher_id')->where(['teacher_id'=>session()->get('t_id')])->get()->getRow();
+        $teacher_id = $getter->teacher_id;
+        date_default_timezone_set('Asia/Manila');
+         $myTime=date('Y-m-d h:i:s');
+        $newData=[
+          'lesson_id' => $teacher_lesson,
+          'teacher_id'=>$teacher_id,
+          'lesson_upload_date' => $myTime,
+
+        ];
+    //     echo "<pre>";
+    //   print_r($newData);
+    // echo "<pre>";
+
+          $TeacherLesson = new TeacherLesson();
+          $TeacherLesson->save($newData);
+
         $session = session();
         $session->setFlashdata('success','Module Upload Completed');
          return redirect()->to('teacher/addmodule');

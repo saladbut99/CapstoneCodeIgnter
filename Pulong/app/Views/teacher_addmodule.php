@@ -54,8 +54,8 @@
               </div>
               <div class="text-danger" style="margin-top:3%;">
                 <?php if (isset($validation)): ?>
-                      <?php if ($validation->hasError('module_title')): ?>
-                            <p>  <?= $validation->getError('module_title') ?></p>
+                      <?php if ($validation->hasError('lesson_name')): ?>
+                            <p>  <?= $validation->getError('lesson_name') ?></p>
                       <?php endif; ?>
                 <?php endif; ?>
               </div>
@@ -66,20 +66,20 @@
                 </div>
                 <div class="text-danger" style="margin-top:2%;margin-bottom:2%;">
                   <?php if (isset($validation)): ?>
-                        <?php if ($validation->hasError('module_description')): ?>
-                              <p>  <?= $validation->getError('module_description') ?></p>
+                        <?php if ($validation->hasError('lesson_description')): ?>
+                              <p>  <?= $validation->getError('lesson_description') ?></p>
                         <?php endif; ?>
                   <?php endif; ?>
                 </div>
 
                 <div class="form-group">
                   <label class="form-check-label mx-1" for="gradelevel" style="font-size:25px;"> Grade Level:  </label>
-                   <input type="number" style="width: 100%; height: 50px; text-align: center; border: solid 2px #00acee; border-radius:15px;" id="grade_level" name="year_level" placeholder="" class="mt-1" min='1' max='3'/> <br>
+                   <input type="number" style="width: 100%; height: 50px; text-align: center; border: solid 2px #00acee; border-radius:15px;" id="year_level" name="year_level" placeholder="" class="mt-1" min='1' max='3'/> <br>
                 </div>
                 <div class="text-danger" style="margin-top:3%;">
                   <?php if (isset($validation)): ?>
-                        <?php if ($validation->hasError('grade_level')): ?>
-                              <p>  <?= $validation->getError('grade_level') ?></p>
+                        <?php if ($validation->hasError('year_level')): ?>
+                              <p>  <?= $validation->getError('year_level') ?></p>
                         <?php endif; ?>
                   <?php endif; ?>
                 </div>
