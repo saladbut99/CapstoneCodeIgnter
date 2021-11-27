@@ -125,12 +125,10 @@
                       </center>
                       </div>
 
-                      <select class="form-select form-select-md mb-0" name='section_id'>
-                      <option disabled  selected style="color:grey">Section</option>
-                      <?php $i=1; foreach ($section as $sec): ?>
-                        <option  value="<?= $i; $i++;?>"><?= $sec ?></option>
-                      <?php endforeach; ?>
-                      </select>
+
+                    <div class="form-outline mb-4 row align-items-center">
+                      <!-- SECTION -->
+                      <input type="hidden" id="section_id" name="section_id" class="form-control form-control-lg col" value="<?= session()->get('section_id') ?>" readonly/>
                       <center>
                       <div class="text-danger" style="margin-top:3%;">
                         <?php if (isset($validation)): ?>
@@ -140,6 +138,7 @@
                         <?php endif; ?>
                       </div>
                     </center>
+                    </div>
 
                       <div class="form-outline mt-5 mb-0 row">
                        <hr>

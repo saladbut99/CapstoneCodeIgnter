@@ -50,7 +50,7 @@
                 <form action="teacher_login" method="post">
                   <div class="form">
                     <div class="input_field">
-                      <input  type="text" name="usertype" class="input" readonly value="Teacher">
+                      <input  type="hidden" name="usertype" class="input" readonly value="Teacher">
                     </div>
                     <span class="error">
                     <div class="input_field">

@@ -50,7 +50,7 @@
                 <form action="pupil_login" method="post">
                   <div class="form">
                     <div class="input_field">
-                      <input  type="text" name="usertype" class="input" readonly value="Pupil">
+                      <input  type="hidden" name="usertype" class="input" readonly value="Pupil">
                     </div>
                     <span class="error">
                     <div class="input_field">

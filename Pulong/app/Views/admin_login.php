@@ -54,7 +54,7 @@
                 <form action="admin_login" method="post">
                   <div class="form">
                     <div class="input_field">
-                      <input  type="text" name="usertype" class="input" readonly value="Admin">
+                      <input  type="hidden" name="usertype" class="input" readonly value="Admin">
                     </div>
                     <div class="input_field">
                       <input  type="text" name="username" class="input" placeholder="Username">

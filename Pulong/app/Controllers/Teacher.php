@@ -40,7 +40,7 @@ class Teacher extends BaseController
       $data=[
         'meta_title'=>'Teacher | View'
       ];
-      $userModel = new LessonMaster();
+      $userModel = new TeacherModel();
       $data['users'] = $userModel->orderBy('lesson_id', 'ASC')->findAll();
 
 
@@ -60,10 +60,12 @@ class Teacher extends BaseController
          'meta_title'=>'Teacher | Register',
        ];
 
-       $section=[
-         'Grade 1 - Rose','Grade 1 - Rosal', 'Grade 1 - Adelfa' ,'Grade 2 - Lily',  'Grade 2 - Gumamela',  'Grade 3 - Orchid',  'Grade 3 - Daisy'
-       ];
-       $data['section']=$section;
+       // $section=[
+       //   'Grade 1 - Rose','Grade 1 - Rosal', 'Grade 1 - Adelfa' ,'Grade 2 - Lily',  'Grade 2 - Gumamela',  'Grade 3 - Orchid',  'Grade 3 - Daisy'
+       // ];
+       //
+       //
+       // $data['section']=$section;
 
 
        // if ($this->request->getMethod()=='post') {
@@ -190,6 +192,11 @@ class Teacher extends BaseController
     return view('teacher_login',$data);
   }
 private function setUserSession($user,$type){
+  $userModel = new TeacherModel();
+  $section = $userModel->join('section', 'teacher.section_id = section.section_id')->where(['teacher_id'=>$user['teacher_id']])->get()->getRow();
+    $result2=$section->section_name;
+    $section_id = $userModel->where(['teacher_id'=>$user['teacher_id']])->get()->getRow();
+      $result3=$section_id->section_id;
      $data = [
        't_id'=> $user['teacher_id'],
        'firstname'=> $user['teacher_firstname'],
@@ -197,6 +204,8 @@ private function setUserSession($user,$type){
        'username'=> $user['teacher_username'],
        'isLoggedIn'=> true,
        'usertype'=> $type,
+       'section'=>$result2,
+      'section_id'=>$result3,
      ];
      session()->set($data);
      return true;
@@ -364,8 +373,12 @@ public function accountstatus(){
   $data=[
     'meta_title'=>'Teacher | Account Status'
   ];
-  $userModel = new PupilModel();
-  $data['users'] = $userModel->join('section', 'pupil.section_id = section.section_id')->orderBy('pupil_id', 'DESC')->findAll();
+
+  $userModel = new TeacherModel();
+  $section_id = $userModel->where(['teacher_id'=>session()->get('t_id')])->get()->getRow();
+  $result3=$section_id->section_id;
+  $pupilModel = new PupilModel();
+  $data['users'] = $pupilModel->join('section', 'pupil.section_id = section.section_id')->where(['pupil.section_id'=>$result3])->orderBy('pupil_id', 'DESC')->findAll();
   return view('teacher_changeteacheraccstat', $data);
 }
 
