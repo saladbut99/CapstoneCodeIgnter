@@ -58,6 +58,7 @@ $routes->group('admin', ["filter" => 'Auth'], function($routes){
 $routes->group('teacher', ["filter" => 'Auth'], function($routes){
   $routes->add('home','Teacher::index');
   $routes->add('view','Teacher::view');
+  $routes->add('removemodule','Teacher::removemodule');
   $routes->match(['get','post'],'update','Teacher::update');
   $routes->match(['get','post'],'register','Teacher::register');
  // // $routes->add('register','Admin::register');
@@ -66,6 +67,7 @@ $routes->group('teacher', ["filter" => 'Auth'], function($routes){
    $routes->match(['get','post'],'addmodule','Teacher::addmodule');
   $routes->add('pupilaccountstatus','Teacher::accountstatus');
    $routes->add('view/(:num)','Teacher::viewuser/$1');
+   $routes->add('delete/(:num)','Teacher::delete/$1');
  // $routes->add('viewmodule','Admin::viewmodule');
  //  $routes->add('viewcontent','Admin::viewcontent');
     $routes->get('logout', 'Teacher::logout');

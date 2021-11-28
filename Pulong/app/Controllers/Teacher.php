@@ -41,11 +41,35 @@ class Teacher extends BaseController
       $data=[
         'meta_title'=>'Teacher | View'
       ];
-      $userModel = new LessonMaster();
-      $data['users'] = $userModel->orderBy('lesson_id', 'ASC')->findAll();
+
+
+      $teacher_id=session()->get('t_id');
+      $userModel = new TeacherLesson();
+      $data['users'] = $userModel->join('lesson_master', 'teacher_lesson.lesson_id = lesson_master.lesson_id')->where(['teacher_lesson.teacher_id'=>$teacher_id])->orderBy('lesson_master.lesson_id', 'ASC')->findAll();
 
 
         return view('teacher_view', $data);
+    }
+    public function removemodule()
+    {
+      $type = session()->get('usertype');
+       if ($type!='Teacher' && $type=='Admin'){
+          return redirect()->to('admin/home');
+        //  echo "hello";
+       }else if ($type!='Teacher' && $type=='Pupil') {
+         return redirect()->to('pupil/home');
+       }
+      $data=[
+        'meta_title'=>'Teacher | Remove Module'
+      ];
+
+
+      $teacher_id=session()->get('t_id');
+      $userModel = new TeacherLesson();
+      $data['users'] = $userModel->join('lesson_master', 'teacher_lesson.lesson_id = lesson_master.lesson_id')->where(['teacher_lesson.teacher_id'=>$teacher_id])->orderBy('lesson_master.lesson_id', 'ASC')->findAll();
+
+
+        return view('remove_module', $data);
     }
     public function register()
     {
@@ -385,6 +409,27 @@ public function viewuser($id){
   $session = session();
   $session->setFlashdata('updatesuccess','Account Change Successful ');
    return redirect()->to('teacher/pupilaccountstatus');
+
+}
+
+public function delete($id){
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+   $lessonmaster = new LessonMaster;
+    $model = new TeacherLesson();
+    if ($lessonmaster) {
+      $lessonmaster->delete($id);
+    }
+
+
+   $session = session();
+   $session->setFlashdata('updatesuccess','Module Successfully Deleted ');
+   return redirect()->to('teacher/removemodule');
 
 }
 

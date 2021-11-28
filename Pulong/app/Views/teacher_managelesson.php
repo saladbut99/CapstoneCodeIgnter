@@ -117,14 +117,14 @@
 });
 
   $(".remmod").click(function(){
-    window.location = $(this).attr('href');
-    alert("REMOVE MODULE");
+    window.location = 'removemodule';
+
 
 });
 
   $(".viewmod").click(function(){
     window.location = 'view'
-    
+
 });
 
   $(".upmod").click(function(){

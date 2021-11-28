@@ -37,6 +37,12 @@
            </a>
        </div>
        <br>
+       <?php if (session()->get('updatesuccess')): ?>
+       <div class="alert alert-success" role="alert" style="margin-bottom:5%;">
+           <h4><?= session()->get('updatesuccess') ?></h4>
+       </div>
+     <?php endif; ?>
+       <br>
        <?php if (!$users): ?>
           <h1 style="text-align:center;">No Added Module</h1>
       <?php else: ?>
@@ -52,7 +58,7 @@
 
               <?php if ($user['year_level']==1): ?>
                  <tr>
-                    <td style="text-align:left">  <?php echo $user['lesson_name']; ?></td>
+                    <td style="text-align:left"> <a href="delete\<?= $user['lesson_id'] ?>" onclick="return doconfirm()"><?php echo $user['lesson_name']; ?></a> </td>
 
                   </tr>
                <?php endif; ?>
@@ -73,7 +79,7 @@
 
                <?php if ($user['year_level']==2): ?>
                  <tr>
-                    <td style="text-align:left">  <?php echo $user['lesson_name']; ?></td>
+                    <td style="text-align:left"> <a href="delete\<?= $user['lesson_id'] ?>" onclick="return doconfirm()"> <?php echo $user['lesson_name']; ?></a></td>
                   </tr>
               <?php endif; ?>
             <?php endforeach; ?>
@@ -89,7 +95,7 @@
              <?php foreach($users as $user): ?>
                <?php if ($user['year_level']==3): ?>
                  <tr>
-                    <td style="text-align:left">  <?php echo $user['lesson_name']; ?></td>
+                    <td style="text-align:left"> <a href="delete\<?= $user['lesson_id'] ?>" onclick="return doconfirm()"><?php echo $user['lesson_name']; ?></a> </td>
                   </tr>
               <?php endif; ?>
 
@@ -134,6 +140,17 @@
              "responsive": true,
          });
      } );
+   </script>
+
+ <script>
+   function doconfirm()
+   {
+       job=confirm("Are you sure to delete permanently?");
+       if(job!=true)
+       {
+           return false;
+       }
+   }
    </script>
 
 <script>
