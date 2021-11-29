@@ -52,7 +52,7 @@
 
               <?php if ($user['year_level']==1): ?>
                  <tr>
-                    <td style="text-align:left">  <?php echo $user['lesson_name']; ?></td>
+                    <td style="text-align:left"><a href="module/<?= $user['lesson_id'] ?>"><?php echo $user['lesson_name']; ?></a>  </td>
 
                   </tr>
                <?php endif; ?>
@@ -73,7 +73,7 @@
 
                <?php if ($user['year_level']==2): ?>
                  <tr>
-                    <td style="text-align:left">  <?php echo $user['lesson_name']; ?></td>
+                    <td style="text-align:left"><a href="module/<?= $user['lesson_id'] ?>"><?php echo $user['lesson_name']; ?></a></td>
                   </tr>
               <?php endif; ?>
             <?php endforeach; ?>
@@ -89,7 +89,7 @@
              <?php foreach($users as $user): ?>
                <?php if ($user['year_level']==3): ?>
                  <tr>
-                    <td style="text-align:left">  <?php echo $user['lesson_name']; ?></td>
+                    <td style="text-align:left"><a href="module/<?= $user['lesson_id'] ?>"><?php echo $user['lesson_name']; ?></a></td>
                   </tr>
               <?php endif; ?>
 

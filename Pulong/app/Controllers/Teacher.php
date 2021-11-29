@@ -453,5 +453,28 @@ public function accountstatus(){
   return view('teacher_changeteacheraccstat', $data);
 }
 
+public function module($id){
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+  $data=[
+    'meta_title'=>'Admin | View Module'
+  ];
+  //$teacher_id=session()->get('t_id');
+  $userModel = new LessonMaster();
+  $data['users'] = $userModel->where(['lesson_id'=>$id])->get()->getRow();
+  //     echo "<pre>";
+  //   print_r($data);
+  // echo "<pre>";
+
+    return view('teacher_moduleview', $data);
+
+
+}
+
 
 }
