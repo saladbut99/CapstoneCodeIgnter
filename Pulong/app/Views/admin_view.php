@@ -17,9 +17,7 @@
        </nav>
    </div>
    <div class="menu p-2 text-center">
-     <div class="pt-3" style="cursor:pointer;">
-       <a href="update">Update Password</a>
-       </div>
+
         <div class="" style="cursor:pointer;">
         Logout
         </div>

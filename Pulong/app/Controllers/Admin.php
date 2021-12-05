@@ -310,5 +310,21 @@ public function update(){
 
   }
 
+  public function manage(){
+    $type = session()->get('usertype');
+     if ($type!='Admin' && $type=='Teacher'){
+        return redirect()->to('teacher/home');
+      //  echo "hello";
+    }else if ($type!='Admin' && $type=='Pupil') {
+       return redirect()->to('pupil/home');
+     }
+    $data=[
+      'meta_title'=>'Admin | Manage '
+    ];
+
+     return view('admin_manage', $data);
+
+  }
+
 
 }

@@ -476,5 +476,21 @@ public function module($id){
 
 }
 
+public function manage(){
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+  $data=[
+    'meta_title'=>'Teacher | Manage '
+  ];
+
+   return view('teacher_manage', $data);
+
+}
+
 
 }

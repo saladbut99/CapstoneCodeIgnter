@@ -18,9 +18,7 @@
        </nav>
    </div>
    <div class="menu p-2 text-center">
-     <div class="pt-3" style="cursor:pointer;">
-       <a href="update">Update Password</a>
-       </div>
+
         <div class="">
         <a href="logout">Logout</a>
         </div>
@@ -53,8 +51,8 @@
                     <path fill-rule="evenodd" d="M15.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L12.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
                   </svg>
                   <br><br>
-                  <p>Change Account Status of Students.</p>
-                <a href="pupilaccountstatus" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> Change Account Status</a>
+                  <p>Manage Account or Change Pupil Account Status.</p>
+                <a href="manageaccount" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> Change Account Status</a>
                 </div>
             </div>
 
