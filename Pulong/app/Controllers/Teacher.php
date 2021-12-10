@@ -334,9 +334,9 @@ public function addmodule()
         'label'=>'Module Description',
       ],
 
-      'year_level'=>[
+      'unit'=>[
         'rules'=>'required',
-        'label'=>'Grade Level',
+        'label'=>'Lesson Unit',
       ],
 
     ];
@@ -366,9 +366,14 @@ public function addmodule()
           $TeacherLesson = new TeacherLesson();
           $TeacherLesson->save($newData);
 
+          $db = db_connect();
+          $custom = new CustomModel($db);
+          $id=$custom->getmoduleid($_POST['lesson_name']);
+
+
         $session = session();
         $session->setFlashdata('success','Module Upload Completed');
-         return redirect()->to('teacher/addmodule');
+         return redirect()->to('teacher/module/'.$id);
 
     }else{
       //if validation is not successfull

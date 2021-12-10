@@ -36,11 +36,7 @@
           </div>
           <div>
           <h2 class="text-uppercase text-center">ADD MODULE</h2>
-          <?php if (session()->get('success')): ?>
-          <div class="alert alert-success" role="alert" style="margin-bottom:5%;">
-              <h4><?= session()->get('success') ?></h4>
-          </div>
-        <?php endif; ?>
+        
         <br>
       </div>
           <div class="col-10 col-md-8 offset-md-2">
@@ -71,12 +67,12 @@
 
                 <div class="form-group">
                   <label class="form-check-label mx-1" for="gradelevel" style="font-size:25px;"> Grade Level:  </label>
-                   <input type="number" style="width: 100%; height: 50px; text-align: center; border: solid 2px #00acee; border-radius:15px;" id="year_level" name="year_level" placeholder="" class="mt-1" min='1' max='3'/> <br>
+                   <input type="number" style="width: 100%; height: 50px; text-align: center; border: solid 2px #00acee; border-radius:15px;" id="unit" name="unit" placeholder="" class="mt-1" min='1' max='4'/> <br>
                 </div>
                 <div class="text-danger" style="margin-top:3%;">
                   <?php if (isset($validation)): ?>
-                        <?php if ($validation->hasError('year_level')): ?>
-                              <p>  <?= $validation->getError('year_level') ?></p>
+                        <?php if ($validation->hasError('unit')): ?>
+                              <p>  <?= $validation->getError('unit') ?></p>
                         <?php endif; ?>
                   <?php endif; ?>
                 </div>

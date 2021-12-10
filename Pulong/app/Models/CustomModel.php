@@ -64,6 +64,14 @@ class CustomModel{
     //  $result2=$result['account_status'];
       return $result2;
   }
-
+  function getmoduleid($name){
+      $builder = $this->db->table('lesson_master');
+      $builder->select('lesson_id');
+      $builder->where('lesson_name',$name);
+      $result = $builder->get()->getRow();
+      $result2=$result->lesson_id;
+    //  $result2=$result['account_status'];
+      return $result2;
+  }
 
 }
