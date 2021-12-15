@@ -28,7 +28,7 @@
 
   <div class="container h-100" style="margin-bottom:5%;" >
      <div class="row">
-       <div class="backbutton col-2">
+       <div class="backbutton col-1">
            <a href="<?php echo base_url(); ?>/public/teacher/manage" style="text-decoration: none; color: rgb(68, 68, 68);">
            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
                <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
@@ -46,10 +46,31 @@
    </div>
        <div class="mt-3">
          <br>
-             <h1><?= $users->lesson_name; ?></h1>
-             <hr style="width:70%;height:2px;">
-             <h2><?= $users->lesson_description; ?></h2>
+             <h1 style="text-align:left"><?= $users->lesson_name; ?></h1>
+             <hr style="width:100%;height:2px;color:#00acee">
+             <h3 style="text-align:left"><?= $users->lesson_description; ?></h3>
        </div>
+        <form class="m-5 p-5">
+       <div class="discussion-area p-2">
+          <!-- DISCUSSION -->
+       <center>
+       <div class="form-outline mb-4">
+         <textarea class="form-control" style="width: 50%; border: 2px solid #00acee;" id="exampleFormControlTextarea1" placeholder="+ IMAGE" rows="4"></textarea>
+       </div>
+       <div class="form-outline mb-4">
+         <textarea class="form-control" style="width: 80%; border: 2px solid #00acee;" id="exampleFormControlTextarea1" placeholder="Discussion" rows="4"></textarea>
+       </div>
+
+       <!-- EXAMPLE -->
+
+       </center>
+
+
+
+
+       <!-- Submit button -->
+       <button type="submit" class="btn btn-primary btn-block mb-4">SUBMIT</button>
+     </form>
    </div>
  </div>
 </div>
