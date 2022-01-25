@@ -120,7 +120,7 @@ class Teacher extends BaseController
              'rules'=>'is_unique[pupil.pupil_username]|required',
              'label'=>'Pupil Username',
              'errors'=>[
-                   'is_unique' => 'Username already taken please check for existing teacher account.',
+                   'is_unique' => 'Username already taken please check for existing pupil account.',
                  ]
            ],
            'pupil_address'=> [
@@ -194,7 +194,7 @@ class Teacher extends BaseController
             $data['validation']=$this->validator;
 
           }else {
-            //store user data into the database
+
             $model = new TeacherModel();
             $user = $model->where('teacher_username',$this->request->getVar('username'))
                             ->first();

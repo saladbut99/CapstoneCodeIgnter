@@ -38,7 +38,7 @@
                 </svg>
                   <br><br>
                   <p>Update Password</p>
-                <a href="update" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> Register Account</a>
+                <a href="update" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> Update</a>
                 </div>
             </div>
 
