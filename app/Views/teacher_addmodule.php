@@ -36,7 +36,7 @@
           </div>
           <div>
           <h2 class="text-uppercase text-center">ADD MODULE</h2>
-        
+
         <br>
       </div>
           <div class="col-10 col-md-8 offset-md-2">

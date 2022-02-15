@@ -50,6 +50,7 @@
              <hr style="width:100%;height:2px;color:#00acee">
              <h3 style="text-align:left"><?= $users->lesson_description; ?></h3>
        </div>
+       <!-- form for the lesson -->
         <form class="m-5 p-5">
        <div class="discussion-area p-2">
           <!-- DISCUSSION -->
