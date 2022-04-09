@@ -18,7 +18,7 @@
        </nav>
    </div>
    <div class="menu p-2 text-center">
-  
+
         <div class="">
         <a href="logout">Logout</a>
         </div>
@@ -47,14 +47,14 @@
         <table class="table table-borderless" id="users-list"  style=" border-bottom: none;">
           <thead style="text-align:left; font-size:3rem">
              <tr>
-                <th>Grade 1</th>
+                <th>Unit 1</th>
              </tr>
           </thead>
 
              <?php if($users): ?>
              <?php foreach($users as $user): ?>
 
-              <?php if ($user['year_level']==1): ?>
+              <?php if ($user['unit']==1): ?>
                  <tr>
                     <td style="text-align:left"> <a href="delete\<?= $user['lesson_id'] ?>" onclick="return doconfirm()"><?php echo $user['lesson_name']; ?></a> </td>
 
@@ -67,7 +67,7 @@
         <table class="table table-borderless" id="users-list2" style=" border-bottom: none;" >
           <thead style="text-align:left; font-size:3rem">
              <tr>
-                <th>Grade 2</th>
+                <th>Unit 2</th>
              </tr>
           </thead>
 
@@ -75,7 +75,7 @@
              <?php foreach($users as $user): ?>
 
 
-               <?php if ($user['year_level']==2): ?>
+               <?php if ($user['unit']==2): ?>
                  <tr>
                     <td style="text-align:left"> <a href="delete\<?= $user['lesson_id'] ?>" onclick="return doconfirm()"> <?php echo $user['lesson_name']; ?></a></td>
                   </tr>
@@ -86,17 +86,36 @@
         <table class="table table-borderless" id="users-list3" style=" border-bottom: none;" >
           <thead style="text-align:left; font-size:3rem">
              <tr>
-                <th>Grade 3</th>
+                <th>Unit 3</th>
              </tr>
           </thead>
              <?php if($users): ?>
              <?php foreach($users as $user): ?>
-               <?php if ($user['year_level']==3): ?>
+               <?php if ($user['unit']==3): ?>
                  <tr>
                     <td style="text-align:left"> <a href="delete\<?= $user['lesson_id'] ?>" onclick="return doconfirm()"><?php echo $user['lesson_name']; ?></a> </td>
                   </tr>
               <?php endif; ?>
 
+            <?php endforeach; ?>
+            <?php endif; ?>
+        </table>
+        <table class="table table-borderless" id="users-list4" style=" border-bottom: none;" >
+          <thead style="text-align:left; font-size:3rem">
+             <tr>
+                <th>Unit 4</th>
+             </tr>
+          </thead>
+
+             <?php if($users): ?>
+             <?php foreach($users as $user): ?>
+
+
+               <?php if ($user['unit']==4): ?>
+                 <tr>
+                    <td style="text-align:left"> <a href="delete\<?= $user['lesson_id'] ?>" onclick="return doconfirm()"> <?php echo $user['lesson_name']; ?></a></td>
+                  </tr>
+              <?php endif; ?>
             <?php endforeach; ?>
             <?php endif; ?>
         </table>
@@ -115,7 +134,7 @@
             "bInfo" : false,
             "searching": false,
             "language": {
-              "emptyTable": "No uploaded module for Grade 1"
+              "emptyTable": "No uploaded module for Unit 1"
             },
              "responsive": true,
          });
@@ -124,7 +143,7 @@
             "bInfo" : false,
             "searching": false,
             "language": {
-              "emptyTable": "No uploaded module for Grade 2"
+              "emptyTable": "No uploaded module for Unit 2"
             },
              "responsive": true,
          });
@@ -133,7 +152,16 @@
             "bInfo" : false,
             "searching": false,
             "language": {
-              "emptyTable": "No uploaded module for Grade 3"
+              "emptyTable": "No uploaded module for Unit 3"
+            },
+             "responsive": true,
+         });
+         $('#users-list4').DataTable({
+            "bPaginate": false,
+            "bInfo" : false,
+            "searching": false,
+            "language": {
+              "emptyTable": "No uploaded module for Unit 4"
             },
              "responsive": true,
          });

@@ -19,7 +19,7 @@
    </div>
 
    <div class="menu p-2 text-center">
-  
+
         <div class="">
         <a href="logout">Logout</a>
         </div>
