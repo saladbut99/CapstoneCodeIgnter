@@ -44,41 +44,54 @@
         <?php endif; ?>
         <br>
    </div>
-       <div class="mt-3">
+       <div class="mt-3 border border-bottom-0">
          <br>
              <h1 style="text-align:left"><?= $users->lesson_name; ?></h1>
              <hr style="width:100%;height:2px;color:#00acee">
              <h3 style="text-align:left"><?= $users->lesson_description; ?></h3>
        </div>
-        <form class="m-5 p-5">
+        <form class="mt-5 p-1 border border-top-0">
        <div class="discussion-area p-2">
           <!-- DISCUSSION -->
        <center>
-       <div class="form-outline mb-4">
-         <textarea class="form-control" style="width: 50%; border: 2px solid #00acee;" id="exampleFormControlTextarea1" placeholder="+ IMAGE" rows="4"></textarea>
+       <div class="form-outline">
+       <label for="media4example" class="form-label"><b>Upload media for discussion</b></label>
+       <input class="form-control" type="file" id="media4discussion" enable />
+         <br>
        </div>
        <div class="form-outline mb-4">
-         <textarea class="form-control" style="width: 80%; border: 2px solid #00acee;" id="exampleFormControlTextarea1" placeholder="Discussion" rows="4"></textarea>
+         <textarea class="form-control" style="width: 100%; border: 2px solid #00acee;" id="exampleFormControlTextarea1" placeholder="Discussion" rows="4"></textarea>
        </div>
-
+<hr>
        <!-- EXAMPLE -->
+    
+       <div class="form-outline mt-4 mb-5 input_fields_wrap">
+      <label for="media4example" class="form-label "><b>Upload media for example/s</b></label>
+      <input class="form-control" type="file" id="media4example" enable />
+      </div>
 
+      
        </center>
 
 
 
 
        <!-- Submit button -->
-       <button type="submit" class="btn btn-primary btn-block mb-4">SUBMIT</button>
+       <button type="submit" class="btn btn-primary btn-block mb-4 mt-5">SUBMIT</button>
      </form>
    </div>
  </div>
 </div>
 
 <script>
+
+
+
   $( ".dropdown" ).click(function() {
     $( ".menu").toggle();
 });
+
+
 </script>
 
 <?= $this->endSection() ?>

@@ -42,7 +42,7 @@
           <div class="col-10 col-md-8 offset-md-2">
             <form action="addmodule" method="post">
               <div class="form-group">
-                  <label for="" style="font-size:25px;">Title</label>
+                  <label for="" style="font-size:25px;">Module Title</label>
                   <input type="text" id="" class="form-control" name="lesson_name" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;">
               </div>
               <div class="text-danger" style="margin-top:3%;">
@@ -54,7 +54,7 @@
               </div>
 
                 <div class="form-group">
-                  <label for="" style="font-size:25px;">Description</label>
+                  <label for="" style="font-size:25px;">Module Description</label>
                   <textarea type="text" id="" class="form-control" name="lesson_description" rows="3" style="border-color: #00acee; border-width: 2px; border-radius:15px;"></textarea>
                 </div>
                 <div class="text-danger" style="margin-top:2%;margin-bottom:2%;">
