@@ -80,8 +80,11 @@
                 <div class="form-group">
                   <label for="" style="font-size:25px; margin-bottom:3%;">Media</label>
                   <br>
-                  <input type="file" name="image" id="image" class="form-control-file">
+                  <input type="file" name="image" id="image" class="form-control-file" onchange="loadFile(event)">
                   <div class="text-danger" style="margin-top:3%;">
+                  <center>
+                  <img id="output" width="350" />
+                </center>
                     <?php if (isset($validation)): ?>
                           <?php if ($validation->hasError('image')): ?>
                                 <p>  <?= $validation->getError('image') ?></p>
@@ -129,6 +132,12 @@
              document.getElementById("pupil_username").value = username;
           }
         </script>
+        <script>
+             var loadFile = function(event) {
+	           var image = document.getElementById('output');
+	           image.src = URL.createObjectURL(event.target.files[0]);
+              };
+         </script>
 
 <script>
   $( ".dropdown" ).click(function() {
