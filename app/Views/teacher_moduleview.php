@@ -51,24 +51,34 @@
              <h3 style="text-align:left"><?= $users->lesson_description; ?></h3>
        </div>
        <!-- form for the lesson -->
-        <form class="m-5 p-5">
-       <div class="discussion-area p-2">
-          <!-- DISCUSSION -->
-       <center>
-       <div class="form-outline mb-4">
-         <textarea class="form-control" style="width: 50%; border: 2px solid #00acee;" id="exampleFormControlTextarea1" placeholder="+ IMAGE" rows="4"></textarea>
-       </div>
-       <div class="form-outline mb-4">
-         <textarea class="form-control" style="width: 80%; border: 2px solid #00acee;" id="exampleFormControlTextarea1" placeholder="Discussion" rows="4"></textarea>
-       </div>
+       <div style="margin-top:2%;">
+         <?php if (session()->get('updatesuccess')): ?>
+           <div class="alert alert-success" role="alert" style="margin-bottom:2%;">
+               <h4><?= session()->get('updatesuccess') ?></h4>
+           </div>
+         <?php endif; ?>
+         <br>
+    </div>
+        <form method="post" class="m-5 p-5" enctype="multipart/form-data">
+            <div class="discussion-area p-2">
+              <!-- DISCUSSION -->
+              <center>
+                <div class="form-outline mb-4">
 
+                  <input type="file" name="image" id="image" class="form-control-file">
+                  <div class="text-danger" style="margin-top:3%;">
+                    <?php if (isset($validation)): ?>
+                          <?php if ($validation->hasError('image')): ?>
+                                <p>  <?= $validation->getError('image') ?></p>
+                          <?php endif; ?>
+                    <?php endif; ?>
+                  </div>
+                </div>
+                <div class="form-outline mb-4">
+                  <textarea class="form-control" style="width: 80%; border: 2px solid #00acee;" id="exampleFormControlTextarea1" placeholder="Discussion" rows="4" name="discussion"></textarea>
+                </div>
        <!-- EXAMPLE -->
-
        </center>
-
-
-
-
        <!-- Submit button -->
        <button type="submit" class="btn btn-primary btn-block mb-4">SUBMIT</button>
      </form>

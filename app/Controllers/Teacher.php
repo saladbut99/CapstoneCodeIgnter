@@ -8,6 +8,7 @@ use App\Models\PupilModelStatus;
 use App\Models\LessonMaster;
 use App\Models\CustomModel;
 use App\Models\TeacherLesson;
+use App\Models\MediaLesson;
 
 
 class Teacher extends BaseController
@@ -475,6 +476,48 @@ public function module($id){
   //     echo "<pre>";
   //   print_r($data);
   // echo "<pre>";
+  helper(['form']);
+
+  if ($this->request->getMethod()=='post') {
+    $model = new MediaLesson();
+    $rules=[
+      // 'password'=>[
+      //     'rules'=>'required|min_length[8]|max_length[255]',
+      //     'label'=>'Password',
+      // ],
+      // 'password_confirm'=>[
+      //     'rules'=>'matches[password]',
+      //     'label'=>'Confirm Password',
+      // ],
+      'image'=>[
+        'rules'=> 'uploaded[image]|ext_in[image,png,jpg,gif]',
+        'label'=>'Image',
+      ],
+    ];
+    if ($this->validate($rules)) {
+        //Then do database insertion or loginuser
+
+        $file = $this->request->getFile('image');
+        if ($file->isValid()&& !$file->hasMoved()) {
+          $file->move('./uploads/images');
+        }
+        $filename = $file->getName();
+        $_POST['file_name']=$filename;
+        $_POST['file_targetDirectory']='./uploads/image';
+        $model->save($_POST);
+         $session = session();
+         $session->setFlashdata('updatesuccess','Image and Discussion Added Successfully ');
+           return redirect()->to('teacher/module/'.$id);
+
+        // echo '<script type="text/javascript">
+        //       alert("Account Creation Successful!");
+        //       </script>';
+    }else{
+      //if validation is not successfull
+      //validator provies a list of errors
+      $data['validation']=$this->validator;
+    }
+  }
 
     return view('teacher_moduleview', $data);
 
