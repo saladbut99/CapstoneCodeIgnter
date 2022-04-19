@@ -98,8 +98,17 @@ class CustomModel{
     $builder->select('lesson_content_id');
       $builder->where('lesson_id',$id);
     $result = $builder->get()->getRow();
-    $result2=$result->lesson_content_id;
+    //$result2=$result->lesson_content_id;
   //  $result2=$result['account_status'];
-    return $result2;
+    return $result;
+  }
+  function getNull($id){
+    $builder = $this->db->table('lesson_content');
+    $builder->select('lesson_content_id');
+      $builder->where('lesson_id',$id);
+    $result = $builder->get()->getRow();
+  //  $result2=$result->lesson_content_id;
+  //  $result2=$result['account_status'];
+    return $result;
   }
 }

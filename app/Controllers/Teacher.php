@@ -322,6 +322,9 @@ public function addmodule()
   helper(['form']);
   if ($this->request->getMethod()=='post') {
     $model = new LessonMaster();
+    $model1 = new LessonContent();
+    $model2 = new MediaLesson();
+
     $rules=[
       'lesson_name'=> [
         'rules'=>'required|is_unique[lesson_master.lesson_name]',
@@ -339,7 +342,14 @@ public function addmodule()
         'rules'=>'required',
         'label'=>'Lesson Unit',
       ],
-
+      'image'=>[
+        'rules'=> 'uploaded[image]|ext_in[image,png,jpg,gif]',
+        'label'=>'Image',
+      ],
+      'discussion'=>[
+        'rules'=>'required|is_unique[lesson_content.discussion]',
+        'label'=>'Discussion Field',
+      ],
     ];
     if ($this->validate($rules)) {
         //Then do database insertion or loginuser
@@ -368,13 +378,38 @@ public function addmodule()
           $TeacherLesson->save($newData);
 
           $db = db_connect();
-          $custom = new CustomModel($db);
-          $id=$custom->getmoduleid($_POST['lesson_name']);
+          $customnew= new CustomModel($db);
+          $id=$customnew->getmoduleid($_POST['lesson_name']);
+
+                  $file = $this->request->getFile('image');
+                  if ($file->isValid()&& !$file->hasMoved()) {
+                    $file->move('./uploads/images');
+                  }
+                  $filename = $file->getName();
+
+                  $db = db_connect();
+                  $getlessonid = new CustomModel($db);
+                  $id=$getlessonid->getlessonid($id);
+
+
+
+                  $_POST['file_name']=$filename;
+                  $_POST['lesson_id']=$id;
+                  $_POST['file_targetDirectory']='./uploads/image';
+
+                  $model1->save($_POST);
+
+                  $discussion=$_POST['discussion'];
+                  $db = db_connect();
+                  $getlessoncontentid = new CustomModel($db);
+                  $id2=$getlessoncontentid->getlessoncontentid($discussion);
+                  $_POST['lesson_content_id']=$id2;
+                  $model2->save($_POST);
 
 
         $session = session();
         $session->setFlashdata('success','Module Upload Completed');
-         return redirect()->to('teacher/module/'.$id);
+          return redirect()->to('teacher/viewmodule/'.$id);
 
     }else{
       //if validation is not successfull
@@ -557,6 +592,8 @@ public function viewmodule($id){
     'meta_title'=>'Admin | View Module'
   ];
   //$teacher_id=session()->get('t_id');
+
+
   $userModel = new LessonMaster();
   $data['users'] = $userModel->where(['lesson_id'=>$id])->get()->getRow();
 
@@ -569,14 +606,10 @@ public function viewmodule($id){
 
 
   $userModel3 = new MediaLesson();
-  $data['image'] = $userModel3->where(['lesson_content_id'=>$id2])->get()->getRow();
+    $data['image'] = $userModel3->where(['lesson_content_id'=>$id2->lesson_content_id])->get()->getRow();
 
 
-
-
-
-
-    return view('teacher_module', $data);
+  return view('teacher_module', $data);
 
 
 }

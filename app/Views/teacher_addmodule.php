@@ -40,7 +40,7 @@
         <br>
       </div>
           <div class="col-10 col-md-8 offset-md-2">
-            <form action="addmodule" method="post">
+            <form action="addmodule" method="post" enctype="multipart/form-data">
               <div class="form-group">
                   <label for="" style="font-size:25px;">Title</label>
                   <input type="text" id="" class="form-control" name="lesson_name" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;">
@@ -66,8 +66,9 @@
                 </div>
 
                 <div class="form-group">
-                  <label class="form-check-label mx-1" for="gradelevel" style="font-size:25px;"> Grade Level:  </label>
-                   <input type="number" style="width: 100%; height: 50px; text-align: center; border: solid 2px #00acee; border-radius:15px;" id="unit" name="unit" placeholder="" class="mt-1" min='1' max='4'/> <br>
+                  <label class="form-check-label mx-1" for="gradelevel" style="font-size:25px;"> Grade Level  </label>
+                  <br>
+                   <input type="number" style="margin-left: auto;width: 50%; height: 50px; text-align: center; border: solid 2px #00acee; border-radius:15px;" id="unit" name="unit" placeholder="" class="mt-1" min='1' max='4'/> <br>
                 </div>
                 <div class="text-danger" style="margin-top:3%;">
                   <?php if (isset($validation)): ?>
@@ -75,6 +76,29 @@
                               <p>  <?= $validation->getError('unit') ?></p>
                         <?php endif; ?>
                   <?php endif; ?>
+                </div>
+                <div class="form-group">
+                  <label for="" style="font-size:25px; margin-bottom:3%;">Media</label>
+                  <br>
+                  <input type="file" name="image" id="image" class="form-control-file">
+                  <div class="text-danger" style="margin-top:3%;">
+                    <?php if (isset($validation)): ?>
+                          <?php if ($validation->hasError('image')): ?>
+                                <p>  <?= $validation->getError('image') ?></p>
+                          <?php endif; ?>
+                    <?php endif; ?>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="" style="font-size:25px; margin-bottom:3%;">Discussion</label>
+                  <textarea class="form-control" style="width: 100%; border: 2px solid #00acee;" id="exampleFormControlTextarea1" placeholder="Discussion" rows="4" name="discussion"></textarea>
+                  <div class="text-danger" style="margin-top:3%;">
+                    <?php if (isset($validation)): ?>
+                          <?php if ($validation->hasError('discussion')): ?>
+                                <p>  <?= $validation->getError('discussion') ?></p>
+                          <?php endif; ?>
+                    <?php endif; ?>
+                  </div>
                 </div>
                 <center>
                 <button type="submit" class="btn btn-primary btn-block mb-4 mt-4">Submit</button>

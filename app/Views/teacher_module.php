@@ -68,8 +68,12 @@
          <img src="<?=base_url()?>/public/uploads/images/<?= $image->file_name; ?>" alt="" width="max" height="max">
        <?php endif; ?>
 
+       <?php if (!$discussion): ?>
+         <h1>no discussion</h1>
+        <?php else: ?>
+          <h1 style="margin-top:5%;"><?= $discussion->discussion; ?></h1>
+        <?php endif; ?>
 
-      <h1 style="margin-top:5%;"><?= $discussion->discussion; ?></h1>
    </div>
  </div>
 </div>
