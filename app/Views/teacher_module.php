@@ -59,7 +59,7 @@
          <?php endif; ?>
          <br>
     </div>
-      <h1>CONTENT HERE</h1>
+      <img src="<?= ?>" alt="">
    </div>
  </div>
 </div>
