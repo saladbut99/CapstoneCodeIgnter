@@ -495,7 +495,7 @@ public function module($id){
         'label'=>'Image',
       ],
       'discussion'=>[
-        'rules'=>'required',
+        'rules'=>'required|is_unique[lesson_content.discussion]',
         'label'=>'Discussion Field',
       ],
     ];
@@ -512,14 +512,23 @@ public function module($id){
         $getlessonid = new CustomModel($db);
         $id=$getlessonid->getlessonid($id);
 
+
+
         $_POST['file_name']=$filename;
         $_POST['lesson_id']=$id;
         $_POST['file_targetDirectory']='./uploads/image';
+
         $model->save($_POST);
+
+        $discussion=$_POST['discussion'];
+        $db = db_connect();
+        $getlessoncontentid = new CustomModel($db);
+        $id2=$getlessoncontentid->getlessoncontentid($discussion);
+        $_POST['lesson_content_id']=$id2;
         $model2->save($_POST);
          $session = session();
          $session->setFlashdata('updatesuccess','Image and Discussion Added Successfully ');
-           return redirect()->to('teacher/module/'.$id);
+           return redirect()->to('teacher/viewmodule/'.$id);
 
         // echo '<script type="text/javascript">
         //       alert("Account Creation Successful!");
@@ -535,6 +544,35 @@ public function module($id){
 
 
 }
+
+public function viewmodule($id){
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+  $data=[
+    'meta_title'=>'Admin | View Module'
+  ];
+  //$teacher_id=session()->get('t_id');
+  $userModel = new LessonMaster();
+  $data['users'] = $userModel->where(['lesson_id'=>$id])->get()->getRow();
+
+  $userModel = new MediaLesson();
+  $data['image'] = $userModel->where(['lesson_id'=>$id])->get()->getRow();
+
+
+
+
+
+
+    return view('teacher_module', $data);
+
+
+}
+
 
 public function manage(){
   $type = session()->get('usertype');

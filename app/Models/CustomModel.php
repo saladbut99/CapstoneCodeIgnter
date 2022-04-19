@@ -83,5 +83,14 @@ class CustomModel{
     return $result2;
 
   }
+  function getlessoncontentid($discussion){
+    $builder = $this->db->table('lesson_content');
+    $builder->select('lesson_content_id');
+      $builder->where('discussion',$discussion);
+    $result = $builder->get()->getRow();
+    $result2=$result->lesson_content_id;
+  //  $result2=$result['account_status'];
+    return $result2;
+  }
 
 }

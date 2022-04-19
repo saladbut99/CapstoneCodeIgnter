@@ -15,7 +15,7 @@ class MediaLesson extends Model
     // protected $useSoftDeletes = true;
 
     //list of fields that can be manipulated from an outside class
-    protected $allowedFields = ['file_name', 'lessont_content_id','file_targetDirectory'];
+    protected $allowedFields = ['file_name', 'lesson_content_id','file_targetDirectory'];
 
     //specify dates
     // protected $useTimestamps = true;

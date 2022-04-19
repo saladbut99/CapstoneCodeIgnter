@@ -76,6 +76,13 @@
                 </div>
                 <div class="form-outline mb-4">
                   <textarea class="form-control" style="width: 80%; border: 2px solid #00acee;" id="exampleFormControlTextarea1" placeholder="Discussion" rows="4" name="discussion"></textarea>
+                  <div class="text-danger" style="margin-top:3%;">
+                    <?php if (isset($validation)): ?>
+                          <?php if ($validation->hasError('discussion')): ?>
+                                <p>  <?= $validation->getError('discussion') ?></p>
+                          <?php endif; ?>
+                    <?php endif; ?>
+                  </div>
                 </div>
        <!-- EXAMPLE -->
        </center>
