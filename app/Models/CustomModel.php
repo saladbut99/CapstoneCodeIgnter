@@ -73,5 +73,15 @@ class CustomModel{
     //  $result2=$result['account_status'];
       return $result2;
   }
+  function getlessonid($id){
+    $builder = $this->db->table('lesson_master');
+    $builder->select('lesson_id');
+    $builder->where('lesson_id',$id);
+    $result = $builder->get()->getRow();
+    $result2=$result->lesson_id;
+  //  $result2=$result['account_status'];
+    return $result2;
+
+  }
 
 }

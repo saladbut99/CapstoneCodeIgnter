@@ -9,7 +9,7 @@ use App\Models\LessonMaster;
 use App\Models\CustomModel;
 use App\Models\TeacherLesson;
 use App\Models\MediaLesson;
-
+use App\Models\LessonContent;
 
 class Teacher extends BaseController
 {
@@ -479,7 +479,8 @@ public function module($id){
   helper(['form']);
 
   if ($this->request->getMethod()=='post') {
-    $model = new MediaLesson();
+    $model = new LessonContent();
+    $model2 = new MediaLesson();
     $rules=[
       // 'password'=>[
       //     'rules'=>'required|min_length[8]|max_length[255]',
@@ -493,6 +494,10 @@ public function module($id){
         'rules'=> 'uploaded[image]|ext_in[image,png,jpg,gif]',
         'label'=>'Image',
       ],
+      'discussion'=>[
+        'rules'=>'required',
+        'label'=>'Discussion Field',
+      ],
     ];
     if ($this->validate($rules)) {
         //Then do database insertion or loginuser
@@ -502,9 +507,16 @@ public function module($id){
           $file->move('./uploads/images');
         }
         $filename = $file->getName();
+
+        $db = db_connect();
+        $getlessonid = new CustomModel($db);
+        $id=$getlessonid->getlessonid($id);
+
         $_POST['file_name']=$filename;
+        $_POST['lesson_id']=$id;
         $_POST['file_targetDirectory']='./uploads/image';
         $model->save($_POST);
+        $model2->save($_POST);
          $session = session();
          $session->setFlashdata('updatesuccess','Image and Discussion Added Successfully ');
            return redirect()->to('teacher/module/'.$id);
