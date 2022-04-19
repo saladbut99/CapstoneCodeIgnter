@@ -50,7 +50,7 @@
 
               <?php if ($user['unit']==1): ?>
                  <tr>
-                    <td style="text-align:left"><a href="module/<?= $user['lesson_id'] ?>"><?php echo $user['lesson_name']; ?></a>  </td>
+                    <td style="text-align:left"><a href="moduleview/<?= $user['lesson_id'] ?>"><?php echo $user['lesson_name']; ?></a>  </td>
 
                   </tr>
                <?php endif; ?>
@@ -71,7 +71,7 @@
 
                <?php if ($user['unit']==2): ?>
                  <tr>
-                    <td style="text-align:left"><a href="module/<?= $user['lesson_id'] ?>"><?php echo $user['lesson_name']; ?></a></td>
+                    <td style="text-align:left"><a href="viewmodule/<?= $user['lesson_id'] ?>"><?php echo $user['lesson_name']; ?></a></td>
                   </tr>
               <?php endif; ?>
             <?php endforeach; ?>
@@ -87,7 +87,7 @@
              <?php foreach($users as $user): ?>
                <?php if ($user['unit']==3): ?>
                  <tr>
-                    <td style="text-align:left"><a href="module/<?= $user['lesson_id'] ?>"><?php echo $user['lesson_name']; ?></a></td>
+                    <td style="text-align:left"><a href="viewmodule/<?= $user['lesson_id'] ?>"><?php echo $user['lesson_name']; ?></a></td>
                   </tr>
               <?php endif; ?>
 
@@ -104,7 +104,7 @@
              <?php foreach($users as $user): ?>
                <?php if ($user['unit']==4): ?>
                  <tr>
-                    <td style="text-align:left"><a href="module/<?= $user['lesson_id'] ?>"><?php echo $user['lesson_name']; ?></a></td>
+                    <td style="text-align:left"><a href="viewmodule/<?= $user['lesson_id'] ?>"><?php echo $user['lesson_name']; ?></a></td>
                   </tr>
               <?php endif; ?>
 

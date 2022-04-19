@@ -59,7 +59,17 @@
          <?php endif; ?>
          <br>
     </div>
-      <img src="<?= ?>" alt="">
+
+
+
+      <?php if (!$image): ?>
+        <h1>no image</h1>
+       <?php else: ?>
+         <img src="<?=base_url()?>/public/uploads/images/<?= $image->file_name; ?>" alt="" width="max" height="max">
+       <?php endif; ?>
+
+
+      <h1 style="margin-top:5%;"><?= $discussion->discussion; ?></h1>
    </div>
  </div>
 </div>

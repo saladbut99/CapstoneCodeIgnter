@@ -560,8 +560,16 @@ public function viewmodule($id){
   $userModel = new LessonMaster();
   $data['users'] = $userModel->where(['lesson_id'=>$id])->get()->getRow();
 
-  $userModel = new MediaLesson();
-  $data['image'] = $userModel->where(['lesson_id'=>$id])->get()->getRow();
+  $userModel2 = new LessonContent();
+  $data['discussion'] = $userModel2->where(['lesson_id'=>$id])->get()->getRow();
+
+  $db = db_connect();
+  $getlessoncontentid = new CustomModel($db);
+  $id2=$getlessoncontentid->getlessoncontenti2($id);
+
+
+  $userModel3 = new MediaLesson();
+  $data['image'] = $userModel3->where(['lesson_content_id'=>$id2])->get()->getRow();
 
 
 
