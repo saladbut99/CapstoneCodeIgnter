@@ -176,7 +176,8 @@ transition: all 0.3 ease;
 .section1{
   height: 80vh;
   width: 70%;
-  margin-inline: auto;
+  margin-left: auto;
+  margin-right: auto;
   margin-bottom: 10%;
 
 }
@@ -317,9 +318,6 @@ thead, th {
 @media only screen and (max-width: 768px) {
   .login_image {
     width: 50px;
-  }
-  .loginbutton{
-
   }
 
 }
