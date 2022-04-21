@@ -1,12 +1,13 @@
 <?= $this->extend('layouts/loginlayout') ?>
 <?= $this->section('logintemplate') ?>
     <center>
+    <div id="login" style="  background-image: url('<?=base_url()?>/public/assets/images/teacher.gif');">
     <div class="formcontainer m-5 pb-5" style="max-width:50%;">
       <div class="container h-100">
         <br>
         <div class="row h-100 align-items-center">
           <div class="col-3 text-center">
-              <a href="homepage" class="login_a">Back</a>
+              <a href="homepage" class="login_a btn btn-secondary btn-lg active" role="button" aria-pressed="true">Back</a>
           </div>
           <div class="col-6 text-center">
               <h1><b>Teacher Login</b></h1>
@@ -70,6 +71,7 @@
           </div>
         </div>
       </div>
+    </div>
     </div>
   </center>
   <?= $this->endSection() ?>

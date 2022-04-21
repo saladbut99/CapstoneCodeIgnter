@@ -13,25 +13,13 @@ h1{
 
 
 .bg {
-  background-image:   linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url('website/Banner.png');
+  background-image:  url('website/PULONG animated.gif');
   background-position: center;
   background-repeat: no-repeat;
   height: 100vh;
   min-height: 500px;
-  background-attachment: fixed;
 }
 
-.bg{
-  animation-name: example;
-  animation-duration: 4s;
-  animation-iteration-count: infinite;
-}
-
-@keyframes example {
-  0% {background-size: 300vh; }
-  50% {background-size: 290vh; background-position-y: top;}
-  100%  {background-size: 300vh;}
-}
 
 
 .whitebg{
@@ -57,8 +45,8 @@ h1{
   padding: 8px 10px;
   font-size: 15px;
   transition: all 0.3s ease 0s;
-  border: 5px solid #59CF02;
-  background: none;
+  border: 5px solid #062a6b;
+  background: rgba(89, 207, 2, 0.9);
   color:  white;
   cursor: pointer;
   border-radius: 20px;
@@ -82,7 +70,7 @@ transition: 1s;
 }
 
 .formcontainer{
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.75);
   width: 100%;
   border: 3px solid #00acee;
    border-radius: 25px;
@@ -114,7 +102,7 @@ transition: all 0.3 ease;
 }
 
 .formcontainer .form .input_field .input:focus{
-border: 3px solid  #59CF02;
+border: 3px solid  #45a700;
 border-radius: 20px;
 transition: all 0.3 ease;
 }
@@ -123,7 +111,7 @@ transition: all 0.3 ease;
   height: 60px;
   font-size: 20px;
   transition: all 0.3s ease 0s;
-  border: 2px solid   #59CF02;
+  border: 2px solid   #45a700;
   background: white;
   color:  black;
   cursor: pointer;
@@ -137,11 +125,11 @@ transition: all 0.3 ease;
 
 .login_a{
   text-decoration: none;
-  color:black;
     transition: all 0.3s ease 0s;
 }
 .login_a:hover{
   color:#00acee;
+  transform: scale(1.05);
 }
 .login_image{
   width: 200px;
@@ -336,3 +324,10 @@ thead, th {
 }
 
 
+
+#login{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  max-height: 100vh;
+}

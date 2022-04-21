@@ -9,11 +9,11 @@
 
   </head>
 <body>
-  <div class="bg" style="  background-image:   linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url('<?=base_url()?>/public/assets/images/banner.png');">
+  <div class="bg" style="  background-image: url('<?=base_url()?>/public/assets/images/PULONG animated.gif');">
     <div class="container h-100">
       <div class="row h-100 align-items-center">
         <div class="col-md text-center">
-            <h1 style="font-size:14vh;color:white;"><b>Welcome to Pulong</b></h1>
+      
         </div>
         <div class="col-md-1 text-center">
 
