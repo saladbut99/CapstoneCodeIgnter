@@ -263,3 +263,11 @@ transition: all 0.3 ease;
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+.viewer img {
+    opacity: 0.8;
+    cursor: pointer;
+  }
+.viewer img:hover {
+    opacity: 1;
+  }
