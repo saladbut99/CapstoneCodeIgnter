@@ -343,7 +343,7 @@ public function addmodule()
         'label'=>'Lesson Unit',
       ],
       'image'=>[
-        'rules'=> 'uploaded[image]|ext_in[image,png,jpg,gif]',
+        'rules'=> 'uploaded[image]|ext_in[image,png,jpg,gif,mp4]',
         'label'=>'Image',
       ],
       'discussion'=>[
@@ -386,6 +386,7 @@ public function addmodule()
                     $file->move('./uploads/images');
                   }
                   $filename = $file->getName();
+                  $fileExt = pathinfo($filename, PATHINFO_EXTENSION);
 
                   $db = db_connect();
                   $getlessonid = new CustomModel($db);
@@ -396,6 +397,7 @@ public function addmodule()
                   $_POST['file_name']=$filename;
                   $_POST['lesson_id']=$id;
                   $_POST['file_targetDirectory']='./uploads/image';
+                  $_POST['file_extension']=$fileExt;
 
                   $model1->save($_POST);
 
@@ -526,7 +528,7 @@ public function module($id){
       //     'label'=>'Confirm Password',
       // ],
       'image'=>[
-        'rules'=> 'uploaded[image]|ext_in[image,png,jpg,gif]',
+        'rules'=> 'uploaded[image]|ext_in[image,png,jpg,gif,mp4]',
         'label'=>'Image',
       ],
       'discussion'=>[

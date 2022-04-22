@@ -61,7 +61,13 @@
     </div>
 
     <div class="imageview">
-      <a href="<?=base_url()?>/public/uploads/images/<?= $image->file_name; ?>" target="_blank"><img src="<?=base_url()?>/public/uploads/images/<?= $image->file_name; ?>"  alt="" width="400" height="600" onclick="myFunction(this);"></a>
+      <?php if (strcmp($image->file_extension,'mp4')==0): ?>
+        <video width="auto" height="auto" poster="/images/w3schools_green.jpg" controls>
+            <source src="<?=base_url()?>/public/uploads/images/<?= $image->file_name; ?>" type="video/mp4">
+      </video>
+      <?php else: ?>
+            <a href="<?=base_url()?>/public/uploads/images/<?= $image->file_name; ?>" target="_blank"><img src="<?=base_url()?>/public/uploads/images/<?= $image->file_name; ?>"  alt="" width="600" height="900" onclick="myFunction(this);"></a>
+      <?php endif; ?>
     </div>
     <!-- <div class="expandingcontainer">
       <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
