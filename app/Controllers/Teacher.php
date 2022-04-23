@@ -472,7 +472,7 @@ public function delete($id){
 
    $session = session();
    $session->setFlashdata('updatesuccess','Module Successfully Deleted ');
-   return redirect()->to('teacher/removemodule');
+   return redirect()->to('teacher/view');
 
 }
 
