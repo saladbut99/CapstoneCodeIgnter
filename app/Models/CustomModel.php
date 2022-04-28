@@ -102,6 +102,15 @@ class CustomModel{
   //  $result2=$result['account_status'];
     return $result;
   }
+  function getlessoncontenti3($id){
+    $builder = $this->db->table('lesson_content');
+    $builder->select('lesson_content_id');
+      $builder->where('lesson_id',$id);
+    $result = $builder->get()->getRow();
+    $result2=$result->lesson_content_id;
+  //  $result2=$result['account_status'];
+    return $result2;
+  }
   function getNull($id){
     $builder = $this->db->table('lesson_content');
     $builder->select('lesson_content_id');

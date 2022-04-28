@@ -28,8 +28,12 @@ class LessonMaster extends Model
     // protected $skipValidation      = false;
   //  protected $beforeUpdate = ['hashPassword'];
     // //beforeinsert everytime you are going to insert checkName function is executed
-    //  protected $beforeInsert = ['checkName'];
-    //
+    //   protected $beforeInsert = ['capitalName'];
+    // //
+    // protected function capitalName(array $data){
+    //       $data['data']['lesson_name']=ucfirst($data['data']['lesson_name']);
+    //       return $data;
+    // }
     // //$data variable below is the data that is being submitted
     // protected function checkName(array $data){
     //

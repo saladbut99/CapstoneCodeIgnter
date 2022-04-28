@@ -352,3 +352,7 @@ thead, th {
   font-size: 35px;
   cursor: pointer;
 }
+video {
+  width: 100%;
+   max-height: 100%;
+}

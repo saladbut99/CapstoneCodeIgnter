@@ -62,11 +62,11 @@
 
     <div class="imageview">
       <?php if (strcmp($image->file_extension,'mp4')==0): ?>
-        <video width="auto" height="auto" poster="/images/w3schools_green.jpg" controls>
+        <video controls>
             <source src="<?=base_url()?>/public/uploads/images/<?= $image->file_name; ?>" type="video/mp4">
       </video>
       <?php else: ?>
-            <a href="<?=base_url()?>/public/uploads/images/<?= $image->file_name; ?>" target="_blank"><img src="<?=base_url()?>/public/uploads/images/<?= $image->file_name; ?>"  alt="" width="600" height="900" onclick="myFunction(this);"></a>
+            <a href="<?=base_url()?>/public/uploads/images/<?= $image->file_name; ?>" target="_blank"><img src="<?=base_url()?>/public/uploads/images/<?= $image->file_name; ?>"  alt="" width="600" height="900" onclick="myFunction(this);" class="img-fluid"></a>
       <?php endif; ?>
     </div>
     <!-- <div class="expandingcontainer">
@@ -85,22 +85,37 @@
      <div class="mt-3">
         <h1 style="text-align:left">Examples</h1>
         <hr style="width:100%;height:2px;color:#00acee;">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                  <?php if ($example): ?>
+                        <?php foreach ($example as $examples): ?>
+                              <h2 style="text-align:left;"><?= $examples['example']; ?></h2>
+                        <?php endforeach; ?>
+                  <?php endif; ?>
+                </div>
+                <div class="">
+
+                </div>
+            </div>
+        </div>
+
         <h1 style="text-align:left;">   <button id="toggle" class="btn btn-info mb-4 mt-4" style="margin-bottom:1%; "  align="left"> Add Example</button></h1>
      </div>
    </div>
    <br>
  </div>
- <form class="" action="" method="post" id="form" style="display:none;">
+ <form class="" action="<?php echo site_url('teacher/viewmodule/'.$users->lesson_id);?>" method="post" id="form" style="display:none;"  enctype="multipart/form-data">
    <div class="container" style="margin-top:5%;">
      <div class="row">
        <div class="col-sm">
                <div class="form-group">
-                 <label for="" style="font-size:25px; margin-bottom:3%;">Example</label>
-                 <textarea class="form-control" style="width: 100%; border: 2px solid #00acee;" id="exampleFormControlTextarea1" placeholder="Discussion" rows="4" name="discussion"></textarea>
+                 <label for="" style="font-size:25px; margin-bottom:3%;">Example Content</label>
+                 <textarea class="form-control" style="width: 100%; border: 2px solid #00acee;" id="exampleFormControlTextarea1" placeholder="Discussion" rows="4" name="example"></textarea>
                  <div class="text-danger" style="margin-top:3%;">
                    <?php if (isset($validation)): ?>
-                         <?php if ($validation->hasError('discussion')): ?>
-                               <p>  <?= $validation->getError('discussion') ?></p>
+                         <?php if ($validation->hasError('example')): ?>
+                               <p>  <?= $validation->getError('example') ?></p>
                          <?php endif; ?>
                    <?php endif; ?>
                  </div>
@@ -122,6 +137,7 @@
            </div>
          </div>
        </div>
+
      </div>
    </div>
    <br>

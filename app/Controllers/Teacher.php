@@ -10,6 +10,7 @@ use App\Models\CustomModel;
 use App\Models\TeacherLesson;
 use App\Models\MediaLesson;
 use App\Models\LessonContent;
+use App\Models\LessonExample;
 
 class Teacher extends BaseController
 {
@@ -353,7 +354,9 @@ public function addmodule()
     ];
     if ($this->validate($rules)) {
         //Then do database insertion or loginuser
-
+        $_POST['lesson_name']=ucfirst($_POST['lesson_name']);
+        $_POST['lesson_description']=ucfirst($_POST['lesson_description']);
+        $_POST['discussion']=ucfirst($_POST['discussion']);
         $model->save($_POST);
 
         $db = db_connect();
@@ -582,6 +585,90 @@ public function module($id){
 
 }
 
+// public function addexample(){
+//   $type = session()->get('usertype');
+//    if ($type!='Teacher' && $type=='Admin'){
+//       return redirect()->to('admin/home');
+//     //  echo "hello";
+//    }else if ($type!='Teacher' && $type=='Pupil') {
+//      return redirect()->to('pupil/home');
+//    }
+//
+//    $userModel = new LessonMaster();
+//    $lesson_id = $userModel->where(['lesson_id'=>$id])->get()->getRow()->lesson_id;
+//
+//    $userModel2 = new LessonContent();
+//    $lesson_content_id = $userModel2->where(['lesson_id'=>$id])->get()->getRow()->lesson_content_id;
+//
+//   // $data=[
+//   //   'meta_title'=>'Admin | View Module'
+//   // ];
+//   $rules=[
+//     // 'password'=>[
+//     //     'rules'=>'required|min_length[8]|max_length[255]',
+//     //     'label'=>'Password',
+//     // ],
+//     // 'password_confirm'=>[
+//     //     'rules'=>'matches[password]',
+//     //     'label'=>'Confirm Password',
+//     // ],
+//     // 'image'=>[
+//     //   'rules'=> 'uploaded[image]|ext_in[image,png,jpg,gif,mp4]',
+//     //   'label'=>'Image',
+//     // ],
+//     'example'=>[
+//       'rules'=>'required|is_unique[lesson_content.discussion]',
+//       'label'=>'Discussion Field',
+//     ],
+//   ];
+//
+//   helper(['form']);
+//
+//   if ($this->request->getMethod()=='post') {
+//     $model= new LessonExample();
+//     if ($this->validate($rules)) {
+//       //Then do database insertion or loginuser
+//
+//       // $file = $this->request->getFile('image');
+//       // if ($file->isValid()&& !$file->hasMoved()) {
+//       //   $file->move('./uploads/images');
+//       // }
+//       // $filename = $file->getName();
+//       //
+//       // $db = db_connect();
+//       // $getlessonid = new CustomModel($db);
+//       // $id=$getlessonid->getlessonid($id);
+//       //
+//       //
+//       //
+//       // $_POST['file_name']=$filename;
+//       // $_POST['lesson_id']=$id;
+//       // $_POST['file_targetDirectory']='./uploads/image';
+//       //
+//       // $model->save($_POST);
+//
+//       //$discussion=$_POST['discussion'];
+//       // $db = db_connect();
+//       // $getlessoncontentid = new CustomModel($db);
+//       // $id2=$getlessoncontentid->getlessoncontenti2($id);
+//       $_POST['lesson_content_id']=$lesson_content_id;
+//       $model->save($_POST);
+//        $session = session();
+//        $session->setFlashdata('updatesuccess','Image and Discussion Added Successfully ');
+//       //  return redirect()->to('teacher/viewmodule/'.$id);
+//       return redirect()->to('teacher/view');
+//
+//       // echo '<script type="text/javascript">
+//       //       alert("Account Creation Successful!");
+//       //       </script>';
+//   }else{
+//     //if validation is not successfull
+//     //validator provies a list of errors
+//     $data['validation']=$this->validator;
+//   }
+// }
+// }
+
 public function viewmodule($id){
   $type = session()->get('usertype');
    if ($type!='Teacher' && $type=='Admin'){
@@ -610,10 +697,83 @@ public function viewmodule($id){
   $userModel3 = new MediaLesson();
     $data['image'] = $userModel3->where(['lesson_content_id'=>$id2->lesson_content_id])->get()->getRow();
 
+  $example = new LessonExample();
+  $data['example'] = $example->where(['lesson_content_id'=>$id2->lesson_content_id])->findAll();
+    //$data['users'] = $userModel->join('lesson_master', 'teacher_lesson.lesson_id = lesson_master.lesson_id')->where(['teacher_lesson.teacher_id'=>$teacher_id])->orderBy('lesson_master.lesson_id', 'ASC')->findAll();
+
+    $rules=[
+      // 'password'=>[
+      //     'rules'=>'required|min_length[8]|max_length[255]',
+      //     'label'=>'Password',
+      // ],
+      // 'password_confirm'=>[
+      //     'rules'=>'matches[password]',
+      //     'label'=>'Confirm Password',
+      // ],
+      'image'=>[
+        'rules'=> 'ext_in[image,png,jpg,gif,mp4]',
+        'label'=>'Image',
+      ],
+      'example'=>[
+        'rules'=>'required|is_unique[lesson_content.discussion]',
+        'label'=>'Discussion Field',
+      ],
+    ];
+
+    helper(['form']);
+    if ($this->request->getMethod()=='post') {
+      $model_lesson= new LessonExample();
+      $model_media = new MediaLesson();
+      if ($this->validate($rules)) {
+        //Then do database insertion or loginuser
+        if (is_uploaded_file($_FILES['image']['tmp_name'])) {
+
+          $file = $this->request->getFile('image');
+          if ($file->isValid()&& !$file->hasMoved()) {
+            $file->move('./uploads/images');
+          }
+        //  $filename = $file->getName();
+          $filename = $file->getName();
+          $fileExt = pathinfo($filename, PATHINFO_EXTENSION);
+
+          $db = db_connect();
+          $getlessonid = new CustomModel($db);
+          $id=$getlessonid->getlessonid($id);
+
+          $_POST['file_name']=$filename;
+        //  $_POST['lesson_id']=$id;
+          $_POST['file_targetDirectory']='./uploads/image';
+          $_POST['file_extension']=$fileExt;
+          $getlessoncontentid = new CustomModel($db);
+          $id2=$getlessoncontentid->getlessoncontenti3($id);
+          $_POST['lesson_content_id']=$id2;
+          $model_media->save($_POST);
+        }
+
+
+        //$discussion=$_POST['discussion'];
+        $db = db_connect();
+        $getlessoncontentid = new CustomModel($db);
+        $id2=$getlessoncontentid->getlessoncontenti3($id);
+        $_POST['lesson_content_id']=$id2;
+
+        $model_lesson->save($_POST);
+         $session = session();
+         $session->setFlashdata('updatesuccess','Example added successfully ');
+        //  return redirect()->to('teacher/viewmodule/'.$id);
+        return redirect()->to('teacher/viewmodule/'.$id);
+
+        // echo '<script type="text/javascript">
+        //       alert("Account Creation Successful!");
+        //       </script>';
+    }else{
+      //if validation is not successfull
+      //validator provies a list of errors
+      $data['validation']=$this->validator;
+    }
+    }
 
   return view('teacher_module', $data);
-
-
 }
 
 

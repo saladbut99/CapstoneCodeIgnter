@@ -54,7 +54,7 @@
               </div>
 
                 <div class="form-group">
-                  <label for="" style="font-size:25px;">Description</label>
+                  <label for="" style="font-size:25px;">Description/Instruction</label>
                   <textarea type="text" id="" class="form-control" name="lesson_description" rows="3" style="border-color: #00acee; border-width: 2px; border-radius:15px;"></textarea>
                 </div>
                 <div class="text-danger" style="margin-top:2%;margin-bottom:2%;">
