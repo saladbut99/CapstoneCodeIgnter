@@ -11,6 +11,7 @@ use App\Models\TeacherLesson;
 use App\Models\MediaLesson;
 use App\Models\LessonContent;
 use App\Models\LessonExample;
+use App\Models\MediaLessonExample;
 
 class Teacher extends BaseController
 {
@@ -694,11 +695,37 @@ public function viewmodule($id){
   $id2=$getlessoncontentid->getlessoncontenti2($id);
 
 
+
+  // $db = db_connect();
+  // $getexampleid1 = new CustomModel($db);
+  // $exampleid=$getexampleid1->example($example_val);
+
+  // $id3 = $id2->lesson_content_id;
+  //
+  // $db = db_connect();
+  // $getexampleid1 = new CustomModel($db);
+  // $exampleid_=$getexampleid1->example_media($id3);
+
+
+// echo "<pre>";
+//   print_r($exampleid_);
+// echo "<pre";
+
+
   $userModel3 = new MediaLesson();
     $data['image'] = $userModel3->where(['lesson_content_id'=>$id2->lesson_content_id])->get()->getRow();
 
   $example = new LessonExample();
   $data['example'] = $example->where(['lesson_content_id'=>$id2->lesson_content_id])->findAll();
+
+    //
+    // $example_media = new MediaLessonExample();
+    // $data['example_media'] = $example_media->where(['example_id'=>$exampleid_->example_id])->findAll();
+
+  // echo "<pre>";
+  //   print_r($exampleid_);
+  // echo "<pre";
+
     //$data['users'] = $userModel->join('lesson_master', 'teacher_lesson.lesson_id = lesson_master.lesson_id')->where(['teacher_lesson.teacher_id'=>$teacher_id])->orderBy('lesson_master.lesson_id', 'ASC')->findAll();
 
     $rules=[
@@ -715,18 +742,36 @@ public function viewmodule($id){
         'label'=>'Image',
       ],
       'example'=>[
-        'rules'=>'required|is_unique[lesson_content.discussion]',
-        'label'=>'Discussion Field',
+        'rules'=>'required|is_unique[lesson_example.example]',
+        'label'=>'Examople Field',
       ],
     ];
 
     helper(['form']);
     if ($this->request->getMethod()=='post') {
       $model_lesson= new LessonExample();
-      $model_media = new MediaLesson();
+    //  $model_media = new MediaLessonExample();
       if ($this->validate($rules)) {
         //Then do database insertion or loginuser
-        if (is_uploaded_file($_FILES['image']['tmp_name'])) {
+
+
+
+        //$discussion=$_POST['discussion'];
+        $db = db_connect();
+        $getlessoncontentid = new CustomModel($db);
+        $id2=$getlessoncontentid->getlessoncontenti3($id);
+        $_POST['lesson_content_id']=$id2;
+
+
+
+        // $example_val=$_POST['example'];
+        // $db = db_connect();
+        // $getexampleid = new CustomModel($db);
+        // $exampleid=$getexampleid->example($example_val);
+
+
+        if (!is_uploaded_file($_FILES['image']['tmp_name'])) {
+
 
           $file = $this->request->getFile('image');
           if ($file->isValid()&& !$file->hasMoved()) {
@@ -740,24 +785,34 @@ public function viewmodule($id){
           $getlessonid = new CustomModel($db);
           $id=$getlessonid->getlessonid($id);
 
-          $_POST['file_name']=$filename;
+          $_POST['file_name']='NoFile';
         //  $_POST['lesson_id']=$id;
-          $_POST['file_targetDirectory']='./uploads/image';
-          $_POST['file_extension']=$fileExt;
-          $getlessoncontentid = new CustomModel($db);
-          $id2=$getlessoncontentid->getlessoncontenti3($id);
-          $_POST['lesson_content_id']=$id2;
-          $model_media->save($_POST);
+          $_POST['file_targetDirectory']='NoFile';
+          $_POST['file_extension']='NoFile';
+
+          // $getlessoncontentid = new CustomModel($db);
+          // $id2=$getlessoncontentid->getlessoncontenti3($id);
+        //  $_POST['example_id']=$exampleid;
+
+      }else {
+        $file = $this->request->getFile('image');
+        if ($file->isValid()&& !$file->hasMoved()) {
+          $file->move('./uploads/images');
         }
+      //  $filename = $file->getName();
+        $filename = $file->getName();
+        $fileExt = pathinfo($filename, PATHINFO_EXTENSION);
 
-
-        //$discussion=$_POST['discussion'];
         $db = db_connect();
-        $getlessoncontentid = new CustomModel($db);
-        $id2=$getlessoncontentid->getlessoncontenti3($id);
-        $_POST['lesson_content_id']=$id2;
+        $getlessonid = new CustomModel($db);
+        $id=$getlessonid->getlessonid($id);
 
-        $model_lesson->save($_POST);
+        $_POST['file_name']=$filename;
+      //  $_POST['lesson_id']=$id;
+        $_POST['file_targetDirectory']='./uploads/image';
+        $_POST['file_extension']=$fileExt;
+      }
+          $model_lesson->save($_POST);
          $session = session();
          $session->setFlashdata('updatesuccess','Example added successfully ');
         //  return redirect()->to('teacher/viewmodule/'.$id);

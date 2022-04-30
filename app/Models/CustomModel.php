@@ -111,6 +111,25 @@ class CustomModel{
   //  $result2=$result['account_status'];
     return $result2;
   }
+  function example($example){
+    $builder = $this->db->table('lesson_example');
+    $builder->select('example_id');
+    $builder->where('example',$example);
+    $result = $builder->get()->getRow();
+    $result2=$result->example_id;
+  //  $result2=$result['account_status'];
+    return $result2;
+  }
+
+  function example_media($id2){
+      $builder = $this->db->table('lesson_example');
+      $builder->select('example_id');
+      $builder->where('lesson_content_id',$id2);
+      //$result = $builder->get()->getResult();
+    //  $result2=$result->example_id;
+    //  $result2=$result['account_status'];
+      return $result;
+    }
   function getNull($id){
     $builder = $this->db->table('lesson_content');
     $builder->select('lesson_content_id');

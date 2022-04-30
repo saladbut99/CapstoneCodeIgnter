@@ -80,29 +80,65 @@
    </div>
  </div>
 
- <div class="container">
-   <div class="row">
-     <div class="mt-3">
-        <h1 style="text-align:left">Examples</h1>
-        <hr style="width:100%;height:2px;color:#00acee;">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm">
-                  <?php if ($example): ?>
-                        <?php foreach ($example as $examples): ?>
-                              <h2 style="text-align:left;"><?= $examples['example']; ?></h2>
-                        <?php endforeach; ?>
+<br><br>
+<div class="container">
+  <div class="text-danger" style="margin-top:3%;">
+    <?php if (isset($validation)): ?>
+          <?php if ($validation->hasError('example')): ?>
+                <p>  <?= $validation->getError('example') ?></p>
+          <?php endif; ?>
+    <?php endif; ?>
+    <div class="text-danger" style="margin-top:3%;">
+      <?php if (isset($validation)): ?>
+            <?php if ($validation->hasError('image')): ?>
+                  <p>  <?= $validation->getError('image') ?></p>
+            <?php endif; ?>
+      <?php endif; ?>
+    </div>
+  </div>
+  <table class="table table-bordered display nowrap" id="users-list"  cellspacing="0" style="width:100%;" >
+    <thead style="text-align:left; font-size:3rem; ">
+       <tr>
+          <th>Examples</th>
+          <th></th>
+       </tr>
+    </thead>
+
+       <?php if($example): ?>
+       <?php foreach($example as $examples): ?>
+
+           <tr>
+              <td class="align-middle" style="text-align:center">  <h2 style="margin-top:2%;"><?= $examples['example']; ?></h2></td>
+              <?php if (strcmp($examples['file_name'],'NoFile')==0): ?>
+                  <td  style="text-align:center">  <p style="color:grey; margin-top:2%;">No media uploaded</p></td>
+              <?php else: ?>
+
+                  <?php if (strcmp($examples['file_extension'],'mp4')==0): ?>
+                    <td style="text-align:center">
+                      <a href="<?=base_url()?>/public/uploads/images/<?= $examples['file_name']; ?>>" target="_blank">
+                        <video controls>
+                            <source src="<?=base_url()?>/public/uploads/images/<?= $examples['file_name']; ?>" type="video/mp4">
+                      </video>
+                    </a>
+                  </td>
+                  <?php else: ?>
+                    <td style="text-align:center"> <a href="<?=base_url()?>/public/uploads/images/<?= $examples['file_name']; ?>" target="_blank">
+                      <img src="<?=base_url()?>/public/uploads/images/<?= $examples['file_name']; ?>"  alt="" width="300" height="300" onclick="myFunction(this);" class="img-fluid">
+                    </img></a></td>
                   <?php endif; ?>
-                </div>
-                <div class="">
+              <?php endif; ?>
 
-                </div>
-            </div>
-        </div>
 
-        <h1 style="text-align:left;">   <button id="toggle" class="btn btn-info mb-4 mt-4" style="margin-bottom:1%; "  align="left"> Add Example</button></h1>
-     </div>
-   </div>
+            </tr>
+
+      <?php endforeach; ?>
+      <?php endif; ?>
+  </table>
+  <h1 style="text-align:left;">   <button id="toggle" class="btn btn-info mb-4 mt-4" style="margin-bottom:1%; "  align="left"> Add Example</button></h1>
+</div>
+</div>
+
+
    <br>
  </div>
  <form class="" action="<?php echo site_url('teacher/viewmodule/'.$users->lesson_id);?>" method="post" id="form" style="display:none;"  enctype="multipart/form-data">
@@ -112,29 +148,20 @@
                <div class="form-group">
                  <label for="" style="font-size:25px; margin-bottom:3%;">Example Content</label>
                  <textarea class="form-control" style="width: 100%; border: 2px solid #00acee;" id="exampleFormControlTextarea1" placeholder="Discussion" rows="4" name="example"></textarea>
-                 <div class="text-danger" style="margin-top:3%;">
-                   <?php if (isset($validation)): ?>
-                         <?php if ($validation->hasError('example')): ?>
-                               <p>  <?= $validation->getError('example') ?></p>
-                         <?php endif; ?>
-                   <?php endif; ?>
-                 </div>
+
                </div>
        </div>
        <div class="col-sm" >
-         <div class="form-group">
-           <br>
-           <input type="file" name="image" id="image" class="form-control-file" onchange="loadFile(event)">
-           <div class="text-danger" style="margin-top:3%;">
+         <div class="form-group ">
+
+             <label class="btn btn-success" style="margin-top:10%;">
+                <i class="fa fa-image"></i> Add Media<input type="file" style="display: none;" name="image" id="image" class="form-control-file" onchange="loadFile(event)" class="align-middle" style="border-top:5%;">
+             </label>
+
            <center>
-           <img id="output" width="350" />
-         </center>
-             <?php if (isset($validation)): ?>
-                   <?php if ($validation->hasError('image')): ?>
-                         <p>  <?= $validation->getError('image') ?></p>
-                   <?php endif; ?>
-             <?php endif; ?>
-           </div>
+              <img id="output" width="350" />
+          </center>
+
          </div>
        </div>
 
@@ -169,11 +196,69 @@ function myFunction(imgs) {
   expandImg.parentElement.style.display = "block";
 }
 </script>
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
 
 <script>
   $('#toggle').click(function(){
     $('#form').toggle();
   });
+</script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+<script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+ <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/rowreorder/1.2.8/css/rowReorder.dataTables.min.css">
+<script src="https://cdn.datatables.net/rowreorder/1.2.8/js/dataTables.rowReorder.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
+<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+
+<script>
+    $(document).ready( function () {
+      $('#users-list').DataTable({
+         "bPaginate": false,
+         "bInfo" : false,
+         "searching": false,
+      //   dom: 'Bfrtip',
+         "language": {
+           "emptyTable": "No examples uploaded"
+         },
+       //   buttons: [
+       //     {
+       //         text: 'Add Example',
+       //         action: function ( e, dt, node, config ) {
+       //             alert( 'Button activated' );
+       //         }
+       //     }
+       // ],
+          "responsive": true,
+      });
+      $('#users-list2').DataTable({
+         "bPaginate": false,
+         "bInfo" : false,
+         "searching": false,
+         "language": {
+           "emptyTable": "No uploaded module for Unit 2"
+         },
+          "responsive": true,
+      });
+      $('#users-list3').DataTable({
+         "bPaginate": false,
+         "bInfo" : false,
+         "searching": false,
+         "language": {
+           "emptyTable": "No uploaded module for Unit 3"
+         },
+          "responsive": true,
+      });
+      $('#users-list4').DataTable({
+         "bPaginate": false,
+         "bInfo" : false,
+         "searching": false,
+         "language": {
+           "emptyTable": "No uploaded module for Unit 4"
+         },
+          "responsive": true,
+      });
+  } );
 </script>
 
 

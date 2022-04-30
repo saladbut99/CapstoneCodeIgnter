@@ -79,9 +79,12 @@
                 </div>
                 <div class="form-group">
                   <label for="" style="font-size:25px; margin-bottom:3%;">Media</label>
-                  <br>
-                  <input type="file" name="image" id="image" class="form-control-file" onchange="loadFile(event)">
+
                   <div class="text-danger" style="margin-top:3%;">
+                    <label class="btn btn-primary">
+                      <i class="fa fa-image"></i> Add Media<input type="file" style="display: none;" name="image" id="image" class="form-control-file" onchange="loadFile(event)">
+                    </label>
+
                   <center>
                   <img id="output" width="350" />
                 </center>
@@ -92,6 +95,7 @@
                     <?php endif; ?>
                   </div>
                 </div>
+                <br>
                 <div class="form-group">
                   <label for="" style="font-size:25px; margin-bottom:3%;">Discussion</label>
                   <textarea class="form-control" style="width: 100%; border: 2px solid #00acee;" id="exampleFormControlTextarea1" placeholder="Discussion" rows="4" name="discussion"></textarea>
@@ -144,6 +148,7 @@
     $( ".menu").toggle();
 });
 </script>
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
 
 
 </body>

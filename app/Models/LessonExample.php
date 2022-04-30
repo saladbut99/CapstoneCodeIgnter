@@ -15,6 +15,6 @@ class LessonExample extends Model
     // protected $useSoftDeletes = true;
 
     //list of fields that can be manipulated from an outside class
-    protected $allowedFields = ['lesson_content_id','example'];
+    protected $allowedFields = ['lesson_content_id','example', 'file_name', 'file_targetDirectory', 'file_extension'];
 
 }
