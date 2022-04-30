@@ -59,28 +59,36 @@
          <?php endif; ?>
          <br>
     </div>
-
-    <div class="imageview">
-      <?php if (strcmp($image->file_extension,'mp4')==0): ?>
-        <video controls>
-            <source src="<?=base_url()?>/public/uploads/images/<?= $image->file_name; ?>" type="video/mp4">
-      </video>
-      <?php else: ?>
-            <a href="<?=base_url()?>/public/uploads/images/<?= $image->file_name; ?>" target="_blank"><img src="<?=base_url()?>/public/uploads/images/<?= $image->file_name; ?>"  alt="" width="600" height="900" onclick="myFunction(this);" class="img-fluid"></a>
-      <?php endif; ?>
-    </div>
-    <!-- <div class="expandingcontainer">
-      <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
-      <img id="expandedImg" style="width:100%">
-      <div id="imgtext"></div>
-    </div> -->
-    <div>
-      <h1 style="margin-top:5%;"><?= $discussion->discussion; ?></h1>
-    </div>
    </div>
  </div>
 
-<br><br>
+
+
+<div class="container" style="margin-bottom:7%;">
+    <div class="row">
+      <div class="mt-3">
+        <div class="imageview">
+          <?php if (strcmp($image->file_extension,'mp4')==0): ?>
+            <video controls>
+                <source src="<?=base_url()?>/public/uploads/images/<?= $image->file_name; ?>" type="video/mp4">
+          </video>
+          <?php else: ?>
+                <a href="<?=base_url()?>/public/uploads/images/<?= $image->file_name; ?>" target="_blank"><img src="<?=base_url()?>/public/uploads/images/<?= $image->file_name; ?>"  alt="" width="auto" height="auto" onclick="myFunction(this);" class="img-fluid"></a>
+          <?php endif; ?>
+        </div>
+      </div>
+
+      <!-- <div class="expandingcontainer">
+        <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
+        <img id="expandedImg" style="width:100%">
+        <div id="imgtext"></div>
+      </div> -->
+      <div class="mt-3">
+        <h1 style="margin-top:5%;"><?= $discussion->discussion; ?></h1>
+      </div>
+    </div>
+</div>
+
 <div class="container">
   <div class="text-danger" style="margin-top:3%;">
     <?php if (isset($validation)): ?>
