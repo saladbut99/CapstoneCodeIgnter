@@ -5,6 +5,13 @@ namespace App\Controllers;
 use App\Models\TeacherRegistration;
 use App\Models\AdminModel;
 use App\Models\CustomModel;
+use App\Models\LessonMaster;
+use App\Models\TeacherLesson;
+use App\Models\MediaLesson;
+use App\Models\LessonContent;
+use App\Models\LessonExample;
+use App\Models\MediaLessonExample;
+
 class Admin extends BaseController
 {
     public function index()
@@ -105,10 +112,17 @@ class Admin extends BaseController
       }else if ($type!='Admin' && $type=='Pupil') {
          return redirect()->to('pupil/home');
        }
-      $title=[
+      $data=[
         'meta_title'=>'Admin | View Lesson'
       ];
-      return view('admin_view', $title);
+
+      $userModel = new TeacherRegistration();
+      $data['users']=$userModel->join('teacher_lesson', 'teacher.teacher_id = teacher_lesson.teacher_id')->join('lesson_master','teacher_lesson.lesson_id = lesson_master.lesson_id')->join('section','teacher.section_id = section.section_id')->orderBy('teacher.teacher_id', 'ASC')->findAll();
+      return view('admin_view', $data);
+
+
+
+
     }
 
     public function viewmodule(){
@@ -139,6 +153,19 @@ class Admin extends BaseController
       return view('admin_viewcontent', $title);
     }
 
+    public function viewsection(){
+      $type = session()->get('usertype');
+       if ($type!='Admin' && $type=='Teacher'){
+          return redirect()->to('teacher/home');
+        //  echo "hello";
+      }else if ($type!='Admin' && $type=='Pupil') {
+         return redirect()->to('pupil/home');
+       }
+      $title=[
+        'meta_title'=>'Admin | View Section'
+      ];
+      return view('admin_viewsection', $title);
+    }
     public function success(){
       $title=[
         'meta_title'=>'Success'

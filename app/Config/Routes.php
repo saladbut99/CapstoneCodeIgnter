@@ -48,6 +48,7 @@ $routes->group('admin', ["filter" => 'Auth'], function($routes){
   $routes->match(['get','post'],'register','Admin::register');
   $routes->match(['get','post'],'update','Admin::update');
   $routes->add('viewlessons','Admin::viewlesson');
+    $routes->add('viewsection','Admin::viewsection');
   $routes->add('manage','Admin::manage');
   $routes->add('accountstatus','Admin::accountstatus');
   $routes->add('viewmodule','Admin::viewmodule');

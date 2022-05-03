@@ -139,4 +139,13 @@ class CustomModel{
   //  $result2=$result['account_status'];
     return $result;
   }
+
+  function join(){
+    $builder = $this->db->table('teacher');
+    $result =$builder->join('teacher', 'teacher.teacher_id = teacher_lesson.teacher_id')->join('lesson_master','teacher_lesson.lesson_id = lesson_master.lesson_id')->orderBy('teacher.teacher_id', 'ASC')->findAll();
+    //$result = $builder->get()->getResult();
+  //  $result2=$result->example_id;
+  //  $result2=$result['account_status'];
+    return $result;
+  }
 }

@@ -27,42 +27,104 @@
        $( ".menu").toggle();
    });
    </script>
-<div class="backbutton backbuttonpos row align-items-center">
 
-      <div class="backbutton col-2 p-0">
-          <a href="home" style="text-decoration: none; color: rgb(68, 68, 68);" class="">
-          <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
-          </svg>
-          </a>
+   <div class="container">
+      <div class="row">
+        <div class="backbutton col-2 p-0">
+            <a href="home" style="text-decoration: none; color: rgb(68, 68, 68);" class="">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+            </svg>
+            </a>
+        </div>
       </div>
-      <div class="col-3" style="cursor: pointer;">
-          <a href="home" style="text-decoration: none; color: rgb(68, 68, 68);" class=""></a>
-          <h4>Back</h4>
-          </a>
-      </div>
-      <div class="col-7"></div>
-  </div>
-<br>
-  <div class="col-sm-12">
-      <form method="get">
-          <div class="row align-items-center">
-              <div class="col-sm-1" style="padding-right: 5px; width: auto;">
-                  <label style="margin-left: 5px;">Search: </label>
-              </div>
-              <div class="col-sm-2" style="padding-left: 0px;width: auto;">
-                  <input type="text" name="username" id="username" class="form-control" value="" placeholder="...">
-              </div>
-              <div class="col-sm-1 p-2 m-0" style="width: auto;">
-                  <button type="submit" name="submit" value="search" id="submit" class="btn btn-primary"><i class="fa fa-fw fa-search"></i> Search</button>
-              </div>
-              <div class="col-sm-1 p-0 m-0" style="width: auto;">
-                  <button type="reset" class="btn btn-danger"><i class="fa fa-fw fa-sync"></i> Clear</a>
-              </div>
-                      </div>
-                  </div>
+   </div>
+
+      <div class="container mt-5" style="margin-bottom:5%;">
+        <div class="mt-3">
+          <div class="backbutton col-2">
+              <a href="manage" style="text-decoration: none; color: rgb(68, 68, 68);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+              </svg>
+              </a>
           </div>
-      </form>
-  </div>
+          <br>
+          <?php if (!$users): ?>
+             <h1 style="text-align:center;">No Added Module</h1>
+         <?php else: ?>
+           <table class="table table-borderless table-hover" id="users-list"  style=" border-bottom: none;">
+             <thead style="text-align:left; font-size:3rem">
+                <tr>
+                   <th>Section 1</th>
+                   <th></th>
+                   <th></th>
+                   <th></th>
+                </tr>
+             </thead>
+
+                <?php if($users): ?>
+                <?php foreach($users as $user): ?>
+                  <?php if ($user['section_id']==7): ?>
+                    <tr>
+                       <td style="text-align:left"><a href="viewmodule/<?= $user['teacher_username'] ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['teacher_firstname']; ?> <?php echo $user['teacher_lastname']; ?></a> </td>
+                       <td style="text-align:left"><a href="viewmodule/<?= $user['teacher_username'] ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['section_id']; ?></a> </td>
+                        <td style="text-align:left"><a href="viewmodule/<?= $user['teacher_username'] ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['section_name']; ?></a> </td>
+                        <td style="text-align:left"><a href="viewmodule/<?= $user['teacher_username'] ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['grade_level']; ?></a> </td>
+                     </tr>
+                  <?php endif; ?>
+
+               <?php endforeach; ?>
+               <?php endif; ?>
+           </table>
+
+          <?php endif; ?>
+
+        </div>
+      </div>
+
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+      <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+      <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+      <script>
+      $(document).ready( function () {
+        $('#users-list').DataTable({
+           "bPaginate": false,
+           "bInfo" : false,
+           "searching": false,
+           "language": {
+             "emptyTable": "No uploaded module for Unit 1"
+           },
+            "responsive": true,
+        });
+        $('#users-list2').DataTable({
+           "bPaginate": false,
+           "bInfo" : false,
+           "searching": false,
+           "language": {
+             "emptyTable": "No uploaded module for Unit 2"
+           },
+            "responsive": true,
+        });
+        $('#users-list3').DataTable({
+           "bPaginate": false,
+           "bInfo" : false,
+           "searching": false,
+           "language": {
+             "emptyTable": "No uploaded module for Unit 3"
+           },
+            "responsive": true,
+        });
+        $('#users-list4').DataTable({
+           "bPaginate": false,
+           "bInfo" : false,
+           "searching": false,
+           "language": {
+             "emptyTable": "No uploaded module for Unit 4"
+           },
+            "responsive": true,
+        });
+    } );
+  </script>
 
   <?= $this->endSection() ?>
