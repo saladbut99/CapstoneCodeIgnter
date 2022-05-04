@@ -55,7 +55,7 @@
                 <h1 style="color:white;">Rose</h1>
                 <br>
                 <h3 style="color:white;">Grade 1</h3>
-                <a href="update" class=" btn btn-light btn-outline-primary" style="margin-top: 5%; margin-bottom: 5%;"> View Module</a>
+                <a href="viewrose" class=" btn btn-light btn-outline-primary" style="margin-top: 5%; margin-bottom: 5%;"> View Module</a>
                 </div>
             </div>
             <div class="col text-center" >
@@ -65,7 +65,7 @@
                 <h1 style="color:white;">Rosal</h1>
                 <br>
                 <h3 style="color:white;">Grade 1</h3>
-                <a href="update" class=" btn btn-light btn-outline-primary" style="margin-top: 5%; margin-bottom: 5%;"> View Module</a>
+                <a href="viewrosal" class=" btn btn-light btn-outline-primary" style="margin-top: 5%; margin-bottom: 5%;"> View Module</a>
                 </div>
             </div>
             <div class="col text-center" >
@@ -75,7 +75,7 @@
                 <h1 style="color:white;">Adelfa</h1>
                 <br>
                 <h3 style="color:white;">Grade 1</h3>
-                <a href="update" class=" btn btn-light btn-outline-primary" style="margin-top: 5%; margin-bottom: 5%;"> View Module</a>
+                <a href="viewadelfa" class=" btn btn-light btn-outline-primary" style="margin-top: 5%; margin-bottom: 5%;"> View Module</a>
                 </div>
             </div>
             <div class="col text-center" >
@@ -85,7 +85,7 @@
                 <h1 style="color:white;">Lily</h1>
                 <br>
                 <h3 style="color:white;">Grade 2</h3>
-                <a href="update" class=" btn btn-light btn-outline-primary" style="margin-top: 5%; margin-bottom: 5%;"> View Module</a>
+                <a href="viewlily" class=" btn btn-light btn-outline-primary" style="margin-top: 5%; margin-bottom: 5%;"> View Module</a>
                 </div>
             </div>
         </div>
@@ -103,7 +103,7 @@
                 <h1 style="color:white;">Gumamela</h1>
                 <br>
                 <h3 style="color:white;">Grade 2</h3>
-                <a href="update" class=" btn btn-light btn-outline-primary" style="margin-top: 5%; margin-bottom: 5%;"> View Module</a>
+                <a href="viewgumamela" class=" btn btn-light btn-outline-primary" style="margin-top: 5%; margin-bottom: 5%;"> View Module</a>
                 </div>
             </div>
             <div class="col-3 text-center" >
@@ -113,7 +113,7 @@
                 <h1 style="color:white;">Orchid</h1>
                 <br>
                 <h3 style="color:white;">Grade 2</h3>
-                <a href="update" class=" btn btn-light btn-outline-primary" style="margin-top: 5%; margin-bottom: 5%;"> View Module</a>
+                <a href="vieworchid" class=" btn btn-light btn-outline-primary" style="margin-top: 5%; margin-bottom: 5%;"> View Module</a>
                 </div>
             </div>
             <div class="col-3 text-center" >
@@ -123,7 +123,7 @@
                 <h1 style="color:white;">Daisy</h1>
                 <br>
                 <h3 style="color:white;">Grade 2</h3>
-                <a href="update" class=" btn btn-light btn-outline-primary" style="margin-top: 5%; margin-bottom: 5%;"> View Module</a>
+                <a href="viewdaisy" class=" btn btn-light btn-outline-primary" style="margin-top: 5%; margin-bottom: 5%;"> View Module</a>
                 </div>
             </div>
         </div>

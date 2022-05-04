@@ -104,6 +104,171 @@ class Admin extends BaseController
        return view('admin_registeraccount', $data);
     }
 
+    public function viewrosal(){
+      $type = session()->get('usertype');
+       if ($type!='Admin' && $type=='Teacher'){
+          return redirect()->to('teacher/home');
+        //  echo "hello";
+      }else if ($type!='Admin' && $type=='Pupil') {
+         return redirect()->to('pupil/home');
+       }
+      $data=[
+        'meta_title'=>'Admin | Grade 1 Rosal'
+      ];
+
+      $userModel = new TeacherRegistration();
+      $data['users']=$userModel->join('teacher_lesson', 'teacher.teacher_id = teacher_lesson.teacher_id')->join('lesson_master','teacher_lesson.lesson_id = lesson_master.lesson_id')->join('section','teacher.section_id = section.section_id')->orderBy('teacher.teacher_id', 'ASC')->findAll();
+      return view('admin_rosal', $data);
+    }
+
+    public function viewrose(){
+      $type = session()->get('usertype');
+       if ($type!='Admin' && $type=='Teacher'){
+          return redirect()->to('teacher/home');
+        //  echo "hello";
+      }else if ($type!='Admin' && $type=='Pupil') {
+         return redirect()->to('pupil/home');
+       }
+      $data=[
+        'meta_title'=>'Admin | Grade 1 Rose'
+      ];
+
+      $userModel = new TeacherRegistration();
+      $data['users']=$userModel->join('teacher_lesson', 'teacher.teacher_id = teacher_lesson.teacher_id')->join('lesson_master','teacher_lesson.lesson_id = lesson_master.lesson_id')->join('section','teacher.section_id = section.section_id')->orderBy('teacher.teacher_id', 'ASC')->findAll();
+      return view('admin_rose', $data);
+    }
+
+    public function viewadelfa(){
+      $type = session()->get('usertype');
+       if ($type!='Admin' && $type=='Teacher'){
+          return redirect()->to('teacher/home');
+        //  echo "hello";
+      }else if ($type!='Admin' && $type=='Pupil') {
+         return redirect()->to('pupil/home');
+       }
+      $data=[
+        'meta_title'=>'Admin | Grade 1 Adelfa'
+      ];
+
+      $userModel = new TeacherRegistration();
+      $data['users']=$userModel->join('teacher_lesson', 'teacher.teacher_id = teacher_lesson.teacher_id')->join('lesson_master','teacher_lesson.lesson_id = lesson_master.lesson_id')->join('section','teacher.section_id = section.section_id')->orderBy('teacher.teacher_id', 'ASC')->findAll();
+      return view('admin_adelfa', $data);
+    }
+
+    public function viewlily(){
+      $type = session()->get('usertype');
+       if ($type!='Admin' && $type=='Teacher'){
+          return redirect()->to('teacher/home');
+        //  echo "hello";
+      }else if ($type!='Admin' && $type=='Pupil') {
+         return redirect()->to('pupil/home');
+       }
+      $data=[
+        'meta_title'=>'Admin | Grade 1 Lily'
+      ];
+
+      $userModel = new TeacherRegistration();
+      $data['users']=$userModel->join('teacher_lesson', 'teacher.teacher_id = teacher_lesson.teacher_id')->join('lesson_master','teacher_lesson.lesson_id = lesson_master.lesson_id')->join('section','teacher.section_id = section.section_id')->orderBy('lesson_master.unit', 'ASC')->findAll();
+      return view('admin_lily', $data);
+    }
+
+    public function viewgumamela(){
+      $type = session()->get('usertype');
+       if ($type!='Admin' && $type=='Teacher'){
+          return redirect()->to('teacher/home');
+        //  echo "hello";
+      }else if ($type!='Admin' && $type=='Pupil') {
+         return redirect()->to('pupil/home');
+       }
+      $data=[
+        'meta_title'=>'Admin | Grade 2 Gumamela'
+      ];
+
+      $userModel = new TeacherRegistration();
+      $data['users']=$userModel->join('teacher_lesson', 'teacher.teacher_id = teacher_lesson.teacher_id')->join('lesson_master','teacher_lesson.lesson_id = lesson_master.lesson_id')->join('section','teacher.section_id = section.section_id')->orderBy('lesson_master.unit', 'ASC')->findAll();
+      return view('admin_gumamela', $data);
+    }
+
+    public function vieworchid(){
+      $type = session()->get('usertype');
+       if ($type!='Admin' && $type=='Teacher'){
+          return redirect()->to('teacher/home');
+        //  echo "hello";
+      }else if ($type!='Admin' && $type=='Pupil') {
+         return redirect()->to('pupil/home');
+       }
+      $data=[
+        'meta_title'=>'Admin | Grade 2 Gumamela'
+      ];
+
+      $userModel = new TeacherRegistration();
+      $data['users']=$userModel->join('teacher_lesson', 'teacher.teacher_id = teacher_lesson.teacher_id')->join('lesson_master','teacher_lesson.lesson_id = lesson_master.lesson_id')->join('section','teacher.section_id = section.section_id')->orderBy('lesson_master.unit', 'ASC')->findAll();
+      return view('admin_orchid', $data);
+    }
+
+    public function viewdaisy(){
+      $type = session()->get('usertype');
+       if ($type!='Admin' && $type=='Teacher'){
+          return redirect()->to('teacher/home');
+        //  echo "hello";
+      }else if ($type!='Admin' && $type=='Pupil') {
+         return redirect()->to('pupil/home');
+       }
+      $data=[
+        'meta_title'=>'Admin | Grade 2 Gumamela'
+      ];
+
+      $userModel = new TeacherRegistration();
+      $data['users']=$userModel->join('teacher_lesson', 'teacher.teacher_id = teacher_lesson.teacher_id')->join('lesson_master','teacher_lesson.lesson_id = lesson_master.lesson_id')->join('section','teacher.section_id = section.section_id')->orderBy('lesson_master.unit', 'ASC')->findAll();
+      return view('admin_daisy', $data);
+    }
+
+
+
+
+
+
+
+
+    public function viewmodule($id){
+      $type = session()->get('usertype');
+       if ($type!='Admin' && $type=='Teacher'){
+          return redirect()->to('teacher/home');
+        //  echo "hello";
+      }else if ($type!='Admin' && $type=='Pupil') {
+         return redirect()->to('pupil/home');
+       }
+      $data=[
+        'meta_title'=>'Admin | View Module'
+      ];
+      //$teacher_id=session()->get('t_id');
+
+
+      $userModel = new LessonMaster();
+      $data['users'] = $userModel->where(['lesson_id'=>$id])->get()->getRow();
+
+      $userModel2 = new LessonContent();
+      $data['discussion'] = $userModel2->where(['lesson_id'=>$id])->get()->getRow();
+
+      $db = db_connect();
+      $getlessoncontentid = new CustomModel($db);
+      $id2=$getlessoncontentid->getlessoncontenti2($id);
+
+
+
+      $userModel3 = new MediaLesson();
+        $data['image'] = $userModel3->where(['lesson_content_id'=>$id2->lesson_content_id])->get()->getRow();
+
+      $example = new LessonExample();
+      $data['example'] = $example->where(['lesson_content_id'=>$id2->lesson_content_id])->findAll();
+
+
+
+
+      return view('admin_module', $data);
+    }
+
+
     public function viewlesson(){
       $type = session()->get('usertype');
        if ($type!='Admin' && $type=='Teacher'){
@@ -124,20 +289,20 @@ class Admin extends BaseController
 
 
     }
-
-    public function viewmodule(){
-      $type = session()->get('usertype');
-       if ($type!='Admin' && $type=='Teacher'){
-          return redirect()->to('teacher/home');
-        //  echo "hello";
-      }else if ($type!='Admin' && $type=='Pupil') {
-         return redirect()->to('pupil/home');
-       }
-      $title=[
-        'meta_title'=>'Admin | Module'
-      ];
-      return view('admin_viewmodule', $title);
-    }
+    //
+    // public function viewmodule(){
+    //   $type = session()->get('usertype');
+    //    if ($type!='Admin' && $type=='Teacher'){
+    //       return redirect()->to('teacher/home');
+    //     //  echo "hello";
+    //   }else if ($type!='Admin' && $type=='Pupil') {
+    //      return redirect()->to('pupil/home');
+    //    }
+    //   $title=[
+    //     'meta_title'=>'Admin | Module'
+    //   ];
+    //   return view('admin_viewmodule', $title);
+    // }
 
     public function viewcontent(){
       $type = session()->get('usertype');
