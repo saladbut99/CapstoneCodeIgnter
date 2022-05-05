@@ -832,6 +832,135 @@ public function viewmodule($id){
 }
 
 
+public function updatemodule($id){
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+  $data=[
+    'meta_title'=>'Admin | Update Module'
+  ];
+  //$teacher_id=session()->get('t_id');
+
+
+  $userModel = new LessonMaster();
+  $data['users'] = $userModel->where(['lesson_id'=>$id])->get()->getRow();
+
+  $userModel2 = new LessonContent();
+  $data['discussion'] = $userModel2->where(['lesson_id'=>$id])->get()->getRow();
+
+  $db = db_connect();
+  $getlessoncontentid = new CustomModel($db);
+  $id2=$getlessoncontentid->getlessoncontenti2($id);
+
+
+  $userModel3 = new MediaLesson();
+    $data['image'] = $userModel3->where(['lesson_content_id'=>$id2->lesson_content_id])->get()->getRow();
+
+  $example = new LessonExample();
+  $data['example'] = $example->where(['lesson_content_id'=>$id2->lesson_content_id])->findAll();
+
+    //
+    // $rules=[
+    //
+    //   'image'=>[
+    //     'rules'=> 'ext_in[image,png,jpg,gif,mp4]',
+    //     'label'=>'Image',
+    //   ],
+    //   'example'=>[
+    //     'rules'=>'required|is_unique[lesson_example.example]',
+    //     'label'=>'Examople Field',
+    //   ],
+    // ];
+    //
+    // helper(['form']);
+    // if ($this->request->getMethod()=='post') {
+    //   $model_lesson= new LessonExample();
+    // //  $model_media = new MediaLessonExample();
+    //   if ($this->validate($rules)) {
+    //     //Then do database insertion or loginuser
+    //
+    //
+    //
+    //     //$discussion=$_POST['discussion'];
+    //     $db = db_connect();
+    //     $getlessoncontentid = new CustomModel($db);
+    //     $id2=$getlessoncontentid->getlessoncontenti3($id);
+    //     $_POST['lesson_content_id']=$id2;
+    //
+    //
+    //
+    //     // $example_val=$_POST['example'];
+    //     // $db = db_connect();
+    //     // $getexampleid = new CustomModel($db);
+    //     // $exampleid=$getexampleid->example($example_val);
+    //
+    //
+    //     if (!is_uploaded_file($_FILES['image']['tmp_name'])) {
+    //
+    //
+    //       $file = $this->request->getFile('image');
+    //       if ($file->isValid()&& !$file->hasMoved()) {
+    //         $file->move('./uploads/images');
+    //       }
+    //     //  $filename = $file->getName();
+    //       $filename = $file->getName();
+    //       $fileExt = pathinfo($filename, PATHINFO_EXTENSION);
+    //
+    //       $db = db_connect();
+    //       $getlessonid = new CustomModel($db);
+    //       $id=$getlessonid->getlessonid($id);
+    //
+    //       $_POST['file_name']='NoFile';
+    //     //  $_POST['lesson_id']=$id;
+    //       $_POST['file_targetDirectory']='NoFile';
+    //       $_POST['file_extension']='NoFile';
+    //
+    //       // $getlessoncontentid = new CustomModel($db);
+    //       // $id2=$getlessoncontentid->getlessoncontenti3($id);
+    //     //  $_POST['example_id']=$exampleid;
+    //
+    //   }else {
+    //     $file = $this->request->getFile('image');
+    //     if ($file->isValid()&& !$file->hasMoved()) {
+    //       $file->move('./uploads/images');
+    //     }
+    //   //  $filename = $file->getName();
+    //     $filename = $file->getName();
+    //     $fileExt = pathinfo($filename, PATHINFO_EXTENSION);
+    //
+    //     $db = db_connect();
+    //     $getlessonid = new CustomModel($db);
+    //     $id=$getlessonid->getlessonid($id);
+    //
+    //     $_POST['file_name']=$filename;
+    //   //  $_POST['lesson_id']=$id;
+    //     $_POST['file_targetDirectory']='./uploads/image';
+    //     $_POST['file_extension']=$fileExt;
+    //   }
+    //       $model_lesson->save($_POST);
+    //      $session = session();
+    //      $session->setFlashdata('updatesuccess','Example added successfully ');
+    //     //  return redirect()->to('teacher/viewmodule/'.$id);
+    //     return redirect()->to('teacher/viewmodule/'.$id);
+    //
+    //     // echo '<script type="text/javascript">
+    //     //       alert("Account Creation Successful!");
+    //     //       </script>';
+    // }else{
+    //   //if validation is not successfull
+    //   //validator provies a list of errors
+    //   $data['validation']=$this->validator;
+    // }
+    // }
+
+  return view('teacher_updatemodule', $data);
+}
+
+
 public function manage(){
   $type = session()->get('usertype');
    if ($type!='Teacher' && $type=='Admin'){
