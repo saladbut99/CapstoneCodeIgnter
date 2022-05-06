@@ -833,6 +833,7 @@ public function viewmodule($id){
 
 
 public function updatemodule($id){
+
   $type = session()->get('usertype');
    if ($type!='Teacher' && $type=='Admin'){
       return redirect()->to('admin/home');
@@ -840,6 +841,10 @@ public function updatemodule($id){
    }else if ($type!='Teacher' && $type=='Pupil') {
      return redirect()->to('pupil/home');
    }
+
+ $db      = \Config\Database::connect();
+
+
   $data=[
     'meta_title'=>'Admin | Update Module'
   ];
@@ -864,98 +869,113 @@ public function updatemodule($id){
   $data['example'] = $example->where(['lesson_content_id'=>$id2->lesson_content_id])->findAll();
 
     //
-    // $rules=[
+    $rules=[
+
+        'lesson_name'=>[
+          'rules'=>'required|is_unique[lesson_master.lesson_name]',
+          'label'=>'Lesson Name Field',
+        ],
+        'lesson_description'=>[
+          'rules'=>'required',
+          'label'=>'Module Description',
+        ],
+
+        'unit'=>[
+          'rules'=>'required',
+          'label'=>'Lesson Unit',
+        ],
+      'image'=>[
+        'rules'=> 'ext_in[image,png,jpg,gif,mp4]',
+        'label'=>'Image',
+      ],
+      // 'example'=>[
+      //   'rules'=>'required|is_unique[lesson_example.example]',
+      //   'label'=>'Examople Field',
+      // ],
+    ];
     //
-    //   'image'=>[
-    //     'rules'=> 'ext_in[image,png,jpg,gif,mp4]',
-    //     'label'=>'Image',
-    //   ],
-    //   'example'=>[
-    //     'rules'=>'required|is_unique[lesson_example.example]',
-    //     'label'=>'Examople Field',
-    //   ],
-    // ];
-    //
-    // helper(['form']);
-    // if ($this->request->getMethod()=='post') {
-    //   $model_lesson= new LessonExample();
-    // //  $model_media = new MediaLessonExample();
-    //   if ($this->validate($rules)) {
-    //     //Then do database insertion or loginuser
-    //
-    //
-    //
-    //     //$discussion=$_POST['discussion'];
-    //     $db = db_connect();
-    //     $getlessoncontentid = new CustomModel($db);
-    //     $id2=$getlessoncontentid->getlessoncontenti3($id);
-    //     $_POST['lesson_content_id']=$id2;
-    //
-    //
-    //
-    //     // $example_val=$_POST['example'];
-    //     // $db = db_connect();
-    //     // $getexampleid = new CustomModel($db);
-    //     // $exampleid=$getexampleid->example($example_val);
-    //
-    //
-    //     if (!is_uploaded_file($_FILES['image']['tmp_name'])) {
-    //
-    //
-    //       $file = $this->request->getFile('image');
-    //       if ($file->isValid()&& !$file->hasMoved()) {
-    //         $file->move('./uploads/images');
-    //       }
-    //     //  $filename = $file->getName();
-    //       $filename = $file->getName();
-    //       $fileExt = pathinfo($filename, PATHINFO_EXTENSION);
-    //
-    //       $db = db_connect();
-    //       $getlessonid = new CustomModel($db);
-    //       $id=$getlessonid->getlessonid($id);
-    //
-    //       $_POST['file_name']='NoFile';
-    //     //  $_POST['lesson_id']=$id;
-    //       $_POST['file_targetDirectory']='NoFile';
-    //       $_POST['file_extension']='NoFile';
-    //
-    //       // $getlessoncontentid = new CustomModel($db);
-    //       // $id2=$getlessoncontentid->getlessoncontenti3($id);
-    //     //  $_POST['example_id']=$exampleid;
-    //
-    //   }else {
-    //     $file = $this->request->getFile('image');
-    //     if ($file->isValid()&& !$file->hasMoved()) {
-    //       $file->move('./uploads/images');
-    //     }
-    //   //  $filename = $file->getName();
-    //     $filename = $file->getName();
-    //     $fileExt = pathinfo($filename, PATHINFO_EXTENSION);
-    //
-    //     $db = db_connect();
-    //     $getlessonid = new CustomModel($db);
-    //     $id=$getlessonid->getlessonid($id);
-    //
-    //     $_POST['file_name']=$filename;
-    //   //  $_POST['lesson_id']=$id;
-    //     $_POST['file_targetDirectory']='./uploads/image';
-    //     $_POST['file_extension']=$fileExt;
-    //   }
-    //       $model_lesson->save($_POST);
-    //      $session = session();
-    //      $session->setFlashdata('updatesuccess','Example added successfully ');
-    //     //  return redirect()->to('teacher/viewmodule/'.$id);
-    //     return redirect()->to('teacher/viewmodule/'.$id);
-    //
-    //     // echo '<script type="text/javascript">
-    //     //       alert("Account Creation Successful!");
-    //     //       </script>';
-    // }else{
-    //   //if validation is not successfull
-    //   //validator provies a list of errors
-    //   $data['validation']=$this->validator;
-    // }
-    // }
+    helper(['form']);
+
+    if ($this->request->getMethod()=='post') {
+
+      $model_lesson = new LessonMaster();
+
+       if ($this->validate($rules)) {
+
+
+        $lesson_master = [
+            'lesson_name' => ucfirst($_POST['lesson_name']),
+            'lesson_description' => ucfirst($_POST['lesson_description']),
+            'unit'=> $_POST['unit'],
+        ];
+
+        $builder = $db->table('lesson_master');
+
+        $builder->where('lesson_id', $id);
+
+        $builder->update($lesson_master);
+
+        $lesson_content = [
+            'discussion' => ucfirst($_POST['discussion']),
+        ];
+
+        $builder_content = $db->table('lesson_content');
+
+        $builder_content->where('lesson_id', $id);
+
+        $builder_content->update($lesson_content);
+
+      //   // $example_val=$_POST['example'];
+      //   // $db = db_connect();
+      //   // $getexampleid = new CustomModel($db);
+      //   // $exampleid=$getexampleid->example($example_val);
+      //
+      //
+      //   if (!is_uploaded_file($_FILES['image']['tmp_name'])) {
+      //
+      //
+      if (is_uploaded_file($_FILES['image']['tmp_name'])) {
+
+        $file = $this->request->getFile('image');
+        if ($file->isValid()&& !$file->hasMoved()) {
+          $file->move('./uploads/images');
+        }
+      //  $filename = $file->getName();
+        $filename = $file->getName();
+        $fileExt = pathinfo($filename, PATHINFO_EXTENSION);
+
+        $db = db_connect();
+        $getlessonid = new CustomModel($db);
+        $id=$getlessonid->getlessonid($id);
+
+        $_POST['file_name']=$filename;
+      //  $_POST['lesson_id']=$id;
+        $_POST['file_targetDirectory']='./uploads/image';
+        $_POST['file_extension']=$fileExt;
+
+          $lesson_media = [
+             'file_name' => $filename,
+             'file_extension' =>$fileExt,
+           ];
+
+           $builder_media = $db->table('media_lesson');
+
+           $builder_media->where('lesson_content_id', $id2->lesson_content_id);
+
+           $builder_media->update($lesson_media);
+
+    }
+
+      $session = session();
+      $session->setFlashdata('success','Module Upload Completed');
+        return redirect()->to('teacher/updatemodule/'.$id);
+    }else{
+      //if validation is not successfull
+      //validator provies a list of errors
+      $data['validation']=$this->validator;
+    }
+  }
+
 
   return view('teacher_updatemodule', $data);
 }
