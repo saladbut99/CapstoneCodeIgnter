@@ -88,11 +88,22 @@
                  <?php endif; ?>
                </div>
                <div class="form-group">
+
                  <label for="" style="font-size:25px; margin-bottom:3%;">Media</label>
-                     <img src="<?=base_url()?>/public/uploads/images/<?= $image->file_name; ?>" id="output" alt="" width="auto" height="auto" onclick="myFunction(this);" class="img-fluid">
+                 <br>
+                 <?php if (strcmp($image->file_extension,'mp4')==0): ?>
+                   <video controls  onclick="myFunction(this);" id="output">
+                       <source src="<?=base_url()?>/public/uploads/images/<?= $image->file_name; ?>" type="video/mp4">
+                 </video>
+                 <?php else: ?>
+                         <img src="<?=base_url()?>/public/uploads/images/<?= $image->file_name; ?>" id="output" alt="" width="auto" height="auto" onclick="myFunction(this);" class="img-fluid">
+                 <?php endif; ?>
+                 <br>
+                   <h5 style="margin-top:5%;"></h5>
                  <div class="text-danger" style="margin-top:3%;">
                    <label class="btn btn-primary">
                      <i class="fa fa-image"></i> Change Media<input type="file" style="display: none;" name="image" id="image" class="form-control-file" onchange="loadFile(event)">
+
                    </label>
                </center>
                    <?php if (isset($validation)): ?>
@@ -101,6 +112,7 @@
                          <?php endif; ?>
                    <?php endif; ?>
                  </div>
+
                </div>
                <br>
                <div class="form-group">
@@ -224,6 +236,16 @@
      var image = document.getElementById('output');
      image.src = URL.createObjectURL(event.target.files[0]);
       };
+
+ </script>
+ <script>
+ $(document).ready(function() {
+          $('input[type="file"]').change(function(e) {
+              var geekss = e.target.files[0].name;
+              $("h5").text(geekss + ' is the selected file.');
+
+          });
+      });
  </script>
 <script>
   $( ".dropdown" ).click(function() {
