@@ -12,6 +12,7 @@ use App\Models\MediaLesson;
 use App\Models\LessonContent;
 use App\Models\LessonExample;
 use App\Models\MediaLessonExample;
+use App\Models\ActivityMaster;
 
 class Teacher extends BaseController
 {
@@ -980,6 +981,88 @@ public function updatemodule($id){
   return view('teacher_updatemodule', $data);
 }
 
+public function addactivity($id){
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+  $data=[
+    'meta_title'=>'Teacher | Add Activity '
+  ];
+
+
+  $userModel = new LessonMaster();
+  $data['lesson'] = $userModel->where(['lesson_id'=>$id])->get()->getRow();
+
+  $rules=[
+
+      'activity_name'=>[
+        'rules'=>'required|is_unique[lesson_master.lesson_name]',
+        'label'=>'Activity Name',
+      ],
+      'activity_instruction'=>[
+        'rules'=>'required',
+        'label'=>'Activity Description',
+      ],
+    'activity_type'=>[
+      'rules'=> 'required',
+      'label'=>'Activity Type',
+    ],
+
+  ];
+
+  helper(['form']);
+
+  if ($this->request->getMethod()=='post') {
+
+    $model_activity = new ActivityMaster();
+
+     if ($this->validate($rules)) {
+
+       $_POST['activity_name']=ucfirst($_POST['activity_name']);
+       $_POST['activity_instruction']=ucfirst($_POST['activity_instruction']);
+       $_POST['lesson_id']=$id;
+       date_default_timezone_set('Asia/Manila');
+       $myTime=date('Y-m-d h:i:s');
+       $_POST['activity_upload_date'] = $myTime;
+       $model_activity->save($_POST);
+       $session = session();
+       $session->setFlashdata('success','Module Upload Completed');
+       
+       if (strcmp($_POST['activity_type'],'multiple_choice')==0) {
+         return redirect()->to('teacher/updatemodule/'.$id);
+       }
+
+  }else{
+    //if validation is not successfull
+    //validator provies a list of errors
+    $data['validation']=$this->validator;
+  }
+}
+
+
+   return view('teacher_addactivity', $data);
+
+}
+
+public function multiplechoice(){
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+  $data=[
+    'meta_title'=>'Teacher | Manage '
+  ];
+
+   return view('teacher_multiplechoice', $data);
+
+}
 
 public function manage(){
   $type = session()->get('usertype');
@@ -996,6 +1079,8 @@ public function manage(){
    return view('teacher_manage', $data);
 
 }
+
+
 
 
 }
