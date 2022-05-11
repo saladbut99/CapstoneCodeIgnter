@@ -26,7 +26,7 @@
 
 <center>
 
-<h1>multipart</h1>
+<h1>enumeration </h1>
 
 
 <script>

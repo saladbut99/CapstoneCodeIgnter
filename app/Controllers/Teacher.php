@@ -993,6 +993,7 @@ public function addactivity($id){
     'meta_title'=>'Teacher | Add Activity '
   ];
 
+   $db      = \Config\Database::connect();
 
   $userModel = new LessonMaster();
   $data['lesson'] = $userModel->where(['lesson_id'=>$id])->get()->getRow();
@@ -1031,9 +1032,21 @@ public function addactivity($id){
        $model_activity->save($_POST);
        $session = session();
        $session->setFlashdata('success','Module Upload Completed');
-       
+
+       $builder = $db->table('activity_master');
+
+       $builder->where('activity_name',  $_POST['activity_name']);
+
+       $result = $builder->get()->getRow();
+
+       $id2=$result->activity_id;
+
        if (strcmp($_POST['activity_type'],'multiple_choice')==0) {
-         return redirect()->to('teacher/updatemodule/'.$id);
+         return redirect()->to('teacher/multiplechoice/'.$id2);
+       }elseif (strcmp($_POST['activity_type'],'enumeration')==0) {
+          return redirect()->to('teacher/enumeration/'.$id2);
+       }else {
+        return redirect()->to('teacher/identification/'.$id2);
        }
 
   }else{
@@ -1048,7 +1061,40 @@ public function addactivity($id){
 
 }
 
-public function multiplechoice(){
+public function viewactivity($id){
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+  $data=[
+    'meta_title'=>'Teacher | Add Activity '
+  ];
+
+  $db      = \Config\Database::connect();
+
+  // $userModel = new LessonMaster();
+  // $data['lesson'] = $userModel->where(['lesson_id'=>$id])->get()->getRow();
+
+  // $builder = $db->table('activity_master');
+  //
+  // $builder->where('lesson_id',  $id);
+  //
+  // $data['users'] = $builder->get()->getRow();
+
+  $activity_id = new ActivityMaster();
+  $data['users'] = $activity_id->where(['lesson_id'=>$id])->findAll();
+
+  $userModel = new LessonMaster();
+  $data['lesson'] = $userModel->where(['lesson_id'=>$id])->get()->getRow();
+
+
+   return view('teacher_viewactivity', $data);
+
+}
+public function multiplechoice($id){
   $type = session()->get('usertype');
    if ($type!='Teacher' && $type=='Admin'){
       return redirect()->to('admin/home');
@@ -1061,6 +1107,38 @@ public function multiplechoice(){
   ];
 
    return view('teacher_multiplechoice', $data);
+
+}
+
+public function enumeration($id){
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+  $data=[
+    'meta_title'=>'Teacher | Manage '
+  ];
+
+   return view('teacher_enumeration', $data);
+
+}
+
+public function identification($id){
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+  $data=[
+    'meta_title'=>'Teacher | Manage '
+  ];
+
+   return view('teacher_identification', $data);
 
 }
 
