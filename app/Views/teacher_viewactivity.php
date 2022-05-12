@@ -39,7 +39,7 @@
            </a>
        </div>
        <br>
-        <h2 class="text-uppercase text-center">VIEW ACTIVITIES FOR <?= $lesson->lesson_name; ?></h2>
+        <h2 class="text-uppercase text-center">ACTIVITIES FOR MODULE: <?= $lesson->lesson_name; ?></h2>
        <?php if (!$users): ?>
           <h1 style="text-align:center;">No Added Activity</h1>
       <?php else: ?>
@@ -55,7 +55,7 @@
              <?php if($users): ?>
              <?php foreach($users as $user): ?>
                  <tr style="text-align:center;">
-                    <td style="text-align:left"><a href="viewmodule/<?= $user['activity_id'] ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['activity_name']; ?></a>  </td>
+                    <td style="text-align:left"><a href="<?php echo base_url(); ?>/public/teacher/activitytype_checker/<?= $user['activity_id'] ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['activity_name']; ?></a>  </td>
                   </tr>
 
             <?php endforeach; ?>

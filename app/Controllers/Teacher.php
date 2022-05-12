@@ -1001,8 +1001,8 @@ public function addactivity($id){
   $rules=[
 
       'activity_name'=>[
-        'rules'=>'required|is_unique[lesson_master.lesson_name]',
-        'label'=>'Activity Name',
+        'rules'=>'required|is_unique[activity_master.activity_name]',
+        'label'=>'Activity Title',
       ],
       'activity_instruction'=>[
         'rules'=>'required',
@@ -1102,9 +1102,16 @@ public function multiplechoice($id){
    }else if ($type!='Teacher' && $type=='Pupil') {
      return redirect()->to('pupil/home');
    }
+    $question_no=1;
   $data=[
-    'meta_title'=>'Teacher | Manage '
+    'meta_title'=>'Teacher | Manage ',
+    'question_no'=>$question_no,
   ];
+
+
+
+  $activity_id = new ActivityMaster();
+  $data['users'] = $activity_id->where(['activity_id'=>$id])->get()->getRow();
 
    return view('teacher_multiplechoice', $data);
 
@@ -1140,6 +1147,41 @@ public function identification($id){
 
    return view('teacher_identification', $data);
 
+}
+
+public function activitytype_checker($actid){
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+  $data=[
+    'meta_title'=>'Teacher | Activity '
+  ];
+
+  // $activity_id = new ActivityMaster();
+  // $data['users'] = $activity_id->where(['activity_id'=>$actid])->findAll();
+
+   $db      = \Config\Database::connect();
+
+   $builder = $db->table('activity_master');
+
+   $builder->where('activity_id',  $actid);
+
+   $data['users'] = $builder->get()->getRow();
+
+   $act_type=$data['users']->activity_type;
+
+
+  if (strcmp($act_type,'multiple_choice')==0) {
+    return redirect()->to('teacher/multiplechoice/'. $actid);
+  }elseif (strcmp($act_type,'enumeration')==0) {
+     return redirect()->to('teacher/enumeration/'. $actid);
+  }else {
+   return redirect()->to('teacher/identification/'. $actid);
+  }
 }
 
 public function manage(){
