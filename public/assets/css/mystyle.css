@@ -370,7 +370,7 @@ video {
     margin-bottom: 20%;
   background: #FFF;
   z-index: 20;
-  overflow: auto;
+overflow: auto;
 }
 
 #popup1 {

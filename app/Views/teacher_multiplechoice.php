@@ -28,7 +28,7 @@
 
 <center>
 
-  <div class="container h-100" style="margin-bottom:5%;" id="wrapper" >
+  <div class="container h-100" style="margin-bottom:0%;" id="wrapper" >
      <div class="row">
        <div class="backbutton col-1">
            <a href="<?php echo base_url(); ?>/public/teacher/view" style="text-decoration: none; color: rgb(68, 68, 68);">
@@ -64,21 +64,46 @@
 
    </div>
  </div>
+ <div class="container">
+  <div class="row">
+    <div class="col-mt">
+      <h1 style="text-align:middle;">   <button id="toggle" class="btn btn-success mb-4 mt-4" style="margin-bottom:1%; display: block;"  > Add Question</button></h1>
+    </div>
+  </div>
+ </div>
 
- <form class="" action="<?php echo site_url('teacher/viewmodule/'.$users->lesson_id);?>" method="post" id="form" style="display:none;"  enctype="multipart/form-data">
-   <div class="container" style="margin-top:5%;">
+<div id='border' style="border:1px solid white; width:70%; margin-bottom:5%; border-radius:10px;">
+ <form class="" action="<?php echo site_url('teacher/viewmodule/'.$users->lesson_id);?>" method="post" id="form" style="display:none; margin-bottom:5%;"  enctype="multipart/form-data">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <a href="#" onclick="hide('popup2')" >
+          <p style="text-align:right;"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="grey" class="bi bi-x" viewBox="0 0 16 16">
+            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+          </svg></p>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h1 style="margin-bottom:5%;">Question <?= $question_no ?></h1>
+      </div>
+    </div>
+  </div>
+
+   <div class="container" style="margin-top:0%;">
      <div class="row">
        <div class="col-sm">
                <div class="form-group">
-                 <label for="" style="font-size:25px; margin-bottom:3%;">Example Content</label>
-                 <textarea class="form-control" style="width: 100%; border: 2px solid #00acee;" id="exampleFormControlTextarea1" placeholder="Discussion" rows="4" name="example"></textarea>
-
+                 <label for="" style="font-size:25px; margin-bottom:3%;">Activity Question</label>
+                 <textarea class="form-control" style="width: 100%; border: 2px solid #00acee;" id="exampleFormControlTextarea1" placeholder="" rows="4" name="activity_question"></textarea>
                </div>
        </div>
        <div class="col-sm" >
          <div class="form-group ">
-
-             <label class="btn btn-success" style="margin-top:10%;">
+             <label class="btn btn-success" style="margin-top:10%;margin-bottom:3%">
                 <i class="fa fa-image"></i> Add Media<input type="file" style="display: none;" name="image" id="image" class="form-control-file" onchange="loadFile(event)" class="align-middle" style="border-top:5%;">
              </label>
 
@@ -88,81 +113,50 @@
 
          </div>
        </div>
-
      </div>
    </div>
    <br>
+
+   <div style="width:90%;">
+     <h2 style="margin-bottom:2%;"> Answer Options  </h2>
+     <div class="form-check">
+       <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+       <label class="form-check-label" for="flexRadioDefault1" >
+           <input type="text" id="" class="form-control" name="activity_name" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;">
+       </label>
+     </div>
+     <div class="form-check">
+       <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+       <label class="form-check-label" for="flexRadioDefault2">
+         Default checked radio
+       </label>
+     </div>
+   </div>
+
+
    <center>
    <button type="submit" class="btn btn-primary btn-block mb-4 mt-4">Submit</button>
  </center>
 </form>
 
 </div>
-<div class="container">
- <div class="row">
-   <div class="col-mt">
-     <h1 style="text-align:middle;">   <button id="toggle" class="btn btn-success mb-4 mt-4" style="margin-bottom:1%; "  align="left"> Add Activity</button></h1>
-   </div>
- </div>
+
 </div>
 
 
 
-<a href="#" onclick="show('popup2')">Show popup (:before & :after)</a>
 
- <div class="popup" id="popup2">
-   <h1 style="background-color:grey;">Question <?= $question_no ?></h1>
-   <form action="" method="post" enctype="multipart/form-data">
+<script>
+  $('#toggle').click(function(){
+    $('#form').toggle();
+    var set = document.getElementById('toggle');
+    set.style.display ='none';
 
+    var set1 = document.getElementById('border');
+    set1.style.border ='1px solid black';
+  });
 
-
-       <div class="form-group">
-         <label for="" style="font-size:25px;">Activity Instruction</label>
-         <textarea type="text" id="" class="form-control" name="activity_question" rows="3" style="border-color: #00acee; border-width: 2px; "></textarea>
-       </div>
-       <div class="text-danger" style="margin-top:2%;margin-bottom:2%;">
-         <?php if (isset($validation)): ?>
-               <?php if ($validation->hasError('activity_description')): ?>
-                     <p>  <?= $validation->getError('activity_description') ?></p>
-               <?php endif; ?>
-         <?php endif; ?>
-       </div>
-       <label class="form-check-label mx-1" for="gradelevel" style="font-size:25px;"> Activity Type  </label>
-       <div class="form-check">
-         <input class="form-check-input" type="radio" id="flexRadioDefault1" name="activity_type" value='multiple_choice' required>
-         <label class="form-check-label" for="flexRadioDefault1">
-           Multiple Choice
-         </label>
-       </div>
-       <div class="form-check">
-         <input class="form-check-input" type="radio" id="flexRadioDefault1" name="activity_type" value='enumeration' required>
-         <label class="form-check-label" for="flexRadioDefault1">
-           Enumeration
-         </label>
-       </div>
-       <div class="form-check">
-         <input class="form-check-input" type="radio" id="flexRadioDefault1" name="activity_type" value='identification' required>
-         <label class="form-check-label" for="flexRadioDefault1">
-           Identification
-         </label>
-       </div>
-       <div class="text-danger" style="margin-top:3%;">
-         <?php if (isset($validation)): ?>
-               <?php if ($validation->hasError('activity_type')): ?>
-                     <p>  <?= $validation->getError('activity_type') ?></p>
-               <?php endif; ?>
-         <?php endif; ?>
-       </div>
-
-       <center>
-       <button type="submit" class="btn btn-primary btn-block mb-4 mt-4">Submit</button>
-     </center>
-   <a href="#" onclick="hide('popup2')">Ok!</a>
- </div>
-
-
-
-
+</script>
 <script>
 $ = function(id) {
   return document.getElementById('popup2');
@@ -172,13 +166,18 @@ function show(id) {
 
   var set = document.getElementById('popup2');
   set.style.display ='block';
+
 }
 
 
 function hide(id) {
 
-  var set = document.getElementById('popup2');
+  var set = document.getElementById('form');
   set.style.display ='none';
+  var set1 = document.getElementById('toggle');
+  set1.style.display ='block';
+  var set2 = document.getElementById('border');
+  set2.style.border ='1px solid white';
 }
 </script>
 <script>
