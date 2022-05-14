@@ -12,6 +12,7 @@ use App\Models\MediaLesson;
 use App\Models\LessonContent;
 use App\Models\LessonExample;
 use App\Models\MediaLessonExample;
+use App\Models\ActivityMaster;
 
 class Teacher extends BaseController
 {
@@ -980,6 +981,208 @@ public function updatemodule($id){
   return view('teacher_updatemodule', $data);
 }
 
+public function addactivity($id){
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+  $data=[
+    'meta_title'=>'Teacher | Add Activity '
+  ];
+
+   $db      = \Config\Database::connect();
+
+  $userModel = new LessonMaster();
+  $data['lesson'] = $userModel->where(['lesson_id'=>$id])->get()->getRow();
+
+  $rules=[
+
+      'activity_name'=>[
+        'rules'=>'required|is_unique[activity_master.activity_name]',
+        'label'=>'Activity Title',
+      ],
+      'activity_instruction'=>[
+        'rules'=>'required',
+        'label'=>'Activity Description',
+      ],
+    'activity_type'=>[
+      'rules'=> 'required',
+      'label'=>'Activity Type',
+    ],
+
+  ];
+
+  helper(['form']);
+
+  if ($this->request->getMethod()=='post') {
+
+    $model_activity = new ActivityMaster();
+
+     if ($this->validate($rules)) {
+
+       $_POST['activity_name']=ucfirst($_POST['activity_name']);
+       $_POST['activity_instruction']=ucfirst($_POST['activity_instruction']);
+       $_POST['lesson_id']=$id;
+       date_default_timezone_set('Asia/Manila');
+       $myTime=date('Y-m-d h:i:s');
+       $_POST['activity_upload_date'] = $myTime;
+       $model_activity->save($_POST);
+       $session = session();
+       $session->setFlashdata('success','Module Upload Completed');
+
+       $builder = $db->table('activity_master');
+
+       $builder->where('activity_name',  $_POST['activity_name']);
+
+       $result = $builder->get()->getRow();
+
+       $id2=$result->activity_id;
+
+       if (strcmp($_POST['activity_type'],'multiple_choice')==0) {
+         return redirect()->to('teacher/multiplechoice/'.$id2);
+       }elseif (strcmp($_POST['activity_type'],'enumeration')==0) {
+          return redirect()->to('teacher/enumeration/'.$id2);
+       }else {
+        return redirect()->to('teacher/identification/'.$id2);
+       }
+
+  }else{
+    //if validation is not successfull
+    //validator provies a list of errors
+    $data['validation']=$this->validator;
+  }
+}
+
+
+   return view('teacher_addactivity', $data);
+
+}
+
+public function viewactivity($id){
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+  $data=[
+    'meta_title'=>'Teacher | Add Activity '
+  ];
+
+  $db      = \Config\Database::connect();
+
+  // $userModel = new LessonMaster();
+  // $data['lesson'] = $userModel->where(['lesson_id'=>$id])->get()->getRow();
+
+  // $builder = $db->table('activity_master');
+  //
+  // $builder->where('lesson_id',  $id);
+  //
+  // $data['users'] = $builder->get()->getRow();
+
+  $activity_id = new ActivityMaster();
+  $data['users'] = $activity_id->where(['lesson_id'=>$id])->findAll();
+
+  $userModel = new LessonMaster();
+  $data['lesson'] = $userModel->where(['lesson_id'=>$id])->get()->getRow();
+
+
+   return view('teacher_viewactivity', $data);
+
+}
+public function multiplechoice($id){
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+    $question_no=1;
+  $data=[
+    'meta_title'=>'Teacher | Manage ',
+    'question_no'=>$question_no,
+  ];
+
+
+
+  $activity_id = new ActivityMaster();
+  $data['users'] = $activity_id->where(['activity_id'=>$id])->get()->getRow();
+
+   return view('teacher_multiplechoice', $data);
+
+}
+
+public function enumeration($id){
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+  $data=[
+    'meta_title'=>'Teacher | Manage '
+  ];
+
+   return view('teacher_enumeration', $data);
+
+}
+
+public function identification($id){
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+  $data=[
+    'meta_title'=>'Teacher | Manage '
+  ];
+
+   return view('teacher_identification', $data);
+
+}
+
+public function activitytype_checker($actid){
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+  $data=[
+    'meta_title'=>'Teacher | Activity '
+  ];
+
+  // $activity_id = new ActivityMaster();
+  // $data['users'] = $activity_id->where(['activity_id'=>$actid])->findAll();
+
+   $db      = \Config\Database::connect();
+
+   $builder = $db->table('activity_master');
+
+   $builder->where('activity_id',  $actid);
+
+   $data['users'] = $builder->get()->getRow();
+
+   $act_type=$data['users']->activity_type;
+
+
+  if (strcmp($act_type,'multiple_choice')==0) {
+    return redirect()->to('teacher/multiplechoice/'. $actid);
+  }elseif (strcmp($act_type,'enumeration')==0) {
+     return redirect()->to('teacher/enumeration/'. $actid);
+  }else {
+   return redirect()->to('teacher/identification/'. $actid);
+  }
+}
 
 public function manage(){
   $type = session()->get('usertype');
@@ -996,6 +1199,8 @@ public function manage(){
    return view('teacher_manage', $data);
 
 }
+
+
 
 
 }

@@ -92,14 +92,17 @@
                  <label for="" style="font-size:25px; margin-bottom:3%;">Media</label>
                  <br>
                  <?php if (strcmp($image->file_extension,'mp4')==0): ?>
-                   <video controls  onclick="myFunction(this);" id="output">
+                   <video controls >
                        <source src="<?=base_url()?>/public/uploads/images/<?= $image->file_name; ?>" type="video/mp4">
                  </video>
                  <?php else: ?>
-                         <img src="<?=base_url()?>/public/uploads/images/<?= $image->file_name; ?>" id="output" alt="" width="auto" height="auto" onclick="myFunction(this);" class="img-fluid">
+                         <img src="<?=base_url()?>/public/uploads/images/<?= $image->file_name; ?>" alt="" width="auto" height="auto"  class="img-fluid">
                  <?php endif; ?>
                  <br>
                    <h5 style="margin-top:5%;"></h5>
+                     <img  id="output" alt="" width="auto" height="auto"  class="img-fluid">
+                     
+
                  <div class="text-danger" style="margin-top:3%;">
                    <label class="btn btn-primary">
                      <i class="fa fa-image"></i> Change Media<input type="file" style="display: none;" name="image" id="image" class="form-control-file" onchange="loadFile(event)">
