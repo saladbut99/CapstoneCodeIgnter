@@ -13,7 +13,8 @@ use App\Models\LessonContent;
 use App\Models\LessonExample;
 use App\Models\MediaLessonExample;
 use App\Models\ActivityMaster;
-
+use App\Models\ActivityContent;
+use App\Models\MediaActivity;
 class Teacher extends BaseController
 {
     public function index()
@@ -1113,6 +1114,9 @@ public function multiplechoice($id){
   $activity_id = new ActivityMaster();
   $data['users'] = $activity_id->where(['activity_id'=>$id])->get()->getRow();
 
+  $activity_id = new ActivityContent();
+  $data['question'] = $activity_id->where(['activity_id'=>$id])->findAll();
+
    return view('teacher_multiplechoice', $data);
 
 }
@@ -1182,6 +1186,148 @@ public function activitytype_checker($actid){
   }else {
    return redirect()->to('teacher/identification/'. $actid);
   }
+}
+
+public function addquestion($id){
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+
+
+
+
+   $rules=[
+
+       'activity_question'=>[
+         'rules'=>'required|is_unique[activity_content.activity_question]',
+         'label'=>'Activity Title',
+       ],
+       'image'=>[
+         'rules'=> 'ext_in[image,png,jpg,gif,mp4]',
+         'label'=>'Image',
+       ],
+     //   'activity_instruction'=>[
+     //     'rules'=>'required',
+     //     'label'=>'Activity Description',
+     //   ],
+     // 'activity_type'=>[
+     //   'rules'=> 'required',
+     //   'label'=>'Activity Type',
+     // ],
+
+   ];
+
+   helper(['form']);
+
+   if ($this->request->getMethod()=='post') {
+
+     $model_activity = new ActivityContent();
+     $model_actmedia= new MediaActivity();
+      if ($this->validate($rules)) {
+
+        $_POST['activity_question']=ucfirst($_POST['activity_question']);
+        $_POST['activity_id']=$id;
+
+
+
+           $db      = \Config\Database::connect();
+
+           $builder = $db->table('activity_master');
+
+           $builder->where('activity_id',  $id);
+
+          $activity = $builder->get()->getRow();
+
+          $type = $activity->activity_type;
+          if (strcmp($type,'multiple_choice')==0) {
+            $_POST['activity_answer_type']=  'M';
+          }else if (strcmp($type,'enumeration')==0) {
+            $_POST['activity_answer_type']=  'E';
+          }else {
+            $_POST['activity_answer_type']=  'I';
+          }
+
+          // echo "<pre>";
+          //   print_r($_POST);
+          // echo "<pre>";
+
+          $model_activity->save($_POST);
+
+          if (!is_uploaded_file($_FILES['image']['tmp_name'])) {
+
+
+            $file = $this->request->getFile('image');
+            if ($file->isValid()&& !$file->hasMoved()) {
+              $file->move('./uploads/images');
+            }
+          //  $filename = $file->getName();
+            $filename = $file->getName();
+            $fileExt = pathinfo($filename, PATHINFO_EXTENSION);
+            //
+            // $db = db_connect();
+            // $getlessonid = new CustomModel($db);
+            // $id=$getlessonid->getlessonid($id);
+            $builder1 = $db->table('activity_content');
+
+            $builder1->where('activity_question',  $_POST['activity_question']);
+
+            $content = $builder1->get()->getRow();
+            $_POST['file_name']='NoFile';
+            $_POST['activity_content_id']=$content->activity_content_id;
+            $_POST['file_targetDirectory']='NoFile';
+            $_POST['file_extension']='NoFile';
+
+            // $getlessoncontentid = new CustomModel($db);
+            // $id2=$getlessoncontentid->getlessoncontenti3($id);
+          //  $_POST['example_id']=$exampleid;
+
+
+
+
+        }else {
+          $file = $this->request->getFile('image');
+          if ($file->isValid()&& !$file->hasMoved()) {
+            $file->move('./uploads/images');
+          }
+        //  $filename = $file->getName();
+          $filename = $file->getName();
+          $fileExt = pathinfo($filename, PATHINFO_EXTENSION);
+
+          // $db = db_connect();
+          // $getlessonid = new CustomModel($db);
+          // $id=$getlessonid->getlessonid($id);
+          $builder1 = $db->table('activity_content');
+
+          $builder1->where('activity_question',  $_POST['activity_question']);
+
+          $content = $builder1->get()->getRow();
+
+          $_POST['file_name']=$filename;
+          $_POST['activity_content_id']=$content->activity_content_id;
+          $_POST['file_targetDirectory']='./uploads/image';
+          $_POST['file_extension']=$fileExt;
+        }
+
+        $model_actmedia->save($_POST);
+          $session = session();
+          $session->setFlashdata('success','Question Added');
+
+          if (strcmp($activity->activity_type,'multiple_choice')==0) {
+            return redirect()->to('teacher/multiplechoice/'.$id);
+
+          }
+
+   }else{
+     //if validation is not successfull
+     //validator provies a list of errors
+     $data['validation']=$this->validator;
+   }
+ }
+
 }
 
 public function manage(){
