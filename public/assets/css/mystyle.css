@@ -400,4 +400,49 @@ overflow: auto;
   z-index: -1;
 }
 
+/* ------------or add activity------------ */
+
+/* for activity type purpose */
+
+.radio-btn{
+  cursor: pointer;
+}
+
+.radio-btn:checked + .label-activity-type {
+  color: #1eb400;
+}
+
+.radio-btn:checked + .label-activity-type {
+  color: #1eb400;
+  transform: translateX(10  px) scale(1.1); 
+}
+
+.label-activity-type {
+  color: rgb(0, 0, 0);
+  transition: all 0.25s linear;
+}
+
+.label-activity-type::before {
+  content: "";
+  transition: all 0.25s linear;
+}
+/* ------------end for activity type---------------- */
+
+#activity-txtarea{
+  border-color: #00acee; 
+  border-width: 2px; 
+  border-radius:15px;
+}
+
+#activity-txtarea:hover, #activity-txtarea:focus , #activity-txtarea:valid{
+  border-color: #1eb4009a;
+}
+
+
+#activity-txtarea:focus{
+  border-color: #1eb400;
+}
+/* ------------end for add activity------------ */
+
+
 /* From here on, just aesthetics */

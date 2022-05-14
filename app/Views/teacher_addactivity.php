@@ -43,7 +43,7 @@
             <form action="" method="post" enctype="multipart/form-data">
               <div class="form-group">
                   <label for="" style="font-size:25px;">Activity Title</label>
-                  <input type="text" id="" class="form-control" name="activity_name" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;">
+                  <input type="text" id="activity-txtarea" class="form-control" name="activity_name" style="height: 50px;" required>
               </div>
               <div class="text-danger" style="margin-top:3%;">
                 <?php if (isset($validation)): ?>
@@ -55,7 +55,7 @@
 
                 <div class="form-group">
                   <label for="" style="font-size:25px;">Activity Instruction</label>
-                  <textarea type="text" id="" class="form-control" name="activity_instruction" rows="3" style="border-color: #00acee; border-width: 2px; border-radius:15px;"></textarea>
+                  <textarea type="text" id="activity-txtarea" class="form-control" name="activity_instruction" rows="3" style="" required></textarea>
                 </div>
                 <div class="text-danger" style="margin-top:2%;margin-bottom:2%;">
                   <?php if (isset($validation)): ?>
@@ -65,21 +65,21 @@
                   <?php endif; ?>
                 </div>
                 <label class="form-check-label mx-1" for="gradelevel" style="font-size:25px;"> Activity Type  </label>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" id="flexRadioDefault1" name="activity_type" value='multiple_choice' required>
-                  <label class="form-check-label" for="flexRadioDefault1">
+                <div class="form-check container-activity-type">
+                  <input class="form-check-input radio-btn" type="radio" id="flexRadioDefault1" name="activity_type" value='multiple_choice' required>
+                  <label class="form-check-label label-activity-type" for="flexRadioDefault1">
                     Multiple Choice
                   </label>
                 </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" id="flexRadioDefault1" name="activity_type" value='enumeration' required>
-                  <label class="form-check-label" for="flexRadioDefault1">
+                <div class="form-check container-activity-type">
+                  <input class="form-check-input radio-btn" type="radio" id="flexRadioDefault1" name="activity_type" value='enumeration' required>
+                  <label class="form-check-label label-activity-type" for="flexRadioDefault1">
                     Enumeration
                   </label>
                 </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" id="flexRadioDefault1" name="activity_type" value='identification' required>
-                  <label class="form-check-label" for="flexRadioDefault1">
+                <div class="form-check container-activity-type">
+                  <input class="form-check-input radio-btn" type="radio" id="flexRadioDefault1" name="activity_type" value='identification' required>
+                  <label class="form-check-label label-activity-type" for="flexRadioDefault1">
                     Identification
                   </label>
                 </div>
