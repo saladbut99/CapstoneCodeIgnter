@@ -15,6 +15,9 @@ use App\Models\MediaLessonExample;
 use App\Models\ActivityMaster;
 use App\Models\ActivityContent;
 use App\Models\MediaActivity;
+use App\Models\Choices;
+
+
 class Teacher extends BaseController
 {
     public function index()
@@ -1197,9 +1200,6 @@ public function addquestion($id){
      return redirect()->to('pupil/home');
    }
 
-
-
-
    $rules=[
 
        'activity_question'=>[
@@ -1214,10 +1214,10 @@ public function addquestion($id){
      //     'rules'=>'required',
      //     'label'=>'Activity Description',
      //   ],
-     // 'activity_type'=>[
-     //   'rules'=> 'required',
-     //   'label'=>'Activity Type',
-     // ],
+     'choice'=>[
+       'rules'=> 'required',
+       'label'=>'Choice',
+     ],
 
    ];
 
@@ -1226,7 +1226,9 @@ public function addquestion($id){
    if ($this->request->getMethod()=='post') {
 
      $model_activity = new ActivityContent();
-     $model_actmedia= new MediaActivity();
+     $model_actmedia = new MediaActivity();
+     $model_choice = new Choices();
+
       if ($this->validate($rules)) {
 
         $_POST['activity_question']=ucfirst($_POST['activity_question']);
@@ -1313,6 +1315,37 @@ public function addquestion($id){
         }
 
         $model_actmedia->save($_POST);
+        $builder2 = $db->table('activity_content');
+
+        $builder2->where('activity_question',  $_POST['activity_question']);
+
+        $content2 = $builder2->get()->getRow();
+
+        //$_POST['activity_content_id']=$content2->activity_content_id;
+
+        $choices = array($_POST['choice']);
+        foreach ($choices as $choice) {
+            $choice_ent=$choice;
+
+            $f=count($choice_ent);
+
+            for($i=0;$i<$f;$i++)
+            {
+              $arre=[
+                'choice'=>$choice_ent[$i],
+                'activity_content_id'=>$content2->activity_content_id,
+                ];
+              $model_choice->save($arre);
+            }
+
+        }
+
+
+
+        // echo "<pre>";
+        //   print_r($choices);
+        // echo "<pre>";
+
           $session = session();
           $session->setFlashdata('success','Question Added');
 
@@ -1320,6 +1353,8 @@ public function addquestion($id){
             return redirect()->to('teacher/multiplechoice/'.$id);
 
           }
+
+
 
    }else{
      //if validation is not successfull

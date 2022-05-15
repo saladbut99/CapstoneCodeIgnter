@@ -126,25 +126,25 @@
      <div class="form-check">
        <input class="form-check-input" type="radio" name="activity_answer" id="answer1" value="" required>
        <label class="form-check-label" for="flexRadioDefault1" >
-           <input type="text" id="question_1" class="form-control" name="" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;" >
+           <input type="text" id="question_1" class="form-control" name="choice[]" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;" >
        </label>
      </div>
      <div class="form-check">
        <input class="form-check-input" type="radio" name="activity_answer" id="answer2" value="" required>
        <label class="form-check-label" for="flexRadioDefault1" >
-           <input type="text" id="question_2" class="form-control" name="" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;" >
+           <input type="text" id="question_2" class="form-control" name="choice[]" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;" >
        </label>
      </div>
      <div class="form-check">
        <input class="form-check-input" type="radio" name="activity_answer" id="answer3" value="" required>
        <label class="form-check-label" for="flexRadioDefault1" >
-           <input type="text" id="question_3" class="form-control" name="" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;" >
+           <input type="text" id="question_3" class="form-control" name="choice[]" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;" >
        </label>
      </div>
      <div class="form-check">
        <input class="form-check-input" type="radio" name="activity_answer" id="answer4" value="" required>
        <label class="form-check-label" for="flexRadioDefault1" >
-           <input type="text" id="question_4" class="form-control" name="" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;" >
+           <input type="text" id="question_4" class="form-control" name="choice[]" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;" >
        </label>
      </div>
 
