@@ -464,6 +464,12 @@ overflow: auto;
   
 }
 
+.radiobtn-mc:checked  {
+  background-color: #1eb400 !important;
+  border-color: #1eb400 !important
+  
+}
+
 
 
 .radiobtn-mc{
@@ -480,7 +486,7 @@ overflow: auto;
   align-items: center !important;
 }
 
-div.grupouno:hover *{
+.grupouno:hover *{
   border-color: #1eb400 !important;
 }
 

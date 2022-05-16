@@ -62,6 +62,10 @@
          <br>
     </div>
 
+    <?php foreach ($question as $questions): ?>
+            <h1><?= $questions['activity_question']; ?></h1>
+    <?php endforeach; ?>
+
    </div>
  </div>
  <div class="container">
@@ -73,7 +77,7 @@
  </div>
 
 <div id='border' style="border:1px solid white; width:70%; margin-bottom:5%; border-radius:10px;">
- <form class="" action="<?php echo site_url('teacher/viewmodule/'.$users->lesson_id);?>" method="post" id="form" style="display:none; margin-bottom:5%;"  enctype="multipart/form-data">
+ <form class="" action="<?php echo site_url('teacher/addquestion/'.$users->activity_id);?>" method="post" id="form" style="display:none; margin-bottom:5%;"  enctype="multipart/form-data">
   <div class="container">
     <div class="row">
       <div class="col">
@@ -119,42 +123,42 @@
 
    <div style="width:90%;">
      <h2 style="margin-bottom:2%;"> Answer Options  </h2>
-     
      <div class="form-check grupouno">
-       <input class="form-check-input radiobtn-mc" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+       <input class="form-check-input radiobtn-mc" type="radio" name="activity_answer" id="answer1" value="" required>
        <label class="form-check-label" for="flexRadioDefault1" >
-           <input type="text" id="" class="form-control input-mc" name="activity_name" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;">
+           <input type="text" id="question_1" class="form-control input-mc" name="choice[]" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;" >
+       </label>
+     </div>
+     <div class="form-check grupouno">
+       <input class="form-check-input radiobtn-mc" type="radio" name="activity_answer" id="answer2" value="" required>
+       <label class="form-check-label" for="flexRadioDefault1" >
+           <input type="text" id="question_2" class="form-control input-mc" name="choice[]" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;" >
+       </label>
+     </div>
+     <div class="form-check grupouno">
+       <input class="form-check-input radiobtn-mc" type="radio" name="activity_answer" id="answer3" value="" required>
+       <label class="form-check-label" for="flexRadioDefault1" >
+           <input type="text" id="question_3" class="form-control input-mc" name="choice[]" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;" >
+       </label>
+     </div>
+     <div class="form-check grupouno">
+       <input class="form-check-input radiobtn-mc" type="radio" name="activity_answer" id="answer4" value="" required>
+       <label class="form-check-label" for="flexRadioDefault1" >
+           <input type="text" id="question_4" class="form-control input-mc" name="choice[]" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;" >
        </label>
      </div>
 
-     <div class="form-check grupouno">
-       <input class="form-check-input radiobtn-mc" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-       <label class="form-check-label lebel" for="flexRadioDefault1" >
-           <input type="text" id="" class="form-control input-mc" name="activity_name" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;">
-       </label>
-     </div>
 
-     <div class="form-check grupouno">
-       <input class="form-check-input radiobtn-mc" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
-       <label class="form-check-label" for="flexRadioDefault1" >
-           <input type="text" id="" class="form-control input-mc" name="activity_name" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;">
-       </label>
-     </div>
-     
-     <div class="form-check grupouno">
-       <input class="form-check-input radiobtn-mc" type="radio" name="flexRadioDefault" id="flexRadioDefault4">
-       <label class="form-check-label" for="flexRadioDefault2">
-       <input type="text" id="" class="form-control input-mc" name="activity_name" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;">
-        
-       </label>
-     </div>
+
+
+
    </div>
 
     Default checked radio
 
 
    <center>
-   <button type="submit" class="btn btn-primary btn-block mb-4 mt-4">Submit</button>
+   <button type="submit" onclick ="addValueToRadioBtn();" class="btn btn-primary btn-block mb-4 mt-4">Submit</button>
  </center>
 </form>
 
@@ -163,7 +167,22 @@
 </div>
 
 
+<script>
+function addValueToRadioBtn() {
+    if (document.getElementById("answer1").checked == true){
+        document.getElementById("answer1").value = document.getElementById("question_1").value;
+    }else   if (document.getElementById("answer2").checked == true){
+            document.getElementById("answer2").value = document.getElementById("question_2").value;
+    }else   if (document.getElementById("answer3").checked == true){
+            document.getElementById("answer3").value = document.getElementById("question_3").value;
+    }else {
+        document.getElementById("answer4").value = document.getElementById("question_4").value;
+    }
 
+
+}
+
+</script>
 
 <script>
   $('#toggle').click(function(){
