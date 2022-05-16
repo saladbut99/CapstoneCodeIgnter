@@ -1106,10 +1106,10 @@ public function multiplechoice($id){
    }else if ($type!='Teacher' && $type=='Pupil') {
      return redirect()->to('pupil/home');
    }
-    $question_no=1;
+  //  $question_no=1;
   $data=[
     'meta_title'=>'Teacher | Manage ',
-    'question_no'=>$question_no,
+  //  'question_no'=>$question_no,
   ];
 
 
@@ -1119,6 +1119,13 @@ public function multiplechoice($id){
 
   $activity_id = new ActivityContent();
   $data['question'] = $activity_id->where(['activity_id'=>$id])->findAll();
+
+
+  $choices = new Choices();
+  $data['choice'] = $choices->findAll();
+
+  $medias = new MediaActivity();
+  $data['media'] = $medias->findAll();
 
    return view('teacher_multiplechoice', $data);
 
@@ -1326,7 +1333,7 @@ public function addquestion($id){
         $choices = array($_POST['choice']);
         foreach ($choices as $choice) {
             $choice_ent=$choice;
-
+            
             $f=count($choice_ent);
 
             for($i=0;$i<$f;$i++)

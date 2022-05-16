@@ -2,7 +2,7 @@
 
 <?= $this->section('content'); ?>
 
-
+  <?php $question_no=0; ?>
 
 <div class="navbar" style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(<?=base_url()?>/public/assets/images/banner.png);">
        <nav class="nav row w-100 align-items-center">
@@ -61,11 +61,51 @@
          <?php endif; ?>
          <br>
     </div>
-
+<center>
     <?php foreach ($question as $questions): ?>
-            <h1><?= $questions['activity_question']; ?></h1>
-    <?php endforeach; ?>
 
+     <?php $question_no++;  ?>
+            <div class="container" style="width:80%;border:0.5px solid green;margin-bottom:2%; border-radius:4px;">
+                <div class="row">
+                    <div class="col">
+                        <h3 style="text-align:left;margin-top:2%;margin-bottom:2%;">Question <?= $question_no; ?></h3>
+                        <h1 style="margin-bottom:2%;"><?= $questions['activity_question']; ?></h1>
+
+                        <?php foreach ($media as $medias): ?>
+                          <?php if ($medias['activity_content_id']==$questions['activity_content_id']): ?>
+                            <?php if (strcmp($medias['file_extension'],'mp4')==0): ?>
+                              <video controls>
+                                  <source src="<?=base_url()?>/public/uploads/images/<?= $medias['file_name'] ?>" type="video/mp4">
+                            </video>
+                            <?php else: ?>
+                                <a href="<?=base_url()?>/public/uploads/images/<?= $medias['file_name']; ?>" target="_blank"><img src="<?=base_url()?>/public/uploads/images/<?= $medias['file_name']; ?>"  alt="" width="70%" height="70$" onclick="myFunction(this);" class="img-fluid"></a>
+                            <?php endif; ?>
+                          <?php endif; ?>
+                        <?php endforeach; ?>
+
+
+
+                        <div class="strike" >
+                          <span style="color:grey;">Answer Highlights in Green</span>
+                        </div>
+                        <?php foreach ($choice as $choices): ?>
+                          <?php if ($choices['activity_content_id']==$questions['activity_content_id']): ?>
+                            <?php if (strcmp($questions['activity_answer'],$choices['choice'])==0): ?>
+                                    <?php $color='green'; ?>
+                            <?php else: ?>
+                                    <?php $color='grey'; ?>
+                            <?php endif; ?>
+                                <div class="" >
+                                        <h3 style="border: 2px solid <?= $color ?>; width:50%; border-radius:10px; color:<?= $color ?>"><?= $choices['choice']; ?></h3>
+                                </div>
+
+                          <?php endif; ?>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>
+    <?php endforeach; ?>
+</center>
    </div>
  </div>
  <div class="container">
@@ -75,6 +115,9 @@
     </div>
   </div>
  </div>
+
+<!-- form for the question -->
+
 
 <div id='border' style="border:1px solid white; width:70%; margin-bottom:5%; border-radius:10px;">
  <form class="" action="<?php echo site_url('teacher/addquestion/'.$users->activity_id);?>" method="post" id="form" style="display:none; margin-bottom:5%;"  enctype="multipart/form-data">
@@ -92,7 +135,7 @@
   <div class="container">
     <div class="row">
       <div class="col">
-        <h1 style="margin-bottom:5%;">Question <?= $question_no ?></h1>
+        <h1 style="margin-bottom:5%;">Question <?= $question_no+=1; ?></h1>
       </div>
     </div>
   </div>
@@ -126,25 +169,25 @@
      <div class="form-check">
        <input class="form-check-input" type="radio" name="activity_answer" id="answer1" value="" required>
        <label class="form-check-label" for="flexRadioDefault1" >
-           <input type="text" id="question_1" class="form-control" name="choice[]" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;" >
+           <input type="text" id="question_1" class="form-control" name="choice[]" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;text-transform: capitalize;" >
        </label>
      </div>
      <div class="form-check">
        <input class="form-check-input" type="radio" name="activity_answer" id="answer2" value="" required>
        <label class="form-check-label" for="flexRadioDefault1" >
-           <input type="text" id="question_2" class="form-control" name="choice[]" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;" >
+           <input type="text" id="question_2" class="form-control" name="choice[]" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;text-transform: capitalize;" >
        </label>
      </div>
      <div class="form-check">
        <input class="form-check-input" type="radio" name="activity_answer" id="answer3" value="" required>
        <label class="form-check-label" for="flexRadioDefault1" >
-           <input type="text" id="question_3" class="form-control" name="choice[]" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;" >
+           <input type="text" id="question_3" class="form-control" name="choice[]" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;text-transform: capitalize;" >
        </label>
      </div>
      <div class="form-check">
        <input class="form-check-input" type="radio" name="activity_answer" id="answer4" value="" required>
        <label class="form-check-label" for="flexRadioDefault1" >
-           <input type="text" id="question_4" class="form-control" name="choice[]" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;" >
+           <input type="text" id="question_4" class="form-control" name="choice[]" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;text-transform: capitalize;" >
        </label>
      </div>
 
