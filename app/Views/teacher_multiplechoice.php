@@ -119,19 +119,38 @@
 
    <div style="width:90%;">
      <h2 style="margin-bottom:2%;"> Answer Options  </h2>
-     <div class="form-check">
-       <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+     
+     <div class="form-check grupouno">
+       <input class="form-check-input radiobtn-mc" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
        <label class="form-check-label" for="flexRadioDefault1" >
-           <input type="text" id="" class="form-control" name="activity_name" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;">
+           <input type="text" id="" class="form-control input-mc" name="activity_name" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;">
        </label>
      </div>
-     <div class="form-check">
-       <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+
+     <div class="form-check grupouno">
+       <input class="form-check-input radiobtn-mc" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+       <label class="form-check-label lebel" for="flexRadioDefault1" >
+           <input type="text" id="" class="form-control input-mc" name="activity_name" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;">
+       </label>
+     </div>
+
+     <div class="form-check grupouno">
+       <input class="form-check-input radiobtn-mc" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
+       <label class="form-check-label" for="flexRadioDefault1" >
+           <input type="text" id="" class="form-control input-mc" name="activity_name" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;">
+       </label>
+     </div>
+     
+     <div class="form-check grupouno">
+       <input class="form-check-input radiobtn-mc" type="radio" name="flexRadioDefault" id="flexRadioDefault4">
        <label class="form-check-label" for="flexRadioDefault2">
-         Default checked radio
+       <input type="text" id="" class="form-control input-mc" name="activity_name" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;">
+        
        </label>
      </div>
    </div>
+
+    Default checked radio
 
 
    <center>
