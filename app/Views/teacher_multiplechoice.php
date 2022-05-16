@@ -166,28 +166,44 @@
 
    <div style="width:90%;">
      <h2 style="margin-bottom:2%;"> Answer Options  </h2>
-     <div class="form-check">
-       <input class="form-check-input" type="radio" name="activity_answer" id="answer1" value="" required>
+     <div class="form-check grupouno">
+       <input class="form-check-input radiobtn-mc" type="radio" name="activity_answer" id="answer1" value="" required>
        <label class="form-check-label" for="flexRadioDefault1" >
+<<<<<<< HEAD
            <input type="text" id="question_1" class="form-control" name="choice[]" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;text-transform: capitalize;" >
+=======
+           <input type="text" id="question_1" class="form-control input-mc" name="choice[]" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;" >
+>>>>>>> 57abe9d6f753e593249256c6ad1caec478dfea30
        </label>
      </div>
-     <div class="form-check">
-       <input class="form-check-input" type="radio" name="activity_answer" id="answer2" value="" required>
+     <div class="form-check grupouno">
+       <input class="form-check-input radiobtn-mc" type="radio" name="activity_answer" id="answer2" value="" required>
        <label class="form-check-label" for="flexRadioDefault1" >
+<<<<<<< HEAD
            <input type="text" id="question_2" class="form-control" name="choice[]" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;text-transform: capitalize;" >
+=======
+           <input type="text" id="question_2" class="form-control input-mc" name="choice[]" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;" >
+>>>>>>> 57abe9d6f753e593249256c6ad1caec478dfea30
        </label>
      </div>
-     <div class="form-check">
-       <input class="form-check-input" type="radio" name="activity_answer" id="answer3" value="" required>
+     <div class="form-check grupouno">
+       <input class="form-check-input radiobtn-mc" type="radio" name="activity_answer" id="answer3" value="" required>
        <label class="form-check-label" for="flexRadioDefault1" >
+<<<<<<< HEAD
            <input type="text" id="question_3" class="form-control" name="choice[]" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;text-transform: capitalize;" >
+=======
+           <input type="text" id="question_3" class="form-control input-mc" name="choice[]" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;" >
+>>>>>>> 57abe9d6f753e593249256c6ad1caec478dfea30
        </label>
      </div>
-     <div class="form-check">
-       <input class="form-check-input" type="radio" name="activity_answer" id="answer4" value="" required>
+     <div class="form-check grupouno">
+       <input class="form-check-input radiobtn-mc" type="radio" name="activity_answer" id="answer4" value="" required>
        <label class="form-check-label" for="flexRadioDefault1" >
+<<<<<<< HEAD
            <input type="text" id="question_4" class="form-control" name="choice[]" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;text-transform: capitalize;" >
+=======
+           <input type="text" id="question_4" class="form-control input-mc" name="choice[]" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;" >
+>>>>>>> 57abe9d6f753e593249256c6ad1caec478dfea30
        </label>
      </div>
 
@@ -196,6 +212,8 @@
 
 
    </div>
+
+    Default checked radio
 
 
    <center>
