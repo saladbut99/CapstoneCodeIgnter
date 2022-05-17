@@ -423,7 +423,7 @@ overflow: auto;
 
 .radio-btn:checked{
   background-color: #1eb400 !important;
-  
+
 }
 
 
@@ -492,13 +492,13 @@ overflow: auto;
 .radiobtn-mc:checked{
   background-color: #1eb400 !important;
   border-color: #1eb400 !important
-  
+
 }
 
 .radiobtn-mc:checked  {
   background-color: #1eb400 !important;
   border-color: #1eb400 !important
-  
+
 }
 
 
@@ -526,5 +526,9 @@ overflow: auto;
 
   }
 
+
+  .deletebutton:hover + .show {
+    display: block;
+  }
 /* From here on, just aesthetics */
 >>>>>>> 57abe9d6f753e593249256c6ad1caec478dfea30

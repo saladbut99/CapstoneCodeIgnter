@@ -1333,7 +1333,7 @@ public function addquestion($id){
         $choices = array($_POST['choice']);
         foreach ($choices as $choice) {
             $choice_ent=$choice;
-            
+
             $f=count($choice_ent);
 
             for($i=0;$i<$f;$i++)
@@ -1356,6 +1356,8 @@ public function addquestion($id){
           $session = session();
           $session->setFlashdata('success','Question Added');
 
+
+
           if (strcmp($activity->activity_type,'multiple_choice')==0) {
             return redirect()->to('teacher/multiplechoice/'.$id);
 
@@ -1369,6 +1371,45 @@ public function addquestion($id){
      $data['validation']=$this->validator;
    }
  }
+
+}
+
+public function delete_activity($id){
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+
+   // $activity = new ActivityContent();
+   // $activity->get()->getRow();
+
+   $activity_content = new ActivityContent();
+   $data['act']=$activity_content->get()->getRow();
+
+    $activity_master = new ActivityMaster();
+   $data['master']=$activity_master->where(['activity_id'=>$data['act']->activity_id])->get()->getRow();
+
+    $model = new TeacherLesson();
+
+
+    if ($activity_content) {
+      $activity_content->delete($id);
+    }
+
+    $id2=$data['act']->activity_id;
+    //$type=$data['master']->activity_type;
+
+   $session = session();
+   $session->setFlashdata('success','Activity Question Successfully Deleted ');
+
+
+     if (strcmp($data['master']->activity_type,'multiple_choice')==0) {
+         return redirect()->to('teacher/multiplechoice/'.$id2);
+         }
+
 
 }
 
