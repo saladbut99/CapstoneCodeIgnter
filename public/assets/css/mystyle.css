@@ -13,18 +13,11 @@ h1{
 
 
 .bg {
-  background-image:   linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url('website/Banner.png');
   background-position: center;
   background-repeat: no-repeat;
   height: 100vh;
   min-height: 500px;
   background-attachment: fixed;
-}
-
-.bg{
-  animation-name: example;
-  animation-duration: 4s;
-  animation-iteration-count: infinite;
 }
 
 @keyframes example {
@@ -63,10 +56,15 @@ h1{
   cursor: pointer;
   border-radius: 20px;
 }
-.button:hover{
+
+#loginbtn{
+  background-color: #57cf0233;
+}
+
+#loginbtn:hover{
 background-color: #59CF02;
 color:white;
-transition: 1s;
+transition: .2s;
 }
 
 .loginbutton a{
@@ -480,18 +478,11 @@ overflow: auto;
     margin-right: 15px;
 }
 
-<<<<<<< HEAD
-.strike > span:after {
-    left: 100%;
-    margin-left: 15px;
-}
-=======
 
 /* ------------for multiple choice--------------*/
 
 .radiobtn-mc:checked{
   background-color: #1eb400 !important;
-<<<<<<< HEAD
   border-color: #1eb400 !important;
   transition: .25s ease-out;
   
@@ -501,7 +492,6 @@ overflow: auto;
   background-color: #5aff396b !important;
   border-color: #1eb400 !important;
   border-radius: 5px;
-=======
   border-color: #1eb400 !important
 
 }
@@ -510,7 +500,6 @@ overflow: auto;
   background-color: #1eb400 !important;
   border-color: #1eb400 !important
 
->>>>>>> 4b544a4ffc3800ec4cb65e9c32e285dfe2fc14d6
 }
 
 
@@ -544,4 +533,3 @@ overflow: auto;
     display: block;
   }
 /* From here on, just aesthetics */
->>>>>>> 57abe9d6f753e593249256c6ad1caec478dfea30
