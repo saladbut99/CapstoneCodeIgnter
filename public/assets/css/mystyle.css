@@ -460,14 +460,15 @@ overflow: auto;
 
 .radiobtn-mc:checked{
   background-color: #1eb400 !important;
-  border-color: #1eb400 !important
+  border-color: #1eb400 !important;
+  transition: .25s ease-out;
   
 }
 
-.radiobtn-mc:checked  {
-  background-color: #1eb400 !important;
-  border-color: #1eb400 !important
-  
+.radiobtn-mc:checked + .lebel > .input-mc {
+  background-color: #5aff396b !important;
+  border-color: #1eb400 !important;
+  border-radius: 5px;
 }
 
 
@@ -484,6 +485,7 @@ overflow: auto;
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
+  width: max-content !important;
 }
 
 .grupouno:hover *{

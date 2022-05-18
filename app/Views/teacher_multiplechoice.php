@@ -125,25 +125,25 @@
      <h2 style="margin-bottom:2%;"> Answer Options  </h2>
      <div class="form-check grupouno">
        <input class="form-check-input radiobtn-mc" type="radio" name="activity_answer" id="answer1" value="" required>
-       <label class="form-check-label" for="flexRadioDefault1" >
+       <label class="form-check-label lebel" for="flexRadioDefault1" >
            <input type="text" id="question_1" class="form-control input-mc" name="choice[]" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;" >
        </label>
      </div>
      <div class="form-check grupouno">
        <input class="form-check-input radiobtn-mc" type="radio" name="activity_answer" id="answer2" value="" required>
-       <label class="form-check-label" for="flexRadioDefault1" >
+       <label class="form-check-label lebel" for="flexRadioDefault1" >
            <input type="text" id="question_2" class="form-control input-mc" name="choice[]" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;" >
        </label>
      </div>
      <div class="form-check grupouno">
        <input class="form-check-input radiobtn-mc" type="radio" name="activity_answer" id="answer3" value="" required>
-       <label class="form-check-label" for="flexRadioDefault1" >
+       <label class="form-check-label lebel" for="flexRadioDefault1" >
            <input type="text" id="question_3" class="form-control input-mc" name="choice[]" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;" >
        </label>
      </div>
      <div class="form-check grupouno">
        <input class="form-check-input radiobtn-mc" type="radio" name="activity_answer" id="answer4" value="" required>
-       <label class="form-check-label" for="flexRadioDefault1" >
+       <label class="form-check-label lebel" for="flexRadioDefault1" >
            <input type="text" id="question_4" class="form-control input-mc" name="choice[]" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;" >
        </label>
      </div>
