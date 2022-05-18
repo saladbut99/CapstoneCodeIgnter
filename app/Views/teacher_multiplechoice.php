@@ -2,7 +2,7 @@
 
 <?= $this->section('content'); ?>
 
-
+  <?php $question_no=0; ?>
 
 <div class="navbar" style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(<?=base_url()?>/public/assets/images/banner.png);">
        <nav class="nav row w-100 align-items-center">
@@ -61,11 +61,71 @@
          <?php endif; ?>
          <br>
     </div>
-
+<center>
     <?php foreach ($question as $questions): ?>
-            <h1><?= $questions['activity_question']; ?></h1>
-    <?php endforeach; ?>
 
+     <?php $question_no++;  ?>
+            <div class="container" style="width:80%;border:0.5px solid green;margin-bottom:2%; border-radius:4px;">
+                <div class="row">
+                    <div class="col">
+                              <div class="row" style="margin-bottom:5%;">
+                                  <div class="col-sm">
+                                        <h3 style="text-align:left;margin-top:2%;margin-bottom:2%;">Question <?= $question_no; ?></h3>
+                                  </div>
+                                  <div class="col-sm" style="text-align:right;">
+                                    <a href="<?php echo site_url('teacher/delete_activity/'.$questions['activity_content_id']);?>"  class="deletebutton" onclick="return doconfirm()" style="text-decoration:none;">
+                                      <button type="button"  class="btn btn-outline-secondary" style="margin-top:1%;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                      <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
+                                    </svg> Delete
+                                  </button>
+                                    </a>
+                                    <a class="deletebutton" onclick="return doconfirm()" style="text-decoration:none;">
+                                      <button type="button" class="btn btn-outline-secondary" style="margin-top:1%;">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                        <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                                      </svg> Edit
+                                      </button>
+                                    </a>
+                                  </div>
+                              </div>
+
+                        <h1 style="margin-bottom:2%;"><?= $questions['activity_question']; ?></h1>
+                        <?php foreach ($media as $medias): ?>
+                          <?php if ($medias['activity_content_id']==$questions['activity_content_id']): ?>
+                            <?php if (strcmp($medias['file_extension'],'mp4')==0): ?>
+                              <video controls>
+                                  <source src="<?=base_url()?>/public/uploads/images/<?= $medias['file_name'] ?>" type="video/mp4">
+                            </video>
+                            <?php else: ?>
+                                <a href="<?=base_url()?>/public/uploads/images/<?= $medias['file_name']; ?>" target="_blank"><img src="<?=base_url()?>/public/uploads/images/<?= $medias['file_name']; ?>"  alt="" width="70%" height="70$" onclick="myFunction(this);" class="img-fluid"></a>
+                            <?php endif; ?>
+                          <?php endif; ?>
+                        <?php endforeach; ?>
+
+
+
+                        <div class="strike" >
+                          <span style="color:grey;">Answer Highlights in Green</span>
+                        </div>
+                        <?php foreach ($choice as $choices): ?>
+                          <?php if ($choices['activity_content_id']==$questions['activity_content_id']): ?>
+                            <?php if (strcmp($questions['activity_answer'],$choices['choice'])==0): ?>
+                                    <?php $color='green'; ?>
+                            <?php else: ?>
+                                    <?php $color='grey'; ?>
+                            <?php endif; ?>
+                                <div class="" style="margin-bottom:2%;" >
+                                        <h3 style="border: 2px solid <?= $color ?>; width:50%; border-radius:10px; color:<?= $color ?>"><?= $choices['choice']; ?></h3>
+                                </div>
+
+                          <?php endif; ?>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>
+    <?php endforeach; ?>
+</center>
    </div>
  </div>
  <div class="container">
@@ -75,6 +135,9 @@
     </div>
   </div>
  </div>
+
+<!-- form for the question -->
+
 
 <div id='border' style="border:1px solid white; width:70%; margin-bottom:5%; border-radius:10px;">
  <form class="" action="<?php echo site_url('teacher/addquestion/'.$users->activity_id);?>" method="post" id="form" style="display:none; margin-bottom:5%;"  enctype="multipart/form-data">
@@ -92,7 +155,7 @@
   <div class="container">
     <div class="row">
       <div class="col">
-        <h1 style="margin-bottom:5%;">Question <?= $question_no ?></h1>
+        <h1 style="margin-bottom:5%;">Question <?= $question_no+=1; ?></h1>
       </div>
     </div>
   </div>
@@ -154,7 +217,7 @@
 
    </div>
 
-    Default checked radio
+
 
 
    <center>
@@ -297,6 +360,17 @@ function myFunction(imgs) {
       });
   } );
 </script>
+
+<script>
+  function doconfirm()
+  {
+      job=confirm("Are you sure to delete permanently?");
+      if(job!=true)
+      {
+          return false;
+      }
+  }
+  </script>
 
 
 <?= $this->endSection() ?>

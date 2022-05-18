@@ -83,6 +83,7 @@ $routes->group('teacher', ["filter" => 'Auth'], function($routes){
    $routes->add('view/(:num)','Teacher::viewuser/$1');
    $routes->add('updatemodule/(:num)','Teacher::updatemodule/$1');
    $routes->add('delete/(:num)','Teacher::delete/$1');
+   $routes->add('delete_activity/(:num)','Teacher::delete_activity/$1');
    $routes->match(['get','post'],'addactivity/(:num)','Teacher::addactivity/$1');
    $routes->get('multiplechoice/(:num)','Teacher::multiplechoice/$1');
  // $routes->add('viewmodule','Admin::viewmodule');

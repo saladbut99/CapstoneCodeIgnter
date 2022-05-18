@@ -414,7 +414,7 @@ overflow: auto;
 
 .radio-btn:checked + .label-activity-type {
   color: #1eb400;
-  transform: translateX(10  px) scale(1.1); 
+  transform: translateX(10  px) scale(1.1);
 }
 
 .radio-btn:hover , .radio-btn:checked{
@@ -423,7 +423,7 @@ overflow: auto;
 
 .radio-btn:checked{
   background-color: #1eb400 !important;
-  
+
 }
 
 
@@ -439,8 +439,8 @@ overflow: auto;
 /* ------------end for activity type---------------- */
 
 #activity-txtarea{
-  border-color: #00acee; 
-  border-width: 2px; 
+  border-color: #00acee;
+  border-width: 2px;
   border-radius:15px;
 }
 
@@ -449,17 +449,49 @@ overflow: auto;
 }
 
 
-#activity-txtarea:focus{
-  border-color: #1eb400;
+
+
+.strike {
+    display: block;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-bottom: 2%;
+    margin-top: 2%;
 }
-/* ------------end for add activity------------ */
 
+.strike > span {
+    position: relative;
+    display: inline-block;
+}
 
+.strike > span:before,
+.strike > span:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 9999px;
+    height: 1px;
+    background: grey;
+}
+
+.strike > span:before {
+    right: 100%;
+    margin-right: 15px;
+}
+
+<<<<<<< HEAD
+.strike > span:after {
+    left: 100%;
+    margin-left: 15px;
+}
+=======
 
 /* ------------for multiple choice--------------*/
 
 .radiobtn-mc:checked{
   background-color: #1eb400 !important;
+<<<<<<< HEAD
   border-color: #1eb400 !important;
   transition: .25s ease-out;
   
@@ -469,6 +501,16 @@ overflow: auto;
   background-color: #5aff396b !important;
   border-color: #1eb400 !important;
   border-radius: 5px;
+=======
+  border-color: #1eb400 !important
+
+}
+
+.radiobtn-mc:checked  {
+  background-color: #1eb400 !important;
+  border-color: #1eb400 !important
+
+>>>>>>> 4b544a4ffc3800ec4cb65e9c32e285dfe2fc14d6
 }
 
 
@@ -497,4 +539,9 @@ overflow: auto;
 
   }
 
+
+  .deletebutton:hover + .show {
+    display: block;
+  }
 /* From here on, just aesthetics */
+>>>>>>> 57abe9d6f753e593249256c6ad1caec478dfea30

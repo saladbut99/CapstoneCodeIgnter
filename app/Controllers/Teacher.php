@@ -1106,10 +1106,10 @@ public function multiplechoice($id){
    }else if ($type!='Teacher' && $type=='Pupil') {
      return redirect()->to('pupil/home');
    }
-    $question_no=1;
+  //  $question_no=1;
   $data=[
     'meta_title'=>'Teacher | Manage ',
-    'question_no'=>$question_no,
+  //  'question_no'=>$question_no,
   ];
 
 
@@ -1119,6 +1119,13 @@ public function multiplechoice($id){
 
   $activity_id = new ActivityContent();
   $data['question'] = $activity_id->where(['activity_id'=>$id])->findAll();
+
+
+  $choices = new Choices();
+  $data['choice'] = $choices->findAll();
+
+  $medias = new MediaActivity();
+  $data['media'] = $medias->findAll();
 
    return view('teacher_multiplechoice', $data);
 
@@ -1191,6 +1198,7 @@ public function activitytype_checker($actid){
   }
 }
 
+// Add Question
 public function addquestion($id){
   $type = session()->get('usertype');
    if ($type!='Teacher' && $type=='Admin'){
@@ -1349,6 +1357,8 @@ public function addquestion($id){
           $session = session();
           $session->setFlashdata('success','Question Added');
 
+
+
           if (strcmp($activity->activity_type,'multiple_choice')==0) {
             return redirect()->to('teacher/multiplechoice/'.$id);
 
@@ -1363,6 +1373,157 @@ public function addquestion($id){
    }
  }
 
+}
+
+//Delete Activity
+public function delete_activity($id){
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+
+   // $activity = new ActivityContent();
+   // $activity->get()->getRow();
+
+   $activity_content = new ActivityContent();
+   $data['act']=$activity_content->get()->getRow();
+
+    $activity_master = new ActivityMaster();
+   $data['master']=$activity_master->where(['activity_id'=>$data['act']->activity_id])->get()->getRow();
+
+    $model = new TeacherLesson();
+
+
+    if ($activity_content) {
+      $activity_content->delete($id);
+    }
+
+    $id2=$data['act']->activity_id;
+    //$type=$data['master']->activity_type;
+
+   $session = session();
+   $session->setFlashdata('success','Activity Question Successfully Deleted ');
+
+
+     if (strcmp($data['master']->activity_type,'multiple_choice')==0) {
+         return redirect()->to('teacher/multiplechoice/'.$id2);
+         }
+}
+
+public function delete_mainactivity($id){
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+
+
+   $activitymaster = new ActivityMaster;
+   $model = new TeacherLesson();
+
+   $data['activity']=$activitymaster->get()->getRow();
+   $lesson_id=$data['activity']->lesson_id;
+
+    $lesson_content = new LessonMaster();
+    $data['lesson']=$lesson_content->where(['lesson_id'=>$lesson_id])->get()->getRow();
+
+    if ($activitymaster) {
+      $activitymaster->delete($id);
+    }
+
+   $session = session();
+   $session->setFlashdata('updatesuccess','Activity Successfully Deleted ');
+   return redirect()->to('teacher/viewactivity/'.$lesson_id);
+
+}
+
+//Update Activity
+public function update_activity($id){
+
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+
+ $db      = \Config\Database::connect();
+
+   $activitymaster = new ActivityMaster;
+   $data['activity']=$activitymaster->get()->getRow();
+   $lesson_id=$data['activity']->lesson_id;
+
+  $data=[
+    'meta_title'=>'Admin | Update Module'
+  ];
+  //$teacher_id=session()->get('t_id');
+
+
+  $userModel2 = new ActivityMaster();
+  $data['activity'] = $userModel2->where(['activity_id'=>$id])->get()->getRow();
+
+  $userModel2 = new LessonMaster();
+  $data['lesson'] = $userModel2->where(['lesson_id'=>$lesson_id])->get()->getRow();
+
+    $rules=[
+
+      'activity_name'=>[
+        'rules'=>'required',
+        'label'=>'Activity Title',
+      ],
+      'activity_instruction'=>[
+        'rules'=>'required',
+        'label'=>'Activity Description',
+      ],
+    'activity_type'=>[
+      'rules'=> 'required',
+      'label'=>'Activity Type',
+    ],
+
+    ];
+    //
+    helper(['form']);
+
+    if ($this->request->getMethod()=='post') {
+
+      $model_lesson = new ActivityMaster();
+
+       if ($this->validate($rules)) {
+
+
+        $activity_master = [
+            'activity_name' => ucfirst($_POST['activity_name']),
+            'activity_instruction' => ucfirst($_POST['activity_instruction']),
+            'activity_type'=> $_POST['activity_type'],
+        ];
+
+        $builder = $db->table('activity_master');
+
+        $builder->where('activity_id', $id);
+
+        $builder->update($activity_master);
+
+
+
+
+      $session = session();
+      $session->setFlashdata('updatesuccess','Module Upload Completed');
+        return redirect()->to('teacher/viewactivity/'.$lesson_id);
+    }else{
+      //if validation is not successfull
+      //validator provies a list of errors
+      $data['validation']=$this->validator;
+    }
+  }
+
+
+  return view('teacher_updateactivity', $data);
 }
 
 public function manage(){
