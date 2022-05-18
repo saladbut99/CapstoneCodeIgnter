@@ -115,7 +115,7 @@
                             <?php else: ?>
                                     <?php $color='grey'; ?>
                             <?php endif; ?>
-                                <div class="" >
+                                <div class="" style="margin-bottom:2%;" >
                                         <h3 style="border: 2px solid <?= $color ?>; width:50%; border-radius:10px; color:<?= $color ?>"><?= $choices['choice']; ?></h3>
                                 </div>
 
