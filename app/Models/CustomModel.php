@@ -148,4 +148,11 @@ class CustomModel{
   //  $result2=$result['account_status'];
     return $result;
   }
+  function updatequestion($choice,$id){
+    $builder_media = $this->db->table('choices');
+
+    $builder_media->where('activity_content_id', $id);
+
+    $builder_media->update($choice);
+  }
 }

@@ -74,14 +74,14 @@
                                   </div>
                                   <div class="col-sm" style="text-align:right;">
                                     <a href="<?php echo site_url('teacher/delete_activity/'.$questions['activity_content_id']);?>"  class="deletebutton" onclick="return doconfirm()" style="text-decoration:none;">
-                                      <button type="button"  class="btn btn-outline-secondary" style="margin-top:1%;">
+                                      <button type="button"  class="btn btn-outline-secondary" style="margin-top:2%;">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
                                       <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
                                     </svg> Delete
                                   </button>
                                     </a>
-                                    <a class="deletebutton" onclick="return doconfirm()" style="text-decoration:none;">
-                                      <button type="button" class="btn btn-outline-secondary" style="margin-top:1%;">
+                                    <a href="<?php echo site_url('teacher/update_question/'.$questions['activity_content_id']);?>" class="deletebutton" style="text-decoration:none;">
+                                      <button type="button" class="btn btn-outline-secondary" style="margin-top:2%;">
                                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
                                         <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
                                       </svg> Edit
@@ -167,13 +167,26 @@
                  <label for="" style="font-size:25px; margin-bottom:3%;">Activity Question</label>
                  <textarea class="form-control" style="width: 100%; border: 2px solid #00acee;" id="exampleFormControlTextarea1" placeholder="" rows="4" name="activity_question"></textarea>
                </div>
+               <div class="text-danger" style="margin-top:3%;">
+                 <?php if (isset($validation)): ?>
+                       <?php if ($validation->hasError('activity_question')): ?>
+                             <p>  <?= $validation->getError('activity_question') ?></p>
+                       <?php endif; ?>
+                 <?php endif; ?>
+               </div>
        </div>
        <div class="col-sm" >
          <div class="form-group ">
              <label class="btn btn-success" style="margin-top:10%;margin-bottom:3%">
                 <i class="fa fa-image"></i> Add Media<input type="file" style="display: none;" name="image" id="image" class="form-control-file" onchange="loadFile(event)" class="align-middle" style="border-top:5%;">
              </label>
-
+             <div class="text-danger" style="margin-top:3%;">
+               <?php if (isset($validation)): ?>
+                     <?php if ($validation->hasError('image')): ?>
+                           <p>  <?= $validation->getError('image') ?></p>
+                     <?php endif; ?>
+               <?php endif; ?>
+             </div>
            <center>
               <img id="output" width="350" />
           </center>
@@ -189,25 +202,25 @@
      <div class="form-check grupouno">
        <input class="form-check-input radiobtn-mc" type="radio" name="activity_answer" id="answer1" value="" required>
        <label class="form-check-label" for="flexRadioDefault1" >
-           <input type="text" id="question_1" class="form-control input-mc" name="choice[]" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;" >
+           <input type="text" id="question_1" class="form-control input-mc" name="choice[]" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;" required>
        </label>
      </div>
      <div class="form-check grupouno">
        <input class="form-check-input radiobtn-mc" type="radio" name="activity_answer" id="answer2" value="" required>
        <label class="form-check-label" for="flexRadioDefault1" >
-           <input type="text" id="question_2" class="form-control input-mc" name="choice[]" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;" >
+           <input type="text" id="question_2" class="form-control input-mc" name="choice[]" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;" required>
        </label>
      </div>
      <div class="form-check grupouno">
        <input class="form-check-input radiobtn-mc" type="radio" name="activity_answer" id="answer3" value="" required>
        <label class="form-check-label" for="flexRadioDefault1" >
-           <input type="text" id="question_3" class="form-control input-mc" name="choice[]" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;" >
+           <input type="text" id="question_3" class="form-control input-mc" name="choice[]" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;" required>
        </label>
      </div>
      <div class="form-check grupouno">
        <input class="form-check-input radiobtn-mc" type="radio" name="activity_answer" id="answer4" value="" required>
        <label class="form-check-label" for="flexRadioDefault1" >
-           <input type="text" id="question_4" class="form-control input-mc" name="choice[]" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;" >
+           <input type="text" id="question_4" class="form-control input-mc" name="choice[]" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;" required>
        </label>
      </div>
 
@@ -254,7 +267,7 @@ function addValueToRadioBtn() {
     set.style.display ='none';
 
     var set1 = document.getElementById('border');
-    set1.style.border ='1px solid black';
+    set1.style.border ='1px solid green';
   });
 
 </script>
@@ -364,7 +377,7 @@ function myFunction(imgs) {
 <script>
   function doconfirm()
   {
-      job=confirm("Are you sure to delete permanently?");
+      job=confirm("Are you sure to delete the question permanently?");
       if(job!=true)
       {
           return false;

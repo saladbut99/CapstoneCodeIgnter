@@ -1159,6 +1159,19 @@ public function identification($id){
     'meta_title'=>'Teacher | Manage '
   ];
 
+  $activity_id = new ActivityMaster();
+  $data['users'] = $activity_id->where(['activity_id'=>$id])->get()->getRow();
+
+  $activity_id = new ActivityContent();
+  $data['question'] = $activity_id->where(['activity_id'=>$id])->findAll();
+
+
+  $choices = new Choices();
+  $data['choice'] = $choices->findAll();
+
+  $medias = new MediaActivity();
+  $data['media'] = $medias->findAll();
+
    return view('teacher_identification', $data);
 
 }
@@ -1375,6 +1388,142 @@ public function addquestion($id){
 
 }
 
+public function addquestion_identification($id){
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+
+   $rules=[
+
+       'activity_question'=>[
+         'rules'=>'required|is_unique[activity_content.activity_question]',
+         'label'=>'Activity Title',
+       ],
+       'image'=>[
+         'rules'=> 'ext_in[image,png,jpg,gif,mp4]',
+         'label'=>'Image',
+       ],
+     //   'activity_instruction'=>[
+     //     'rules'=>'required',
+     //     'label'=>'Activity Description',
+     //   ],
+     'activity_answer'=>[
+       'rules'=> 'required',
+       'label'=>'Choice',
+     ],
+
+   ];
+
+   helper(['form']);
+
+   if ($this->request->getMethod()=='post') {
+
+     $model_activity = new ActivityContent();
+     $model_actmedia = new MediaActivity();
+
+      if ($this->validate($rules)) {
+
+        $_POST['activity_question']=ucfirst($_POST['activity_question']);
+        $_POST['activity_id']=$id;
+
+
+
+           $db      = \Config\Database::connect();
+
+           $builder = $db->table('activity_master');
+
+           $builder->where('activity_id',  $id);
+
+          $activity = $builder->get()->getRow();
+
+          $type = $activity->activity_type;
+
+          if (strcmp($type,'multiple_choice')==0) {
+            $_POST['activity_answer_type']=  'M';
+          }else if (strcmp($type,'enumeration')==0) {
+            $_POST['activity_answer_type']=  'E';
+          }else {
+            $_POST['activity_answer_type']=  'I';
+          }
+
+
+          $model_activity->save($_POST);
+
+          if (!is_uploaded_file($_FILES['image']['tmp_name'])) {
+
+
+            $file = $this->request->getFile('image');
+            if ($file->isValid()&& !$file->hasMoved()) {
+              $file->move('./uploads/images');
+            }
+
+            $filename = $file->getName();
+            $fileExt = pathinfo($filename, PATHINFO_EXTENSION);
+
+            $builder1 = $db->table('activity_content');
+
+            $builder1->where('activity_question',  $_POST['activity_question']);
+
+            $content = $builder1->get()->getRow();
+            $_POST['file_name']='NoFile';
+            $_POST['activity_content_id']=$content->activity_content_id;
+            $_POST['file_targetDirectory']='NoFile';
+            $_POST['file_extension']='NoFile';
+
+
+        }else {
+          $file = $this->request->getFile('image');
+          if ($file->isValid()&& !$file->hasMoved()) {
+            $file->move('./uploads/images');
+          }
+
+          $filename = $file->getName();
+          $fileExt = pathinfo($filename, PATHINFO_EXTENSION);
+
+          $builder1 = $db->table('activity_content');
+
+          $builder1->where('activity_question',  $_POST['activity_question']);
+
+          $content = $builder1->get()->getRow();
+
+          $_POST['file_name']=$filename;
+          $_POST['activity_content_id']=$content->activity_content_id;
+          $_POST['file_targetDirectory']='./uploads/image';
+          $_POST['file_extension']=$fileExt;
+        }
+
+        $model_actmedia->save($_POST);
+        $builder2 = $db->table('activity_content');
+
+        $builder2->where('activity_question',  $_POST['activity_question']);
+
+        $content2 = $builder2->get()->getRow();
+
+          $session = session();
+          $session->setFlashdata('success','Question Added');
+
+
+
+          if (strcmp($activity->activity_type,'identification')==0) {
+            return redirect()->to('teacher/identification/'.$id);
+
+          }
+
+
+
+   }else{
+     //if validation is not successfull
+     //validator provies a list of errors
+     $data['validation']=$this->validator;
+   }
+ }
+
+}
+
 //Delete Activity
 public function delete_activity($id){
   $type = session()->get('usertype');
@@ -1526,6 +1675,176 @@ public function update_activity($id){
   return view('teacher_updateactivity', $data);
 }
 
+public function update_question($id){
+
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+
+ $db      = \Config\Database::connect();
+
+   $activitymaster = new ActivityMaster;
+   $data['activity']=$activitymaster->get()->getRow();
+   $lesson_id=$data['activity']->lesson_id;
+
+  $data=[
+    'meta_title'=>'Admin | Update Module'
+  ];
+  //$teacher_id=session()->get('t_id');
+
+
+  $userModel2 = new ActivityContent();
+  $data['activity'] = $userModel2->where(['activity_content_id'=>$id])->get()->getRow();
+
+  $activitymaster = new ActivityMaster();
+  $data['master'] = $activitymaster->where(['activity_id'=>$data['activity']->activity_id])->get()->getRow();
+
+  $media = new MediaActivity();
+  $data['medias'] = $media->where(['activity_content_id'=>$id])->get()->getRow();
+
+
+  $choices = new Choices();
+  $data['choices'] = $choices->where(['activity_content_id'=>$id])->findAll();
+
+  $userModel1 = new LessonMaster();
+  $data['lesson'] = $userModel1->where(['lesson_id'=>$lesson_id])->get()->getRow();
+
+  // echo "<pre>";
+  //   print_r($data['choices']);
+  // echo "<pre>";
+
+    $rules=[
+
+      'activity_question'=>[
+        'rules'=>'required',
+        'label'=>'Activity Title',
+      ],
+      'image'=>[
+        'rules'=> 'ext_in[image,png,jpg,gif,mp4]',
+        'label'=>'Image',
+      ],
+    //   'activity_instruction'=>[
+    //     'rules'=>'required',
+    //     'label'=>'Activity Description',
+    //   ],
+    'choice'=>[
+      'rules'=> 'required',
+      'label'=>'Choice',
+    ],
+
+    ];
+
+    helper(['form']);
+
+    if ($this->request->getMethod()=='post') {
+
+
+
+       if ($this->validate($rules)) {
+
+
+        $activity_content = [
+            'activity_question' => ucfirst($_POST['activity_question']),
+            'activity_answer' => ucfirst($_POST['activity_answer']),
+        ];
+
+        $builder = $db->table('activity_content');
+
+        $builder->where('activity_content_id', $id);
+
+        $builder->update($activity_content);
+
+
+        if (is_uploaded_file($_FILES['image']['tmp_name'])) {
+
+          $file = $this->request->getFile('image');
+          if ($file->isValid()&& !$file->hasMoved()) {
+            $file->move('./uploads/images');
+          }
+        //  $filename = $file->getName();
+          $filename = $file->getName();
+          $fileExt = pathinfo($filename, PATHINFO_EXTENSION);
+
+          // $db = db_connect();
+          // $getlessonid = new CustomModel($db);
+          // $id=$getlessonid->getlessonid($id);
+
+          $_POST['file_name']=$filename;
+        //  $_POST['lesson_id']=$id;
+          $_POST['file_targetDirectory']='./uploads/image';
+          $_POST['file_extension']=$fileExt;
+
+            $activity_media = [
+               'file_name' => $filename,
+               'file_extension' =>$fileExt,
+             ];
+
+             $builder_media = $db->table('media_activity');
+
+             $builder_media->where('activity_content_id', $id);
+
+             $builder_media->update($activity_media);
+      }
+
+      $id_array = array();
+
+      $choices = array($_POST['choice']);
+
+     $choicestable = $data['choices'];
+
+     foreach ($data['choices'] as $id) {
+        array_push($id_array,$id['choices_id']);
+     }
+
+
+   //
+   // echo "<pre>";
+   //   print_r($id_array);
+   // echo "<pre>";
+
+      foreach ($choices as $choice) {
+          $choice_e=$choice;
+
+          $f=count($choice_e);
+          for($i=0;$i<$f;$i++)
+          {
+            $arre=[
+              'choice'=>ucfirst($choice_e[$i]),
+
+              ];
+
+
+          $builder_media = $db->table('choices');
+
+          $builder_media->where('choices_id', $id_array[$i]);
+
+          $builder_media->update($arre);
+
+       }
+     }
+      $session = session();
+      $session->setFlashdata('updatesuccess','Module Upload Completed');
+
+
+      if (strcmp($data['master']->activity_type,'multiple_choice')==0) {
+       return redirect()->to('teacher/multiplechoice/'.$data['activity']->activity_id);
+
+      }
+
+    }else{
+      //if validation is not successfull
+      //validator provies a list of errors
+      $data['validation']=$this->validator;
+    }
+  }
+
+
+  return view('teacher_updatequestion', $data);
+}
 public function manage(){
   $type = session()->get('usertype');
    if ($type!='Teacher' && $type=='Admin'){
