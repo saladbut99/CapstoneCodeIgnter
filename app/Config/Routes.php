@@ -62,6 +62,7 @@ $routes->group('admin', ["filter" => 'Auth'], function($routes){
   $routes->add('viewcontent','Admin::viewcontent');
   $routes->add('view/(:num)','Admin::viewuser/$1');
   $routes->get('logout', 'Admin::logout');
+  $routes->get('viewactivity/(:num)','Admin::viewactivity/$1');
 });
 
 $routes->group('teacher', ["filter" => 'Auth'], function($routes){

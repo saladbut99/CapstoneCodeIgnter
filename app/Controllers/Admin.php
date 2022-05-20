@@ -11,6 +11,10 @@ use App\Models\MediaLesson;
 use App\Models\LessonContent;
 use App\Models\LessonExample;
 use App\Models\MediaLessonExample;
+use App\Models\ActivityMaster;
+use App\Models\ActivityContent;
+use App\Models\MediaActivity;
+use App\Models\Choices;
 
 class Admin extends BaseController
 {
@@ -518,5 +522,39 @@ public function update(){
 
   }
 
+
+  public function viewactivity($id){
+    $type = session()->get('usertype');
+     if ($type!='Admin' && $type=='Teacher'){
+        return redirect()->to('teacher/home');
+      //  echo "hello";
+    }else if ($type!='Admin' && $type=='Pupil') {
+       return redirect()->to('pupil/home');
+     }
+    $data=[
+      'meta_title'=>'Teacher | Add Activity '
+    ];
+
+    $db      = \Config\Database::connect();
+
+    // $userModel = new LessonMaster();
+    // $data['lesson'] = $userModel->where(['lesson_id'=>$id])->get()->getRow();
+
+    // $builder = $db->table('activity_master');
+    //
+    // $builder->where('lesson_id',  $id);
+    //
+    // $data['users'] = $builder->get()->getRow();
+
+    $activity_id = new ActivityMaster();
+    $data['users'] = $activity_id->where(['lesson_id'=>$id])->findAll();
+
+    $userModel = new LessonMaster();
+    $data['lesson'] = $userModel->where(['lesson_id'=>$id])->get()->getRow();
+
+
+     return view('admin_viewactivity', $data);
+
+  }
 
 }
