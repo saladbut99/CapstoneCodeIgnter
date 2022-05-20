@@ -1538,7 +1538,7 @@ public function delete_activity($id){
    // $activity->get()->getRow();
 
    $activity_content = new ActivityContent();
-   $data['act']=$activity_content->get()->getRow();
+   $data['act']=$activity_content->where(['activity_content_id'=>$id])->get()->getRow();
 
     $activity_master = new ActivityMaster();
    $data['master']=$activity_master->where(['activity_id'=>$data['act']->activity_id])->get()->getRow();
@@ -1559,6 +1559,43 @@ public function delete_activity($id){
 
      if (strcmp($data['master']->activity_type,'multiple_choice')==0) {
          return redirect()->to('teacher/multiplechoice/'.$id2);
+         }
+}
+
+public function delete_identificationactivity($id){
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+
+   // $activity = new ActivityContent();
+   // $activity->get()->getRow();
+
+   $activity_content = new ActivityContent();
+   $data['act']=$activity_content->where(['activity_content_id'=>$id])->get()->getRow();
+
+    $activity_master = new ActivityMaster();
+   $data['master']=$activity_master->where(['activity_id'=>$data['act']->activity_id])->get()->getRow();
+
+    $model = new TeacherLesson();
+
+
+    if ($activity_content) {
+      $activity_content->delete($id);
+    }
+
+    $id2=$data['act']->activity_id;
+    //$type=$data['master']->activity_type;
+
+   $session = session();
+   $session->setFlashdata('success','Activity Question Successfully Deleted ');
+
+
+     if (strcmp($data['master']->activity_type,'identification')==0) {
+         return redirect()->to('teacher/identification/'.$id2);
          }
 }
 
@@ -1845,6 +1882,141 @@ public function update_question($id){
 
   return view('teacher_updatequestion', $data);
 }
+
+public function update_identification($id){
+
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+
+ $db      = \Config\Database::connect();
+
+   $activitymaster = new ActivityMaster;
+   $data['activity']=$activitymaster->get()->getRow();
+   $lesson_id=$data['activity']->lesson_id;
+
+  $data=[
+    'meta_title'=>'Admin | Update Module'
+  ];
+  //$teacher_id=session()->get('t_id');
+
+
+  $userModel2 = new ActivityContent();
+  $data['activity'] = $userModel2->where(['activity_content_id'=>$id])->get()->getRow();
+
+  $activitymaster = new ActivityMaster();
+  $data['master'] = $activitymaster->where(['activity_id'=>$data['activity']->activity_id])->get()->getRow();
+
+  $media = new MediaActivity();
+  $data['medias'] = $media->where(['activity_content_id'=>$id])->get()->getRow();
+
+
+  $choices = new Choices();
+  $data['choices'] = $choices->where(['activity_content_id'=>$id])->findAll();
+
+  $userModel1 = new LessonMaster();
+  $data['lesson'] = $userModel1->where(['lesson_id'=>$lesson_id])->get()->getRow();
+
+  // echo "<pre>";
+  //   print_r($data['choices']);
+  // echo "<pre>";
+
+    $rules=[
+      //
+      'activity_question'=>[
+        'rules'=>'required',
+        'label'=>'Activity Title',
+      ],
+      'image'=>[
+        'rules'=> 'ext_in[image,png,jpg,gif,mp4]',
+        'label'=>'Image',
+      ],
+
+    'activity_answer'=>[
+      'rules'=> 'required',
+      'label'=>'Choice',
+    ],
+
+    ];
+
+    helper(['form']);
+
+    if ($this->request->getMethod()=='post') {
+
+
+
+       if ($this->validate($rules)) {
+
+
+        $activity_update = [
+            'activity_question' => ucfirst($_POST['activity_question']),
+            'activity_answer' => ucfirst($_POST['activity_answer']),
+        ];
+
+        $builder = $db->table('activity_content');
+
+        $builder->where('activity_content_id', $id);
+
+        $builder->update($activity_update);
+
+
+        if (is_uploaded_file($_FILES['image']['tmp_name'])) {
+
+          $file = $this->request->getFile('image');
+          if ($file->isValid()&& !$file->hasMoved()) {
+            $file->move('./uploads/images');
+          }
+        //  $filename = $file->getName();
+          $filename = $file->getName();
+          $fileExt = pathinfo($filename, PATHINFO_EXTENSION);
+
+          // $db = db_connect();
+          // $getlessonid = new CustomModel($db);
+          // $id=$getlessonid->getlessonid($id);
+
+          $_POST['file_name']=$filename;
+        //  $_POST['lesson_id']=$id;
+          $_POST['file_targetDirectory']='./uploads/image';
+          $_POST['file_extension']=$fileExt;
+
+            $activity_media = [
+               'file_name' => $filename,
+               'file_extension' =>$fileExt,
+             ];
+
+             $builder_media = $db->table('media_activity');
+
+             $builder_media->where('activity_content_id', $id);
+
+             $builder_media->update($activity_media);
+      }
+
+
+   //
+   // echo "<pre>";
+   //   print_r($id_array);
+   // echo "<pre>";
+
+      $session = session();
+      $session->setFlashdata('updatesuccess','Module Upload Completed');
+
+      return redirect()->to('teacher/identification/'.$data['activity']->activity_id);
+
+    }else{
+      //if validation is not successfull
+      //validator provies a list of errors
+      $data['validation']=$this->validator;
+    }
+  }
+
+
+  return view('teacher_updateidentification', $data);
+}
+
 public function manage(){
   $type = session()->get('usertype');
    if ($type!='Teacher' && $type=='Admin'){

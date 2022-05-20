@@ -83,10 +83,14 @@ $routes->group('teacher', ["filter" => 'Auth'], function($routes){
    $routes->add('view/(:num)','Teacher::viewuser/$1');
    $routes->add('updatemodule/(:num)','Teacher::updatemodule/$1');
    $routes->add('update_question/(:num)','Teacher::update_question/$1');
-    $routes->add('addquestion_identification/(:num)','Teacher::addquestion_identification/$1');
+
    $routes->add('delete/(:num)','Teacher::delete/$1');
    $routes->add('delete_activity/(:num)','Teacher::delete_activity/$1');
+   $routes->add('delete_mainactivity/(:num)','Teacher::delete_mainactivity/$1');
    $routes->match(['get','post'],'addactivity/(:num)','Teacher::addactivity/$1');
+   $routes->match(['get','post'],'update_identification/(:num)','Teacher::update_identification/$1');
+  $routes->match(['get','post'],'addquestion/(:num)','Teacher::addquestion/$1');
+    $routes->match(['get','post'],'addquestion_identification/(:num)','Teacher::addquestion_identification/$1');
    $routes->get('multiplechoice/(:num)','Teacher::multiplechoice/$1');
  // $routes->add('viewmodule','Admin::viewmodule');
  //  $routes->add('viewcontent','Admin::viewcontent');
