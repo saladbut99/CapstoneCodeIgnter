@@ -1,6 +1,14 @@
 <?= $this->extend('layouts/loginlayout') ?>
 <?= $this->section('logintemplate') ?>
-    <center>
+<style>
+  body{
+    background-image:url('http://localhost/CapstoneCodeIgnter/Pulong/public/assets/images/adminbg.gif');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+</style>
+    <center class="conn3">
     <div class="formcontainer m-5 pb-5" style="max-width:50%;">
       <div class="container h-100">
         <br>
@@ -64,7 +72,7 @@
                     </div>
                     <center>
                       <div class="input_field"  >
-                        <input type="submit" name="Login" class="button">
+                        <input type="submit" name="Login" class="button submitbtn">
                       </div>
                     </center>
             </div>

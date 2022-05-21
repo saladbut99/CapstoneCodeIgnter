@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <title></title>
 </head>
-<body style="background-color: #03256c;">
+<body style="background-color: #2a4674;">
 
     <?= $this->renderSection('logintemplate'); ?>
 

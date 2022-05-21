@@ -13,11 +13,13 @@ h1{
 
 
 .bg {
-  background-position: center;
+  background-position: left;
   background-repeat: no-repeat;
   height: 100vh;
   min-height: 500px;
   background-attachment: fixed;
+  background-size: cover;
+  background-color: #483e80;
 }
 
 @keyframes example {
@@ -31,6 +33,7 @@ h1{
   height: 100vh;
   min-height: 500px;
   transition: all 1s ease;
+  background-color: white;
 }
 
 .reveal{
@@ -304,30 +307,6 @@ thead, th {
   background-color: red;
 }
 
-@media only screen and (max-width: 600) {
-  .login_image {
-    width: 40px;
-  }
-
-}
-
-
-@media only screen and (max-width: 768px) {
-  .login_image {
-    width: 50px;
-  }
-  .loginbutton{
-
-  }
-
-}
-
-@media only screen and (max-width: 1325px) {
-  .login_image {
-    width: 80px;
-  }
-}
-
 
 
 .imageview img {
@@ -533,3 +512,93 @@ overflow: auto;
     display: block;
   }
 /* From here on, just aesthetics */
+
+
+
+
+
+/* media query */
+
+/* mobile */
+@media only screen and (max-width: 480px) {
+  .login_image {
+    width: 40px;
+  }
+
+  .loginbutton{
+    margin-bottom: 40px !important;
+  }
+
+
+  .bg{
+    background-image:url('http://localhost/CapstoneCodeIgnter/Pulong/public/assets/images/indexbg_mobile.gif');
+    background-color: red ;
+    background-position: center !important;
+  }
+
+  .submitbtn{
+    font-size: 0.8rem !important;
+
+  }
+
+  .conn1{
+    background-image:url('http://localhost/CapstoneCodeIgnter/Pulong/public/assets/images/pupil_login_bg_mobile.gif');
+    background-position: bottom;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  .conn2{
+    background-image:url('http://localhost/CapstoneCodeIgnter/Pulong/public/assets/images/teacher_login_bg_mobile.gif');
+    background-position: bottom;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  .conn3{
+    background-image:url('http://localhost/CapstoneCodeIgnter/Pulong/public/assets/images/admin_login_bg_mobile.gif');
+    background-position: bottom;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+ 
+
+  .formcontainer{
+    max-width: 60% !important;
+    background-color: rgba(255, 255, 255, 0.75)
+  }
+}
+
+/* tablet */
+@media only screen and (min-width: 481px) and (max-width: 1024px) {
+  .login_image {
+    width: 50px;
+  }
+
+  
+  .bg{
+    background-image:url('http://localhost/CapstoneCodeIgnter/Pulong/public/assets/images/indexbg.gif');
+    background-size: cover; 
+    background-position-x: -50px;
+    background-color: green;
+    
+  }
+
+  .loginbutton{
+
+  }
+
+}
+
+/* desktop */
+@media only screen and (min-width: 1025px) {
+  .login_image {
+    width: 80px;
+  }
+
+  .bg{
+    background-image:url('http://localhost/CapstoneCodeIgnter/Pulong/public/assets/images/indexbg.gif');
+    background-size: cover;
+  }
+
+}
+

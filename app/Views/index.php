@@ -9,7 +9,7 @@
 
   </head>
 <body>
-  <div class="bg" style="  background-image:url('<?=base_url()?>/public/assets/images/indexbg.gif');">
+  <div class="bg" style="">
     <div class="container h-100">
       <div class="row h-100 align-items-center">
         <div class="col-md text-center">
