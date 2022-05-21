@@ -5,7 +5,7 @@
 <div class="navbar" style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(<?=base_url()?>/public/assets/images/banner.png);">
        <nav class="nav row w-100 align-items-center">
            <div class="col-7">
-               <a href="home" style="text-decoration: none; font-size:250%;"><b>Pulong</b></a>
+               <a href="<?php echo base_url(); ?>/public/teacher/home" style="text-decoration: none; font-size:250%;"><b>Pulong</b></a>
            </div>
            <div class="col-4 text-center pt-3">
                <p style="color:white; text-align:right;"><?= session()->get('firstname') ?> <?= session()->get('lastname') ?></p>
@@ -21,9 +21,10 @@
    <div class="menu p-2 text-center">
 
         <div class="">
-        <a href="logout">Logout</a>
+        <a href="<?php echo base_url(); ?>/public/teacher/logout">Logout</a>
         </div>
    </div>
+
 
         <div class="mask d-flex align-items-center h-100 gradient-custom-3 mb-5">
           <div class="container h-100" >

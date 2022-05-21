@@ -5,7 +5,7 @@
 <div class="navbar" style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(<?=base_url()?>/public/assets/images/banner.png);">
        <nav class="nav row w-100 align-items-center">
            <div class="col-7">
-               <a href="home" style="text-decoration: none; font-size:250%;"><b>Pulong</b></a>
+               <a href="<?php echo base_url(); ?>/public/teacher/home" style="text-decoration: none; font-size:250%;"><b>Pulong</b></a>
            </div>
            <div class="col-4 text-center pt-3">
                <p style="color:white; text-align:right;"><?= session()->get('firstname') ?> <?= session()->get('lastname') ?></p>
@@ -19,8 +19,9 @@
    </div>
 
    <div class="menu p-2 text-center">
+
         <div class="">
-        <a href="logout">Logout</a>
+        <a href="<?php echo base_url(); ?>/public/teacher/logout">Logout</a>
         </div>
    </div>
 
@@ -69,12 +70,6 @@
                   <input class="form-check-input radio-btn" type="radio" id="flexRadioDefault1" name="activity_type" value='multiple_choice' required>
                   <label class="form-check-label label-activity-type" for="flexRadioDefault1">
                     Multiple Choice
-                  </label>
-                </div>
-                <div class="form-check container-activity-type">
-                  <input class="form-check-input radio-btn" type="radio" id="flexRadioDefault1" name="activity_type" value='enumeration' required>
-                  <label class="form-check-label label-activity-type" for="flexRadioDefault1">
-                    Enumeration
                   </label>
                 </div>
                 <div class="form-check container-activity-type">

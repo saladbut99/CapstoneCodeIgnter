@@ -55,6 +55,9 @@ $routes->group('admin', ["filter" => 'Auth'], function($routes){
   $routes->add('vieworchid','Admin::vieworchid');
   $routes->add('viewdaisy','Admin::viewdaisy');
   $routes->add('viewlily','Admin::viewlily');
+  $routes->add('viewlily','Admin::viewlily');
+  $routes->get('multiplechoice/(:num)','Admin::multiplechoice/$1');
+  $routes->get('identification/(:num)','Admin::identification/$1');
   $routes->get('viewmodule/(:num)','Admin::viewmodule/$1');
   $routes->add('manage','Admin::manage');
   $routes->add('accountstatus','Admin::accountstatus');

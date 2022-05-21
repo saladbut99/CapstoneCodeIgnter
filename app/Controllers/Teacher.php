@@ -1370,14 +1370,7 @@ public function addquestion($id){
           $session = session();
           $session->setFlashdata('success','Question Added');
 
-
-
-          if (strcmp($activity->activity_type,'multiple_choice')==0) {
             return redirect()->to('teacher/multiplechoice/'.$id);
-
-          }
-
-
 
    }else{
      //if validation is not successfull
@@ -1506,15 +1499,7 @@ public function addquestion_identification($id){
           $session = session();
           $session->setFlashdata('success','Question Added');
 
-
-
-          if (strcmp($activity->activity_type,'identification')==0) {
             return redirect()->to('teacher/identification/'.$id);
-
-          }
-
-
-
    }else{
      //if validation is not successfull
      //validator provies a list of errors
