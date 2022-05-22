@@ -1221,6 +1221,14 @@ public function addquestion($id){
      return redirect()->to('pupil/home');
    }
 
+    $model_master = new ActivityMaster();
+
+      $activity_id = new ActivityContent();
+      $data['users'] = $activity_id->where(['activity_id'=>$id])->findAll();
+
+      $score=count($data['users']);
+      $score+=1;
+
    $rules=[
 
        'activity_question'=>[
@@ -1277,8 +1285,10 @@ public function addquestion($id){
           // echo "<pre>";
           //   print_r($_POST);
           // echo "<pre>";
+          $_POST['activity_perfect_score']=$score*2;
 
           $model_activity->save($_POST);
+          $model_master->save($_POST);
 
           if (!is_uploaded_file($_FILES['image']['tmp_name'])) {
 
@@ -1370,7 +1380,14 @@ public function addquestion($id){
           $session = session();
           $session->setFlashdata('success','Question Added');
 
+
+
+
             return redirect()->to('teacher/multiplechoice/'.$id);
+
+
+
+
 
    }else{
      //if validation is not successfull
@@ -1389,6 +1406,14 @@ public function addquestion_identification($id){
    }else if ($type!='Teacher' && $type=='Pupil') {
      return redirect()->to('pupil/home');
    }
+
+   $model_master = new ActivityMaster();
+
+     $activity_id = new ActivityContent();
+     $data['users'] = $activity_id->where(['activity_id'=>$id])->findAll();
+
+     $score=count($data['users']);
+     $score+=1;
 
    $rules=[
 
@@ -1444,7 +1469,10 @@ public function addquestion_identification($id){
           }
 
 
+          $_POST['activity_perfect_score']=$score*2;
+
           $model_activity->save($_POST);
+          $model_master->save($_POST);
 
           if (!is_uploaded_file($_FILES['image']['tmp_name'])) {
 
@@ -1499,7 +1527,15 @@ public function addquestion_identification($id){
           $session = session();
           $session->setFlashdata('success','Question Added');
 
+
+
+          if (strcmp($activity->activity_type,'identification')==0) {
             return redirect()->to('teacher/identification/'.$id);
+
+          }
+
+
+
    }else{
      //if validation is not successfull
      //validator provies a list of errors
@@ -1530,12 +1566,28 @@ public function delete_activity($id){
 
     $model = new TeacherLesson();
 
+    $score= $data['master']->activity_perfect_score;
+    $score=$score-2;
+
 
     if ($activity_content) {
       $activity_content->delete($id);
     }
 
     $id2=$data['act']->activity_id;
+
+    $save=[
+      'activity_perfect_score' => $score,
+    ];
+
+
+     $db      = \Config\Database::connect();
+
+     $builder = $db->table('activity_master');
+
+     $builder->where('activity_id',  $id2);
+
+    $activity = $builder->update($save);
     //$type=$data['master']->activity_type;
 
    $session = session();
@@ -1565,6 +1617,10 @@ public function delete_identificationactivity($id){
     $activity_master = new ActivityMaster();
    $data['master']=$activity_master->where(['activity_id'=>$data['act']->activity_id])->get()->getRow();
 
+   $score= $data['master']->activity_perfect_score;
+   $score=$score-2;
+
+
     $model = new TeacherLesson();
 
 
@@ -1574,6 +1630,19 @@ public function delete_identificationactivity($id){
 
     $id2=$data['act']->activity_id;
     //$type=$data['master']->activity_type;
+
+    $save=[
+      'activity_perfect_score' => $score,
+    ];
+
+
+     $db      = \Config\Database::connect();
+
+     $builder = $db->table('activity_master');
+
+     $builder->where('activity_id',  $id2);
+
+    $activity = $builder->update($save);
 
    $session = session();
    $session->setFlashdata('success','Activity Question Successfully Deleted ');

@@ -48,7 +48,14 @@
    </div>
        <div class="col mt">
          <br>
-             <h1 style="text-align:left;font-size:6 0px;"><b><?= $users->activity_name; ?></b></h1>
+             <div class="row">
+               <div class="col">
+                  <h1 style="text-align:left;font-size:6 0px;"><b><?= $users->activity_name; ?></b></h1>
+               </div>
+               <div class="col">
+                  <h1 style="text-align:right;font-size:6 0px;"><b><?= $users->activity_perfect_score ?> / <?= $users->activity_perfect_score ?></b></h1>
+               </div>
+             </div>
              <hr style="width:100%;height:2px;color:#00acee">
              <h3 style="text-align:left"><?= $users->activity_instruction; ?></h3>
        </div>
