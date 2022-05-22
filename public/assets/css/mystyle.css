@@ -22,13 +22,6 @@ h1{
   background-color: #483e80;
 }
 
-@keyframes example {
-  0% {background-size: 300vh; }
-  50% {background-size: 290vh; background-position-y: top;}
-  100%  {background-size: 300vh;}
-}
-
-
 .whitebg{
   height: 100vh;
   min-height: 500px;
@@ -160,6 +153,19 @@ transition: all 0.3 ease;
   margin-bottom: 5%;
 }
 
+.navbar_pupil{
+  animation-name: example;
+  animation-duration: 60s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes example {
+  0% {background-size: 100vh; }
+  50% {background-size: 100vh; background-position-y: bottom;}
+  100%  {background-size: 100vh;}
+}
+
+
 .nav b{
   color: white;
   padding-left: 20px;
@@ -181,6 +187,17 @@ transition: all 0.3 ease;
   margin-bottom: 10%;
 
 }
+
+.section_pupil {
+  transition: transform .1s;
+  transition-timing-function: ease-in-out;
+}
+
+.section_pupil:hover {
+  transform: scale(1.1) !important;
+
+}
+
 .content{
   border: 1px solid black;
 }
@@ -521,6 +538,11 @@ overflow: auto;
 
 /* mobile */
 @media only screen and (max-width: 480px) {
+body {
+  background-color: #2a4674 !important;
+  background-image: none !important;
+}
+
   .login_image {
     width: 40px;
   }

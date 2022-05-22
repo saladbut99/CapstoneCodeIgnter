@@ -7,7 +7,6 @@
     background-size: cover;
     background-repeat: no-repeat;
   }
-
 </style>
     <center class="conn1">
     <div class="formcontainer m-5 pb-5" style="max-width:50%;">
