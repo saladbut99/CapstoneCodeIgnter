@@ -189,13 +189,39 @@ transition: all 0.3 ease;
 }
 
 .section_pupil {
-  transition: transform .1s;
-  transition-timing-function: ease-in-out;
+  transition: transform .3s ease-in-out;
+
+
+  
 }
 
 .section_pupil:hover {
   transform: scale(1.1) !important;
+ 
+}
 
+#sec1:hover {
+  background-image: url('http://localhost/CapstoneCodeIgnter/Pulong/public/assets/images/learnlesson_bg.gif');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition: 1.5s ease-in-out;
+}
+
+#sec2:hover {
+  background-image: url('http://localhost/CapstoneCodeIgnter/Pulong/public/assets/images/viewperformance_bg.gif');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition: 1.5s ease-in-out;
+}
+
+#sec3:hover {
+  background-image: url('http://localhost/CapstoneCodeIgnter/Pulong/public/assets/images/changepass_bg.gif');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition: 1.5s ease-in-out;
 }
 
 .content{
