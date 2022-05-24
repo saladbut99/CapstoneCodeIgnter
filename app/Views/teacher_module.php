@@ -2,6 +2,8 @@
 
 <?= $this->section('content'); ?>
 
+<?php $example_no=0; ?>
+
 <div class="navbar" style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(<?=base_url()?>/public/assets/images/banner.png);">
        <nav class="nav row w-100 align-items-center">
            <div class="col-7">
@@ -104,44 +106,68 @@
       <?php endif; ?>
     </div>
   </div>
-  <table class="table table-bordered display nowrap" id="users-list"  cellspacing="0" style="width:100%;" >
-    <thead style="text-align:left; font-size:3rem; ">
-       <tr>
-          <th>Examples</th>
-          <th></th>
-       </tr>
-    </thead>
+
 
        <?php if($example): ?>
        <?php foreach($example as $examples): ?>
 
-           <tr>
-              <td class="align-middle" style="text-align:center">  <h2 style="margin-top:2%;"><?= $examples['example']; ?></h2></td>
-              <?php if (strcmp($examples['file_name'],'NoFile')==0): ?>
-                  <td  style="text-align:center">  <p style="color:grey; margin-top:2%;">No media uploaded</p></td>
-              <?php else: ?>
+   <?php $example_no++;  ?>
+         <div class="container" style="width:80%;border:0.5px solid #00acee;margin-bottom:2.5%; border-radius:4px; box-shadow:2px 3px 2px grey;">
+             <div class="row">
+                 <div class="col">
+                           <div class="row" style="margin-bottom:5%;">
+                               <div class="col-sm">
+                                     <h3 style="text-align:left;margin-top:2%;margin-bottom:2%;">Example <?= $example_no   ?> </h3>
+                               </div>
+                               <div class="col-sm" style="text-align:right;">
+                                 <a href="<?php echo site_url('teacher/delete_example/'.$examples['example_id']);?>"  class="deletebutton" onclick="return doconfirm()" style="text-decoration:none;">
+                                   <button type="button"  class="btn btn-outline-secondary" style="margin-top:2%;">
+                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                   <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
+                                 </svg> Delete
+                               </button>
+                                 </a>
+                                 <a href="<?php echo site_url('teacher/update_example/'.$examples['example_id']);?>" class="deletebutton" style="text-decoration:none;">
+                                   <button type="button" class="btn btn-outline-secondary" style="margin-top:2%;">
+                                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                     <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                                   </svg> Edit
+                                   </button>
+                                 </a>
+                               </div>
+                           </div>
 
-                  <?php if (strcmp($examples['file_extension'],'mp4')==0): ?>
-                    <td style="text-align:center">
-                      <a href="<?=base_url()?>/public/uploads/images/<?= $examples['file_name']; ?>>" target="_blank">
-                        <video controls>
-                            <source src="<?=base_url()?>/public/uploads/images/<?= $examples['file_name']; ?>" type="video/mp4">
-                      </video>
-                    </a>
-                  </td>
-                  <?php else: ?>
-                    <td style="text-align:center"> <a href="<?=base_url()?>/public/uploads/images/<?= $examples['file_name']; ?>" target="_blank">
-                      <img src="<?=base_url()?>/public/uploads/images/<?= $examples['file_name']; ?>"  alt="" width="300" height="300" onclick="myFunction(this);" class="img-fluid">
-                    </img></a></td>
-                  <?php endif; ?>
-              <?php endif; ?>
+                     <h1 style="margin-bottom:2%;"><?= $examples['example']; ?></h1>
+                     <div style="margin-bottom:5%;">
+                       <div class="strike" style="margin-bottom:3%;">
+                         <span style="color:grey;">Media Example</span>
+                       </div>
+                       <?php if (strcmp($examples['file_name'],'NoFile')==0): ?>
+                            <p style="color:grey; margin-top:2%;">No media uploaded</p>
+                       <?php else: ?>
 
+                           <?php if (strcmp($examples['file_extension'],'mp4')==0): ?>
 
-            </tr>
+                               <a href="<?=base_url()?>/public/uploads/images/<?= $examples['file_name']; ?>>" target="_blank" style="margin-bottom:3%;">
+                                 <video controls>
+                                     <source src="<?=base_url()?>/public/uploads/images/<?= $examples['file_name']; ?>" type="video/mp4">
+                               </video>
+                             </a>
+
+                           <?php else: ?>
+                           <a href="<?=base_url()?>/public/uploads/images/<?= $examples['file_name']; ?>" target="_blank" style="margin-bottom:3%;">
+                               <img src="<?=base_url()?>/public/uploads/images/<?= $examples['file_name']; ?>"  alt="" width="auto" height="auto" onclick="myFunction(this);" class="img-fluid">
+                             </img></a>
+                           <?php endif; ?>
+                       <?php endif; ?>
+                     </div>
+                 </div>
+             </div>
+         </div>
 
       <?php endforeach; ?>
       <?php endif; ?>
-  </table>
+
   <h1 style="text-align:left;">   <button id="toggle" class="btn btn-info mb-4 mt-4" style="margin-bottom:1%; "  align="left"> Add Example</button></h1>
 </div>
 </div>
@@ -268,6 +294,17 @@ function myFunction(imgs) {
       });
   } );
 </script>
+
+<script>
+  function doconfirm()
+  {
+      job=confirm("Are you sure to delete the question permanently?");
+      if(job!=true)
+      {
+          return false;
+      }
+  }
+  </script>
 
 
 <?= $this->endSection() ?>

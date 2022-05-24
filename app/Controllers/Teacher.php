@@ -877,7 +877,7 @@ public function updatemodule($id){
     $rules=[
 
         'lesson_name'=>[
-          'rules'=>'required|is_unique[lesson_master.lesson_name]',
+          'rules'=>'required',
           'label'=>'Lesson Name Field',
         ],
         'lesson_description'=>[
@@ -973,7 +973,7 @@ public function updatemodule($id){
 
       $session = session();
       $session->setFlashdata('success','Module Upload Completed');
-        return redirect()->to('teacher/updatemodule/'.$id);
+        return redirect()->to('teacher/viewmodule/'.$id);
     }else{
       //if validation is not successfull
       //validator provies a list of errors
@@ -983,6 +983,167 @@ public function updatemodule($id){
 
 
   return view('teacher_updatemodule', $data);
+}
+
+public function delete_example($id){
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+
+
+   $example = new LessonExample();
+   $data['example']=$example->where(['example_id'=>$id])->get()->getRow();
+
+   $lesson_content = new LessonContent();
+   $data['content']=$lesson_content->where(['lesson_content_id'=>$data['example']->lesson_content_id])->get()->getRow();
+
+   $lesson_master = new LessonMaster();
+   $data['master']=$lesson_master->where(['lesson_id'=>$data['content']->lesson_id])->get()->getRow();
+
+    $model = new TeacherLesson();
+
+
+    if ($example) {
+      $example->delete($id);
+    }
+
+    $id2=$data['master']->lesson_id;
+
+
+
+    // echo "<pre>";
+    //   print_r($data['example']);
+    // echo "<pre>";
+
+
+   $session = session();
+   $session->setFlashdata('success','Example Successfully Deleted ');
+
+  return redirect()->to('teacher/viewmodule/'.$id2);
+
+}
+
+public function update_example($id){
+
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+
+ $db      = \Config\Database::connect();
+
+
+
+  $data=[
+    'meta_title'=>'Teacher | Update Example'
+  ];
+  //$teacher_id=session()->get('t_id');
+
+
+     $example = new LessonExample();
+     $data['example']=$example->where(['example_id'=>$id])->get()->getRow();
+
+     $lesson_content = new LessonContent();
+     $data['content']=$lesson_content->where(['lesson_content_id'=>$data['example']->lesson_content_id])->get()->getRow();
+
+     $lesson_master = new LessonMaster();
+     $data['master']=$lesson_master->where(['lesson_id'=>$data['content']->lesson_id])->get()->getRow();
+
+
+
+    $rules=[
+      'image'=>[
+        'rules'=> 'ext_in[image,png,jpg,gif,mp4]',
+        'label'=>'Image',
+      ],
+      'example'=>[
+        'rules'=>'required',
+        'label'=>'Examople Field',
+      ],
+
+    ];
+
+    helper(['form']);
+
+    if ($this->request->getMethod()=='post') {
+
+
+
+       if ($this->validate($rules)) {
+
+
+
+
+        if (is_uploaded_file($_FILES['image']['tmp_name'])) {
+
+          $file = $this->request->getFile('image');
+          if ($file->isValid()&& !$file->hasMoved()) {
+            $file->move('./uploads/images');
+          }
+        //  $filename = $file->getName();
+          $filename = $file->getName();
+          $fileExt = pathinfo($filename, PATHINFO_EXTENSION);
+
+          // $db = db_connect();
+          // $getlessonid = new CustomModel($db);
+          // $id=$getlessonid->getlessonid($id);
+
+          $_POST['file_name']=$filename;
+        //  $_POST['lesson_id']=$id;
+          $_POST['file_targetDirectory']='./uploads/image';
+          $_POST['file_extension']=$fileExt;
+
+            $activity_media = [
+               'file_name' => $filename,
+               'file_extension' =>$fileExt,
+               'file_targetDirectory'=>'./uploads/image',
+             ];
+
+             $builder_media = $db->table('lesson_example');
+
+             $builder_media->where('example_id', $id);
+
+             $builder_media->update($activity_media);
+
+      }
+
+      $example=[
+         'example'=>ucfirst($_POST['example']),
+      ];
+      $builder_media2 = $db->table('lesson_example');
+
+      $builder_media2->where('example_id', $id);
+
+      $builder_media2->update($example);
+   //
+   // echo "<pre>";
+   //   print_r($id_array);
+   // echo "<pre>";
+
+
+      $session = session();
+      $session->setFlashdata('updatesuccess','Module Upload Completed');
+
+       return redirect()->to('teacher/viewmodule/'.$data['master']->lesson_id);
+
+
+
+    }else{
+      //if validation is not successfull
+      //validator provies a list of errors
+      $data['validation']=$this->validator;
+    }
+  }
+
+
+  return view('teacher_updateexample', $data);
 }
 
 public function addactivity($id){

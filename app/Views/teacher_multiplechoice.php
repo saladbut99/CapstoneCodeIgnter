@@ -72,7 +72,7 @@
     <?php foreach ($question as $questions): ?>
 
      <?php $question_no++;  ?>
-            <div class="container" style="width:80%;border:0.5px solid green;margin-bottom:2%; border-radius:4px;">
+            <div class="container" style="width:80%;border:0.5px solid #00acee;margin-bottom:2.5%; border-radius:4px; box-shadow:2px 3px 2px grey;">
                 <div class="row">
                     <div class="col">
                               <div class="row" style="margin-bottom:5%;">
@@ -105,7 +105,7 @@
                                   <source src="<?=base_url()?>/public/uploads/images/<?= $medias['file_name'] ?>" type="video/mp4">
                             </video>
                             <?php else: ?>
-                                <a href="<?=base_url()?>/public/uploads/images/<?= $medias['file_name']; ?>" target="_blank"><img src="<?=base_url()?>/public/uploads/images/<?= $medias['file_name']; ?>"  alt="" width="70%" height="70$" onclick="myFunction(this);" class="img-fluid"></a>
+                                <a href="<?=base_url()?>/public/uploads/images/<?= $medias['file_name']; ?>" target="_blank"><img src="<?=base_url()?>/public/uploads/images/<?= $medias['file_name']; ?>"  alt="" width="70%" height="70%" onclick="myFunction(this);" class="img-fluid"></a>
                             <?php endif; ?>
                           <?php endif; ?>
                         <?php endforeach; ?>

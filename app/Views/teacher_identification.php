@@ -71,7 +71,7 @@
     <?php foreach ($question as $questions): ?>
 
      <?php $question_no++;  ?>
-            <div class="container" style="width:80%;border:0.5px solid green;margin-bottom:2%; border-radius:4px;">
+            <div class="container" style="width:80%;border:2px solid #00acee;margin-bottom:2.5%; border-radius:4px;box-shadow:2px 3px 2px grey;">
                 <div class="row">
                     <div class="col">
                               <div class="row" style="margin-bottom:5%;">

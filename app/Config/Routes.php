@@ -74,6 +74,8 @@ $routes->group('teacher', ["filter" => 'Auth'], function($routes){
   $routes->get('module/(:num)','Teacher::module/$1');
   $routes->get('viewmodule/(:num)','Teacher::viewmodule/$1');
   $routes->get('viewactivity/(:num)','Teacher::viewactivity/$1');
+  $routes->get('delete_example/(:num)','Teacher::delete_example/$1');
+  $routes->get('update_example/(:num)','Teacher::update_example/$1');
   $routes->add('removemodule','Teacher::removemodule');
   $routes->match(['get','post'],'update','Teacher::update');
   $routes->match(['get','post'],'register','Teacher::register');
