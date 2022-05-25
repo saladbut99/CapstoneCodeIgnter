@@ -37,7 +37,8 @@ class Teacher extends BaseController
 
         return view('teacher_home', $title);
     }
-    public function view()
+
+    public function viewmoduletable()
     {
       $type = session()->get('usertype');
        if ($type!='Teacher' && $type=='Admin'){
@@ -58,6 +59,7 @@ class Teacher extends BaseController
 
         return view('teacher_view', $data);
     }
+
     public function removemodule()
     {
       $type = session()->get('usertype');

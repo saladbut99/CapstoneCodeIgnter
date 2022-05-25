@@ -98,6 +98,8 @@ $routes->group('teacher', ["filter" => 'Auth'], function($routes){
   $routes->match(['get','post'],'addquestion/(:num)','Teacher::addquestion/$1');
     $routes->match(['get','post'],'addquestion_identification/(:num)','Teacher::addquestion_identification/$1');
    $routes->get('multiplechoice/(:num)','Teacher::multiplechoice/$1');
+   $routes->get('viewmoduletable/(:num)','Teacher::viewmoduletable/$1');
+
  // $routes->add('viewmodule','Admin::viewmodule');
  //  $routes->add('viewcontent','Admin::viewcontent');
     $routes->get('logout', 'Teacher::logout');
@@ -106,6 +108,8 @@ $routes->group('teacher', ["filter" => 'Auth'], function($routes){
 $routes->group('pupil', ["filter" => 'Auth'], function($routes){
   $routes->add('home','Pupil::index');
   $routes->add('view','Pupil::view');
+  $routes->get('viewmoduletable/(:num)','Pupil::viewmoduletable/$1');
+  $routes->get('viewmodule/(:num)','Pupil::viewmodule/$1');
  // // $routes->add('register','Admin::register');
  // $routes->match(['get','post'],'register','Admin::register');
  //  $routes->add('viewlessons','Admin::viewlesson');

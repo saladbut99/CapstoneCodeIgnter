@@ -19,7 +19,7 @@
    </div>
    <div class="menu p-2 text-center">
      <div class="pt-3" style="cursor:pointer;">
-       
+
        </div>
         <div class="">
         <a href="logout">Logout</a>
@@ -30,7 +30,7 @@
     <div class="formcontainer mt-5 pb-5" style="max-width:90%; background-color: white; border:none; height:70vh;">
       <div class="container  h-100">
         <div class="row h-100 align-items-center ">
-          
+
           <div class="col-md text-center">
                 <div class="dashboard_div section_pupil" id="sec1">
                     <br>
@@ -39,10 +39,10 @@
                       </svg>
                       <br><br>
                       <p>View Lesson and Do Activities</p>
-                    <a href="manage" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> Learn Lesson</a>
+                    <a href="viewmoduletable" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> Learn Lesson</a>
                 </div>
             </div>
-                    
+
             <div class="col-md text-center">
                 <div class="dashboard_div section_pupil" id="sec2">
                 <br>
@@ -66,7 +66,7 @@
                   </svg>
                   <br><br>
                   <p>Change Password</p>
-                <a href="manageaccount" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> Change Account Password</a>
+                <a href="update" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> Change Account Password</a>
                 </div>
             </div>
         </div>
