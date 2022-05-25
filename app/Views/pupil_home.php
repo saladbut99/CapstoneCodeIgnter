@@ -2,7 +2,7 @@
 
 <?= $this->section('content'); ?>
 
-<div class="navbar navbar_pupil" style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(<?=base_url()?>/public/assets/images/banner.png);">
+<div class="navbar navbar_pupil mb-0" style="height:76px !important; background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(<?=base_url()?>/public/assets/images/banner.png);">
        <nav class="nav row w-100 align-items-center">
            <div class="col-7">
                <a href="home" style="text-decoration: none; font-size:250%;"><b>Pulong</b></a>
@@ -14,7 +14,7 @@
                <div style="margin-right: 0%;">
                    <a href="#" class="dropdown"><img src="<?=base_url()?>/public/assets/images/student_logo.png" alt="" class="nav_img" height="60" width="60"></a>
                 </div>
-           </div>
+           </div>`
        </nav>
    </div>
    <div class="menu p-2 text-center">
@@ -26,50 +26,70 @@
         </div>
    </div>
 
-<center>
-    <div class="formcontainer mt-5 pb-5" style="max-width:90%; background-color: white; border:none; height:70vh;">
+    <audio id="beep-one" hidden preload="auto">
+    <source src="<?=base_url()?>/public/assets/clickar.mp3">
+    <source src="audio/beep.ogg">
+    </audio>
+
+<center id="cntr">
+  <br>
+    <div class="formcontainer pt-2 mt-0 pb-5" style="height:80vh !important; max-width:90%; background-color: rgba(255, 255, 255, 0.2); border:none; height:70vh;">
       <div class="container  h-100">
-        <div class="row h-100 align-items-center ">
-          
-          <div class="col-md text-center">
+        
+      <div class="row justify-content-center h-10 align-items-center pt-3" style="width: 70vw;">
+          <div class="col-md text-center section_menu">
                 <div class="dashboard_div section_pupil" id="sec1">
                     <br>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="green" class="bi bi-book" viewBox="0 0 16 16">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="green" class="bi bi-book isbigi" viewBox="0 0 16 16">
                         <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
                       </svg>
-                      <br><br>
-                      <p>View Lesson and Do Activities</p>
-                    <a href="manage" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> Learn Lesson</a>
+                    <h6 style="color:green;" class="section_h6"> LEARN LESSON </h6>
                 </div>
             </div>
                     
-            <div class="col-md text-center">
+            <div class="col-md text-center section_menu">
                 <div class="dashboard_div section_pupil" id="sec2">
                 <br>
-                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="green" class="bi bi-clipboard-check" viewBox="0 0 16 16">
+                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="green" class="bi bi-clipboard-check isbigi" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
                     <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
                     <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
                   </svg>
-                  <br><br>
-                  <p>View Activity Performance</p>
-                <a href="#" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> View Performance</a>
+                  <h6 style="color:green;" class="section_h6"> VIEW PERFORMANCE </h6>
                 </div>
             </div>
 
-            <div class="col-md text-center">
+            <div class="col-md text-center section_menu">
                 <div class="dashboard_div section_pupil" id="sec3">
                 <br>
-                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="green" class="bi bi-person-check" viewBox="0 0 16 16">
+                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="green" class="bi bi-person-check isbigi" viewBox="0 0 16 16">
                     <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
                     <path fill-rule="evenodd" d="M15.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L12.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
                   </svg>
-                  <br><br>
-                  <p>Change Password</p>
-                <a href="manageaccount" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> Change Account Password</a>
+                  <h6 style="color:green;" class="section_h6"> CHANGE PASSWORD </h6>
                 </div>
             </div>
         </div>
+        <hr style="width: 70vw;">
+        <div class="row h-60 align-items-center mt-2 pop-up" style="" id="pop-up1">
+          <h1> LEARN A LESSON </h1>
+          <div class="pop-up d-flex">
+          <a href="manage" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> Learn Lesson</a>
+          </div>
+        </div>
+        <div class="row h-60 align-items-center mt-2 pop-up" style="" id="pop-up2">
+          <h1> VIEW YOUR SCORE </h1>
+          <div class="pop-up d-flex">
+          <a href="#" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> View Performance</a>
+          </div>
+        </div>
+        <div class="row h-60 align-items-center mt-2 pop-up" style="" id="pop-up3">
+          <h1> CHANGE YOUR PASSWORD </h1>
+          <div class="pop-up d-flex">
+          <a href="manageaccount" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> Change Password</a>
+          </div>
+        </div>
+
       </div>
     </div>
 </center>
@@ -80,6 +100,63 @@
   $( ".dropdown" ).click(function() {
     $( ".menu").toggle();
 });
+
+  $( "#sec1" ).click(function() {
+    $( "#pop-up1").show();
+    $('#sec1').css({
+        'cssText': 'background-color: rgba(255, 255, 255, 0.8) !important'
+    });
+    $('#sec2').css({
+        'cssText': 'background-color: rgba(255, 255, 255, 0.4) !important'
+    });
+    $('#sec3').css({
+        'cssText': 'background-color: rgba(255, 255, 255, 0.4) !important'
+    });
+    $( "#pop-up2").hide();
+    $( "#pop-up3").hide();
+ });
+ $( "#sec2" ).click(function() {
+    $( "#pop-up2").show();
+    $('#sec1').css({
+        'cssText': 'background-color: rgba(255, 255, 255, 0.4) !important'
+    });
+    $('#sec2').css({
+        'cssText': 'background-color: rgba(255, 255, 255, 0.8) !important'
+    });
+    $('#sec3').css({
+        'cssText': 'background-color: rgba(255, 255, 255, 0.4) !important'
+    });
+    $( "#pop-up1").hide();
+    $( "#pop-up3").hide();
+ });
+ $( "#sec3" ).click(function() {
+    $( "#pop-up3").show();
+    $('#sec1').css({
+        'cssText': 'background-color: rgba(255, 255, 255, 0.4) !important'
+    });
+    $('#sec2').css({
+        'cssText': 'background-color: rgba(255, 255, 255, 0.4) !important'
+    });
+    $('#sec3').css({
+        'cssText': 'background-color: rgba(255, 255, 255, 0.8) !important'
+    });
+    $( "#pop-up1").hide();
+    $( "#pop-up2").hide();
+ });
+
+var beepOne = $("#beep-one")[0];
+$(".section_menu").click(function () {
+beepOne.currentTime=0;
+beepOne.play();
+});
+
+$("#cntr").mousemove(function(e){
+    var amountMovedX = (e.pageX * -1 / 20);
+    var amountMovedY = (e.pageY * -10 / 50);
+    $(this).css('background-position', amountMovedX + 'px ' + amountMovedY + 'px');
+});
+
+
 </script>
 
 <?= $this->endSection() ?>
