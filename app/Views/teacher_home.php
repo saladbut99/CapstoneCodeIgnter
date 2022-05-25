@@ -66,7 +66,7 @@
                       </svg>
                       <br><br>
                       <p>Add , View , Update , and Remove Lessons.</p>
-                    <a href="manage" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> Manage Lesson</a>
+                    <a href="viewmoduletable" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> Manage Lesson</a>
                     </div>
             </div>
 

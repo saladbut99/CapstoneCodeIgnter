@@ -19,7 +19,7 @@
    </div>
    <div class="menu p-2 text-center">
      <div class="pt-3" style="cursor:pointer;">
-       
+
        </div>
         <div class="">
         <a href="logout">Logout</a>
@@ -74,7 +74,7 @@
         <div class="row h-60 align-items-center mt-2 pop-up" style="" id="pop-up1">
           <h1> LEARN A LESSON </h1>
           <div class="pop-up d-flex">
-          <a href="manage" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> Learn Lesson</a>
+          <a href="viewmoduletable" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> Learn Lesson</a>
           </div>
         </div>
         <div class="row h-60 align-items-center mt-2 pop-up" style="" id="pop-up2">
@@ -86,7 +86,7 @@
         <div class="row h-60 align-items-center mt-2 pop-up" style="" id="pop-up3">
           <h1> CHANGE YOUR PASSWORD </h1>
           <div class="pop-up d-flex">
-          <a href="manageaccount" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> Change Password</a>
+          <a href="update" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> Change Password</a>
           </div>
         </div>
 

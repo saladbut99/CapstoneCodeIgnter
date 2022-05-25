@@ -101,7 +101,7 @@
                  <br>
                    <h5 style="margin-top:5%;"></h5>
                      <img  id="output" alt="" width="auto" height="auto"  class="img-fluid">
-                     
+
 
                  <div class="text-danger" style="margin-top:3%;">
                    <label class="btn btn-primary">
@@ -154,46 +154,8 @@
       <?php endif; ?>
     </div>
   </div>
-  <table class="table table-bordered display nowrap" id="users-list"  cellspacing="0" style="width:100%;" >
-    <thead style="text-align:left; font-size:3rem; ">
-       <tr>
-          <th>Examples</th>
-          <th></th>
-       </tr>
-    </thead>
-
-       <?php if($example): ?>
-       <?php foreach($example as $examples): ?>
-
-           <tr>
-              <td class="align-middle" style="text-align:center">  <h2 style="margin-top:2%;"><?= $examples['example']; ?></h2></td>
-              <?php if (strcmp($examples['file_name'],'NoFile')==0): ?>
-                  <td  style="text-align:center">  <p style="color:grey; margin-top:2%;">No media uploaded</p></td>
-              <?php else: ?>
-
-                  <?php if (strcmp($examples['file_extension'],'mp4')==0): ?>
-                    <td style="text-align:center">
-                      <a href="<?=base_url()?>/public/uploads/images/<?= $examples['file_name']; ?>>" target="_blank">
-                        <video controls>
-                            <source src="<?=base_url()?>/public/uploads/images/<?= $examples['file_name']; ?>" type="video/mp4">
-                      </video>
-                    </a>
-                  </td>
-                  <?php else: ?>
-                    <td style="text-align:center"> <a href="<?=base_url()?>/public/uploads/images/<?= $examples['file_name']; ?>" target="_blank">
-                      <img src="<?=base_url()?>/public/uploads/images/<?= $examples['file_name']; ?>"  alt="" width="300" height="300" onclick="myFunction(this);" class="img-fluid">
-                    </img></a></td>
-                  <?php endif; ?>
-              <?php endif; ?>
 
 
-            </tr>
-
-      <?php endforeach; ?>
-      <?php endif; ?>
-  </table>
-  <h1 style="text-align:left;">   <button id="toggle" class="btn btn-info mb-4 mt-4" style="margin-bottom:1%; "  align="left"> Add Example</button></h1>
-</div>
 </div>
 
 
@@ -206,7 +168,13 @@
                <div class="form-group">
                  <label for="" style="font-size:25px; margin-bottom:3%;">Example Content</label>
                  <textarea class="form-control" style="width: 100%; border: 2px solid #00acee;" id="exampleFormControlTextarea1" placeholder="Discussion" rows="4" name="example"></textarea>
-
+               </div>
+               <div class="text-danger" style="margin-top:3%;">
+                 <?php if (isset($validation)): ?>
+                       <?php if ($validation->hasError('example')): ?>
+                             <p>  <?= $validation->getError('example') ?></p>
+                       <?php endif; ?>
+                 <?php endif; ?>
                </div>
        </div>
        <div class="col-sm" >
@@ -215,7 +183,13 @@
              <label class="btn btn-success" style="margin-top:10%;">
                 <i class="fa fa-image"></i> Add Media<input type="file" style="display: none;" name="image" id="image" class="form-control-file" onchange="loadFile(event)" class="align-middle" style="border-top:5%;">
              </label>
-
+             <div class="text-danger" style="margin-top:3%;">
+               <?php if (isset($validation)): ?>
+                     <?php if ($validation->hasError('image')): ?>
+                           <p>  <?= $validation->getError('image') ?></p>
+                     <?php endif; ?>
+               <?php endif; ?>
+             </div>
            <center>
               <img id="output" width="350" />
           </center>
