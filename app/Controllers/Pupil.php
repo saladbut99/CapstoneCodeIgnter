@@ -185,12 +185,6 @@ public function update(){
       $section_id = new PupilModel();
       $data['pupil'] = $section_id->where(['pupil_id'=>$pupil_id])->get()->getRow();
 
-
-
-      // echo "<pre>";
-      //   print_r($data['users']);
-      // echo "<pre>";
-
       return view('pupil_view', $data);
     }
 
@@ -255,4 +249,127 @@ public function update(){
 
       return view('pupil_viewmodule', $data);
     }
+
+    public function viewactivity($id){
+      $type = session()->get('usertype');
+       if ($type!='Pupil' && $type=='Admin'){
+          return redirect()->to('admin/home');
+          //echo "hello";
+       }else if ($type!='Pupil' && $type=='Teacher') {
+         return redirect()->to('teacher/home');
+       }
+      $data=[
+        'meta_title'=>'Teacher | Add Activity '
+      ];
+
+      $db      = \Config\Database::connect();
+
+
+
+      $activity_id = new ActivityMaster();
+      $data['users'] = $activity_id->where(['lesson_id'=>$id])->findAll();
+
+      $userModel = new LessonMaster();
+      $data['lesson'] = $userModel->where(['lesson_id'=>$id])->get()->getRow();
+
+
+       return view('pupil_viewactivity', $data);
+
+    }
+
+    public function multiplechoice($id){
+      $type = session()->get('usertype');
+       if ($type!='Pupil' && $type=='Admin'){
+          return redirect()->to('admin/home');
+          //echo "hello";
+       }else if ($type!='Pupil' && $type=='Teacher') {
+         return redirect()->to('teacher/home');
+       }
+
+      $data=[
+        'meta_title'=>'Teacher | Manage ',
+
+      ];
+
+      $activity_id = new ActivityMaster();
+      $data['users'] = $activity_id->where(['activity_id'=>$id])->get()->getRow();
+
+      $activity_id = new ActivityContent();
+      $data['question'] = $activity_id->where(['activity_id'=>$id])->findAll();
+
+
+      $choices = new Choices();
+      $data['choice'] = $choices->findAll();
+
+      $medias = new MediaActivity();
+      $data['media'] = $medias->findAll();
+
+       return view('pupil_multiplechoice', $data);
+
+    }
+
+    public function activitytype_checker($actid){
+      $type = session()->get('usertype');
+       if ($type!='Pupil' && $type=='Admin'){
+          return redirect()->to('admin/home');
+          //echo "hello";
+       }else if ($type!='Pupil' && $type=='Teacher') {
+         return redirect()->to('teacher/home');
+       }
+      $data=[
+        'meta_title'=>'Teacher | Activity '
+      ];
+
+      // $activity_id = new ActivityMaster();
+      // $data['users'] = $activity_id->where(['activity_id'=>$actid])->findAll();
+
+       $db      = \Config\Database::connect();
+
+       $builder = $db->table('activity_master');
+
+       $builder->where('activity_id',  $actid);
+
+       $data['users'] = $builder->get()->getRow();
+
+       $act_type=$data['users']->activity_type;
+
+
+      if (strcmp($act_type,'multiple_choice')==0) {
+        return redirect()->to('pupil/multiplechoice/'. $actid);
+      }elseif (strcmp($act_type,'enumeration')==0) {
+         return redirect()->to('pupil/enumeration/'. $actid);
+      }else {
+       return redirect()->to('pupil/identification/'. $actid);
+      }
+    }
+
+    public function identification($id){
+      $type = session()->get('usertype');
+       if ($type!='Pupil' && $type=='Admin'){
+          return redirect()->to('admin/home');
+          //echo "hello";
+       }else if ($type!='Pupil' && $type=='Teacher') {
+         return redirect()->to('teacher/home');
+       }
+      $data=[
+        'meta_title'=>'Pupil | Activity '
+      ];
+
+      $activity_id = new ActivityMaster();
+      $data['users'] = $activity_id->where(['activity_id'=>$id])->get()->getRow();
+
+      $activity_id = new ActivityContent();
+      $data['question'] = $activity_id->where(['activity_id'=>$id])->findAll();
+
+
+      $choices = new Choices();
+      $data['choice'] = $choices->findAll();
+
+      $medias = new MediaActivity();
+      $data['media'] = $medias->findAll();
+
+       return view('pupil_identification', $data);
+
+    }
+
 }
