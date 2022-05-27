@@ -295,11 +295,11 @@ public function update(){
       $data['users'] = $activity_id->where(['activity_id'=>$id])->get()->getRow();
 
       $activity_id = new ActivityContent();
-      $data['question'] = $activity_id->where(['activity_id'=>$id])->findAll();
+      $data['question'] = $activity_id->where(['activity_id'=>$id])->orderBy('activity_content_id', 'RANDOM')->findAll();
 
 
       $choices = new Choices();
-      $data['choice'] = $choices->findAll();
+      $data['choice'] = $choices->orderBy('choices_id', 'RANDOM')->findAll();
 
       $medias = new MediaActivity();
       $data['media'] = $medias->findAll();
@@ -359,7 +359,7 @@ public function update(){
       $data['users'] = $activity_id->where(['activity_id'=>$id])->get()->getRow();
 
       $activity_id = new ActivityContent();
-      $data['question'] = $activity_id->where(['activity_id'=>$id])->findAll();
+      $data['question'] = $activity_id->where(['activity_id'=>$id])->orderBy('activity_content_id', 'RANDOM')->findAll();
 
 
       $choices = new Choices();

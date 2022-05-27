@@ -96,17 +96,21 @@
 
 
                         <div class="strike" >
-                          <span style="color:grey;">Answer Highlights in Green</span>
+                          <span style="color:grey;"></span>
                         </div>
                         <?php foreach ($choice as $choices): ?>
                           <?php if ($choices['activity_content_id']==$questions['activity_content_id']): ?>
-                            <?php if (strcmp($questions['activity_answer'],$choices['choice'])==0): ?>
-                                    <?php $color='green'; ?>
-                            <?php else: ?>
-                                    <?php $color='grey'; ?>
-                            <?php endif; ?>
-                                <div class="" style="margin-bottom:2%;" >
-                                        <h3 style="border: 2px solid <?= $color ?>; width:50%; border-radius:10px; color:<?= $color ?>"><?= $choices['choice']; ?></h3>
+                            <?php //if (strcmp($questions['activity_answer'],$choices['choice'])==0): ?>
+                                    <?php //$color='green'; ?>
+                            <?php //else: ?>
+                                    <?php //$color='grey'; ?>
+                            <?php //endif; ?>
+
+                                <div class="form-check" style="width:100%;">
+                                  <input class="form-check-input radiobtn-mc" type="radio" name="answer" id="" value="" required>
+
+                                  <label class="form-check-label" for="flexRadioDefault1" style="border: 2px solid grey; width:50%; border-radius:10px; color:grey">
+                                    <?= $choices['choice']; ?>
                                 </div>
 
                           <?php endif; ?>

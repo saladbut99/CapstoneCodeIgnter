@@ -76,7 +76,7 @@
                                   <div class="col-sm">
                                         <h3 style="text-align:left;margin-top:2%;margin-bottom:2%;">Question <?= $question_no; ?></h3>
                                   </div>
-                                
+
                               </div>
 
                         <h1 style="margin-bottom:2%;"><?= $questions['activity_question']; ?></h1>
@@ -97,10 +97,12 @@
                         <div class="strike" >
                           <span style="color:grey;">Answer</span>
                         </div>
+                        <div class="form-check grupouno" style="margin-bottom:5%; width:100%">
 
-                                <div class="" style="margin-bottom:2%; " >
-                                        <h3 style="padding: 2%;border: 2px solid green; width:50%; border-radius:10px; color:green;"><?= $questions['activity_answer']; ?></h3>
-                                </div>
+                          <label class="form-check-label" for="flexRadioDefault1" >
+                              <input type="text" id="question_4" class="form-control input-mc" name="activity_answer" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px; width:100%;" required>
+                          </label>
+                        </div>
                     </div>
                 </div>
             </div>
