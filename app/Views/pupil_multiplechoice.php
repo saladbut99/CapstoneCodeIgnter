@@ -2,7 +2,11 @@
 
 <?= $this->section('content'); ?>
 
-  <?php $question_no=0; ?>
+  <?php
+    $question_no=0;
+    $choice_id=0;
+  ?>
+
   <div class="navbar" style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(<?=base_url()?>/public/assets/images/banner.png);">
          <nav class="nav row w-100 align-items-center">
              <div class="col-7">
@@ -49,7 +53,7 @@
          <br>
              <div class="row">
                <div class="col">
-                  <h1 style="text-align:left;font-size:6 0px;"><b><?= $users->activity_name; ?></b></h1>
+                  <h1 style="text-align:left;font-size:6 0px;" id='sample'><b> <?= $users->activity_name; ?></b></h1>
                </div>
                <div class="col">
                   <h1 style="text-align:right;font-size:6 0px;"><b><?= $users->activity_perfect_score ?> / <?= $users->activity_perfect_score ?></b></h1>
@@ -68,9 +72,11 @@
          <br>
     </div>
 <center>
+  <form class=""  action="<?php echo site_url('pupil/check/'.$users->activity_id);?>" method="post" id="form" style="display:block; margin-bottom:5%;"  enctype="multipart/form-data">
     <?php foreach ($question as $questions): ?>
 
      <?php $question_no++;  ?>
+
             <div class="container" style="width:80%;border:0.5px solid #00acee;margin-bottom:2.5%; border-radius:4px; box-shadow:2px 3px 2px grey;">
                 <div class="row">
                     <div class="col">
@@ -99,26 +105,35 @@
                           <span style="color:grey;"></span>
                         </div>
                         <?php foreach ($choice as $choices): ?>
+
                           <?php if ($choices['activity_content_id']==$questions['activity_content_id']): ?>
-                            <?php //if (strcmp($questions['activity_answer'],$choices['choice'])==0): ?>
-                                    <?php //$color='green'; ?>
-                            <?php //else: ?>
-                                    <?php //$color='grey'; ?>
-                            <?php //endif; ?>
+
 
                                 <div class="form-check" style="width:100%;">
-                                  <input class="form-check-input radiobtn-mc" type="radio" name="answer" id="" value="" required>
+                                  <input class="form-check-input radiobtn-mc" type="radio" name="<?= $choice_id ?>[answer]" id="answer"  value="<?= $choices['choice']; ?>"  required >
 
                                   <label class="form-check-label" for="flexRadioDefault1" style="border: 2px solid grey; width:50%; border-radius:10px; color:grey">
                                     <?= $choices['choice']; ?>
+                                    <input type="hidden" name="<?= $choice_id ?>[activity_content_id]" value="<?= $choices['activity_content_id'] ?>">
                                 </div>
 
+
                           <?php endif; ?>
+
                         <?php endforeach; ?>
+
                     </div>
                 </div>
             </div>
+
+
+          <?php $choice_id+=1; ?>
+
     <?php endforeach; ?>
+    <button type="submit" form="form"  class="btn btn-primary btn-block mb-4 mt-4">Submit Quiz</button>
+  </form>
+
+
 </center>
    </div>
  </div>
@@ -127,112 +142,13 @@
 <!-- form for the question -->
 
 
-<div id='border' style="border:1px solid white; width:70%; margin-bottom:5%; border-radius:10px;">
- <form class="" action="<?php echo site_url('teacher/addquestion/'.$users->activity_id);?>" method="post" id="form" style="display:none; margin-bottom:5%;"  enctype="multipart/form-data">
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <a href="#" onclick="hide('popup2')" >
-          <p style="text-align:right;"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="grey" class="bi bi-x" viewBox="0 0 16 16">
-            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-          </svg></p>
-        </a>
-      </div>
-    </div>
-  </div>
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <h1 style="margin-bottom:5%;">Question <?= $question_no+=1; ?></h1>
-      </div>
-    </div>
-  </div>
 
-   <div class="container" style="margin-top:0%;">
-     <div class="row">
-       <div class="col-sm">
-               <div class="form-group">
-                 <label for="" style="font-size:25px; margin-bottom:3%;">Activity Question</label>
-                 <textarea class="form-control" style="width: 100%; border: 2px solid #00acee;" id="exampleFormControlTextarea1" placeholder="" rows="4" name="activity_question"></textarea>
-               </div>
-               <div class="text-danger" style="margin-top:3%;">
-                 <?php if (isset($validation)): ?>
-                       <?php if ($validation->hasError('activity_question')): ?>
-                             <p>  <?= $validation->getError('activity_question') ?></p>
-                       <?php endif; ?>
-                 <?php endif; ?>
-               </div>
-       </div>
-       <div class="col-sm" >
-         <div class="form-group ">
-             <label class="btn btn-success" style="margin-top:10%;margin-bottom:3%">
-                <i class="fa fa-image"></i> Add Media<input type="file" style="display: none;" name="image" id="image" class="form-control-file" onchange="loadFile(event)" class="align-middle" style="border-top:5%;">
-             </label>
-             <div class="text-danger" style="margin-top:3%;">
-               <?php if (isset($validation)): ?>
-                     <?php if ($validation->hasError('image')): ?>
-                           <p>  <?= $validation->getError('image') ?></p>
-                     <?php endif; ?>
-               <?php endif; ?>
-             </div>
-           <center>
-              <img id="output" width="350" />
-          </center>
-
-         </div>
-       </div>
-     </div>
-   </div>
-   <br>
-
-   <div style="width:90%;">
-     <h2 style="margin-bottom:2%;"> Answer Options  </h2>
-     <div class="form-check grupouno">
-       <input class="form-check-input radiobtn-mc" type="radio" name="activity_answer" id="answer1" value="" required>
-
-       <label class="form-check-label" for="flexRadioDefault1" >
-           <input type="text" id="question_1" class="form-control input-mc" name="choice[]" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;" required>
-
-
-     </div>
-     <div class="form-check grupouno">
-       <input class="form-check-input radiobtn-mc" type="radio" name="activity_answer" id="answer2" value="" required>
-
-       <label class="form-check-label" for="flexRadioDefault1" >
-           <input type="text" id="question_2" class="form-control input-mc" name="choice[]" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;" required>
-
-     </div>
-     <div class="form-check grupouno">
-       <input class="form-check-input radiobtn-mc" type="radio" name="activity_answer" id="answer3" value="" required>
-
-       <label class="form-check-label" for="flexRadioDefault1" >
-           <input type="text" id="question_3" class="form-control input-mc" name="choice[]" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;" required>
-
-     </div>
-     <div class="form-check grupouno">
-       <input class="form-check-input radiobtn-mc" type="radio" name="activity_answer" id="answer4" value="" required>
-
-       <label class="form-check-label" for="flexRadioDefault1" >
-           <input type="text" id="question_4" class="form-control input-mc" name="choice[]" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;" required>
-     </div>
-
-
-
-
-
-   </div>
-
-
-
-
-   <center>
-   <button type="submit" onclick ="addValueToRadioBtn();" class="btn btn-primary btn-block mb-4 mt-4">Submit</button>
- </center>
-</form>
-
-</div>
-
-</div>
+<script>
+  function check() {
+      var answer=  document.getElementById("answer").value;
+      alert(answer);
+  }
+</script>
 
 
 <script>

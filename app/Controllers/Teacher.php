@@ -16,7 +16,7 @@ use App\Models\ActivityMaster;
 use App\Models\ActivityContent;
 use App\Models\MediaActivity;
 use App\Models\Choices;
-
+use App\Models\PerformanceRecords;
 
 class Teacher extends BaseController
 {
@@ -1581,7 +1581,7 @@ public function addquestion_identification($id){
    $rules=[
 
        'activity_question'=>[
-         'rules'=>'required|is_unique[activity_content.activity_question]',
+         'rules'=>'required|is_unique[activity_content.activity_question]|alpha_space',
          'label'=>'Activity Title',
        ],
        'image'=>[

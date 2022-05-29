@@ -114,6 +114,8 @@ $routes->group('pupil', ["filter" => 'Auth'], function($routes){
   $routes->get('viewactivity/(:num)','Pupil::viewactivity/$1');
   $routes->get('activitytype_checker/(:num)','Pupil::activitytype_checker/$1');
   $routes->get('multiplechoice/(:num)','Pupil::multiplechoice/$1');
+  $routes->get('check/(:num)','Pupil::check/$1');
+  $routes->get('check_identification/(:num)','Pupil::check_identification/$1');
  // // $routes->add('register','Admin::register');
  // $routes->match(['get','post'],'register','Admin::register');
  //  $routes->add('viewlessons','Admin::viewlesson');

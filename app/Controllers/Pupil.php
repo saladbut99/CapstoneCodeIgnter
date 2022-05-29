@@ -16,6 +16,8 @@ use App\Models\ActivityMaster;
 use App\Models\ActivityContent;
 use App\Models\MediaActivity;
 use App\Models\Choices;
+use App\Models\PerformanceRecords;
+
 
 
 class Pupil extends BaseController
@@ -370,6 +372,178 @@ public function update(){
 
        return view('pupil_identification', $data);
 
+    }
+
+    public function check($actid){
+      $type = session()->get('usertype');
+       if ($type!='Pupil' && $type=='Admin'){
+          return redirect()->to('admin/home');
+          //echo "hello";
+       }else if ($type!='Pupil' && $type=='Teacher') {
+         return redirect()->to('teacher/home');
+       }
+      $data=[
+        'meta_title'=>'Teacher | Activity '
+      ];
+      //
+
+      $score=0;
+
+
+      $choices = new Choices();
+      $data['choice'] = $choices->findAll();
+
+      $ind=0;
+
+
+       foreach ($_POST as $key) {
+         // print_r($key['activity_content_id']);
+         $activity_id = new ActivityContent();
+         $data['question'] = $activity_id->where(['activity_content_id'=>$key['activity_content_id']])->get()->getRow();
+
+         if (strcmp($key['answer'],$data['question']->activity_answer)==0) {
+            $score+=2;
+         }
+       }
+
+       date_default_timezone_set('Asia/Manila');
+        $myTime=date('Y-m-d h:i:s');
+
+      $newData=[
+        'pupil_id' => session()->get('t_id'),
+        'activity_score'=>$score,
+        'performed_activity_date'=>$myTime,
+        'activity_id'=>$actid,
+        'activity_retakes'=>0,
+      ];
+
+
+
+      $PerformanceRecords = new PerformanceRecords();
+      $PerformanceRecords->save($newData);
+      $performance_id = $PerformanceRecords->getInsertID();
+      //
+      // $id = new PerformanceRecords();
+      // $data['record'] = $id->where(['performance_id'=>$performance_id])->get()->getRow();
+      //
+      //
+      //
+      // $act_retake = $data['record']->activity_retakes;
+      // $act_retake+=1;
+      // // $retake_data=[
+      // //   'activity_retakes'=>$actid+=1,
+      // // ];
+      //
+      //
+      //  $db      = \Config\Database::connect();
+      //
+      //  $builder = $db->table('performance_records');
+      //  $builder->set('activity_retakes', $act_retake);
+      //  $builder->where('performance_id',  $performance_id);
+      //  $builder->update();
+
+    }
+
+    public function check_identification($actid){
+      $type = session()->get('usertype');
+       if ($type!='Pupil' && $type=='Admin'){
+          return redirect()->to('admin/home');
+          //echo "hello";
+       }else if ($type!='Pupil' && $type=='Teacher') {
+         return redirect()->to('teacher/home');
+       }
+      $data=[
+        'meta_title'=>'Teacher | Activity '
+      ];
+      //
+
+      $score=0;
+
+      // $rules=[
+      //
+      //     'answer'=>[
+      //       'rules'=>'alpha_space',
+      //     ],
+      //
+      // ];
+
+
+      $choices = new Choices();
+      $data['choice'] = $choices->findAll();
+
+      $ind=0;
+
+
+       foreach ($_POST as $key) {
+         // print_r($key['activity_content_id']);
+         $activity_id = new ActivityContent();
+         $data['question'] = $activity_id->where(['activity_content_id'=>$key['activity_content_id']])->get()->getRow();
+
+         if (strcmp(strtoupper(trim($key['answer'])),strtoupper(trim($data['question']->activity_answer)))==0) {
+            $score+=2;
+         }
+       }
+
+
+
+       date_default_timezone_set('Asia/Manila');
+        $myTime=date('Y-m-d h:i:s');
+
+      $newData=[
+        'pupil_id' => session()->get('t_id'),
+        'activity_score'=>$score,
+        'performed_activity_date'=>$myTime,
+        'activity_id'=>$actid,
+        'activity_retakes'=>0,
+      ];
+
+
+
+      $PerformanceRecords = new PerformanceRecords();
+      $PerformanceRecords->save($newData);
+      $performance_id = $PerformanceRecords->getInsertID();
+
+      $data['results']=$_POST;
+
+      $activity_id = new ActivityMaster();
+      $data['users'] = $activity_id->where(['activity_id'=>$actid])->get()->getRow();
+
+      $performance = new PerformanceRecords();
+      $data['performance'] = $performance->where(['performance_id'=>$performance_id])->get()->getRow();
+
+      $activity_id = new ActivityContent();
+      $data['question'] = $activity_id->where(['activity_id'=>$actid])->findAll();
+
+
+      $choices = new Choices();
+      $data['choice'] = $choices->findAll();
+
+      $medias = new MediaActivity();
+      $data['media'] = $medias->findAll();
+
+      // echo "<pre>";
+      //   print_r($data['results']);
+      // echo "<pre";
+
+      // $id = new PerformanceRecords();
+      // $data['record'] = $id->where(['performance_id'=>$performance_id])->get()->getRow();
+      //
+      //
+      //
+      // $act_retake = $data['record']->activity_retakes;
+      // $act_retake+=1;
+      // // $retake_data=[
+      // //   'activity_retakes'=>$actid+=1,
+      // // ];
+      //
+      //
+      //  $db      = \Config\Database::connect();
+      //
+      //  $builder = $db->table('performance_records');
+      //  $builder->set('activity_retakes', $act_retake);
+      //  $builder->where('performance_id',  $performance_id);
+      //  $builder->update();
+     return view('pupil_identificationresults', $data);
     }
 
 }
