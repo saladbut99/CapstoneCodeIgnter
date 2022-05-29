@@ -4,10 +4,10 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class PerformanceRecords extends Model
+class Answers extends Model
 {
-    protected $table      = 'performance_records';
-    protected $primaryKey = 'performance_id';
+    protected $table      = 'answers';
+    protected $primaryKey = 'answer_id';
 
     protected $useAutoIncrement = true;
 
@@ -15,7 +15,7 @@ class PerformanceRecords extends Model
     // protected $useSoftDeletes = true;
 
     //list of fields that can be manipulated from an outside class
-    protected $allowedFields = ['pupil_id', 'activity_score','performed_activity_date','activity_id','activity_retakes','activity_answer', 'activity_content_id'];
+    protected $allowedFields = ['activity_answer', 'performance_id' ,'activity_content_id'];
 
     //specify dates
     // protected $useTimestamps = true;

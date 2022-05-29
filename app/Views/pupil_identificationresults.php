@@ -28,7 +28,7 @@
    </div>
 <center>
 
-  <div class="container h-100" style="margin-bottom:0%;" id="wrapper" >
+  <div class="container h-100 " style="margin-bottom:0%;" id="wrapper"  >
      <div class="row">
        <div class="backbutton col-1">
            <a onclick = "history.back()" style="text-decoration: none; color: rgb(68, 68, 68); cursor:pointer;">
@@ -46,29 +46,32 @@
         <?php endif; ?>
         <br>
    </div>
-       <div class="col mt">
-         <br>
-         <div class="row">
-           <div class="col">
-              <h1 style="text-align:left;font-size:60px;"><b><?= $users->activity_name; ?></b></h1>
-           </div>
-           <div class="col">
-              <h1 style="text-align:right;font-size:60px;"><b>Your Score: <?= $performance->activity_score ?> / <?= $users->activity_perfect_score ?></b></h1>
-           </div>
+   <div class="container">
+
+       <br>
+       <div class="row">
+         <div class="col">
+            <h1 style="text-align:left;font-size:60px;"><b><?= $users->activity_name; ?></b></h1>
+         </div>
+         <div class="col">
+            <h1 style="text-align:right;font-size:60px;"><b>Your Score: <?= $performance->activity_score ?> / <?= $users->activity_perfect_score ?></b></h1>
          </div>
        </div>
-             <hr style="width:100%;height:2px;color:#00acee">
-             <h3 style="text-align:left"><?= $users->activity_instruction; ?></h3>
-       </div>
-       <!-- form for the lesson -->
-      <div style="margin-top:2%;">
-         <?php if (session()->get('updatesuccess')): ?>
-           <div class="alert alert-success" role="alert" style="margin-bottom:2%;">
-               <h4><?= session()->get('updatesuccess') ?></h4>
-           </div>
-         <?php endif; ?>
-         <br>
-    </div>
+
+           <hr style="width:100%;height:2px;color:#00acee">
+           <h3 style="text-align:left"><?= $users->activity_instruction; ?></h3>
+     </div>
+     <!-- form for the lesson -->
+    <div style="margin-top:2%;">
+       <?php if (session()->get('updatesuccess')): ?>
+         <div class="alert alert-success" role="alert" style="margin-bottom:2%;">
+             <h4><?= session()->get('updatesuccess') ?></h4>
+         </div>
+       <?php endif; ?>
+       <br>
+  </div>
+   </div>
+
 <center>
     <form class=""  action="<?php echo site_url('pupil/check_identification/'.$users->activity_id);?>" method="post" id="form" style="display:block; margin-bottom:5%;"  enctype="multipart/form-data">
     <?php foreach ($question as $questions): ?>
@@ -125,7 +128,7 @@
             </div>
             <?php $choice_id+=1; ?>
     <?php endforeach; ?>
-    
+
   </form>
 </center>
    </div>

@@ -17,6 +17,7 @@ use App\Models\ActivityContent;
 use App\Models\MediaActivity;
 use App\Models\Choices;
 use App\Models\PerformanceRecords;
+use App\Models\Answers;
 
 
 
@@ -395,7 +396,7 @@ public function update(){
 
       $ind=0;
 
-
+      $retakes=1;
        foreach ($_POST as $key) {
          // print_r($key['activity_content_id']);
          $activity_id = new ActivityContent();
@@ -406,41 +407,88 @@ public function update(){
          }
        }
 
+
+
        date_default_timezone_set('Asia/Manila');
         $myTime=date('Y-m-d h:i:s');
+
+      $id = new PerformanceRecords();
+      $data['list'] = $id->where(['activity_id'=>$actid])->findAll();
+
+      foreach ($data['list'] as $key) {
+          $retakes+=1;
+      }
 
       $newData=[
         'pupil_id' => session()->get('t_id'),
         'activity_score'=>$score,
         'performed_activity_date'=>$myTime,
         'activity_id'=>$actid,
-        'activity_retakes'=>0,
+        'activity_retakes'=>$retakes,
       ];
 
 
+      $answers = new Answers();
 
       $PerformanceRecords = new PerformanceRecords();
       $PerformanceRecords->save($newData);
       $performance_id = $PerformanceRecords->getInsertID();
       //
-      // $id = new PerformanceRecords();
-      // $data['record'] = $id->where(['performance_id'=>$performance_id])->get()->getRow();
-      //
-      //
-      //
+
+      $data['record'] = $id->where(['performance_id'=>$performance_id])->get()->getRow();
+
+      foreach ($_POST as $answer) {
+            $arre=[
+              'activity_answer'=>$answer['answer'],
+              'performance_id'=>$performance_id,
+              'activity_content_id'=>$answer['activity_content_id'],
+            ];
+            $answers->save($arre);
+      }
+
       // $act_retake = $data['record']->activity_retakes;
-      // $act_retake+=1;
+      // $act_retake2=$act_retake+1;
       // // $retake_data=[
       // //   'activity_retakes'=>$actid+=1,
       // // ];
       //
+      // echo "<pre>";
+      //   print_r($retakes);
+      // echo "<pre";
+      // //
       //
       //  $db      = \Config\Database::connect();
       //
       //  $builder = $db->table('performance_records');
-      //  $builder->set('activity_retakes', $act_retake);
+      //  $builder->set('activity_retakes', 'activity_retakes + 1');
       //  $builder->where('performance_id',  $performance_id);
       //  $builder->update();
+
+    //  $data['results']=$_POST;
+
+
+
+
+
+      $data['results']=$_POST;
+
+      $activity_id = new ActivityMaster();
+      $data['users'] = $activity_id->where(['activity_id'=>$actid])->get()->getRow();
+
+      $performance = new PerformanceRecords();
+      $data['performance'] = $performance->where(['performance_id'=>$performance_id])->get()->getRow();
+
+      $activity_id = new ActivityContent();
+      $data['question'] = $activity_id->where(['activity_id'=>$actid])->findAll();
+
+
+      $choices = new Choices();
+      $data['choice'] = $choices->findAll();
+
+      $medias = new MediaActivity();
+      $data['media'] = $medias->findAll();
+
+      return view('pupil_multiplechoiceresults', $data);
 
     }
 
@@ -456,16 +504,10 @@ public function update(){
         'meta_title'=>'Teacher | Activity '
       ];
       //
-
+      $retakes=1;
       $score=0;
 
-      // $rules=[
-      //
-      //     'answer'=>[
-      //       'rules'=>'alpha_space',
-      //     ],
-      //
-      // ];
+
 
 
       $choices = new Choices();
@@ -489,19 +531,37 @@ public function update(){
        date_default_timezone_set('Asia/Manila');
         $myTime=date('Y-m-d h:i:s');
 
+        $id = new PerformanceRecords();
+        $data['list'] = $id->where(['activity_id'=>$actid])->findAll();
+
+        foreach ($data['list'] as $key) {
+            $retakes+=1;
+        }
+
+
       $newData=[
         'pupil_id' => session()->get('t_id'),
         'activity_score'=>$score,
         'performed_activity_date'=>$myTime,
         'activity_id'=>$actid,
-        'activity_retakes'=>0,
+        'activity_retakes'=>$retakes,
       ];
 
-
+      $answers = new Answers();
 
       $PerformanceRecords = new PerformanceRecords();
       $PerformanceRecords->save($newData);
       $performance_id = $PerformanceRecords->getInsertID();
+
+      foreach ($_POST as $answer) {
+            $arre=[
+              'activity_answer'=>$answer['answer'],
+              'performance_id'=>$performance_id,
+              'activity_content_id'=>$answer['activity_content_id'],
+            ];
+            $answers->save($arre);
+      }
+
 
       $data['results']=$_POST;
 
