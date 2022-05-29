@@ -35,7 +35,7 @@
   <br>
     <div class="formcontainer pt-2 mt-0 pb-5" style="height:80vh !important; max-width:90%; background-color: rgba(255, 255, 255, 0.2); border:none; height:70vh;">
       <div class="container  h-100">
-        
+
       <div class="row justify-content-center h-10 align-items-center pt-3" style="width: 70vw;">
           <div class="col-md text-center section_menu">
                 <div class="dashboard_div section_pupil" id="sec1">
@@ -46,7 +46,7 @@
                     <h6 style="color:green;" class="section_h6"> LEARN LESSON </h6>
                 </div>
             </div>
-                    
+
             <div class="col-md text-center section_menu">
                 <div class="dashboard_div section_pupil" id="sec2">
                 <br>
@@ -80,7 +80,8 @@
         <div class="row h-60 align-items-center mt-2 pop-up" style="" id="pop-up2">
           <h1> VIEW YOUR SCORE </h1>
           <div class="pop-up d-flex">
-          <a href="#" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> View Performance</a>
+          <a href="#" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%; margin-right:5%;"> View Activity Performance</a>
+          <a href="#" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> View Overall Performance</a>
           </div>
         </div>
         <div class="row h-60 align-items-center mt-2 pop-up" style="" id="pop-up3">

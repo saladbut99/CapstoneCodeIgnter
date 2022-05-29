@@ -31,10 +31,11 @@
 
 <center>
 
+
   <div class="container h-100" style="margin-bottom:0%;" id="wrapper" >
      <div class="row">
        <div class="backbutton col-1">
-           <a onclick = "history.back()" style="text-decoration: none; color: rgb(68, 68, 68); cursor:pointer;">
+           <a href="<?php echo base_url(); ?>/public/pupil/viewmodule/<?= $users->lesson_id; ?>" style="text-decoration: none; color: rgb(68, 68, 68); cursor:pointer;">
            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
                <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
            </svg>
@@ -47,21 +48,40 @@
               <h4><?= session()->get('success') ?></h4>
           </div>
         <?php endif; ?>
+
+        <?php if ($performance->percentage_score>=50): ?>
+            <?php $message='Keep up the good work!'; ?>
+        <?php else: ?>
+          <?php $message='Whoops! Try the activity again!'; ?>
+        <?php endif; ?>
         <br>
+        <div class="container">
+          <div class="row" style="margin-bottom:2%;">
+              <div class="col">
+                   <h1><b> <?= $users->activity_name; ?></b></h1>
+              </div>
+          </div>
+            <div class="row" style="margin-bottom:2%;">
+                <div class="col">
+                    <h1>Hi <?= session()->get('firstname') ?>!</h1>
+                </div>
+                <div class="col">
+                    <h1>Your Score:<?= $performance->activity_score ?>  / <?= $users->activity_perfect_score ?> </h1>
+                </div>
+            </div>
+            <div class="row" style="margin-bottom:2%;">
+                <div class="col">
+                    <h1><?= $performance->percentage_score ?>%</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h1><?= $message ?></h1>
+                </div>
+            </div>
+        </div>
    </div>
-       <div class="col mt">
-         <br>
-             <div class="row">
-               <div class="col">
-                  <h1 style="text-align:left;font-size:6 0px;" id='sample'><b> <?= $users->activity_name; ?></b></h1>
-               </div>
-               <div class="col">
-                  <h1 style="text-align:right;font-size:6 0px;"><b><?= $performance->activity_score ?>  / <?= $users->activity_perfect_score ?></b></h1>
-               </div>
-             </div>
-             <hr style="width:100%;height:2px;color:#00acee">
-             <h3 style="text-align:left"><?= $users->activity_instruction; ?></h3>
-       </div>
+
        <!-- form for the lesson -->
       <div style="margin-top:2%;">
          <?php if (session()->get('updatesuccess')): ?>

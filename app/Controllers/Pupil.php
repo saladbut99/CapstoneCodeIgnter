@@ -407,7 +407,9 @@ public function update(){
          }
        }
 
-
+       $activity_id = new ActivityMaster();
+       $data['master'] = $activity_id->where(['activity_id'=>$actid])->get()->getRow();
+       $percent_score=$score/$data['master']->activity_perfect_score*100;
 
        date_default_timezone_set('Asia/Manila');
         $myTime=date('Y-m-d h:i:s');
@@ -425,6 +427,7 @@ public function update(){
         'performed_activity_date'=>$myTime,
         'activity_id'=>$actid,
         'activity_retakes'=>$retakes,
+        'percentage_score'=>$percent_score,
       ];
 
 
@@ -526,7 +529,9 @@ public function update(){
          }
        }
 
-
+       $activity_id = new ActivityMaster();
+       $data['master'] = $activity_id->where(['activity_id'=>$actid])->get()->getRow();
+       $percent_score=$score/$data['master']->activity_perfect_score*100;
 
        date_default_timezone_set('Asia/Manila');
         $myTime=date('Y-m-d h:i:s');
@@ -545,6 +550,7 @@ public function update(){
         'performed_activity_date'=>$myTime,
         'activity_id'=>$actid,
         'activity_retakes'=>$retakes,
+        'percentage_score'=>$percent_score,
       ];
 
       $answers = new Answers();

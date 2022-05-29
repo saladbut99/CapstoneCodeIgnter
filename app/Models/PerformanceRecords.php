@@ -15,7 +15,7 @@ class PerformanceRecords extends Model
     // protected $useSoftDeletes = true;
 
     //list of fields that can be manipulated from an outside class
-    protected $allowedFields = ['pupil_id', 'activity_score','performed_activity_date','activity_id','activity_retakes','activity_answer', 'activity_content_id'];
+    protected $allowedFields = ['pupil_id', 'activity_score','performed_activity_date','activity_id','activity_retakes','activity_answer', 'activity_content_id', 'percentage_score'];
 
     //specify dates
     // protected $useTimestamps = true;
