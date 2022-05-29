@@ -110,6 +110,10 @@ $routes->group('pupil', ["filter" => 'Auth'], function($routes){
   $routes->add('home','Pupil::index');
   $routes->add('view','Pupil::view');
   $routes->get('viewmoduletable/(:num)','Pupil::viewmoduletable/$1');
+  $routes->get('viewmoduleactivity/(:num)','Pupil::viewmoduleactivity/$1');
+  $routes->get('viewactivity/(:num)','Pupil::viewactivity/$1');
+  $routes->get('viewperformance/(:num)','Pupil::viewperformance/$1');
+  $routes->get('viewactivitytable/(:num)','Pupil::viewactivitytable/$1');
   $routes->get('viewmodule/(:num)','Pupil::viewmodule/$1');
   $routes->get('viewactivity/(:num)','Pupil::viewactivity/$1');
   $routes->get('activitytype_checker/(:num)','Pupil::activitytype_checker/$1');

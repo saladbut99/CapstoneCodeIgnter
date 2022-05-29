@@ -1,6 +1,8 @@
 <?= $this->extend('layouts/main'); ?>
 
 <?= $this->section('content'); ?>
+<?php $display='block';
+      $display2='none'; ?>
 
 <div class="navbar navbar_pupil mb-0" style="height:76px !important; background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(<?=base_url()?>/public/assets/images/banner.png);">
        <nav class="nav row w-100 align-items-center">
@@ -30,10 +32,22 @@
     <source src="<?=base_url()?>/public/assets/clickar.mp3">
     <source src="audio/beep.ogg">
     </audio>
-
+<?php if (strcmp(trim($users->account_status),'Inactive')==0): ?>
+  <?php $display='none'; ?>
+  <?php $display2='block'; ?>
+<?php endif; ?>
+<center>
+  <div class="container" style="display:<?= $display2 ?>">
+      <div class="row">
+          <div class="col">
+              <h1 style="color:red;">Account is disabled please contact your teacher to access your account again</h1>
+          </div>
+      </div>
+  </div>
+</center>
 <center id="cntr">
   <br>
-    <div class="formcontainer pt-2 mt-0 pb-5" style="height:80vh !important; max-width:90%; background-color: rgba(255, 255, 255, 0.2); border:none; height:70vh;">
+    <div class="formcontainer pt-2 mt-0 pb-5" style="height:80vh !important; max-width:90%; background-color: rgba(255, 255, 255, 0.2); border:none; height:70vh;display:<?= $display ?>">
       <div class="container  h-100">
 
       <div class="row justify-content-center h-10 align-items-center pt-3" style="width: 70vw;">
@@ -80,7 +94,7 @@
         <div class="row h-60 align-items-center mt-2 pop-up" style="" id="pop-up2">
           <h1> VIEW YOUR SCORE </h1>
           <div class="pop-up d-flex">
-          <a href="#" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%; margin-right:5%;"> View Activity Performance</a>
+          <a href="viewmoduleactivity" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%; margin-right:5%;"> View Activity Performance</a>
           <a href="#" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> View Overall Performance</a>
           </div>
         </div>

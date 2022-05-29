@@ -210,20 +210,18 @@ class Teacher extends BaseController
             $user = $model->where('teacher_username',$this->request->getVar('username'))
                             ->first();
           //get the value of the user type from the form after pass it to the array
-          $type=$this->request->getVar('usertype');
-          //this array bellow ang gamiton if naay user type
-          $this->setUserSession($user,$type);
-      //   $this->setUserSession($user);
+          if (strcmp($user['account_status'],'Inactive')==0) {
+            $data['status']='Account Inactive';
+          }else {
+            //get the value of the user type from the form after pass it to the array
+            $type=$this->request->getVar('usertype');
+            //this array bellow ang gamiton if naay user type
+            $this->setUserSession($user,$type);
+        //   $this->setUserSession($user);
+            return redirect()->to('teacher/home');
+          }
 
-            // ];
-            // $model->save($newData);
-            // $session = session();
-            // $session->setFlashdata('success','Successful Registration');
-              //return redirect()->to('dashboard');
-              return redirect()->to('teacher/home');
-           }
-
-
+        }
     }
     return view('teacher_login',$data);
   }
