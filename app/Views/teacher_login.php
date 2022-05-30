@@ -1,6 +1,11 @@
 <?= $this->extend('layouts/loginlayout') ?>
 <?= $this->section('logintemplate') ?>
 <style>
+@media only screen and (min-width: 481px) and (max-width: 1024px) {
+body {
+  background-color: #2a4674 !important;
+  background-image: none !important;
+}}
   body{
     background-image:url('http://localhost/CapstoneCodeIgnter/Pulong/public/assets/images/teacherbg.gif');
     background-position: center;

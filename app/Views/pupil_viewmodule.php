@@ -24,161 +24,182 @@
         <div class="">
         <a href="<?php echo base_url(); ?>/public/pupil/logout">Logout</a>
         </div>
-   </div>
+</div>
 
 <center>
 
-  <div class="container h-100" style="margin-bottom:5%;" id="wrapper" >
-     <div class="row">
-       <div class="backbutton col-1">
-           <a href="<?php echo base_url(); ?>/public/pupil/viewmoduletable" style="text-decoration: none; color: rgb(68, 68, 68);">
-           <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
-               <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
-           </svg>
-           </a>
-       </div>
-       <br><br><br>
-      <div>
-        <?php if (session()->get('success')): ?>
-          <div class="alert alert-success" role="alert" style="margin-bottom:5%;">
-              <h4><?= session()->get('success') ?></h4>
-          </div>
-        <?php endif; ?>
-        <br>
-   </div>
-       <div class="mt-3">
-         <br>
-
-             <div class="container">
-               <div class="row">
-                 <div class="col">
-                    <h1 style="text-align:left;font-size:80px;"><b><?= $users->lesson_name; ?></b></h1>
-                 </div>
-                 <div class="col" style="margin-top:2%; margin-left:5%;">
-                   <a href="<?php echo base_url(); ?>/public/pupil/viewactivity\<?= $users->lesson_id ?>" style="text-decoration:none;" class="align-middle">
-                     <button type="button" class="btn btn-outline-info">
-                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                         <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                         <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                       </svg> View Activity
-                   </button>
-                   </a>
-                 </div>
-               </div>
-             </div>
-             <hr style="width:100%;height:2px;color:#00acee">
-             <h3 style="text-align:left"><?= $users->lesson_description; ?></h3>
-       </div>
-       <!-- form for the lesson -->
-      <div style="margin-top:2%;">
-         <?php if (session()->get('updatesuccess')): ?>
-           <div class="alert alert-success" role="alert" style="margin-bottom:2%;">
-               <h4><?= session()->get('updatesuccess') ?></h4>
-           </div>
-         <?php endif; ?>
-         <br>
-    </div>
-   </div>
- </div>
-
-
-
-<div class="container" style="margin-bottom:7%;">
-    <div class="row">
-      <div class="mt-3">
-        <div class="imageview">
-          <?php if (strcmp($image->file_extension,'mp4')==0): ?>
-            <video controls>
-                <source src="<?=base_url()?>/public/uploads/images/<?= $image->file_name; ?>" type="video/mp4">
-          </video>
-          <?php else: ?>
-                <a href="<?=base_url()?>/public/uploads/images/<?= $image->file_name; ?>" target="_blank"><img src="<?=base_url()?>/public/uploads/images/<?= $image->file_name; ?>"  alt="" width="auto" height="auto" onclick="myFunction(this);" class="img-fluid"></a>
-          <?php endif; ?>
+<div id="scroll_container">
+  <!-- TITLE AREA -->
+    <div class="container scroll_area" style="margin-bottom:5%; height:100vh" id="wrapper" >
+      <div class="row" style="height:100vh" id="titlewithbtnact">
+        <div class="backbutton col-1 mt-4 d-flex align-items-center">
+            <a href="<?php echo base_url(); ?>/public/pupil/viewmoduletable" style="text-decoration: none; color: rgb(68, 68, 68);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+              </svg>
+            </a>
+            <h6 style="margin-left:1rem !important; margin-top: .5rem !important;">Return Home</h6>
         </div>
-      </div>
-
-      <!-- <div class="expandingcontainer">
-        <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
-        <img id="expandedImg" style="width:100%">
-        <div id="imgtext"></div>
-      </div> -->
-      <div class="mt-3">
-        <h1 style="margin-top:5%;"><?= $discussion->discussion; ?></h1>
-      </div>
-    </div>
-</div>
-
-<div class="container">
-  <div class="text-danger" style="margin-top:3%;">
-    <?php if (isset($validation)): ?>
-          <?php if ($validation->hasError('example')): ?>
-                <p>  <?= $validation->getError('example') ?></p>
+        <br><br><br>
+        <div>
+          <?php if (session()->get('success')): ?>
+            <div class="alert alert-success" role="alert" style="margin-bottom:5%;">
+                <h4><?= session()->get('success') ?></h4>
+            </div>
           <?php endif; ?>
-    <?php endif; ?>
-    <div class="text-danger" style="margin-top:3%;">
-      <?php if (isset($validation)): ?>
-            <?php if ($validation->hasError('image')): ?>
-                  <p>  <?= $validation->getError('image') ?></p>
-            <?php endif; ?>
-      <?php endif; ?>
+          <br>
+    </div>
+        <div class="mt-3">
+          <br>
+
+              <div class="container">
+
+                <div class="row">
+                  <div class="col">
+                      <h1 style="text-align:left;font-size:80px;"><b><?= $users->lesson_name; ?></b></h1>
+                  </div>
+                  <div class="col" style="margin-top:2%; margin-left:5%;">
+                    <a  id="bootoon" href="<?php echo base_url(); ?>/public/pupil/viewactivity\<?= $users->lesson_id ?>" style="text-decoration:none;" class="align-middle">
+                      <button type="button" class="btn btn-outline-info">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                          <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                          <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                        </svg> View Activity
+                    </button>
+                    </a>
+                  </div>
+                  <script>
+                    
+                    $("#bootoon").click(function(){
+                        if(confirm("Press Ok if done with module.")){
+                          $("#bootoon");
+                        }
+                        else{
+                          return false;
+                        }
+                    });
+                  </script>
+                </div>
+
+              </div>
+              <hr style="width:100%;height:2px;color:#00acee">
+              <h3 style="text-align:left"><?= $users->lesson_description; ?></h3>
+        </div>
+        
+        <!-- form for the lesson -->
+        <div style="margin-top:2%;">
+          <?php if (session()->get('updatesuccess')): ?>
+            <div class="alert alert-success" role="alert" style="margin-bottom:2%;">
+                <h4><?= session()->get('updatesuccess') ?></h4>
+            </div>
+          <?php endif; ?>
+          <br>
+      </div>
     </div>
   </div>
 
 
-       <?php if($example): ?>
-       <?php foreach($example as $examples): ?>
+  <!-- DISCUSSION AREA -->
+  <div class="container scroll_area" style="margin-bottom:7%; height:100vh" id="">
+      <div class="row">
+        <div class="mt-3">
+          <div class="imageview">
+            <?php if (strcmp($image->file_extension,'mp4')==0): ?>
+              <video controls>
+                  <source src="<?=base_url()?>/public/uploads/images/<?= $image->file_name; ?>" type="video/mp4">
+            </video>
+            <?php else: ?>
+                  <a href="<?=base_url()?>/public/uploads/images/<?= $image->file_name; ?>" target="_blank"><img src="<?=base_url()?>/public/uploads/images/<?= $image->file_name; ?>"  alt="" width="auto" height="auto" onclick="myFunction(this);" class="img-fluid"></a>
+            <?php endif; ?>
+          </div>
+        </div>
 
-   <?php $example_no++;  ?>
-         <div class="container" style="width:80%;border:0.5px solid #00acee;margin-bottom:2.5%; border-radius:4px; box-shadow:2px 3px 2px grey;">
-             <div class="row">
-                 <div class="col">
-                           <div class="row" style="margin-bottom:5%;">
-                               <div class="col-sm">
-                                     <h3 style="text-align:left;margin-top:2%;margin-bottom:2%;">Example <?= $example_no   ?> </h3>
-                               </div>
+        <!-- <div class="expandingcontainer">
+          <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
+          <img id="expandedImg" style="width:100%">
+          <div id="imgtext"></div>
+        </div> -->
+        <div class="mt-3">
+          <h1 style="margin-top:5%;"><?= $discussion->discussion; ?></h1>
+        </div>
+      </div>
+  </div>
 
-                           </div>
-
-                     <h1 style="margin-bottom:2%;"><?= $examples['example']; ?></h1>
-                     <div style="margin-bottom:5%;">
-                       <div class="strike" style="margin-bottom:3%;">
-                         <span style="color:grey;">Media Example</span>
-                       </div>
-                       <?php if (strcmp($examples['file_name'],'NoFile')==0): ?>
-                            <p style="color:grey; margin-top:2%;">No media uploaded</p>
-                       <?php else: ?>
-
-                           <?php if (strcmp($examples['file_extension'],'mp4')==0): ?>
-
-                               <a href="<?=base_url()?>/public/uploads/images/<?= $examples['file_name']; ?>>" target="_blank" style="margin-bottom:3%;">
-                                 <video controls>
-                                     <source src="<?=base_url()?>/public/uploads/images/<?= $examples['file_name']; ?>" type="video/mp4">
-                               </video>
-                             </a>
-
-                           <?php else: ?>
-                           <a href="<?=base_url()?>/public/uploads/images/<?= $examples['file_name']; ?>" target="_blank" style="margin-bottom:3%;">
-                               <img src="<?=base_url()?>/public/uploads/images/<?= $examples['file_name']; ?>"  alt="" width="auto" height="auto" onclick="myFunction(this);" class="img-fluid">
-                             </img></a>
-                           <?php endif; ?>
-                       <?php endif; ?>
-                     </div>
-                 </div>
-             </div>
-         </div>
-
-      <?php endforeach; ?>
+  <!-- EXAMPLE AREA -->  
+  <div class="container scroll_area container_example pt-5" style="max-width: 2000px !important;">
+    <div class="text-danger" style="margin-top:3%;">
+      <?php if (isset($validation)): ?>
+            <?php if ($validation->hasError('example')): ?>
+                  <p>  <?= $validation->getError('example') ?></p>
+            <?php endif; ?>
       <?php endif; ?>
+      <div class="text-danger" style="margin-top:3%;">
+        <?php if (isset($validation)): ?>
+              <?php if ($validation->hasError('image')): ?>
+                    <p>  <?= $validation->getError('image') ?></p>
+              <?php endif; ?>
+        <?php endif; ?>
+      </div>
+    </div>
 
 
-</div>
+        <?php if($example): ?>
+        <?php foreach($example as $examples): ?>
+
+    <?php $example_no++;  ?>
+          <div class="container example_area" style="">
+              <div class="row">
+                  <div class="col">
+                            <div class="row" style="margin-bottom:5%;">
+                                <div class="col-sm">
+                                      <h3 style="text-align:left;margin-top:2%;margin-bottom:2%;">Example <?= $example_no   ?> </h3>
+                                </div>
+
+                            </div>
+
+                      <h1 style="margin-bottom:2%;"><?= $examples['example']; ?></h1>
+                      <div style="margin-bottom:5%;">
+                        <div class="strike" style="margin-bottom:3%;">
+                          <span style="color:grey;">Media Example</span>
+                        </div>
+                        <?php if (strcmp($examples['file_name'],'NoFile')==0): ?>
+                              <p style="color:grey; margin-top:2%;">No media uploaded</p>
+                        <?php else: ?>
+
+                            <?php if (strcmp($examples['file_extension'],'mp4')==0): ?>
+
+                                <a href="<?=base_url()?>/public/uploads/images/<?= $examples['file_name']; ?>>" target="_blank" style="margin-bottom:3%;">
+                                  <video controls>
+                                      <source src="<?=base_url()?>/public/uploads/images/<?= $examples['file_name']; ?>" type="video/mp4">
+                                </video>
+                              </a>
+
+                            <?php else: ?>
+                            <a href="<?=base_url()?>/public/uploads/images/<?= $examples['file_name']; ?>" target="_blank" style="margin-bottom:3%;">
+                                <img src="<?=base_url()?>/public/uploads/images/<?= $examples['file_name']; ?>"  alt="" width="auto" height="auto" onclick="myFunction(this);" class="img-fluid">
+                              </img></a>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+        <?php endforeach; ?>
+        <?php endif; ?>
+
+
+  </div>
+  </div>
 </div>
 
 
    <br>
  </div>
- <form class="" action="<?php echo site_url('teacher/viewmodule/'.$users->lesson_id);?>" method="post" id="form" style="display:none;"  enctype="multipart/form-data">
-   <div class="container" style="margin-top:5%;">
+<form class="" action="<?php echo site_url('teacher/viewmodule/'.$users->lesson_id);?>" method="post" id="form" style="display:none;"  enctype="multipart/form-data">
+ 
+
+    <div class="container" style="margin-top:5%;">
      <div class="row">
        <div class="col-sm">
                <div class="form-group">
@@ -203,6 +224,7 @@
 
      </div>
    </div>
+
    <br>
    <center>
    <button type="submit" class="btn btn-primary btn-block mb-4 mt-4">Submit</button>
@@ -307,6 +329,56 @@ function myFunction(imgs) {
       }
   }
   </script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> 
+<script type="text/javascript">
+
+$(document).ready(function () {
+    $('html, body').animate({
+        scrollTop: $('#titlewithbtnact').offset().top
+    }, 'fast');
+});
+
+</script>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha384-vk5WoKIaW/vJyUAd9n/wmopsmNhiy+L2Z+SBxGYnUkunIxVxAv/UtMOhba/xskxh"
+        crossorigin="anonymous"></script>
+<script src="scroll-to-section.min.js">
+  $(function(){
+2
+  $("#coke").scrollToSection({childList:".con10ner"});
+3
+});
+
+</script>
+
+<style>
+#scroll_container {
+  scroll-snap-type: y mandatory;
+  overflow: auto;
+}
+
+.scroll_area {
+  scroll-snap-align: start;
+  height:100vh;
+}
+
+.container_example {
+  display:flex;
+  height:100vh !important;
+  overflow-x: auto;
+  gap: 20px;
+}
+
+.example_area {
+  width: 80% !important;
+  border:0.5px solid #00acee;
+  margin-bottom:2.5%; 
+  border-radius:4px; 
+  box-shadow:2px 3px 2px grey;
+}
+</style>
 
 
 <?= $this->endSection() ?>

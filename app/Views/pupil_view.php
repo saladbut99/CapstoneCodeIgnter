@@ -26,6 +26,11 @@
         </div>
    </div>
 
+  <audio id="beep-one" hidden preload="auto">
+    <source src="<?=base_url()?>/public/assets/click2.mp3">
+    <source src="audio/beep.ogg">
+  </audio>
+
    <?php if (session()->get('updatesuccess')): ?>
    <div class="alert alert-success" role="alert" style="margin-bottom:5%;">
        <h4><?= session()->get('updatesuccess') ?></h4>
@@ -33,23 +38,39 @@
   <?php endif; ?>
 
    <div class="container mt-5" style="margin-bottom:5%;">
-     <div class="mt-3">
-       <div class="backbutton col-2">
-           <a href="home" style="text-decoration: none; color: rgb(68, 68, 68);">
-           <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
-               <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
-           </svg>
-           </a>
-       </div>
+
+    <div class="row">
+      <!-- BACKBUTTON DIV -->
+      <div class="backbutton col-3 d-flex align-items-center">
+          <a href="home" style="text-decoration: none; color: rgb(68, 68, 68);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+            </svg>
+          </a>
+        <h6 style="margin-left:1rem !important;">Return Home</h6>
+      </div>
+
+      <!-- BUTTONS FOR TABLE POP UP -->
+      <div class="buttonforunit col d-flex align-items-center">
+        <h4 id="kwarter"> KWARTER: </h4>
+        <button class="btn btn-lg btn-unit" id="btn-unit1"> 1 </button>
+        <button class="btn btn-lg btn-unit" id="btn-unit2"> 2 </button>
+        <button class="btn btn-lg btn-unit" id="btn-unit3"> 3 </button>
+        <button class="btn btn-lg btn-unit" id="btn-unit4"> 4 </button>
+      </div>
+    </div>
+
+      <!-- IF ELSE FOR TABLE ON UNITS -->
+     <div class="">
        <br>
        <?php if (!$users): ?>
           <h1 style="text-align:center;">No Added Module</h1>
       <?php else: ?>
-
+        <!-- UNIT 1 TABLE -->
         <table class="table table-borderless table-hover" id="users-list"  style=" border-bottom: none;">
           <thead style="text-align:left; font-size:3rem">
              <tr>
-                <th style="width:50%;">Unit 1</th>
+                <th style="width:50%;">Kwarter 1</th>
 
              </tr>
           </thead>
@@ -66,10 +87,11 @@
             <?php endforeach; ?>
             <?php endif; ?>
         </table>
+        <!-- UNIT 2 TABLE -->
         <table class="table table-borderless table-hover" id="users-list2" style=" border-bottom: none;" >
           <thead style="text-align:left; font-size:3rem">
              <tr>
-                <th style="width:50%;">Unit 2</th>
+                <th style="width:50%;">Kwarter 2</th>
 
              </tr>
           </thead>
@@ -87,10 +109,11 @@
             <?php endforeach; ?>
             <?php endif; ?>
         </table>
+        <!-- UNIT 3 TABLE -->
         <table class="table table-borderless table-hover" id="users-list3" style=" border-bottom: none;" >
           <thead style="text-align:left; font-size:3rem">
              <tr>
-                <th style="width:50%;">Unit 3</th>
+                <th style="width:50%;">Kwarter 3</th>
 
              </tr>
           </thead>
@@ -106,10 +129,11 @@
             <?php endforeach; ?>
             <?php endif; ?>
         </table>
+        <!-- UNIT 4 TABLE -->
         <table class="table table-borderless table-hover" id="users-list4" style=" border-bottom: none;" >
           <thead style="text-align:left; font-size:3rem">
              <tr>
-                <th style="width:50%;">Unit 4</th>
+                <th style="width:50%;">Kwarter 4</th>
 
              </tr>
           </thead>
@@ -179,6 +203,44 @@
     $( ".menu").toggle();
 });
 </script>
+
+<script>
+  $( "#btn-unit1" ).click(function() {
+    $( "#btn-unit1" ).css({'cssText': 'background-color: whitesmoke !important'});
+    $( "#users-list").show();
+    $( "#users-list2").hide();
+    $( "#users-list3").hide();
+    $( "#users-list4").hide();
+});
+$( "#btn-unit2" ).click(function() {
+    $( "#btn-unit1" ).css({'cssText': 'background-color: white !important'});
+    $( "#users-list").hide();
+    $( "#users-list2").show();
+    $( "#users-list3").hide();
+    $( "#users-list4").hide();
+});
+$( "#btn-unit3" ).click(function() {
+    $( "#btn-unit1" ).css({'cssText': 'background-color: white !important'});
+    $( "#users-list").hide();
+    $( "#users-list2").hide();
+    $( "#users-list3").show();
+    $( "#users-list4").hide();
+});
+$( "#btn-unit4" ).click(function() {
+    $( "#btn-unit1" ).css({'cssText': 'background-color: white !important'});
+    $( "#users-list").hide();
+    $( "#users-list2").hide();
+    $( "#users-list3").hide();
+    $( "#users-list4").show();
+});
+
+var beepOne = $("#beep-one")[0];
+$(".btn-unit").click(function () {
+beepOne.currentTime=0;
+beepOne.play();
+});
+</script>
+
 <script>
   function doconfirm()
   {
@@ -189,5 +251,12 @@
       }
   }
   </script>
+
+  <style>
+    .btn:focus {
+      outline: none !important;
+      box-shadow: none !important;
+    }
+  </style>
 
 <?= $this->endSection() ?>

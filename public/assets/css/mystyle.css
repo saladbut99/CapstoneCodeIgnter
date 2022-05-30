@@ -604,6 +604,38 @@ overflow: auto;
   .deletebutton:hover + .show {
     display: block;
   }
+
+/* for view module table */
+#kwarter {
+  border-radius: 20px 0 20px 20px;
+  border: 1px solid black;
+  margin-bottom: 0px; 
+  padding-top: 8px;
+  padding-left: 8px;
+  padding-bottom: 8px;
+  padding-right: 20px;
+  background-color: whitesmoke;
+}
+
+.btn-unit {
+  border: 1px solid black !important;
+  margin-inline: 2px;
+  border-radius: 0px 20px 20px 20px !important;
+  border-left: 2px !important;
+}
+
+.btn-unit:focus {
+  background-color: whitesmoke !important;
+}
+
+#btn-unit1 {
+  background-color: whitesmoke !important;
+}
+
+#users-list2, #users-list3, #users-list4 {
+  display: none ;
+}
+
 /* From here on, just aesthetics */
 
 
@@ -614,11 +646,6 @@ overflow: auto;
 
 /* mobile */
 @media only screen and (max-width: 480px) {
-body {
-  background-color: #2a4674 !important;
-  background-image: none !important;
-}
-
   .login_image {
     width: 40px;
   }
