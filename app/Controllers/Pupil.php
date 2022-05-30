@@ -18,6 +18,7 @@ use App\Models\MediaActivity;
 use App\Models\Choices;
 use App\Models\PerformanceRecords;
 use App\Models\Answers;
+use App\Models\Section;
 
 
 
@@ -121,6 +122,7 @@ private function setUserSession($user,$type){
      'firstname'=> $user['pupil_firstname'],
      'lastname'=> $user['pupil_lastname'],
      'username'=> $user['pupil_username'],
+     'section'=> $user['section_id'],
      'isLoggedIn'=> true,
      'usertype'=> $type,
    ];
@@ -499,6 +501,7 @@ public function update(){
         'activity_id'=>$actid,
         'activity_retakes'=>$retakes,
         'percentage_score'=>$percent_score,
+        'perfect_score'=>$data['master']->activity_perfect_score,
       ];
 
 
@@ -626,6 +629,7 @@ public function update(){
         'activity_id'=>$actid,
         'activity_retakes'=>$retakes,
         'percentage_score'=>$percent_score,
+        'perfect_score'=>$data['master']->activity_perfect_score,
       ];
 
       $answers = new Answers();
@@ -713,4 +717,49 @@ public function update(){
      return view('pupil_viewperformance', $data);
     }
 
+    public function viewoverallperformance(){
+      $type = session()->get('usertype');
+       if ($type!='Pupil' && $type=='Admin'){
+          return redirect()->to('admin/home');
+          //echo "hello";
+       }else if ($type!='Pupil' && $type=='Teacher') {
+         return redirect()->to('teacher/home');
+       }
+      $data=[
+        'meta_title'=>'Pupil | View Performance ',
+        //'act_id'=>$id,
+      ];
+
+      $total=0;
+      $range=0;
+      $new_pupil = new PerformanceRecords();
+      $data['pupil']=$new_pupil->where(['pupil_id'=>session()->get('t_id')])->findAll();
+
+      // $activity_id = new ActivityMaster();
+      // $data['id'] = $activity_id->where(['activity_id'=>$id])->get()->getRow();
+      // $records = new PerformanceRecords();
+      // // $userModel = new TeacherRegistration();
+      // $data['users']=$records->join('activity_master','activity_master.activity_id = performance_records.activity_id')->join('pupil', 'pupil.pupil_id = performance_records.pupil_id')->where(['performance_records.activity_id'=>$id])->findAll();
+      //$total=$total+$data['pupil']->activity_score;
+      // foreach ($data['pupil'] as $key ) {
+      //   $total=$total+$key['activity_score'];
+      //   $range=$range+$key['perfect_score'];
+      // }
+      $records = new ActivityMaster();
+      // $userModel = new TeacherRegistration();
+      $data['users']=$records->join('lesson_master','activity_master.lesson_id = lesson_master.lesson_id')
+                             ->join('teacher_lesson', 'lesson_master.lesson_id = teacher_lesson.lesson_id')
+                             ->join('teacher', 'teacher_lesson.teacher_id = teacher.teacher_id')
+                             ->join('section', 'teacher.section_id = section.section_id')
+                             ->where(['section.section_id'=>session()->get('section')])
+                             ->findAll();
+      // echo "<pre>";
+    
+    //  $total_percent=$total/$range;
+
+
+
+
+    return view('pupil_viewoverallperformance', $data);
+    }
 }

@@ -4,6 +4,7 @@
 
 <?php $question_no=0;
     $choice_id=0;
+    $display='block';
  ?>
 <div class="navbar" style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(<?=base_url()?>/public/assets/images/banner.png);">
        <nav class="nav row w-100 align-items-center">
@@ -70,6 +71,10 @@
          <br>
     </div>
 <center>
+  <?php if (!$question): ?>
+      <h1>This activity has no question yet, pleae try again later!</h1>
+      <?php $display='none'; ?>
+  <?php endif; ?>
     <form class=""  action="<?php echo site_url('pupil/check_identification/'.$users->activity_id);?>" method="post" id="form" style="display:block; margin-bottom:5%;"  enctype="multipart/form-data">
     <?php foreach ($question as $questions): ?>
 
@@ -114,7 +119,7 @@
             </div>
             <?php $choice_id+=1; ?>
     <?php endforeach; ?>
-    <button type="submit" form="form"  class="btn btn-primary btn-block mb-4 mt-4">Submit Quiz</button>
+    <button type="submit" form="form" style="display:<?= $display; ?>"  class="btn btn-primary btn-block mb-4 mt-4">Submit Quiz</button>
   </form>
 </center>
    </div>

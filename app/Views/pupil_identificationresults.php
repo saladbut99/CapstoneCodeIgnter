@@ -46,21 +46,39 @@
         <?php endif; ?>
         <br>
    </div>
+
+   <?php if ($performance->percentage_score>=50): ?>
+       <?php $message='Keep up the good work!'; ?>
+   <?php else: ?>
+     <?php $message='Whoops! Try the activity again!'; ?>
+   <?php endif; ?>
+   <br>
    <div class="container">
-
-       <br>
-       <div class="row">
+     <div class="row" style="margin-bottom:2%;">
          <div class="col">
-            <h1 style="text-align:left;font-size:60px;"><b><?= $users->activity_name; ?></b></h1>
+              <h1><b> <?= $users->activity_name; ?></b></h1>
          </div>
-         <div class="col">
-            <h1 style="text-align:right;font-size:60px;"><b>Your Score: <?= $performance->activity_score ?> / <?= $users->activity_perfect_score ?></b></h1>
-         </div>
-       </div>
-
-           <hr style="width:100%;height:2px;color:#00acee">
-           <h3 style="text-align:left"><?= $users->activity_instruction; ?></h3>
      </div>
+       <div class="row" style="margin-bottom:2%;">
+           <div class="col">
+               <h1>Hi <?= session()->get('firstname') ?>!</h1>
+           </div>
+           <div class="col">
+               <h1>Your Score:<?= $performance->activity_score ?>  / <?= $users->activity_perfect_score ?> </h1>
+           </div>
+       </div>
+       <div class="row" style="margin-bottom:2%;">
+           <div class="col">
+               <h1><?= $performance->percentage_score ?>%</h1>
+           </div>
+       </div>
+       <div class="row">
+           <div class="col">
+               <h1><?= $message ?></h1>
+           </div>
+       </div>
+   </div>
+ </div>
      <!-- form for the lesson -->
     <div style="margin-top:2%;">
        <?php if (session()->get('updatesuccess')): ?>

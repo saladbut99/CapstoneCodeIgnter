@@ -18,6 +18,8 @@ use App\Models\MediaActivity;
 use App\Models\Choices;
 use App\Models\PerformanceRecords;
 use App\Models\Answers;
+use App\Models\Section;
+
 
 class Teacher extends BaseController
 {

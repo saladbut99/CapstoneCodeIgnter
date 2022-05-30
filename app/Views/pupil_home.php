@@ -95,7 +95,7 @@
           <h1> VIEW YOUR SCORE </h1>
           <div class="pop-up d-flex">
           <a href="viewmoduleactivity" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%; margin-right:5%;"> View Activity Performance</a>
-          <a href="#" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> View Overall Performance</a>
+          <a href="viewoverallperformance" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> View Overall Performance</a>
           </div>
         </div>
         <div class="row h-60 align-items-center mt-2 pop-up" style="" id="pop-up3">
