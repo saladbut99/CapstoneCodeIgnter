@@ -2,7 +2,9 @@
 
 <?= $this->section('content'); ?>
 
-<?php $question_no=0; ?>
+<?php $question_no=0;
+    $choice_id=0;
+ ?>
 <div class="navbar" style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(<?=base_url()?>/public/assets/images/banner.png);">
        <nav class="nav row w-100 align-items-center">
            <div class="col-7">
@@ -46,11 +48,13 @@
    </div>
        <div class="col mt">
          <br>
-         <div class="col">
-            <h1 style="text-align:left;font-size:6 0px;"><b><?= $users->activity_name; ?></b></h1>
-         </div>
-         <div class="col">
-            <h1 style="text-align:right;font-size:6 0px;"><b><?= $users->activity_perfect_score ?> / <?= $users->activity_perfect_score ?></b></h1>
+         <div class="row">
+           <div class="col">
+              <h1 style="text-align:left;font-size:6 0px;"><b><?= $users->activity_name; ?></b></h1>
+           </div>
+           <div class="col">
+              <h1 style="text-align:right;font-size:6 0px;"><b><?= $users->activity_perfect_score ?> / <?= $users->activity_perfect_score ?></b></h1>
+           </div>
          </div>
        </div>
              <hr style="width:100%;height:2px;color:#00acee">
@@ -66,6 +70,7 @@
          <br>
     </div>
 <center>
+    <form class=""  action="<?php echo site_url('pupil/check_identification/'.$users->activity_id);?>" method="post" id="form" style="display:block; margin-bottom:5%;"  enctype="multipart/form-data">
     <?php foreach ($question as $questions): ?>
 
      <?php $question_no++;  ?>
@@ -76,7 +81,7 @@
                                   <div class="col-sm">
                                         <h3 style="text-align:left;margin-top:2%;margin-bottom:2%;">Question <?= $question_no; ?></h3>
                                   </div>
-                                
+
                               </div>
 
                         <h1 style="margin-bottom:2%;"><?= $questions['activity_question']; ?></h1>
@@ -97,14 +102,20 @@
                         <div class="strike" >
                           <span style="color:grey;">Answer</span>
                         </div>
+                        <div class="form-check grupouno" style="margin-bottom:5%; width:100%">
 
-                                <div class="" style="margin-bottom:2%; " >
-                                        <h3 style="padding: 2%;border: 2px solid green; width:50%; border-radius:10px; color:green;"><?= $questions['activity_answer']; ?></h3>
-                                </div>
+                          <label class="form-check-label" for="flexRadioDefault1" >
+                              <input type="text" id="question_4" class="form-control input-mc" name="<?= $choice_id ?>[answer]" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px; width:100%;" required>
+                          </label>
+                          <input type="hidden" name="<?= $choice_id ?>[activity_content_id]" value="<?= $questions['activity_content_id'] ?>">
+                        </div>
                     </div>
                 </div>
             </div>
+            <?php $choice_id+=1; ?>
     <?php endforeach; ?>
+    <button type="submit" form="form"  class="btn btn-primary btn-block mb-4 mt-4">Submit Quiz</button>
+  </form>
 </center>
    </div>
  </div>

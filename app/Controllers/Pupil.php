@@ -16,6 +16,9 @@ use App\Models\ActivityMaster;
 use App\Models\ActivityContent;
 use App\Models\MediaActivity;
 use App\Models\Choices;
+use App\Models\PerformanceRecords;
+use App\Models\Answers;
+
 
 
 class Pupil extends BaseController
@@ -29,11 +32,19 @@ class Pupil extends BaseController
      }else if ($type!='Pupil' && $type=='Teacher') {
        return redirect()->to('teacher/home');
      }
-    $title=[
+    $data=[
       'meta_title'=>'Pupil | Home'
     ];
 
-      return view('pupil_home', $title);
+    $pupil_id=session()->get('t_id');
+    $new = new PupilModel();
+    $data['users'] = $new->where('pupil_id',$pupil_id)->get()->getRow();
+    // echo "<pre>";
+    //   print_r($data['users']);
+    // echo "<pre";
+      return view('pupil_home', $data);
+
+
   }
   public function view()
   {
@@ -80,18 +91,24 @@ class Pupil extends BaseController
           $model = new PupilModel();
           $user = $model->where('pupil_username',$this->request->getVar('username'))
                           ->first();
-        //get the value of the user type from the form after pass it to the array
-        $type=$this->request->getVar('usertype');
-        //this array bellow ang gamiton if naay user type
-        $this->setUserSession($user,$type);
-    //   $this->setUserSession($user);
+
+          if (strcmp($user['account_status'],'Inactive')==0) {
+            $data['status']='Account Inactive';
+          }else {
+            //get the value of the user type from the form after pass it to the array
+            $type=$this->request->getVar('usertype');
+            //this array bellow ang gamiton if naay user type
+            $this->setUserSession($user,$type);
+        //   $this->setUserSession($user);
+            return redirect()->to('pupil/home');
+          }
 
           // ];
           // $model->save($newData);
           // $session = session();
           // $session->setFlashdata('success','Successful Registration');
             //return redirect()->to('dashboard');
-            return redirect()->to('pupil/home');
+
          }
 
 
@@ -186,6 +203,63 @@ public function update(){
       $data['pupil'] = $section_id->where(['pupil_id'=>$pupil_id])->get()->getRow();
 
       return view('pupil_view', $data);
+    }
+
+    public function viewmoduleactivity()
+    {
+      $type = session()->get('usertype');
+       if ($type!='Pupil' && $type=='Admin'){
+          return redirect()->to('admin/home');
+          //echo "hello";
+       }else if ($type!='Pupil' && $type=='Teacher') {
+         return redirect()->to('teacher/home');
+       }
+      $data=[
+        'meta_title'=>'Pupil | View'
+      ];
+
+
+      $pupil_id=session()->get('t_id');
+      $userModel = new TeacherModel();
+      $data['users']=$userModel->join('teacher_lesson', 'teacher.teacher_id = teacher_lesson.teacher_id')->join('lesson_master','teacher_lesson.lesson_id = lesson_master.lesson_id')->join('section','teacher.section_id = section.section_id')->orderBy('teacher.teacher_id', 'ASC')->findAll();
+
+      $section_id = new PupilModel();
+      $data['pupil'] = $section_id->where(['pupil_id'=>$pupil_id])->get()->getRow();
+
+      return view('pupil_actview', $data);
+    }
+
+    public function viewactivitytable($id){
+      $type = session()->get('usertype');
+       if ($type!='Pupil' && $type=='Admin'){
+          return redirect()->to('admin/home');
+          //echo "hello";
+       }else if ($type!='Pupil' && $type=='Teacher') {
+         return redirect()->to('teacher/home');
+       }
+      $data=[
+        'meta_title'=>'Teacher | Add Activity '
+      ];
+
+      $db      = \Config\Database::connect();
+
+      // $userModel = new LessonMaster();
+      // $data['lesson'] = $userModel->where(['lesson_id'=>$id])->get()->getRow();
+
+      // $builder = $db->table('activity_master');
+      //
+      // $builder->where('lesson_id',  $id);
+      //
+      // $data['users'] = $builder->get()->getRow();
+
+      $activity_id = new ActivityMaster();
+      $data['users'] = $activity_id->where(['lesson_id'=>$id])->findAll();
+
+      $userModel = new LessonMaster();
+      $data['lesson'] = $userModel->where(['lesson_id'=>$id])->get()->getRow();
+
+
+       return view('pupil_viewactivitytable', $data);
     }
 
     public function viewmodule($id){
@@ -295,11 +369,11 @@ public function update(){
       $data['users'] = $activity_id->where(['activity_id'=>$id])->get()->getRow();
 
       $activity_id = new ActivityContent();
-      $data['question'] = $activity_id->where(['activity_id'=>$id])->findAll();
+      $data['question'] = $activity_id->where(['activity_id'=>$id])->orderBy('activity_content_id', 'RANDOM')->findAll();
 
 
       $choices = new Choices();
-      $data['choice'] = $choices->findAll();
+      $data['choice'] = $choices->orderBy('choices_id', 'RANDOM')->findAll();
 
       $medias = new MediaActivity();
       $data['media'] = $medias->findAll();
@@ -359,7 +433,7 @@ public function update(){
       $data['users'] = $activity_id->where(['activity_id'=>$id])->get()->getRow();
 
       $activity_id = new ActivityContent();
-      $data['question'] = $activity_id->where(['activity_id'=>$id])->findAll();
+      $data['question'] = $activity_id->where(['activity_id'=>$id])->orderBy('activity_content_id', 'RANDOM')->findAll();
 
 
       $choices = new Choices();
@@ -370,6 +444,273 @@ public function update(){
 
        return view('pupil_identification', $data);
 
+    }
+
+    public function check($actid){
+      $type = session()->get('usertype');
+       if ($type!='Pupil' && $type=='Admin'){
+          return redirect()->to('admin/home');
+          //echo "hello";
+       }else if ($type!='Pupil' && $type=='Teacher') {
+         return redirect()->to('teacher/home');
+       }
+      $data=[
+        'meta_title'=>'Teacher | Activity '
+      ];
+      //
+
+      $score=0;
+
+
+      $choices = new Choices();
+      $data['choice'] = $choices->findAll();
+
+      $ind=0;
+
+      $retakes=1;
+       foreach ($_POST as $key) {
+         // print_r($key['activity_content_id']);
+         $activity_id = new ActivityContent();
+         $data['question'] = $activity_id->where(['activity_content_id'=>$key['activity_content_id']])->get()->getRow();
+
+         if (strcmp($key['answer'],$data['question']->activity_answer)==0) {
+            $score+=2;
+         }
+       }
+
+       $activity_id = new ActivityMaster();
+       $data['master'] = $activity_id->where(['activity_id'=>$actid])->get()->getRow();
+       $percent_score=$score/$data['master']->activity_perfect_score*100;
+
+       date_default_timezone_set('Asia/Manila');
+        $myTime=date('Y-m-d h:i:s');
+
+      $id = new PerformanceRecords();
+      $data['list'] = $id->where(['activity_id'=>$actid])->findAll();
+
+      foreach ($data['list'] as $key) {
+          $retakes+=1;
+      }
+
+      $newData=[
+        'pupil_id' => session()->get('t_id'),
+        'activity_score'=>$score,
+        'performed_activity_date'=>$myTime,
+        'activity_id'=>$actid,
+        'activity_retakes'=>$retakes,
+        'percentage_score'=>$percent_score,
+      ];
+
+
+      $answers = new Answers();
+
+      $PerformanceRecords = new PerformanceRecords();
+      $PerformanceRecords->save($newData);
+      $performance_id = $PerformanceRecords->getInsertID();
+      //
+
+      $data['record'] = $id->where(['performance_id'=>$performance_id])->get()->getRow();
+
+      foreach ($_POST as $answer) {
+            $arre=[
+              'activity_answer'=>$answer['answer'],
+              'performance_id'=>$performance_id,
+              'activity_content_id'=>$answer['activity_content_id'],
+            ];
+            $answers->save($arre);
+      }
+
+      // $act_retake = $data['record']->activity_retakes;
+      // $act_retake2=$act_retake+1;
+      // // $retake_data=[
+      // //   'activity_retakes'=>$actid+=1,
+      // // ];
+      //
+      // echo "<pre>";
+      //   print_r($retakes);
+      // echo "<pre";
+      // //
+      //
+      //  $db      = \Config\Database::connect();
+      //
+      //  $builder = $db->table('performance_records');
+      //  $builder->set('activity_retakes', 'activity_retakes + 1');
+      //  $builder->where('performance_id',  $performance_id);
+      //  $builder->update();
+
+    //  $data['results']=$_POST;
+
+
+
+
+
+      $data['results']=$_POST;
+
+      $activity_id = new ActivityMaster();
+      $data['users'] = $activity_id->where(['activity_id'=>$actid])->get()->getRow();
+
+      $performance = new PerformanceRecords();
+      $data['performance'] = $performance->where(['performance_id'=>$performance_id])->get()->getRow();
+
+      $activity_id = new ActivityContent();
+      $data['question'] = $activity_id->where(['activity_id'=>$actid])->findAll();
+
+
+      $choices = new Choices();
+      $data['choice'] = $choices->findAll();
+
+      $medias = new MediaActivity();
+      $data['media'] = $medias->findAll();
+
+      return view('pupil_multiplechoiceresults', $data);
+
+    }
+
+    public function check_identification($actid){
+      $type = session()->get('usertype');
+       if ($type!='Pupil' && $type=='Admin'){
+          return redirect()->to('admin/home');
+          //echo "hello";
+       }else if ($type!='Pupil' && $type=='Teacher') {
+         return redirect()->to('teacher/home');
+       }
+      $data=[
+        'meta_title'=>'Teacher | Activity '
+      ];
+      //
+      $retakes=1;
+      $score=0;
+
+
+
+
+      $choices = new Choices();
+      $data['choice'] = $choices->findAll();
+
+      $ind=0;
+
+
+       foreach ($_POST as $key) {
+         // print_r($key['activity_content_id']);
+         $activity_id = new ActivityContent();
+         $data['question'] = $activity_id->where(['activity_content_id'=>$key['activity_content_id']])->get()->getRow();
+
+         if (strcmp(strtoupper(trim($key['answer'])),strtoupper(trim($data['question']->activity_answer)))==0) {
+            $score+=2;
+         }
+       }
+
+       $activity_id = new ActivityMaster();
+       $data['master'] = $activity_id->where(['activity_id'=>$actid])->get()->getRow();
+       $percent_score=$score/$data['master']->activity_perfect_score*100;
+
+       date_default_timezone_set('Asia/Manila');
+        $myTime=date('Y-m-d h:i:s');
+
+        $id = new PerformanceRecords();
+        $data['list'] = $id->where(['activity_id'=>$actid])->findAll();
+
+        foreach ($data['list'] as $key) {
+            if (!$key['pupil_id']==session()->get('t_id')) {
+                $retakes=1;
+            }else {
+              $retakes+=1;
+            }
+        }
+
+
+      $newData=[
+        'pupil_id' => session()->get('t_id'),
+        'activity_score'=>$score,
+        'performed_activity_date'=>$myTime,
+        'activity_id'=>$actid,
+        'activity_retakes'=>$retakes,
+        'percentage_score'=>$percent_score,
+      ];
+
+      $answers = new Answers();
+
+      $PerformanceRecords = new PerformanceRecords();
+      $PerformanceRecords->save($newData);
+      $performance_id = $PerformanceRecords->getInsertID();
+
+      foreach ($_POST as $answer) {
+            $arre=[
+              'activity_answer'=>$answer['answer'],
+              'performance_id'=>$performance_id,
+              'activity_content_id'=>$answer['activity_content_id'],
+            ];
+            $answers->save($arre);
+      }
+
+
+      $data['results']=$_POST;
+
+      $activity_id = new ActivityMaster();
+      $data['users'] = $activity_id->where(['activity_id'=>$actid])->get()->getRow();
+
+      $performance = new PerformanceRecords();
+      $data['performance'] = $performance->where(['performance_id'=>$performance_id])->get()->getRow();
+
+      $activity_id = new ActivityContent();
+      $data['question'] = $activity_id->where(['activity_id'=>$actid])->findAll();
+
+
+      $choices = new Choices();
+      $data['choice'] = $choices->findAll();
+
+      $medias = new MediaActivity();
+      $data['media'] = $medias->findAll();
+
+      // echo "<pre>";
+      //   print_r($data['results']);
+      // echo "<pre";
+
+      // $id = new PerformanceRecords();
+      // $data['record'] = $id->where(['performance_id'=>$performance_id])->get()->getRow();
+      //
+      //
+      //
+      // $act_retake = $data['record']->activity_retakes;
+      // $act_retake+=1;
+      // // $retake_data=[
+      // //   'activity_retakes'=>$actid+=1,
+      // // ];
+      //
+      //
+      //  $db      = \Config\Database::connect();
+      //
+      //  $builder = $db->table('performance_records');
+      //  $builder->set('activity_retakes', $act_retake);
+      //  $builder->where('performance_id',  $performance_id);
+      //  $builder->update();
+     return view('pupil_identificationresults', $data);
+    }
+    public function viewperformance($id){
+      $type = session()->get('usertype');
+       if ($type!='Pupil' && $type=='Admin'){
+          return redirect()->to('admin/home');
+          //echo "hello";
+       }else if ($type!='Pupil' && $type=='Teacher') {
+         return redirect()->to('teacher/home');
+       }
+      $data=[
+        'meta_title'=>'Pupil | View Performance ',
+        'act_id'=>$id,
+      ];
+
+      $activity_id = new ActivityMaster();
+      $data['id'] = $activity_id->where(['activity_id'=>$id])->get()->getRow();
+      $records = new PerformanceRecords();
+      // $userModel = new TeacherRegistration();
+      $data['users']=$records->join('activity_master','activity_master.activity_id = performance_records.activity_id')->join('pupil', 'pupil.pupil_id = performance_records.pupil_id')->where(['performance_records.activity_id'=>$id])->findAll();
+      // echo "<pre>";
+      //   print_r($data['users']);
+      // echo "<pre";
+
+
+
+     return view('pupil_viewperformance', $data);
     }
 
 }

@@ -16,7 +16,8 @@ use App\Models\ActivityMaster;
 use App\Models\ActivityContent;
 use App\Models\MediaActivity;
 use App\Models\Choices;
-
+use App\Models\PerformanceRecords;
+use App\Models\Answers;
 
 class Teacher extends BaseController
 {
@@ -209,20 +210,18 @@ class Teacher extends BaseController
             $user = $model->where('teacher_username',$this->request->getVar('username'))
                             ->first();
           //get the value of the user type from the form after pass it to the array
-          $type=$this->request->getVar('usertype');
-          //this array bellow ang gamiton if naay user type
-          $this->setUserSession($user,$type);
-      //   $this->setUserSession($user);
+          if (strcmp($user['account_status'],'Inactive')==0) {
+            $data['status']='Account Inactive';
+          }else {
+            //get the value of the user type from the form after pass it to the array
+            $type=$this->request->getVar('usertype');
+            //this array bellow ang gamiton if naay user type
+            $this->setUserSession($user,$type);
+        //   $this->setUserSession($user);
+            return redirect()->to('teacher/home');
+          }
 
-            // ];
-            // $model->save($newData);
-            // $session = session();
-            // $session->setFlashdata('success','Successful Registration');
-              //return redirect()->to('dashboard');
-              return redirect()->to('teacher/home');
-           }
-
-
+        }
     }
     return view('teacher_login',$data);
   }
@@ -1581,7 +1580,7 @@ public function addquestion_identification($id){
    $rules=[
 
        'activity_question'=>[
-         'rules'=>'required|is_unique[activity_content.activity_question]',
+         'rules'=>'required|is_unique[activity_content.activity_question]|alpha_space',
          'label'=>'Activity Title',
        ],
        'image'=>[

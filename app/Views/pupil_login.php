@@ -59,6 +59,13 @@ body {
                     </div>
                 </div>
             <?php endif; ?>
+            <?php if (isset($status)): ?>
+                <div class="col-10" style="margin-bottom:5%;">
+                  <div class="alert alert-danger" role="aler">
+                            <p>Account Disabled</p>
+                      </div>
+                  </div>
+              <?php endif; ?>
           <div class="row h-100 align-items-center">
             <div class="col-md text-center">
                 <form action="pupil_login" method="post">
@@ -88,5 +95,3 @@ body {
   </center>
 
 <?= $this->endSection() ?>
-
-

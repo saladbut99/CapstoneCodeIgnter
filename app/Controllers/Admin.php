@@ -15,6 +15,8 @@ use App\Models\ActivityMaster;
 use App\Models\ActivityContent;
 use App\Models\MediaActivity;
 use App\Models\Choices;
+use App\Models\PerformanceRecords;
+use App\Models\Answers;
 
 class Admin extends BaseController
 {
@@ -648,7 +650,7 @@ public function update(){
     }else if ($type!='Admin' && $type=='Pupil') {
        return redirect()->to('pupil/home');
      }
-     
+
     $data=[
       'meta_title'=>'Teacher | Manage '
     ];
