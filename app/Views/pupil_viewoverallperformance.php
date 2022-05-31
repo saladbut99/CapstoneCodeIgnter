@@ -5,7 +5,13 @@
   <?php
     $question_no=0;
     $choice_id=0;
+    $count=1;
     $display='block';
+    $display2='none';
+    $total=0;
+    $range=0;
+    $total_score=0;
+    $message='';
   ?>
 
   <div class="navbar" style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(<?=base_url()?>/public/assets/images/banner.png);">
@@ -32,10 +38,11 @@
 
 <center>
 
+
   <div class="container h-100" style="margin-bottom:0%;" id="wrapper" >
      <div class="row">
        <div class="backbutton col-1">
-           <a onclick = "history.back()" style="text-decoration: none; color: rgb(68, 68, 68); cursor:pointer;">
+           <a href="<?php echo base_url(); ?>/public/pupil/home/" style="text-decoration: none; color: rgb(68, 68, 68); cursor:pointer;">
            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
                <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
            </svg>
@@ -48,103 +55,60 @@
               <h4><?= session()->get('success') ?></h4>
           </div>
         <?php endif; ?>
-        <br>
-   </div>
-       <div class="col mt">
-         <br>
-             <div class="row">
-               <div class="col">
-                  <h1 style="text-align:left;font-size:6 0px;" id='sample'><b> <?= $users->activity_name; ?></b></h1>
-               </div>
-               <div class="col">
-                  <h1 style="text-align:right;font-size:6 0px;"><b><?= $users->activity_perfect_score ?> / <?= $users->activity_perfect_score ?></b></h1>
-               </div>
-             </div>
-             <hr style="width:100%;height:2px;color:#00acee">
-             <h3 style="text-align:left"><?= $users->activity_instruction; ?></h3>
-       </div>
-       <!-- form for the lesson -->
-      <div style="margin-top:2%;">
-         <?php if (session()->get('updatesuccess')): ?>
-           <div class="alert alert-success" role="alert" style="margin-bottom:2%;">
-               <h4><?= session()->get('updatesuccess') ?></h4>
-           </div>
-         <?php endif; ?>
-         <br>
-    </div>
-<center>
-  <?php if (!$question): ?>
-      <h1>This activity has no question yet, pleae try again later!</h1>
-      <?php $display='none'; ?>
-  <?php endif; ?>
-  <form class=""  action="<?php echo site_url('pupil/check/'.$users->activity_id);?>" method="post" id="form" style="display:block; margin-bottom:5%;"  enctype="multipart/form-data">
-    <?php foreach ($question as $questions): ?>
-
-     <?php $question_no++;  ?>
-
-            <div class="container" style="width:80%;border:0.5px solid #00acee;margin-bottom:2.5%; border-radius:4px; box-shadow:2px 3px 2px grey;">
-                <div class="row">
-                    <div class="col">
-                              <div class="row" style="margin-bottom:5%;">
-                                  <div class="col-sm">
-                                        <h3 style="text-align:left;margin-top:2%;margin-bottom:2%;">Question <?= $question_no; ?></h3>
-                                  </div>
-                              </div>
-
-                        <h1 style="margin-bottom:2%;"><?= $questions['activity_question']; ?></h1>
-                        <?php foreach ($media as $medias): ?>
-                          <?php if ($medias['activity_content_id']==$questions['activity_content_id']): ?>
-                            <?php if (strcmp($medias['file_extension'],'mp4')==0): ?>
-                              <video controls>
-                                  <source src="<?=base_url()?>/public/uploads/images/<?= $medias['file_name'] ?>" type="video/mp4">
-                            </video>
-                            <?php else: ?>
-                                <a href="<?=base_url()?>/public/uploads/images/<?= $medias['file_name']; ?>" target="_blank"><img src="<?=base_url()?>/public/uploads/images/<?= $medias['file_name']; ?>"  alt="" width="70%" height="70%" onclick="myFunction(this);" class="img-fluid"></a>
-                            <?php endif; ?>
-                          <?php endif; ?>
-                        <?php endforeach; ?>
-
-
-
-                        <div class="strike" >
-                          <span style="color:grey;"></span>
-                        </div>
-                        <?php foreach ($choice as $choices): ?>
-
-                          <?php if ($choices['activity_content_id']==$questions['activity_content_id']): ?>
-
-
-                                <div class="form-check" style="width:100%;">
-                                  <input class="form-check-input radiobtn-mc" type="radio" name="<?= $choice_id ?>[answer]" id="answer"  value="<?= $choices['choice']; ?>"  required >
-
-                                  <label class="form-check-label" for="flexRadioDefault1" style="border: 2px solid grey; width:50%; border-radius:10px; color:grey">
-                                    <?= $choices['choice']; ?>
-                                    <input type="hidden" name="<?= $choice_id ?>[activity_content_id]" value="<?= $choices['activity_content_id'] ?>">
-                                </div>
-
-
-                          <?php endif; ?>
-
-                        <?php endforeach; ?>
-
-                    </div>
-                </div>
-            </div>
-
-
-          <?php $choice_id+=1; ?>
-
-    <?php endforeach; ?>
-    <button type="submit" form="form" style="display: <?= $display;?>"  class="btn btn-primary btn-block mb-4 mt-4">Submit Quiz</button>
-  </form>
-
-
-</center>
-   </div>
- </div>
-
+        </div>
+      </div>
+<?php foreach ($pupil as $key ): ?>
+ <?php
+        $total=$total+$key['activity_score'];
+        $range=$range+$key['perfect_score'];
+    ?>
+<?php endforeach; ?>
+<?php if ($total == 0 && $range==0): ?>
+        <?php $display='none'; ?>
+        <?php $display2='block'; ?>
+<?php else: ?>
+    <?php   $total_score=$total/$range*100; ?>
+    <?php if ($total_score>=50): ?>
+        <?php $message='Keep up the good work!'; ?>
+    <?php else: ?>
+      <?php $message='Dont worry, try reviewing the modules and answer again!'; ?>
+    <?php endif; ?>
+<?php endif; ?>
 
 <!-- form for the question -->
+<div class="container" style="display: <?= $display2 ?>">
+  <div class="row">
+      <div class="col">
+          <h1>You haven't answered the activities yet <?= session()->get('firstname') ?></h1>
+      </div>
+  </div>
+</div>
+
+<div class="container" style="display:<?= $display ?>">
+    <div class="row">
+      <div class="col">
+          <h1>Hi <?= session()->get('firstname') ?>!</h1>
+      </div>
+    </div>
+    <div class="row" style="margin-top:3%;">
+      <div class="col">
+          <h1>Your overall performance score is:</h1>
+      </div>
+    </div>
+    <div class="row" style="margin-top:3%;">
+      <div class="col">
+          <h1><?=$total_score ?>%</h1>
+      </div>
+    </div>
+    <div class="row" style="margin-top:3%;">
+      <div class="col">
+          <h1><?=$message ?></h1>
+      </div>
+    </div>
+</div>
+
+
+
 
 
 

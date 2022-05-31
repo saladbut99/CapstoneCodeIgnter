@@ -113,6 +113,7 @@ $routes->group('pupil', ["filter" => 'Auth'], function($routes){
   $routes->get('viewmoduleactivity/(:num)','Pupil::viewmoduleactivity/$1');
   $routes->get('viewactivity/(:num)','Pupil::viewactivity/$1');
   $routes->get('viewperformance/(:num)','Pupil::viewperformance/$1');
+  $routes->get('viewoverallperformance','Pupil::viewoverallperformance');
   $routes->get('viewactivitytable/(:num)','Pupil::viewactivitytable/$1');
   $routes->get('viewmodule/(:num)','Pupil::viewmodule/$1');
   $routes->get('viewactivity/(:num)','Pupil::viewactivity/$1');

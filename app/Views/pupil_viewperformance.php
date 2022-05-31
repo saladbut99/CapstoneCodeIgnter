@@ -6,6 +6,7 @@
     $question_no=0;
     $choice_id=0;
     $count=1;
+    $counter=0;
   ?>
 
   <div class="navbar" style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(<?=base_url()?>/public/assets/images/banner.png);">
@@ -53,31 +54,57 @@
       </div>
 
 <!-- form for the question -->
+<div class="container" style="margin-bottom:5%;">
+    <div class="row">
+      <div class="col">
+        <h1>Hi <?= session()->get('firstname') ?>! Here are your activity results for </h1>
+        <h1><?= $id->activity_name ?> !</h1>
+      </div>
+    </div>
+</div>
 
+<?php foreach ($users as $user): ?>
+      <?php if ($user['pupil_id']==session()->get('t_id')): ?>
+          <?php $counter+=1; ?>
+      <?php endif; ?>
+<?php endforeach; ?>
 
-      <?php foreach ($users as $user): ?>
-        <?php if ($user['pupil_id']==session()->get('t_id')): ?>
-          <div class="container" style="border: 2px solid #00acee;border-radius:20px; width:60%; margin-bottom:5%;">
-            <div class="row" >
+  <?php if (!$users || $counter==0): ?>
+      <div class="container">
+          <div class="row">
+              <div class="col">
+                    <h1>You haven't answer some activity yet <?= session()->get('firstname') ?></h1>
+              </div>
+          </div>
+      </div>
+  <?php else: ?>
+    <?php foreach ($users as $user): ?>
+      <?php if ($user['pupil_id']==session()->get('t_id')): ?>
+        <div class="container" style="border: 2px solid #00acee;border-radius:20px; width:60%; margin-bottom:5%;">
+          <div class="row" >
+            <div class="col" style="margin-bottom:2%;">
+                <h1>Activity Take No. <?= $count ?></h1>
+          </div>
+          </div>
+          <div class="row">
               <div class="col" style="margin-bottom:2%;">
-                  <h1>Activity Take No. <?= $count ?></h1>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <h1>Score: <?= $user['activity_score'] ?>/<?= $user['activity_perfect_score'] ?></h1>
-                </div>
-                <div class="col">
-                    <h1><?= $user['percentage_score'] ?>%</h1>
-                </div>
+                  <h1><?= $user['performed_activity_date'] ?></h1>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col">
+                  <h1>Your Score: <?= $user['activity_score'] ?>/<?= $user['activity_perfect_score'] ?></h1>
+              </div>
+              <div class="col">
+                  <h1><?= $user['percentage_score'] ?>%</h1>
               </div>
             </div>
-          </div>
-          <?php $count+=1; ?>
-        <?php endif; ?>
-      <?php endforeach; ?>
 
-
-
+        </div>
+        <?php $count+=1; ?>
+      <?php endif; ?>
+    <?php endforeach; ?>
+  <?php endif; ?>
 
 <script>
   function check() {
