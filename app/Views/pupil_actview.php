@@ -199,4 +199,40 @@
   }
   </script>
 
+  <script>
+    $( "#btn-unit1" ).click(function() {
+      $( "#btn-unit1" ).css({'cssText': 'background-color: whitesmoke !important'});
+      $( "#users-list").show();
+      $( "#users-list2").hide();
+      $( "#users-list3").hide();
+      $( "#users-list4").hide();
+  });
+  $( "#btn-unit2" ).click(function() {
+      $( "#btn-unit1" ).css({'cssText': 'background-color: white !important'});
+      $( "#users-list").hide();
+      $( "#users-list2").show();
+      $( "#users-list3").hide();
+      $( "#users-list4").hide();
+  });
+  $( "#btn-unit3" ).click(function() {
+      $( "#btn-unit1" ).css({'cssText': 'background-color: white !important'});
+      $( "#users-list").hide();
+      $( "#users-list2").hide();
+      $( "#users-list3").show();
+      $( "#users-list4").hide();
+  });
+  $( "#btn-unit4" ).click(function() {
+      $( "#btn-unit1" ).css({'cssText': 'background-color: white !important'});
+      $( "#users-list").hide();
+      $( "#users-list2").hide();
+      $( "#users-list3").hide();
+      $( "#users-list4").show();
+  });
+
+  var beepOne = $("#beep-one")[0];
+  $(".btn-unit").click(function () {
+  beepOne.currentTime=0;
+  beepOne.play();
+  });
+  </script>
 <?= $this->endSection() ?>

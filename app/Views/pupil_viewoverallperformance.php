@@ -71,7 +71,7 @@
     <?php if ($total_score>=50): ?>
         <?php $message='Keep up the good work!'; ?>
     <?php else: ?>
-      <?php $message='Dont worry try reviewing the modules and answer again!'; ?>
+      <?php $message='Dont worry, try reviewing the modules and answer again!'; ?>
     <?php endif; ?>
 <?php endif; ?>
 

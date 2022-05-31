@@ -709,12 +709,12 @@ public function update(){
       // $userModel = new TeacherRegistration();
       $data['users']=$records->join('activity_master','activity_master.activity_id = performance_records.activity_id')->join('pupil', 'pupil.pupil_id = performance_records.pupil_id')->where(['performance_records.activity_id'=>$id])->findAll();
       // echo "<pre>";
-      //   print_r($data['users']);
+      //   print_r($data['id']);
       // echo "<pre";
 
 
 
-     return view('pupil_viewperformance', $data);
+    return view('pupil_viewperformance', $data);
     }
 
     public function viewoverallperformance(){
@@ -754,7 +754,7 @@ public function update(){
                              ->where(['section.section_id'=>session()->get('section')])
                              ->findAll();
       // echo "<pre>";
-    
+
     //  $total_percent=$total/$range;
 
 
