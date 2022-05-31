@@ -28,10 +28,13 @@
         </div>
    </div>
 
-    <audio id="beep-one" hidden preload="auto">
-    <source src="<?=base_url()?>/public/assets/clickar.mp3">
-    <source src="audio/beep.ogg">
+    <audio id="bgmusic" hidden autoplay loop> 
+      <source src="<?=base_url()?>/public/assets/AngryBirdsTheme.mp3">
     </audio>
+    <audio id="beep-one" hidden preload="auto">
+      <source src="<?=base_url()?>/public/assets/clickar.mp3">
+    </audio>
+
 <?php if (strcmp(trim($users->account_status),'Inactive')==0): ?>
   <?php $display='none'; ?>
   <?php $display2='block'; ?>
@@ -163,6 +166,13 @@ var beepOne = $("#beep-one")[0];
 $(".section_menu").click(function () {
 beepOne.currentTime=0;
 beepOne.play();
+});
+
+
+var bgmusic = $("#bgmusic")[0];
+$(document).ready(function() {
+  bgmusic.play();
+  bgmusic.volume = 0.2;
 });
 
 $("#cntr").mousemove(function(e){
