@@ -30,7 +30,7 @@
 
 <div id="scroll_container">
   <!-- TITLE AREA -->
-    <div class="container scroll_area" style="margin-bottom:5%; height:100vh" id="wrapper" >
+    <div class="container scroll_area" style="margin-bottom:5%; height:100vh; background-color:blue" id="wrapper" >
       <div class="row" style="height:100vh" id="titlewithbtnact">
         <div class="backbutton col-1 mt-2 d-flex align-items-center">
             <a href="<?php echo base_url(); ?>/public/pupil/viewmoduletable" style="text-decoration: none; color: rgb(68, 68, 68);">
@@ -100,7 +100,7 @@
 
 
   <!-- DISCUSSION AREA -->
-  <div class="container scroll_area" style="margin-bottom:7%; height:100vh" id="">
+  <div class="container scroll_area" style="margin-bottom:7%; height:100vh; background-color:red" id="">
       <div class="row">
         <div class="mt-3">
           <div class="imageview">
@@ -119,14 +119,14 @@
           <img id="expandedImg" style="width:100%">
           <div id="imgtext"></div>
         </div> -->
-        <div class="mt-3">
+        <div class="mt-0">
           <h1 style="margin-top:5%;"><?= $discussion->discussion; ?></h1>
         </div>
       </div>
   </div>
 
   <!-- EXAMPLE AREA -->  
-  <div class="container scroll_area container_example pt-5" style="max-width: 2000px !important;">
+  <div class="container scroll_area container_example pt-5" style="max-width: 2000px !important; background-color:green">
     <div class="text-danger" style="margin-top:3%;">
       <?php if (isset($validation)): ?>
             <?php if ($validation->hasError('example')): ?>
@@ -199,7 +199,7 @@
 <form class="" action="<?php echo site_url('teacher/viewmodule/'.$users->lesson_id);?>" method="post" id="form" style="display:none;"  enctype="multipart/form-data">
  
 
-    <div class="container" style="margin-top:5%;">
+    <div class="container" style="margin-top:20%;">
      <div class="row">
        <div class="col-sm">
                <div class="form-group">
@@ -360,7 +360,8 @@ $(document).ready(function () {
 }
 
 .example_area {
-  width: 80% !important;
+  min-width: 30% !important;
+  width: fit-content;
   border:0.5px solid #00acee;
   margin-bottom:2.5%; 
   border-radius:4px; 

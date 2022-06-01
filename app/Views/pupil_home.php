@@ -210,4 +210,17 @@ $(window).on('scroll', function() {
 
 </script>
 
+
+<style>
+
+.dashboard_div{
+  border:3px solid #00acee;
+  margin-bottom: 2%;
+  border-radius: 5%;
+  background-color: white;
+  height: 10rem;
+  max-height: 90%;
+}
+</style>
+
 <?= $this->endSection() ?>
