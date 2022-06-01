@@ -27,13 +27,13 @@
    });
    </script>
 
-<?php $fname; $lname?>
+<?php $fname; $lname; $section_name;?>
 
 
        <?php if ($users): ?>
           <?php foreach ($users as $user): ?>
             <?php if ($user['section_id']==$section_id): ?>
-                  <?php $fname=$user['teacher_firstname'];
+                  <?php $section_name=$user['section_name'];
                         $lname=$user['teacher_lastname'];
                    ?>
             <?php endif; ?>
@@ -42,8 +42,9 @@
        <?php if (empty($fname) && empty($lname)): ?>
           <h2 style="text-align:center; font-size:300%;">No Teacher</h2>
         <?php else: ?>
-          <h2 style="text-align:center; font-size:300%;"> <?= $fname ?> <?= $lname ?></h2>
+          <h2 style="text-align:center; font-size:300%;"> Modules for section <?= $section_name ?></h2>
        <?php endif; ?>
+         <h3 class=" text-center">Please select a module to view <?= $pupil->pupil_firstname ?> <?= $pupil->pupil_lastname?>'s activity </h3>
 
       <div class="container mt-5" style="margin-bottom:5%;">
 
@@ -75,9 +76,9 @@
                 <?php foreach($users as $user): ?>
                   <?php if ($user['section_id']==$section_id): ?>
                     <tr>
-                        <td style="text-align:left"><a href="viewmodule/<?= $user['lesson_id'] ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['lesson_name']; ?></a> </td>
+                        <td style="text-align:left"><a href="<?php echo base_url(); ?>/public/admin/admin_activityperformance/<?= $user['lesson_id'] ?>/<?= $pupil->pupil_id ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['lesson_name']; ?></a> </td>
                         <td style="text-align:center"><?php echo $user['unit']; ?></td>
-                    
+
                      </tr>
                   <?php endif; ?>
 
