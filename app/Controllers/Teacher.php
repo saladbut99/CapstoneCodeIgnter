@@ -58,7 +58,9 @@ class Teacher extends BaseController
       $teacher_id=session()->get('t_id');
       $userModel = new TeacherLesson();
       $data['users'] = $userModel->join('lesson_master', 'teacher_lesson.lesson_id = lesson_master.lesson_id')->where(['teacher_lesson.teacher_id'=>$teacher_id])->orderBy('lesson_master.lesson_id', 'ASC')->findAll();
-
+      //     echo "<pre>";
+      //   print_r($data['users']);
+      // echo "<pre>";
 
         return view('teacher_view', $data);
     }

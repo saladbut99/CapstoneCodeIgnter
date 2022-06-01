@@ -56,7 +56,7 @@
              <?php foreach($users as $user): ?>
                <?php if ($user['section_id']==3): ?>
                  <tr>
-                     <td style="text-align:left"><a href="#"  style="text-decoration:none; font-size:20px;"><?php echo $user['pupil_firstname']; ?> <?php echo $user['pupil_lastname']; ?></a> </td>
+                     <td style="text-align:left"><a href="<?php echo base_url(); ?>/public/admin/viewperformance_module\<?= $user['section_id'] ?>"  style="text-decoration:none; font-size:20px;"><?php echo $user['pupil_firstname']; ?> <?php echo $user['pupil_lastname']; ?></a> </td>
                   </tr>
                <?php endif; ?>
 
