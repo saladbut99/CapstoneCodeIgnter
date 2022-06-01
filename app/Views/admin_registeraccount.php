@@ -48,6 +48,13 @@
                     <h4><?= session()->get('success') ?></h4>
                 </div>
               <?php endif; ?>
+              <?php if (isset($status)): ?>
+                  <div class="col-10" style="margin-bottom:5%;">
+                    <div class="alert alert-danger" role="alert">
+                              <p>Desired section already has a Teacher!</p>
+                        </div>
+                    </div>
+                <?php endif; ?>
               <br>
                 <form method="post" action="register">
 

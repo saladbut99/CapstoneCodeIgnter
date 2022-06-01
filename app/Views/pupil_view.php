@@ -79,7 +79,7 @@
 
              <?php if($users): ?>
              <?php foreach($users as $user): ?>
-              <?php if ($user['unit']==1 && $user['section_id']==$section_id): ?>
+              <?php if ($user['unit']==1 && $user['section_id']==$pupil->section_id): ?>
                  <tr style="text-align:center;">
                     <td style="text-align:left"><a href="viewmodule/<?= $user['lesson_id'] ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['lesson_name']; ?></a>  </td>
                   </tr>
@@ -100,7 +100,7 @@
              <?php foreach($users as $user): ?>
 
 
-               <?php if ($user['unit']==2 && $user['section_id']==$section_id): ?>
+               <?php if ($user['unit']==2 && $user['section_id']==$pupil->section_id): ?>
                  <tr style="text-align:center;">
                    <td style="text-align:left"><a href="viewmodule/<?= $user['lesson_id'] ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['lesson_name']; ?></a>  </td>
 
@@ -119,7 +119,7 @@
           </thead>
              <?php if($users): ?>
              <?php foreach($users as $user): ?>
-               <?php if ($user['unit']==3 && $user['section_id']==$section_id): ?>
+               <?php if ($user['unit']==3 && $user['section_id']==$pupil->section_id): ?>
                  <tr style="text-align:center;">
                    <td style="text-align:left"><a href="viewmodule/<?= $user['lesson_id'] ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['lesson_name']; ?></a>  </td>
 
@@ -139,7 +139,7 @@
           </thead>
              <?php if($users): ?>
              <?php foreach($users as $user): ?>
-               <?php if ($user['unit']==4 && $user['section_id']==$section_id): ?>
+               <?php if ($user['unit']==4 && $user['section_id']==$pupil->section_id): ?>
                  <tr style="text-align:center">
                    <td style="text-align:left"><a href="viewmodule/<?= $user['lesson_id'] ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['lesson_name']; ?></a>  </td>
 

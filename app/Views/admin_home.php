@@ -79,7 +79,7 @@
                   </svg>
                   <br><br>
                   <p>View Performance of Students.</p>
-                <a href="#" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> View Performance</a>
+                <a href="viewperformance_section" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> View Performance</a>
                 </div>
             </div>
         </div>

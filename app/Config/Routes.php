@@ -48,7 +48,10 @@ $routes->group('admin', ["filter" => 'Auth'], function($routes){
   $routes->match(['get','post'],'register','Admin::register');
   $routes->match(['get','post'],'update','Admin::update');
   $routes->add('viewrose','Admin::viewrose');
+  $routes->add('viewpupil_rose/(:alpha)','Admin::viewpupil_rose/$1');
   $routes->add('viewsection','Admin::viewsection');
+
+  $routes->add('viewperformance_section','Admin::viewperformance_section');
   $routes->add('viewgumamela','Admin::viewgumamela');
   $routes->add('viewrosal','Admin::viewrosal');
   $routes->add('viewadelfa','Admin::viewadelfa');
@@ -58,6 +61,7 @@ $routes->group('admin', ["filter" => 'Auth'], function($routes){
   $routes->add('viewlily','Admin::viewlily');
   $routes->get('multiplechoice/(:num)','Admin::multiplechoice/$1');
   $routes->get('identification/(:num)','Admin::identification/$1');
+  $routes->get('viewperformance_module/(:num)','Admin::viewperformance_module/$1');
   $routes->get('viewmodule/(:num)','Admin::viewmodule/$1');
   $routes->add('manage','Admin::manage');
   $routes->add('accountstatus','Admin::accountstatus');
