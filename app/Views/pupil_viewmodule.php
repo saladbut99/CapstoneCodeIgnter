@@ -4,7 +4,7 @@
 
 <?php $example_no=0; ?>
 
-<div class="navbar" style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(<?=base_url()?>/public/assets/images/banner.png);">
+<div class="navbar mb-0" style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(<?=base_url()?>/public/assets/images/banner.png);">
        <nav class="nav row w-100 align-items-center">
            <div class="col-7">
                <a href="<?php echo base_url(); ?>/public/pupil/home" style="text-decoration: none; font-size:250%;"><b>Pulong</b></a>
@@ -32,7 +32,7 @@
   <!-- TITLE AREA -->
     <div class="container scroll_area" style="margin-bottom:5%; height:100vh" id="wrapper" >
       <div class="row" style="height:100vh" id="titlewithbtnact">
-        <div class="backbutton col-1 mt-4 d-flex align-items-center">
+        <div class="backbutton col-1 mt-2 d-flex align-items-center">
             <a href="<?php echo base_url(); ?>/public/pupil/viewmoduletable" style="text-decoration: none; color: rgb(68, 68, 68);">
               <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
@@ -341,18 +341,6 @@ $(document).ready(function () {
 
 </script>
 
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha384-vk5WoKIaW/vJyUAd9n/wmopsmNhiy+L2Z+SBxGYnUkunIxVxAv/UtMOhba/xskxh"
-        crossorigin="anonymous"></script>
-<script src="scroll-to-section.min.js">
-  $(function(){
-2
-  $("#coke").scrollToSection({childList:".con10ner"});
-3
-});
-
-</script>
-
 <style>
 #scroll_container {
   scroll-snap-type: y mandatory;
@@ -378,6 +366,19 @@ $(document).ready(function () {
   border-radius:4px; 
   box-shadow:2px 3px 2px grey;
 }
+
+#scroll_container {
+  scroll-snap-type: y mandatory;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  overflow: scroll;
+  height: 100vh;
+}
+
+.scroll_are {
+  scroll-snap-align: start;
+}
+
 </style>
 
 

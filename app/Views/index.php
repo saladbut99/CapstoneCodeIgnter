@@ -9,6 +9,9 @@
 
   </head>
 <body>
+  <audio id="musicindex" hidden autoplay loop>
+    <source src="<?=base_url()?>/public/assets/bgmusic.mp3">
+  </audio>
   <div class="bg" style="">
     <div class="container h-100">
       <div class="row h-100 align-items-center">
@@ -78,5 +81,10 @@ function reveal(){
            reveals[i].classList.remove('active');
            }
     }
-}
+};
+</script>
+
+<script>
+var x = document.getElementById("musicindex");
+x.volume = 0.05;  
 </script>

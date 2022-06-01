@@ -205,7 +205,7 @@ transition: all 0.3 ease;
 
 .section_pupil {
   transition: transform .3s ease-in-out;
-  width: 12rem;
+  width: 10rem;
   cursor: pointer;
   border-radius: 50% !important;  
   background-color: rgba(255, 255, 255, 0.8) !important;
@@ -307,7 +307,7 @@ transition: all 0.3 ease;
   margin-bottom: 2%;
   border-radius: 5%;
   background-color: white;
-  height: auto;
+  height: 10rem;
   max-height: 90%;
 }
 

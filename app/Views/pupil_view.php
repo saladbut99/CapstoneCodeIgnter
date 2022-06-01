@@ -4,7 +4,7 @@
 
 <?php $section_id=$pupil->section_id;?>
 
-<div class="navbar" style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(<?=base_url()?>/public/assets/images/banner.png);">
+<div class="navbar mb-0" style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(<?=base_url()?>/public/assets/images/banner.png);">
        <nav class="nav row w-100 align-items-center">
            <div class="col-7">
                <a href="<?php echo base_url(); ?>/public/pupil/home" style="text-decoration: none; font-size:250%;"><b>Pulong</b></a>
@@ -37,17 +37,17 @@
    </div>
   <?php endif; ?>
 
-   <div class="container mt-5" style="margin-bottom:5%;">
+   <div class="container my-0 py-5" id="conviewtable" style="height: 100vh;">
 
-    <div class="row">
+    <div class="row" style="background-image: url(<?=base_url()?>/public/assets/images/pupilbanner.jpg)">
       <!-- BACKBUTTON DIV -->
       <div class="backbutton col-3 d-flex align-items-center">
           <a href="home" style="text-decoration: none; color: rgb(68, 68, 68);">
-            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="whitesmoke" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
               <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
             </svg>
           </a>
-        <h6 style="margin-left:1rem !important;">Return Home</h6>
+        <h6 style="margin-left:1rem !important; color:whitesmoke;">Return Home</h6>
       </div>
 
       <!-- BUTTONS FOR TABLE POP UP -->
@@ -67,7 +67,7 @@
           <h1 style="text-align:center;">No Added Module</h1>
       <?php else: ?>
         <!-- UNIT 1 TABLE -->
-        <table class="table table-borderless table-hover" id="users-list"  style=" border-bottom: none;">
+        <table class="table table-borderless table-hover" id="users-list"  style=" border-bottom: none; height: 80vh;">
           <thead style="text-align:left; font-size:3rem">
              <tr>
                 <th style="width:50%;">Kwarter 1</th>
@@ -88,7 +88,7 @@
             <?php endif; ?>
         </table>
         <!-- UNIT 2 TABLE -->
-        <table class="table table-borderless table-hover" id="users-list2" style=" border-bottom: none;" >
+        <table class="table table-borderless table-hover" id="users-list2" style=" border-bottom: none; height: 80vh !important;" >
           <thead style="text-align:left; font-size:3rem">
              <tr>
                 <th style="width:50%;">Kwarter 2</th>
@@ -154,9 +154,9 @@
      </div>
    </div>
 
-   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
-   <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+               <//script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+               <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+               <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
    <script>
        $(document).ready( function () {
          $('#users-list').DataTable({
@@ -211,27 +211,39 @@
     $( "#users-list2").hide();
     $( "#users-list3").hide();
     $( "#users-list4").hide();
+    $('html, body').animate({
+        scrollTop: $('#conviewtable').offset().top
+    }, 0);
 });
 $( "#btn-unit2" ).click(function() {
-    $( "#btn-unit1" ).css({'cssText': 'background-color: white !important'});
+    $( "#btn-unit1" ).css({'cssText': 'background-color: rgba(255,255,255,0) !important'});
     $( "#users-list").hide();
     $( "#users-list2").show();
     $( "#users-list3").hide();
     $( "#users-list4").hide();
+    $('html, body').animate({
+        scrollTop: $('#conviewtable').offset().top
+    }, 0);
 });
 $( "#btn-unit3" ).click(function() {
-    $( "#btn-unit1" ).css({'cssText': 'background-color: white !important'});
+    $( "#btn-unit1" ).css({'cssText': 'background-color: rgba(255,255,255,0) !important'});
     $( "#users-list").hide();
     $( "#users-list2").hide();
     $( "#users-list3").show();
     $( "#users-list4").hide();
+    $('html, body').animate({
+        scrollTop: $('#conviewtable').offset().top
+    }, 0);
 });
 $( "#btn-unit4" ).click(function() {
-    $( "#btn-unit1" ).css({'cssText': 'background-color: white !important'});
+    $( "#btn-unit1" ).css({'cssText': 'background-color: rgba(255,255,255,0) !important'});
     $( "#users-list").hide();
     $( "#users-list2").hide();
     $( "#users-list3").hide();
     $( "#users-list4").show();
+    $('html, body').animate({
+        scrollTop: $('#conviewtable').offset().top
+    }, 0);
 });
 
 var beepOne = $("#beep-one")[0];
@@ -239,6 +251,13 @@ $(".btn-unit").click(function () {
 beepOne.currentTime=0;
 beepOne.play();
 });
+
+$(document).ready(function () {
+    $('html, body').animate({
+        scrollTop: $('#conviewtable').offset().top
+    }, 1000);
+});
+
 </script>
 
 <script>
@@ -257,6 +276,29 @@ beepOne.play();
       outline: none !important;
       box-shadow: none !important;
     }
+
+  #users-list, #users-list2, #users-list3, #users-list4 {
+    overflow-y: scroll !important;
+    height: 80vh !important;
+    box-shadow: 20px 20px rgba(0,0,0,.15);
+
+  }
+
+  #image-float {
+    position: fixed;
+    height: auto;
+    width: auto;
+    bottom: 0px;
+    right: 0px;
+    float: right;
+  }
+  #image-float > img {
+    height: 500px
+   }
   </style>
+
+<div id="image-float">
+  <img src="<?=base_url()?>/public/assets/images/movie-2-custom-right.png" alt="">
+</div>
 
 <?= $this->endSection() ?>

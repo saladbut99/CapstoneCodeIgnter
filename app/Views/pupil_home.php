@@ -28,10 +28,13 @@
         </div>
    </div>
 
-    <audio id="beep-one" hidden preload="auto">
-    <source src="<?=base_url()?>/public/assets/clickar.mp3">
-    <source src="audio/beep.ogg">
+    <audio id="bgmusic" hidden autoplay loop> 
+      <source src="<?=base_url()?>/public/assets/AngryBirdsTheme.mp3">
     </audio>
+    <audio id="beep-one" hidden preload="auto">
+      <source src="<?=base_url()?>/public/assets/clickar.mp3">
+    </audio>
+
 <?php if (strcmp(trim($users->account_status),'Inactive')==0): ?>
   <?php $display='none'; ?>
   <?php $display2='block'; ?>
@@ -47,7 +50,7 @@
 </center>
 <center id="cntr">
   <br>
-    <div class="formcontainer pt-2 mt-0 pb-5" style="height:80vh !important; max-width:90%; background-color: rgba(255, 255, 255, 0.2); border:none; height:70vh;display:<?= $display ?>">
+    <div class="formcontainer pt-2 mt-0 pb-5" style="height:80vh !important; max-width:90%; background-color: rgba(255, 255, 255, 0.0); border:none; height:70vh;display:<?= $display ?>">
       <div class="container  h-100">
 
       <div class="row justify-content-center h-10 align-items-center pt-3" style="width: 70vw;">
@@ -86,22 +89,27 @@
         </div>
         <hr style="width: 70vw;">
         <div class="row h-60 align-items-center mt-2 pop-up" style="" id="pop-up1">
-          <h1> LEARN A LESSON </h1>
+          <h1 style="padding:20px; background-color: rgba(100,255,100,0.5)"> LEARN A LESSON </h1>
+          <h3><b>LEARN</b> FROM MODULES AND <b>ANSWER</b> ACTIVITIES.</h3>
           <div class="pop-up d-flex">
           <a href="viewmoduletable" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> Learn Lesson</a>
           </div>
         </div>
         <div class="row h-60 align-items-center mt-2 pop-up" style="" id="pop-up2">
-          <h1> VIEW YOUR SCORE </h1>
+        <h1 style="padding:20px; background-color: rgba(100,255,100,0.5)"> VIEW YOUR SCORE </h1>
+        <h3><b>VIEW</b> ACTIVITY SCORES AND <b>VIEW</b> OVERALL PERFORMANCE.</h3>
           <div class="pop-up d-flex">
           <a href="viewmoduleactivity" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%; margin-right:5%;"> View Activity Performance</a>
           <a href="viewoverallperformance" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> View Overall Performance</a>
           </div>
         </div>
         <div class="row h-60 align-items-center mt-2 pop-up" style="" id="pop-up3">
-          <h1> CHANGE YOUR PASSWORD </h1>
-          <div class="pop-up d-flex">
-          <a href="update" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> Change Password</a>
+        <h1 style="padding:20px; background-color: rgba(100,255,100,0.5)"> CHANGE YOUR PASSWORD </h1>
+        <h3>WANT TO <b>CHANGE</b> PASSWORD?</h3>
+        
+          <div class="pop-up d-flex align-items-center" style="flex-direction:column">
+          <h5>ALWAYS <b>REMEMBER</b> YOUR PASSWORD</h5>
+          <a href="update" class=" btn btn-light btn-outline-primary" style="margin-top: 6.6%; margin-bottom: 10%;"> Change Password</a>
           </div>
         </div>
 
@@ -119,7 +127,7 @@
   $( "#sec1" ).click(function() {
     $( "#pop-up1").show();
     $('#sec1').css({
-        'cssText': 'background-color: rgba(255, 255, 255, 0.8) !important'
+        'cssText': 'background-color: rgba(100,255,100,0.5) !important'
     });
     $('#sec2').css({
         'cssText': 'background-color: rgba(255, 255, 255, 0.4) !important'
@@ -129,6 +137,9 @@
     });
     $( "#pop-up2").hide();
     $( "#pop-up3").hide();
+    $('html, body').animate({
+        scrollTop: $('#cntr').offset().top
+    }, 0);
  });
  $( "#sec2" ).click(function() {
     $( "#pop-up2").show();
@@ -136,13 +147,16 @@
         'cssText': 'background-color: rgba(255, 255, 255, 0.4) !important'
     });
     $('#sec2').css({
-        'cssText': 'background-color: rgba(255, 255, 255, 0.8) !important'
+        'cssText': 'background-color: rgba(100,255,100,0.5) !important'
     });
     $('#sec3').css({
         'cssText': 'background-color: rgba(255, 255, 255, 0.4) !important'
     });
     $( "#pop-up1").hide();
     $( "#pop-up3").hide();
+    $('html, body').animate({
+        scrollTop: $('#cntr').offset().top
+    }, 0);
  });
  $( "#sec3" ).click(function() {
     $( "#pop-up3").show();
@@ -153,10 +167,13 @@
         'cssText': 'background-color: rgba(255, 255, 255, 0.4) !important'
     });
     $('#sec3').css({
-        'cssText': 'background-color: rgba(255, 255, 255, 0.8) !important'
+        'cssText': 'background-color: rgba(100,255,100,0.5) !important'
     });
     $( "#pop-up1").hide();
     $( "#pop-up2").hide();
+    $('html, body').animate({
+        scrollTop: $('#cntr').offset().top
+    }, 0);
  });
 
 var beepOne = $("#beep-one")[0];
@@ -165,11 +182,30 @@ beepOne.currentTime=0;
 beepOne.play();
 });
 
+
+var bgmusic = $("#bgmusic")[0];
+$(document).ready(function() {
+  bgmusic.play();
+  bgmusic.volume = 0.05;
+});
+
 $("#cntr").mousemove(function(e){
     var amountMovedX = (e.pageX * -1 / 20);
     var amountMovedY = (e.pageY * -10 / 50);
     $(this).css('background-position', amountMovedX + 'px ' + amountMovedY + 'px');
 });
+
+$(document).ready(function () {
+    $('html, body').animate({
+        scrollTop: $('#cntr').offset().top
+    }, 1000);
+});
+
+
+$(window).on('scroll', function() {
+    console.log( $(this).scrollTop() );
+});
+
 
 
 </script>
