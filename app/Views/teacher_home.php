@@ -2,7 +2,7 @@
 
 <?= $this->section('content'); ?>
 
-<div class="navbar" style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(<?=base_url()?>/public/assets/images/banner.png);">
+<div class="navbar mb-1" style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(<?=base_url()?>/public/assets/images/banner.png);">
        <nav class="nav row w-100 align-items-center">
            <div class="col-7">
                <a href="<?php echo base_url(); ?>/public/teacher/home" style="text-decoration: none; font-size:250%;"><b>Pulong</b></a>
@@ -27,7 +27,7 @@
 <center>
 
 
-    <div class="formcontainer m-5 pb-5" style="max-width:80%; background-color: white; border:none;">
+    <div class="formcontainer m-5 pb-5" style="height: 90vh; max-width:80%; background-color: white; border:none;">
       <div class="container  h-100">
         <div class="row h-100 align-items-center ">
             <div class="col-md text-center" >
