@@ -207,14 +207,14 @@ transition: all 0.3 ease;
   transition: transform .3s ease-in-out;
   width: 10rem;
   cursor: pointer;
-  border-radius: 50% !important;  
+  border-radius: 50% !important;
   background-color: rgba(255, 255, 255, 0.8) !important;
 }
 
 .section_pupil:hover {
   transform: scale(1.1) !important;
   border-radius: 20% !important;
- 
+
 }
 
 .section_pupil:hover > .isbigi{
@@ -557,7 +557,7 @@ overflow: auto;
   background-color: #1eb400 !important;
   border-color: #1eb400 !important;
   transition: .25s ease-out;
-  
+
 }
 
 .radiobtn-mc:checked + .lebel > .input-mc {
@@ -609,7 +609,7 @@ overflow: auto;
 #kwarter {
   border-radius: 20px 0 20px 20px;
   border: 1px solid black;
-  margin-bottom: 0px; 
+  margin-bottom: 0px;
   padding-top: 8px;
   padding-left: 8px;
   padding-bottom: 8px;
@@ -685,7 +685,7 @@ overflow: auto;
     background-repeat: no-repeat;
   }
 
- 
+
 
   .formcontainer{
     max-width: 60% !important;
@@ -699,13 +699,13 @@ overflow: auto;
     width: 50px;
   }
 
-  
+
   .bg{
     background-image:url('http://localhost/CapstoneCodeIgnter/Pulong/public/assets/images/indexbg.gif');
-    background-size: cover; 
+    background-size: cover;
     background-position-x: -50px;
     background-color: green;
-    
+
   }
 
   .loginbutton{
@@ -726,4 +726,3 @@ overflow: auto;
   }
 
 }
-

@@ -39,19 +39,24 @@
            </svg>
            </a>
        </div>
+       <div class="container">
+         <div class="row">
+           <div class="mt-3" style="margin-left:1%;">
+               <a href="addmodule" style="text-decoration:none;">
+                 <button type="button" class="btn btn-success">
+                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                     <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                   </svg> Add Module
+               </button>
+               </a>
+         </div>
+         </div>
+       </div>
        <br>
        <?php if (!$users): ?>
           <h1 style="text-align:center;">No Added Module</h1>
       <?php else: ?>
-          <div class="mt-3" style="margin-left:1%;">
-              <a href="addmodule" style="text-decoration:none;">
-                <button type="button" class="btn btn-success">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                  </svg> Add Module
-              </button>
-              </a>
-        </div>
+        
         <table class="table table-borderless table-hover" id="users-list"  style=" border-bottom: none;">
           <thead style="text-align:left; font-size:3rem">
              <tr>

@@ -27,12 +27,12 @@
    });
    </script>
 
-   <?php $fname; $lname?>
+<?php $fname; $lname?>
 
-       <h1 style="text-align:center; font-size:500%;"><b>Grade 2 Orchid</b></h1>
+       <h1 style="text-align:center; font-size:500%;"><b>Grade 1 Rose</b></h1>
        <?php if ($users): ?>
-          <?php foreach ($teacher as $user): ?>
-            <?php if ($user['section_id']==6): ?>
+          <?php foreach ($users as $user): ?>
+            <?php if ($user['section_id']==1): ?>
                   <?php $fname=$user['teacher_firstname'];
                         $lname=$user['teacher_lastname'];
                    ?>
@@ -42,11 +42,8 @@
        <?php if (empty($fname) && empty($lname)): ?>
           <h2 style="text-align:center; font-size:300%;">No Teacher</h2>
         <?php else: ?>
-              <h2 style="text-align:center; font-size:300%;"> <?= $fname ?> <?= $lname ?></h2>
+          <h2 style="text-align:center; font-size:300%;"> <?= $fname ?> <?= $lname ?></h2>
        <?php endif; ?>
-
-
-
 
       <div class="container mt-5" style="margin-bottom:5%;">
 
@@ -76,10 +73,8 @@
 
                 <?php if($users): ?>
                 <?php foreach($users as $user): ?>
-                  <?php if ($user['section_id']==6): ?>
-
+                  <?php if ($user['section_id']==1): ?>
                     <tr>
-
                         <td style="text-align:left"><a href="viewmodule/<?= $user['lesson_id'] ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['lesson_name']; ?></a> </td>
                         <td style="text-align:center"><?php echo $user['unit']; ?></td>
                         <td style="text-align:center;">  <a href="viewactivity\<?= $user['lesson_id'] ?>" style="text-decoration:none;">
@@ -112,7 +107,7 @@
            "bInfo" : false,
            "searching": false,
            "language": {
-             "emptyTable": "No uploaded module for section Orchid"
+             "emptyTable": "No uploaded module for section Rose"
            },
             "responsive": true,
             "order": [[ 1, "asc" ]],

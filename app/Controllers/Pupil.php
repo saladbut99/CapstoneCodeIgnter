@@ -204,7 +204,12 @@ public function update(){
       $section_id = new PupilModel();
       $data['pupil'] = $section_id->where(['pupil_id'=>$pupil_id])->get()->getRow();
 
-      return view('pupil_view', $data);
+      // echo "<pre>";
+      //   print_r($data['users']);
+      // echo "<pre";
+
+
+    return view('pupil_view', $data);
     }
 
     public function viewmoduleactivity()

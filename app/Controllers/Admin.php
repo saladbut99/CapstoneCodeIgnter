@@ -17,6 +17,8 @@ use App\Models\MediaActivity;
 use App\Models\Choices;
 use App\Models\PerformanceRecords;
 use App\Models\Answers;
+use App\Models\PupilModel;
+use App\Models\PupilModelStatus;
 
 class Admin extends BaseController
 {
@@ -89,11 +91,19 @@ class Admin extends BaseController
         ];
         if ($this->validate($rules)) {
             //Then do database insertion or loginuser
-            $_POST['account_status']='Active';
-            $model->save($_POST);
-            $session = session();
-            $session->setFlashdata('success','Teacher Registration Successful ');
-             return redirect()->to('admin/register');
+            $section_id=$_POST['section_id'];
+
+            $data['teacher']=$model->where(['section_id'=>$section_id])->get()->getRow();
+
+            if (empty($data['teacher'])) {
+              $_POST['account_status']='Active';
+              $model->save($_POST);
+              $session = session();
+              $session->setFlashdata('success','Teacher Registration Successful ');
+               return redirect()->to('admin/register');
+            }else {
+                $data['status']='Account Inactive';
+            }
 
             // echo '<script type="text/javascript">
             //       alert("Account Creation Successful!");
@@ -209,6 +219,11 @@ class Admin extends BaseController
 
       $userModel = new TeacherRegistration();
       $data['users']=$userModel->join('teacher_lesson', 'teacher.teacher_id = teacher_lesson.teacher_id')->join('lesson_master','teacher_lesson.lesson_id = lesson_master.lesson_id')->join('section','teacher.section_id = section.section_id')->orderBy('lesson_master.unit', 'ASC')->findAll();
+      $data['teacher']=$userModel->findAll();
+      // echo "<pre>";
+      // print_r($data['users']);
+      // echo "<pre>";
+
       return view('admin_orchid', $data);
     }
 
@@ -669,6 +684,86 @@ public function update(){
     $data['media'] = $medias->findAll();
 
      return view('admin_identification', $data);
+
+  }
+  public function viewpupil_section($string){
+    $type = session()->get('usertype');
+     if ($type!='Admin' && $type=='Teacher'){
+        return redirect()->to('teacher/home');
+      //  echo "hello";
+    }else if ($type!='Admin' && $type=='Pupil') {
+       return redirect()->to('pupil/home');
+     }
+    $data=[
+      'meta_title'=>'Admin | Account Status'
+    ];
+    $userModel = new PupilModel();
+    $data['users'] = $userModel->join('section', 'pupil.section_id = section.section_id')->orderBy('pupil_id', 'DESC')->findAll();
+
+
+    // $url1 = base_url(); // Site URL
+    // $url2 = $this->uri->segment(1); // Controller - instrument
+    // $url3 = $this->uri->segment(2); // Method - instrument
+    // $url4 = $this->uri->segment(3); // detail
+    // $url5 = $this->uri->segment(4);
+  //  echo $string;
+  if (strcmp(strtoupper($string),strtoupper('Rose'))==0) {
+     return view('admin_viewperformancerose', $data);
+  }elseif (strcmp(strtoupper($string),strtoupper('Rosal'))==0) {
+    return view('admin_viewperformancerosal', $data);
+  }elseif (strcmp(strtoupper($string),strtoupper('Adelfa'))==0) {
+    return view('admin_viewperformanceadelfa', $data);
+  }elseif (strcmp(strtoupper($string),strtoupper('Lily'))==0) {
+    return view('admin_viewperformancelily', $data);
+  }elseif (strcmp(strtoupper($string),strtoupper('Gumamela'))==0) {
+    return view('admin_viewperformancegumamela', $data);
+  }elseif (strcmp(strtoupper($string),strtoupper('Orchid'))==0) {
+    return view('admin_viewperformanceorchid', $data);
+  }elseif (strcmp(strtoupper($string),strtoupper('Daisy'))==0) {
+    return view('admin_viewperformancedaisy', $data);
+  }
+
+  }
+
+  public function viewperformance_section(){
+    $type = session()->get('usertype');
+     if ($type!='Admin' && $type=='Teacher'){
+        return redirect()->to('teacher/home');
+      //  echo "hello";
+    }else if ($type!='Admin' && $type=='Pupil') {
+       return redirect()->to('pupil/home');
+     }
+    $data=[
+      'meta_title'=>'Admin | Section'
+    ];
+    return view('admin_viewsectionperformance', $data);
+
+  }
+
+  public function viewperformance_module($id){
+    $type = session()->get('usertype');
+     if ($type!='Admin' && $type=='Teacher'){
+        return redirect()->to('teacher/home');
+      //  echo "hello";
+    }else if ($type!='Admin' && $type=='Pupil') {
+       return redirect()->to('pupil/home');
+     }
+    $data=[
+      'meta_title'=>'Admin | View Module',
+      'section_id'=>$id,
+    ];
+
+    $userModel = new TeacherRegistration();
+    $data['users']=$userModel->join('teacher_lesson', 'teacher.teacher_id = teacher_lesson.teacher_id')->join('lesson_master','teacher_lesson.lesson_id = lesson_master.lesson_id')->join('section','teacher.section_id = section.section_id')->orderBy('teacher.teacher_id', 'ASC')->findAll();
+    $data['teacher']=$userModel->where(['section_id'=>$id])->get()->getRow();
+
+    //
+    //     echo "<pre>";
+    //   print_r($data['teacher']);
+    // echo "<pre>";
+
+
+    return view('admin_moduleperformance', $data);
 
   }
 

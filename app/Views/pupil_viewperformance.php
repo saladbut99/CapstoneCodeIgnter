@@ -73,7 +73,7 @@
       <div class="container">
           <div class="row">
               <div class="col">
-                    <h1>You haven't answer some activity yet <?= session()->get('firstname') ?></h1>
+                    <h1>Oh you haven't answer some activity yet <?= session()->get('firstname') ?></h1>
               </div>
           </div>
       </div>
