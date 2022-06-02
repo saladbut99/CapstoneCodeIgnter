@@ -17,32 +17,35 @@
   <div class="navbar" style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(<?=base_url()?>/public/assets/images/banner.png);">
          <nav class="nav row w-100 align-items-center">
              <div class="col-7">
-                 <a href="<?php echo base_url(); ?>/public/pupil/home" style="text-decoration: none; font-size:250%;"><b>Pulong</b></a>
+                 <a href="<?php echo base_url(); ?>/public/admin/home" style="text-decoration: none; font-size:250%;"><b>Pulong</b></a>
              </div>
              <div class="col-4 text-center pt-3">
-                 <p style="color:white; text-align:right;"><?= session()->get('firstname') ?> <?= session()->get('lastname') ?></p>
+                  <p style="color:white; text-align:right;"><?= session()->get('firstname') ?> <?= session()->get('lastname') ?></p>
              </div>
              <div class="col-1 p-0 text-center">
                  <div style="margin-right: 0%;">
-                     <a href="#" class="dropdown"><img src="<?=base_url()?>/public/assets/images/student_logo.png" alt="" class="nav_img" height="60" width="60"></a>
+                     <a href="#" class="dropdown"><img src="<?=base_url()?>/public/assets/images/admin.png" alt="" class="nav_img" height="60" width="60"></a>
                   </div>
              </div>
          </nav>
      </div>
      <div class="menu p-2 text-center">
-
           <div class="">
-          <a href="<?php echo base_url(); ?>/public/pupil/logout">Logout</a>
+          <a href="<?php echo base_url(); ?>/public/admin/logout">Logout</a>
           </div>
      </div>
-
+     <script>
+       $( ".dropdown" ).click(function() {
+         $( ".menu").toggle();
+     });
+     </script>
 <center>
 
 
   <div class="container h-100" style="margin-bottom:0%;" id="wrapper" >
      <div class="row">
        <div class="backbutton col-1">
-           <a href="<?php echo base_url(); ?>/public/pupil/home/" style="text-decoration: none; color: rgb(68, 68, 68); cursor:pointer;">
+           <a href="<?php echo base_url(); ?>/public/admin/viewperformance_section" style="text-decoration: none; color: rgb(68, 68, 68); cursor:pointer;">
            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
                <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
            </svg>
@@ -58,10 +61,12 @@
         </div>
       </div>
 <?php foreach ($pupil as $key ): ?>
- <?php
-        $total=$total+$key['activity_score'];
-        $range=$range+$key['perfect_score'];
-    ?>
+  <?php if ($key['lesson_id']==$activity_id): ?>
+    <?php
+           $total=$total+$key['activity_score'];
+           $range=$range+$key['perfect_score'];
+       ?>
+  <?php endif; ?>
 <?php endforeach; ?>
 <?php if ($total == 0 && $range==0): ?>
         <?php $display='none'; ?>
@@ -69,9 +74,9 @@
 <?php else: ?>
     <?php   $total_score=$total/$range*100; ?>
     <?php if ($total_score>=50): ?>
-        <?php $message='Keep up the good work!'; ?>
+        <?php $message='Theyre doing good, up the good work!'; ?>
     <?php else: ?>
-      <?php $message='Dont worry, try reviewing the modules and answer again!'; ?>
+      <?php $message='Monitoring of pupil is advised!'; ?>
     <?php endif; ?>
 <?php endif; ?>
 
@@ -79,7 +84,7 @@
 <div class="container" style="display: <?= $display2 ?>">
   <div class="row">
       <div class="col">
-          <h1>You haven't answered the activities yet <?= session()->get('firstname') ?></h1>
+          <h1><?= $pupilmodel->pupil_firstname ?> didn't answered the activities yet</h1>
       </div>
   </div>
 </div>
@@ -87,12 +92,12 @@
 <div class="container" style="display:<?= $display ?>">
     <div class="row">
       <div class="col">
-          <h1>Hi <?= session()->get('firstname') ?>!</h1>
+          <h1>Hi Admin!</h1>
       </div>
     </div>
     <div class="row" style="margin-top:3%;">
       <div class="col">
-          <h1>Your overall performance score is:</h1>
+          <h1><?= $pupilmodel->pupil_firstname ?>'s overall performance percentage is:</h1>
       </div>
     </div>
     <div class="row" style="margin-top:3%;">

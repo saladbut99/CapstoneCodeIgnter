@@ -100,7 +100,7 @@
     </div>
     <div class="row" style="margin-top:3%;">
       <div class="col">
-          <h1><?=$total_score ?>%</h1>
+          <h1><?= number_format((float)$total_score, 2, '.', ''); ?>%</h1> 
       </div>
     </div>
     <div class="row" style="margin-top:3%;">

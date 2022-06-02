@@ -56,7 +56,7 @@
              <?php if($users): ?>
              <?php foreach($users as $user): ?>
                  <tr style="text-align:center;">
-                    <td style="text-align:left"><a href="<?php echo base_url(); ?>/public/admin/" style="text-decoration:none; font-size:20px;"><?php echo $user['activity_name']; ?></a></td>
+                    <td style="text-align:left"><a href="<?php echo base_url(); ?>/public/admin/viewperformance/<?= $user['activity_id'] ?>/<?= $pupil->pupil_id ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['activity_name']; ?></a></td>
                    </tr>
 
             <?php endforeach; ?>

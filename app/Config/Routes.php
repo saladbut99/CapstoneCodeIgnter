@@ -63,6 +63,7 @@ $routes->group('admin', ["filter" => 'Auth'], function($routes){
   $routes->get('admin_activityperformance/(:num)/(:num)','Admin::admin_activityperformance/$1/$2');
   $routes->get('identification/(:num)','Admin::identification/$1');
   $routes->get('viewperformance_module/(:num)/(:num)','Admin::viewperformance_module/$1/$2');
+  $routes->get('view_overallmoduleperformance/(:num)/(:num)','Admin::view_overallmoduleperformance/$1/$2');
   $routes->get('viewmodule/(:num)','Admin::viewmodule/$1');
   $routes->get('view_overallperformance/(:num)','Admin::view_overallperformance/$1');
   $routes->add('manage','Admin::manage');
@@ -70,6 +71,7 @@ $routes->group('admin', ["filter" => 'Auth'], function($routes){
 //  $routes->add('viewmodule','Admin::viewmodule');
   $routes->add('viewcontent','Admin::viewcontent');
   $routes->add('view/(:num)','Admin::viewuser/$1');
+  $routes->add('viewperformance/(:num)/(:num)','Admin::viewperformance/$1/$2');
   $routes->get('logout', 'Admin::logout');
   $routes->get('viewactivity/(:num)','Admin::viewactivity/$1');
 });
