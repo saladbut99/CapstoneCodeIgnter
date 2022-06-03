@@ -49,6 +49,7 @@ $routes->group('admin', ["filter" => 'Auth'], function($routes){
   $routes->match(['get','post'],'update','Admin::update');
   $routes->add('viewrose','Admin::viewrose');
   $routes->add('viewpupil_rose/(:alpha)','Admin::viewpupil_rose/$1');
+  $routes->add('viewsectionperformance/(:alpha)','Admin::viewsectionperformance/$1');
   $routes->add('viewsection','Admin::viewsection');
 
   $routes->add('viewperformance_section','Admin::viewperformance_section');
@@ -79,6 +80,8 @@ $routes->group('admin', ["filter" => 'Auth'], function($routes){
 $routes->group('teacher', ["filter" => 'Auth'], function($routes){
   $routes->add('home','Teacher::index');
   $routes->add('view','Teacher::view');
+  $routes->add('viewpupil_section','Teacher::viewpupil_section');
+  $routes->add('viewperformance_module/(:num)','Teacher::viewperformance_module/$1');
   $routes->get('module/(:num)','Teacher::module/$1');
   $routes->get('viewmodule/(:num)','Teacher::viewmodule/$1');
   $routes->get('viewactivity/(:num)','Teacher::viewactivity/$1');
@@ -97,7 +100,8 @@ $routes->group('teacher', ["filter" => 'Auth'], function($routes){
    $routes->add('view/(:num)','Teacher::viewuser/$1');
    $routes->add('updatemodule/(:num)','Teacher::updatemodule/$1');
    $routes->add('update_question/(:num)','Teacher::update_question/$1');
-
+   $routes->get('teacher_activityperformance/(:num)/(:num)','Teacher::teacher_activityperformance/$1/$2');
+   $routes->get('viewperformance/(:num)/(:num)','Teacher::viewperformance/$1/$2');
    $routes->add('delete/(:num)','Teacher::delete/$1');
    $routes->add('delete_activity/(:num)','Teacher::delete_activity/$1');
    $routes->add('delete_mainactivity/(:num)','Teacher::delete_mainactivity/$1');

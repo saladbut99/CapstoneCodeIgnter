@@ -90,7 +90,7 @@
 <div class="container" style="display:<?= $display ?>">
     <div class="row">
       <div class="col">
-          <h1>Hi Admin!</h1>
+          <h1>Hi <?= session()->get('firstname') ?>!</h1>
       </div>
     </div>
     <div class="row" style="margin-top:3%;">

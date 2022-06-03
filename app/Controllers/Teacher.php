@@ -19,6 +19,7 @@ use App\Models\Choices;
 use App\Models\PerformanceRecords;
 use App\Models\Answers;
 use App\Models\Section;
+use App\Models\TeacherRegistration;
 
 
 class Teacher extends BaseController
@@ -486,7 +487,7 @@ public function delete($id){
 
    $session = session();
    $session->setFlashdata('updatesuccess','Module Successfully Deleted ');
-   return redirect()->to('teacher/view');
+   return redirect()->to('teacher/viewmoduletable');
 
 }
 
@@ -1427,6 +1428,7 @@ public function addquestion($id){
       if ($this->validate($rules)) {
 
         $_POST['activity_question']=ucfirst($_POST['activity_question']);
+        $_POST['activity_answer']=ucfirst($_POST['activity_question']);
         $_POST['activity_id']=$id;
 
 
@@ -1875,7 +1877,7 @@ public function update_activity($id){
   $data['activity'] = $userModel2->where(['activity_id'=>$id])->get()->getRow();
 
   $userModel2 = new LessonMaster();
-  $data['lesson'] = $userModel2->where(['lesson_id'=>$lesson_id])->get()->getRow();
+  $data['lesson'] = $userModel2->where(['lesson_id'=>$data['activity']->lesson_id])->get()->getRow();
 
     $rules=[
 
@@ -1887,10 +1889,7 @@ public function update_activity($id){
         'rules'=>'required',
         'label'=>'Activity Description',
       ],
-    'activity_type'=>[
-      'rules'=> 'required',
-      'label'=>'Activity Type',
-    ],
+
 
     ];
     //
@@ -1906,7 +1905,7 @@ public function update_activity($id){
         $activity_master = [
             'activity_name' => ucfirst($_POST['activity_name']),
             'activity_instruction' => ucfirst($_POST['activity_instruction']),
-            'activity_type'=> $_POST['activity_type'],
+            //'activity_type'=> $_POST['activity_type'],
         ];
 
         $builder = $db->table('activity_master');
@@ -1920,7 +1919,7 @@ public function update_activity($id){
 
       $session = session();
       $session->setFlashdata('updatesuccess','Module Upload Completed');
-        return redirect()->to('teacher/viewactivity/'.$lesson_id);
+        return redirect()->to('teacher/viewactivity/'.$data['lesson']->lesson_id);
     }else{
       //if validation is not successfull
       //validator provies a list of errors
@@ -2251,6 +2250,168 @@ public function manage(){
 
    return view('teacher_manage', $data);
 
+}
+public function viewpupil_section(){
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+  $data=[
+    'meta_title'=>'Teacher | View Pupil',
+
+  ];
+
+  $section_name = new Section();
+  $data['section'] = $section_name->where(['section_id'=>session()->get('section_id')])->get()->getRow();
+
+  $userModel = new PupilModel();
+  $data['users'] = $userModel->join('section', 'pupil.section_id = section.section_id')->orderBy('pupil_id', 'DESC')->findAll();
+
+
+  // $url1 = base_url(); // Site URL
+  // $url2 = $this->uri->segment(1); // Controller - instrument
+  // $url3 = $this->uri->segment(2); // Method - instrument
+  // $url4 = $this->uri->segment(3); // detail
+  // $url5 = $this->uri->segment(4);
+//  echo $string;
+
+  return view('teacher_pupilactivity', $data);
+}
+
+public function view_overallperformance($id){
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+  $data=[
+    'meta_title'=>'Admin | View Module',
+    'section_id'=>$id,
+  ];
+
+    $total=0;
+    $range=0;
+    $new_pupil = new PerformanceRecords();
+    $data['pupil']=$new_pupil->where(['pupil_id'=>$id])->findAll();
+
+    $pupilmodel = new PupilModel();
+    $data['pupilmodel']=$pupilmodel->where(['pupil_id'=>$id])->get()->getRow();
+
+    // $records = new ActivityMaster();
+    // $data['users']=$records->join('lesson_master','activity_master.lesson_id = lesson_master.lesson_id')
+    //                        ->join('teacher_lesson', 'lesson_master.lesson_id = teacher_lesson.lesson_id')
+    //                        ->join('teacher', 'teacher_lesson.teacher_id = teacher.teacher_id')
+    //                        ->join('section', 'teacher.section_id = section.section_id')
+    //                        ->where(['section.section_id'=>session()->get('section')])
+    //                        ->findAll();
+
+  return view('teacher_viewoverallperformance', $data);
+}
+
+public function viewperformance_module($id){
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+  $data=[
+    'meta_title'=>'Teacher | View Module',
+    'section_id'=>$id,
+  ];
+
+  $userModel = new TeacherModel();
+  $data['users']=$userModel->join('teacher_lesson', 'teacher.teacher_id = teacher_lesson.teacher_id')->join('lesson_master','teacher_lesson.lesson_id = lesson_master.lesson_id')->join('section','teacher.section_id = section.section_id')->orderBy('teacher.teacher_id', 'ASC')->findAll();
+  $data['teacher']=$userModel->where(['teacher_id'=>session()->get('t_id')])->get()->getRow();
+
+
+  $pupilmodel = new PupilModel();
+  $data['pupil']=$pupilmodel->where(['pupil_id'=>$id])->get()->getRow();
+  // //
+  //     echo "<pre>";
+  //   print_r($pupil_id);
+  // echo "<pre>";
+
+
+  return view('teacher_moduleperformance', $data);
+
+}
+
+public function teacher_activityperformance($id,$pupil_id){
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+  $data=[
+    'meta_title'=>'Teacher | View Module',
+    'section_id'=>$id,
+  ];
+
+  $userModel = new TeacherRegistration();
+  $data['users']=$userModel->join('teacher_lesson', 'teacher.teacher_id = teacher_lesson.teacher_id')
+                            ->join('lesson_master','teacher_lesson.lesson_id = lesson_master.lesson_id')
+                            ->join('activity_master','lesson_master.lesson_id = activity_master.lesson_id')
+                            ->join('section','teacher.section_id = section.section_id')
+                            ->orderBy('teacher.teacher_id', 'ASC')
+                            ->where(['activity_master.lesson_id'=>$id])
+                            ->findAll();
+  // $data['teacher']=$userModel->where(['section_id'=>$id])->get()->getRow();
+  //
+  // //
+  //     echo "<pre>";
+  //   print_r($pupil_id);
+  // echo "<pre>";
+  // //
+  //
+  // $activity_id = new ActivityMaster();
+  // $data['users'] = $activity_id->where(['lesson_id'=>$id])->findAll();
+  $pupilmodel = new PupilModel();
+  $data['pupil']=$pupilmodel->where(['pupil_id'=>$pupil_id])->get()->getRow();
+
+  $userModel = new LessonMaster();
+  $data['lesson'] = $userModel->where(['lesson_id'=>$id])->get()->getRow();
+
+  return view('teacher_viewactivity2', $data);
+
+}
+
+public function viewperformance($id,$pupil_id){
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+  $data=[
+    'meta_title'=>'Teacher | View Performance ',
+    'act_id'=>$id,
+    'pupil_id'=>$pupil_id,
+  ];
+
+  $activity_id = new ActivityMaster();
+  $data['id'] = $activity_id->where(['activity_id'=>$id])->get()->getRow();
+  $records = new PerformanceRecords();
+  // $userModel = new TeacherRegistration();
+  $data['users']=$records->join('activity_master','activity_master.activity_id = performance_records.activity_id')->join('pupil', 'pupil.pupil_id = performance_records.pupil_id')->where(['performance_records.activity_id'=>$id])->findAll();
+  // echo "<pre>";
+  //   print_r($data['id']);
+  // echo "<pre";
+
+
+  $pupilmodel = new PupilModel();
+  $data['pupilmodel']=$pupilmodel->where(['pupil_id'=>$pupil_id])->get()->getRow();
+
+return view('teacher_viewperformance', $data);
 }
 
 

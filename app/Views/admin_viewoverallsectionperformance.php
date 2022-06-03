@@ -82,7 +82,7 @@
 <div class="container" style="display: <?= $display2 ?>">
   <div class="row">
       <div class="col">
-          <h1><?= $pupilmodel->pupil_firstname ?> didn't answered the activities yet</h1>
+          <h1>Pupils from Section <?= $id->section_name ?> didn't answered the activities yet</h1>
       </div>
   </div>
 </div>
@@ -95,7 +95,7 @@
     </div>
     <div class="row" style="margin-top:3%;">
       <div class="col">
-          <h1><?= $pupilmodel->pupil_firstname ?>'s overall performance percentage is:</h1>
+          <h1><?= $id->section_name ?>'s overall performance percentage is:</h1>
       </div>
     </div>
     <div class="row" style="margin-top:3%;">

@@ -1,28 +1,28 @@
 <?= $this->extend('layouts/main') ?>
 <?= $this->section('content') ?>
-
 <?php
   $display='block';
  ?>
 
-<div class="navbar" style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(<?=base_url()?>/public/assets/images/banner.png);">
+<div class="navbar mb-1" style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(<?=base_url()?>/public/assets/images/banner.png);">
        <nav class="nav row w-100 align-items-center">
            <div class="col-7">
-               <a href="<?php echo base_url(); ?>/public/admin/home" style="text-decoration: none; font-size:250%;"><b>Pulong</b></a>
+               <a href="<?php echo base_url(); ?>/public/teacher/home" style="text-decoration: none; font-size:250%;"><b>Pulong</b></a>
            </div>
            <div class="col-4 text-center pt-3">
-                <p style="color:white; text-align:right;"><?= session()->get('firstname') ?> <?= session()->get('lastname') ?></p>
+               <p style="color:white; text-align:right;"><?= session()->get('firstname') ?> <?= session()->get('lastname') ?></p>
            </div>
            <div class="col-1 p-0 text-center">
                <div style="margin-right: 0%;">
-                   <a href="#" class="dropdown"><img src="<?=base_url()?>/public/assets/images/admin.png" alt="" class="nav_img" height="60" width="60"></a>
+                   <a href="#" class="dropdown"><img src="<?=base_url()?>/public/assets/images/teacher.png" alt="" class="nav_img" height="60" width="60"></a>
                 </div>
            </div>
        </nav>
    </div>
    <div class="menu p-2 text-center">
+
         <div class="">
-        <a href="<?php echo base_url(); ?>/public/admin/logout">Logout</a>
+        <a href="<?php echo base_url(); ?>/public/teacher/logout">Logout</a>
         </div>
    </div>
    <script>
@@ -30,10 +30,6 @@
        $( ".menu").toggle();
    });
    </script>
-
-   <?php if (strcmp(strtoupper($pupil->account_status),strtoupper('inactive'))==0): ?>
-      <?php $display='none'; ?>
-   <?php endif; ?>
 
 <?php $fname; $lname; $section_name;?>
 
@@ -47,13 +43,13 @@
             <?php endif; ?>
           <?php endforeach; ?>
        <?php endif; ?>
-       <?php if (empty($fname) && empty($lname)): ?>
-          <h2 style="text-align:center; font-size:300%;">No Teacher</h2>
-        <?php else: ?>
-          <h2 style="text-align:center; font-size:300%;display:<?= $display?>"> Modules for section <?= $section_name ?></h2>
-       <?php endif; ?>
-         <h3 class=" text-center" style="display:<?= $display?>">Please select a module to view <?= $pupil->pupil_firstname ?> <?= $pupil->pupil_lastname?>'s activity results, </h3>
-          <h3 class=" text-center" style="display:<?= $display?>">or view module overall performance. </h3>
+
+     <?php if (strcmp(strtoupper($pupil->account_status),strtoupper('inactive'))==0): ?>
+        <?php $display='none'; ?>
+     <?php endif; ?>
+
+         <h3 class=" text-center" style="margin-top:5%;display:<?= $display;?>">Please select a module to view <?= $pupil->pupil_firstname ?> <?= $pupil->pupil_lastname?>'s activity results, </h3>
+          <h3 class=" text-center" style="display:<?= $display;?>">or view module overall performance. </h3>
       <div class="container mt-5" style="margin-bottom:5%;">
 
         <div class="mt-3">
@@ -70,33 +66,26 @@
           <br>
           <?php if (!$users): ?>
              <h1 style="text-align:center;">No Added Module</h1>
-          <?php elseif (strcmp(strtoupper($pupil->account_status),strtoupper('inactive'))==0): ?>
-              <h1 style="text-align:center;">Pupil account is disabled.</h1>
+        <?php elseif (strcmp(strtoupper($pupil->account_status),strtoupper('inactive'))==0): ?>
+           <h1 style="text-align:center;">Pupil account is disabled.</h1>
+           <?php $display='none'; ?>
          <?php else: ?>
            <table class="table table-borderless table-hover" id="users-list"  style=" border-bottom: none;">
              <thead style="text-align:left; font-size:3rem">
                 <tr>
                    <th>Module Name</th>
                    <th>Unit</th>
-                   <th></th>
+
                 </tr>
              </thead>
 
                 <?php if($users): ?>
                 <?php foreach($users as $user): ?>
-                  <?php if ($user['section_id']==$section_id): ?>
+                  <?php if ($user['section_id']==session()->get('section_id')): ?>
                     <tr>
-                        <td style="text-align:left"><a href="<?php echo base_url(); ?>/public/admin/admin_activityperformance/<?= $user['lesson_id'] ?>/<?= $pupil->pupil_id ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['lesson_name']; ?></a> </td>
+                        <td style="text-align:left"><a href="<?php echo base_url(); ?>/public/teacher/teacher_activityperformance/<?= $user['lesson_id'] ?>/<?= $pupil->pupil_id ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['lesson_name']; ?></a> </td>
                         <td style="text-align:center"><?php echo $user['unit']; ?></td>
-                        <td style="text-align:center">
-                          <a href="<?php echo base_url(); ?>/public/admin/view_overallmoduleperformance/<?= $user['lesson_id'] ?>/<?= $pupil->pupil_id ?>" style="text-decoration:none;">
-                            <buttontype="button" class="btn btn-outline-success">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
-                                   <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
-                                   <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
-                                 </svg>View Module Performance</button>
-                              </a>
-                        </td>
+
                      </tr>
                   <?php endif; ?>
 

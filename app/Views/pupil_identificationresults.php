@@ -91,7 +91,7 @@
    </div>
 
 <center>
-    <form class=""  action="<?php echo site_url('pupil/check_identification/'.$users->activity_id);?>" method="post" id="form" style="display:block; margin-bottom:5%;"  enctype="multipart/form-data">
+
     <?php foreach ($question as $questions): ?>
 
      <?php $question_no++;  ?>
@@ -130,7 +130,7 @@
                                 </div>
                                 <?php foreach ($results as $result): ?>
                                     <?php if ($questions['activity_content_id']==$result['activity_content_id']): ?>
-                                      <?php if (strcmp(trim($questions['activity_answer']),trim($result['answer']))==0): ?>
+                                      <?php if (strcmp(trim(ucfirst($questions['activity_answer'])),trim(ucfirst($result['answer'])))==0): ?>
                                               <?php $color='green'; ?>
                                       <?php else: ?>
                                               <?php $color='red'; ?>
@@ -146,8 +146,6 @@
             </div>
             <?php $choice_id+=1; ?>
     <?php endforeach; ?>
-
-  </form>
 </center>
    </div>
  </div>
@@ -157,78 +155,7 @@
 
 
 <div id='border' style="border:1px solid white; width:70%; margin-bottom:5%; border-radius:10px;">
- <form class="" action="<?php echo site_url('teacher/addquestion_identification/'.$users->activity_id);?>" method="post" id="form" style="display:none; margin-bottom:5%;"  enctype="multipart/form-data">
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <a href="#" onclick="hide('popup2')" >
-          <p style="text-align:right;"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="grey" class="bi bi-x" viewBox="0 0 16 16">
-            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-          </svg></p>
-        </a>
-      </div>
-    </div>
-  </div>
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <h1 style="margin-bottom:5%;">Question <?= $question_no+=1; ?></h1>
-      </div>
-    </div>
-  </div>
 
-   <div class="container" style="margin-top:0%;">
-     <div class="row">
-       <div class="col-sm">
-               <div class="form-group">
-                 <label for="" style="font-size:25px; margin-bottom:3%;">Activity Question</label>
-                 <textarea class="form-control" style="width: 100%; border: 2px solid #00acee;" id="exampleFormControlTextarea1" placeholder="" rows="4" name="activity_question"></textarea>
-               </div>
-               <div class="text-danger" style="margin-top:3%;">
-                 <?php if (isset($validation)): ?>
-                       <?php if ($validation->hasError('activity_question')): ?>
-                             <p>  <?= $validation->getError('activity_question') ?></p>
-                       <?php endif; ?>
-                 <?php endif; ?>
-               </div>
-       </div>
-       <div class="col-sm" >
-         <div class="form-group ">
-             <label class="btn btn-success" style="margin-top:10%;margin-bottom:3%">
-                <i class="fa fa-image"></i> Add Media<input type="file" style="display: none;" name="image" id="image" class="form-control-file" onchange="loadFile(event)" class="align-middle" style="border-top:5%;">
-             </label>
-             <div class="text-danger" style="margin-top:3%;">
-               <?php if (isset($validation)): ?>
-                     <?php if ($validation->hasError('image')): ?>
-                           <p>  <?= $validation->getError('image') ?></p>
-                     <?php endif; ?>
-               <?php endif; ?>
-             </div>
-           <center>
-              <img id="output" width="350" />
-          </center>
-
-         </div>
-       </div>
-     </div>
-   </div>
-   <br>
-
-   <div style="width:90%;">
-     <h2 style="margin-bottom:2%;"> Question Answer</h2>
-     <div class="form-check grupouno">
-
-       <label class="form-check-label" for="flexRadioDefault1" >
-           <input type="text" id="question_4" class="form-control input-mc" name="activity_answer" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;" required>
-       </label>
-     </div>
-
-   </div>
-
-   <center>
-   <button type="submit" onclick ="addValueToRadioBtn();" class="btn btn-primary btn-block mb-4 mt-4">Submit</button>
- </center>
-</form>
 
 </div>
 
@@ -250,6 +177,11 @@ function addValueToRadioBtn() {
 
 }
 
+</script>
+<script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
 </script>
 
 <script>

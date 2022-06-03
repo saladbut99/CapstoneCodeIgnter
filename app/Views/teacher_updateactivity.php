@@ -43,7 +43,7 @@
         <br>
       </div>
           <div class="col-10 col-md-8 offset-md-2">
-            <form action="" method="post" enctype="multipart/form-data">
+            <form action="<?php echo site_url('teacher/update_activity/'.$activity->activity_id);?>" method="post" enctype="multipart/form-data">
               <div class="form-group">
                   <label for="" style="font-size:25px;">Activity Title</label>
                   <input type="text" id="activity-txtarea" class="form-control" name="activity_name" style="height: 50px;" value="<?= $activity->activity_name ?>">
@@ -67,26 +67,7 @@
                         <?php endif; ?>
                   <?php endif; ?>
                 </div>
-                <label class="form-check-label mx-1" for="gradelevel" style="font-size:25px;"> Activity Type  </label>
-                <div class="form-check container-activity-type">
-                  <input class="form-check-input radio-btn" type="radio" id="flexRadioDefault1" name="activity_type" value='multiple_choice' required>
-                  <label class="form-check-label label-activity-type" for="flexRadioDefault1">
-                    Multiple Choice
-                  </label>
-                </div>
-                <div class="form-check container-activity-type">
-                  <input class="form-check-input radio-btn" type="radio" id="flexRadioDefault3" name="activity_type" value='identification' required>
-                  <label class="form-check-label label-activity-type" for="flexRadioDefault1">
-                    Identification
-                  </label>
-                </div>
-                <div class="text-danger" style="margin-top:3%;">
-                  <?php if (isset($validation)): ?>
-                        <?php if ($validation->hasError('activity_type')): ?>
-                              <p>  <?= $validation->getError('activity_type') ?></p>
-                        <?php endif; ?>
-                  <?php endif; ?>
-                </div>
+                
 
                 <center>
                 <button type="submit" class="btn btn-primary btn-block mb-4 mt-4">Submit</button>

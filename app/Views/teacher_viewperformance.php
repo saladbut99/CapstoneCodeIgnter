@@ -6,39 +6,32 @@
     $question_no=0;
     $choice_id=0;
     $count=1;
-    $display='block';
-    $display2='none';
-    $total=0;
-    $range=0;
-    $total_score=0;
-    $message='';
+    $counter=0;
   ?>
+
 
   <div class="navbar" style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(<?=base_url()?>/public/assets/images/banner.png);">
          <nav class="nav row w-100 align-items-center">
              <div class="col-7">
-                 <a href="<?php echo base_url(); ?>/public/admin/home" style="text-decoration: none; font-size:250%;"><b>Pulong</b></a>
+                 <a href="<?php echo base_url(); ?>/public/teacher/home" style="text-decoration: none; font-size:250%;"><b>Pulong</b></a>
              </div>
              <div class="col-4 text-center pt-3">
-                  <p style="color:white; text-align:right;"><?= session()->get('firstname') ?> <?= session()->get('lastname') ?></p>
+                 <p style="color:white; text-align:right;"><?= session()->get('firstname') ?> <?= session()->get('lastname') ?></p>
              </div>
              <div class="col-1 p-0 text-center">
                  <div style="margin-right: 0%;">
-                     <a href="#" class="dropdown"><img src="<?=base_url()?>/public/assets/images/admin.png" alt="" class="nav_img" height="60" width="60"></a>
+                     <a href="#" class="dropdown"><img src="<?=base_url()?>/public/assets/images/teacher.png" alt="" class="nav_img" height="60" width="60"></a>
                   </div>
              </div>
          </nav>
      </div>
      <div class="menu p-2 text-center">
+
           <div class="">
-          <a href="<?php echo base_url(); ?>/public/admin/logout">Logout</a>
+          <a href="<?php echo base_url(); ?>/public/teacher/logout">Logout</a>
           </div>
      </div>
-     <script>
-       $( ".dropdown" ).click(function() {
-         $( ".menu").toggle();
-     });
-     </script>
+
 <center>
 
 
@@ -60,60 +53,59 @@
         <?php endif; ?>
         </div>
       </div>
-<?php foreach ($pupil as $key ): ?>
- <?php
-        $total=$total+$key['activity_score'];
-        $range=$range+$key['perfect_score'];
-    ?>
-<?php endforeach; ?>
-<?php if ($total == 0 && $range==0): ?>
-        <?php $display='none'; ?>
-        <?php $display2='block'; ?>
-<?php else: ?>
-    <?php   $total_score=$total/$range*100; ?>
-    <?php if ($total_score>=50): ?>
-        <?php $message='Theyre doing good, up the good work!'; ?>
-    <?php else: ?>
-      <?php $message='Monitoring of pupil is advised!'; ?>
-    <?php endif; ?>
-<?php endif; ?>
 
 <!-- form for the question -->
-<div class="container" style="display: <?= $display2 ?>">
-  <div class="row">
-      <div class="col">
-          <h1><?= $pupilmodel->pupil_firstname ?> didn't answered the activities yet</h1>
-      </div>
-  </div>
-</div>
-
-<div class="container" style="display:<?= $display ?>">
+<div class="container" style="margin-bottom:5%;">
     <div class="row">
       <div class="col">
-          <h1>Hi Admin!</h1>
-      </div>
-    </div>
-    <div class="row" style="margin-top:3%;">
-      <div class="col">
-          <h1><?= $pupilmodel->pupil_firstname ?>'s overall performance percentage is:</h1>
-      </div>
-    </div>
-    <div class="row" style="margin-top:3%;">
-      <div class="col">
-          <h1><?= number_format((float)$total_score, 2, '.', ''); ?>%</h1>
-      </div>
-    </div>
-    <div class="row" style="margin-top:3%;">
-      <div class="col">
-          <h1><?=$message ?></h1>
+        <h1>Hi Admin! Here are there activity results for <?= $pupilmodel->pupil_firstname ?> </h1>
+        <h1>for <?= $id->activity_name ?> !</h1>
       </div>
     </div>
 </div>
 
+<?php foreach ($users as $user): ?>
+      <?php if ($user['pupil_id']==$pupil_id): ?>
+          <?php $counter+=1; ?>
+      <?php endif; ?>
+<?php endforeach; ?>
 
+  <?php if (!$users || $counter==0): ?>
+      <div class="container">
+          <div class="row">
+              <div class="col">
+                    <h1>Looks like <?= $pupilmodel->pupil_firstname; ?> haven't answered the activity yet. </h1>
+              </div>
+          </div>
+      </div>
+  <?php else: ?>
+    <?php foreach ($users as $user): ?>
+      <?php if ($user['pupil_id']==$pupil_id): ?>
+        <div class="container" style="border: 2px solid #00acee;border-radius:20px; width:60%; margin-bottom:5%;">
+          <div class="row" >
+            <div class="col" style="margin-bottom:2%;">
+                <h1>Activity Take No. <?= $count ?></h1>
+          </div>
+          </div>
+          <div class="row">
+              <div class="col" style="margin-bottom:2%;">
+                  <h1><?= $user['performed_activity_date'] ?></h1>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col">
+                  <h1>Your Score: <?= $user['activity_score'] ?>/<?= $user['activity_perfect_score'] ?></h1>
+              </div>
+              <div class="col">
+                  <h1><?= $user['percentage_score'] ?>%</h1>
+              </div>
+            </div>
 
-
-
+        </div>
+        <?php $count+=1; ?>
+      <?php endif; ?>
+    <?php endforeach; ?>
+  <?php endif; ?>
 
 <script>
   function check() {
