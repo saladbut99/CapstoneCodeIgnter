@@ -127,7 +127,7 @@
                                                       </div>
                                                       <?php foreach ($choice as $choices): ?>
                                                         <?php if ($choices['activity_content_id']==$questions['activity_content_id']): ?>
-                                                          <?php if (strcmp($questions['activity_answer'],$choices['choice'])==0): ?>
+                                                          <?php if (strcmp(strtoupper($questions['activity_answer']),strtoupper($choices['choice']))==0): ?>
                                                                   <?php $color='green'; ?>
                                                           <?php else: ?>
                                                                   <?php $color='grey'; ?>
@@ -141,8 +141,15 @@
                                                           <span style="color:grey;">Imong Tubag</span>
                                                         </div>
                                                         <?php foreach ($results as $result): ?>
+                                                          <?php foreach ($choice as $choices): ?>
+                                                            <?php if ($choices['activity_content_id']==$questions['activity_content_id']): ?>
+                                                              <?php if (strcmp(strtoupper($questions['activity_answer']),strtoupper($choices['choice']))==0): ?>
+                                                                      <?php $_choice=$choices['choice']; ?>
+                                                              <?php endif; ?>
+                                                            <?php endif; ?>
+                                                          <?php endforeach; ?>
                                                             <?php if ($questions['activity_content_id']==$result['activity_content_id']): ?>
-                                                              <?php if (strcmp(trim($questions['activity_answer']),trim($result['answer']))==0): ?>
+                                                              <?php if (strcmp(strtoupper($questions['activity_answer']),strtoupper($result['answer']))==0): ?>
                                                                       <?php $color='green'; ?>
                                                               <?php else: ?>
                                                                       <?php $color='red'; ?>

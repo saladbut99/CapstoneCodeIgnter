@@ -117,7 +117,7 @@
                         </div>
                         <?php foreach ($choice as $choices): ?>
                           <?php if ($choices['activity_content_id']==$questions['activity_content_id']): ?>
-                            <?php if (strcmp($questions['activity_answer'],$choices['choice'])==0): ?>
+                            <?php if (strcmp(strtoupper($questions['activity_answer']),strtoupper($choices['choice']))==0): ?>
                                     <?php $color='green'; ?>
                             <?php else: ?>
                                     <?php $color='grey'; ?>

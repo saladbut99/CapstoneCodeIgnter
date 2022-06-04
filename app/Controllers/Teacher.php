@@ -1294,6 +1294,10 @@ public function multiplechoice($id){
   $medias = new MediaActivity();
   $data['media'] = $medias->findAll();
 
+  // echo "<pre>";
+  //   print_r($data['choice']);
+  // echo "<pre>";
+
    return view('teacher_multiplechoice', $data);
 
 }
@@ -1428,7 +1432,7 @@ public function addquestion($id){
       if ($this->validate($rules)) {
 
         $_POST['activity_question']=ucfirst($_POST['activity_question']);
-        $_POST['activity_answer']=ucfirst($_POST['activity_question']);
+        $_POST['activity_answer']=ucfirst($_POST['activity_answer']);
         $_POST['activity_id']=$id;
 
 
@@ -1614,6 +1618,7 @@ public function addquestion_identification($id){
       if ($this->validate($rules)) {
 
         $_POST['activity_question']=ucfirst($_POST['activity_question']);
+        $_POST['activity_answer']=ucfirst($_POST['activity_answer']);
         $_POST['activity_id']=$id;
 
 

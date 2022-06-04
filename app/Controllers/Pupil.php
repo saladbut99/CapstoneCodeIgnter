@@ -480,7 +480,7 @@ public function update(){
          $activity_id = new ActivityContent();
          $data['question'] = $activity_id->where(['activity_content_id'=>$key['activity_content_id']])->get()->getRow();
 
-         if (strcmp($key['answer'],$data['question']->activity_answer)==0) {
+         if (strcmp(strtoupper($key['answer']),strtoupper($data['question']->activity_answer))==0) {
             $score+=2;
          }
        }
