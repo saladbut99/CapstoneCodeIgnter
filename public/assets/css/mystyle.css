@@ -171,14 +171,6 @@ transition: all 0.3 ease;
   padding-left: 20px;
 }
 
-#cntr {
-  background-image: url("http://localhost/CapstoneCodeIgnter/Pulong/public/assets/images/pupil_bg.jpg") !important;
-  background-size: 110%;
-  background-repeat: no-repeat;
-  background-position: center;
-  height: 100vh !important;
-}
-
 .section_menu {
   height: 10rem !important;
   display: flex;
@@ -208,12 +200,11 @@ transition: all 0.3 ease;
   width: 10rem;
   cursor: pointer;
   border-radius: 50% !important;
-  background-color: rgba(255, 255, 255, 0.8) !important;
+  transform: scale(1.2) !important;
 }
 
 .section_pupil:hover {
-  transform: scale(1.1) !important;
-  border-radius: 20% !important;
+    border-radius: 30% !important;
 
 }
 
@@ -689,7 +680,7 @@ overflow: auto;
 
   .formcontainer{
     max-width: 60% !important;
-    background-color: rgba(255, 255, 255, 0.75)
+    background-color: rgba(255, 255, 255, 0.75);
   }
 }
 

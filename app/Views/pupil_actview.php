@@ -4,7 +4,7 @@
 
 <?php $section_id=$pupil->section_id;?>
 
-<div class="navbar" style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(<?=base_url()?>/public/assets/images/banner.png);">
+<div class="navbar mb-0" style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(<?=base_url()?>/public/assets/images/banner.png);">
        <nav class="nav row w-100 align-items-center">
            <div class="col-7">
                <a href="<?php echo base_url(); ?>/public/pupil/home" style="text-decoration: none; font-size:250%;"><b>Pulong</b></a>
@@ -38,8 +38,7 @@
 
 
 
-   <div class="container mt-5" style="margin-bottom:5%;">
-     <div class="mt-3">
+   <div class="container my-0 py-5" id="conviewmodact" style="height: 100vh;">
      <div class="row" style="background-image: url(<?=base_url()?>/public/assets/images/pupilbanner.jpg)">
       <!-- BACKBUTTON DIV -->
       <div class="backbutton col-3 d-flex align-items-center">
@@ -55,9 +54,9 @@
       <div class="buttonforunit col d-flex align-items-center">
         <h4 id="kwarter"> KWARTER: </h4>
         <button class="btn btn-lg btn-unit" id="btn-unit1"> 1 </button>
-        <button class="btn btn-lg btn-unit" id="btn-unit2"> 2 </button>
-        <button class="btn btn-lg btn-unit" id="btn-unit3"> 3 </button>
-        <button class="btn btn-lg btn-unit" id="btn-unit4"> 4 </button>
+        <button class="btn btn-lg btn-unit" id="btn-unit2" style="color: whitesmoke;"> 2 </button>
+        <button class="btn btn-lg btn-unit" id="btn-unit3" style="color: whitesmoke;"> 3 </button>
+        <button class="btn btn-lg btn-unit" id="btn-unit4" style="color: whitesmoke;"> 4 </button>
       </div>
     </div>
        <center>
@@ -156,7 +155,7 @@
      </div>
    </div>
 
-   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+               <//script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
    <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
    <script>
@@ -218,39 +217,72 @@
 
   <script>
     $( "#btn-unit1" ).click(function() {
-      $( "#btn-unit1" ).css({'cssText': 'background-color: whitesmoke !important'});
-      $( "#users-list").show();
-      $( "#users-list2").hide();
-      $( "#users-list3").hide();
-      $( "#users-list4").hide();
-  });
-  $( "#btn-unit2" ).click(function() {
-      $( "#btn-unit1" ).css({'cssText': 'background-color: rgba(255,255,255,0) !important'});
-      $( "#users-list").hide();
-      $( "#users-list2").show();
-      $( "#users-list3").hide();
-      $( "#users-list4").hide();
-  });
-  $( "#btn-unit3" ).click(function() {
-      $( "#btn-unit1" ).css({'cssText': 'background-color: rgba(255,255,255,0) !important'});
-      $( "#users-list").hide();
-      $( "#users-list2").hide();
-      $( "#users-list3").show();
-      $( "#users-list4").hide();
-  });
-  $( "#btn-unit4" ).click(function() {
-      $( "#btn-unit1" ).css({'cssText': 'background-color: rgba(255,255,255,0) !important'});
-      $( "#users-list").hide();
-      $( "#users-list2").hide();
-      $( "#users-list3").hide();
-      $( "#users-list4").show();
-  });
+    $( "#btn-unit1" ).css({'cssText': 'background-color: whitesmoke !important; color: black;'});
+    $( "#btn-unit2" ).css({'cssText':'color: whitesmoke;'});
+    $( "#btn-unit3" ).css({'cssText':'color: whitesmoke;'});
+    $( "#btn-unit4" ).css({'cssText':'color: whitesmoke;'});
+    $( "#users-list").show();
+    $( "#users-list2").hide();
+    $( "#users-list3").hide();
+    $( "#users-list4").hide();
+    $('html, body').animate({
+        scrollTop: $('#conviewmodact').offset().top
+    }, 000);
+});
+$( "#btn-unit2" ).click(function() {
+    $( "#btn-unit1" ).css({'cssText': 'background-color: rgba(255,255,255,0) !important; color: whitesmoke;'});
+    $( "#btn-unit2" ).css({'cssText':'color: black;'});
+    $( "#btn-unit3" ).css({'cssText':'color: whitesmoke;'});
+    $( "#btn-unit4" ).css({'cssText':'color: whitesmoke;'});
+    $( "#users-list").hide();
+    $( "#users-list2").show();
+    $( "#users-list3").hide();
+    $( "#users-list4").hide();
+    $('html, body').animate({
+        scrollTop: $('#conviewmodact').offset().top
+    }, 000);
+});
+$( "#btn-unit3" ).click(function() {
+    $( "#btn-unit1" ).css({'cssText': 'background-color: rgba(255,255,255,0) !important; color: whitesmoke;'});
+    $( "#btn-unit2" ).css({'cssText':'color: whitesmoke;'});
+    $( "#btn-unit3" ).css({'cssText':'color: black;'});
+    $( "#btn-unit4" ).css({'cssText':'color: whitesmoke;'});
+    $( "#users-list").hide();
+    $( "#users-list2").hide();
+    $( "#users-list3").show();
+    $( "#users-list4").hide();
+    $('html, body').animate({
+        scrollTop: $('#conviewmodact').offset().top
+    }, 000);
+});
+$( "#btn-unit4" ).click(function() {
+    $( "#btn-unit1" ).css({'cssText': 'background-color: rgba(255,255,255,0) !important; color: whitesmoke;'});
+    $( "#btn-unit2" ).css({'cssText':'color: whitesmoke;'});
+    $( "#btn-unit3" ).css({'cssText':'color: whitesmoke;'});
+    $( "#btn-unit4" ).css({'cssText':'color: black;'});
+    $( "#users-list").hide();
+    $( "#users-list2").hide();
+    $( "#users-list3").hide();
+    $( "#users-list4").show();
+    $('html, body').animate({
+        scrollTop: $('#conviewmodact').offset().top
+    }, 000);
+});
 
-  var beepOne = $("#beep-one")[0];
-  $(".btn-unit").click(function () {
-  beepOne.currentTime=0;
-  beepOne.play();
-  });
+$(document).ready(function () {
+    $('html, body').animate({
+        scrollTop: $('#conviewmodact').offset().top
+    }, 1000);
+});
+
+var beepOne = $("#beep-one")[0];
+$(".btn-unit").click(function () {
+beepOne.currentTime=0;
+beepOne.play();
+});
+
+
+
   </script>
 
 

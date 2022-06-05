@@ -25,21 +25,42 @@
         <a href="<?php echo base_url(); ?>/public/pupil/logout">Logout</a>
         </div>
 </div>
+<a href="<?php echo base_url(); ?>/public/pupil/viewmoduletable" style="text-decoration: none; color: rgb(68, 68, 68);">
+<div class="backbutton_lesson p-2 col-1 mt-2 d-flex align-items-center" style="background-color: white; border: 1px solid black; border-radius: 20px; border-right: none;">         
+              <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+              </svg>    
+            <h6 style="margin-left:1rem !important; margin-top: .5rem !important;"> Go Back </h6>
+</div>
+</a>
+
+<style>
+  .backbutton_lesson  {
+    position: fixed;
+    margin-left: 5px;
+    left: 0;
+  }
+
+  .backbutton_lesson:hover {
+    background-color: teal !important;
+    transform: scale(1.04);
+    transition: transform .2s ease-in-out;
+  }
+
+  .backbutton_lesson:hover > * {
+   color: whitesmoke;
+  }
+</style>
+
 
 <center>
 
 <div id="scroll_container">
   <!-- TITLE AREA -->
-    <div class="container scroll_area" style="margin-bottom:5%; height:100vh; background-color:blue" id="wrapper" >
-      <div class="row" style="height:100vh" id="titlewithbtnact">
-        <div class="backbutton col-1 mt-2 d-flex align-items-center">
-            <a href="<?php echo base_url(); ?>/public/pupil/viewmoduletable" style="text-decoration: none; color: rgb(68, 68, 68);">
-              <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
-              </svg>
-            </a>
-            <h6 style="margin-left:1rem !important; margin-top: .5rem !important;">Return Home</h6>
-        </div>
+    <div class="container scroll_area" style="border-left: 2px solid black; border-bottom:2px solid black; height:90vh; background-color: white; box-shadow: 13px 0px 16px -7px rgba(0,0,0,0.73);
+-webkit-box-shadow: 13px 0px 16px -7px rgba(0,0,0,0.73);
+-moz-box-shadow: 13px 0px 16px -7px rgba(0,0,0,0.73);" id="wrapper" >
+      <div class="row" style="" id="titlewithbtnact"> 
         <br><br><br>
         <div>
           <?php if (session()->get('success')): ?>
@@ -54,24 +75,27 @@
 
               <div class="container">
 
-                <div class="row">
+                <div class="row align-items-center">
                   <div class="col">
                       <h1 style="text-align:left;font-size:80px;"><b><?= $users->lesson_name; ?></b></h1>
                   </div>
-                  <div class="col" style="margin-top:2%; margin-left:5%;">
+                  <div class="col" style="margin-left:5%;">
                     <a  id="bootoon" href="<?php echo base_url(); ?>/public/pupil/viewactivity\<?= $users->lesson_id ?>" style="text-decoration:none;" class="align-middle">
-                      <button type="button" class="btn btn-outline-info">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                      <button type="button" class="btn btn-outline-info" 
+                      style="box-shadow: 0px 21px 13px -13px rgba(0,0,0,0.73);
+                          -webkit-box-shadow: 0px 21px 13px -13px rgba(0,0,0,0.73);
+                          -moz-box-shadow: 0px 21px 13px -13px rgba(0,0,0,0.73);">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                           <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                           <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                        </svg> View Activity
+                        </svg> <h3>View Activity</h3>
                     </button>
                     </a>
                   </div>
                   <script>
                     
                     $("#bootoon").click(function(){
-                        if(confirm("Press Ok if done with module.")){
+                        if(confirm("Pindota ang 'Ok' kung nahuman na sa modyul. 'Cancel' kung wala pa.")){
                           $("#bootoon");
                         }
                         else{
@@ -100,33 +124,38 @@
 
 
   <!-- DISCUSSION AREA -->
-  <div class="container scroll_area" style="margin-bottom:7%; height:100vh; background-color:red" id="">
+  <div class="container scroll_area" style="border-right: 2px solid black; border-bottom: 2px solid black;height:90vh; background-color:white; box-shadow: -13px 0px 16px -7px rgba(0,0,0,0.73);
+-webkit-box-shadow: -13px 0px 16px -7px rgba(0,0,0,0.73);
+-moz-box-shadow: -13px 0px 16px -7px rgba(0,0,0,0.73);" id="">
       <div class="row">
-        <div class="mt-3">
-          <div class="imageview">
+        <div class="my-3">
+            <div class="imageview">
             <?php if (strcmp($image->file_extension,'mp4')==0): ?>
               <video controls>
                   <source src="<?=base_url()?>/public/uploads/images/<?= $image->file_name; ?>" type="video/mp4">
             </video>
             <?php else: ?>
-                  <a href="<?=base_url()?>/public/uploads/images/<?= $image->file_name; ?>" target="_blank"><img src="<?=base_url()?>/public/uploads/images/<?= $image->file_name; ?>"  alt="" width="auto" height="auto" onclick="myFunction(this);" class="img-fluid"></a>
+                  <a href="<?=base_url()?>/public/uploads/images/<?= $image->file_name; ?>" target="_blank"><img src="<?=base_url()?>/public/uploads/images/<?= $image->file_name; ?>"  alt="" width="auto" height="auto" onclick="myFunction(this);" class="img-fluid" id="disc_img"></a>
             <?php endif; ?>
           </div>
         </div>
+        <center><hr style="width: 50%;"></center>
 
         <!-- <div class="expandingcontainer">
           <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
           <img id="expandedImg" style="width:100%">
           <div id="imgtext"></div>
         </div> -->
-        <div class="mt-0">
-          <h1 style="margin-top:5%;"><?= $discussion->discussion; ?></h1>
+        <div class="mt-0" style="overflow-y: scroll;">
+          <h3 style="margin-top:2%; height: 30vh;"><?= $discussion->discussion; ?></h3>
         </div>
       </div>
   </div>
 
   <!-- EXAMPLE AREA -->  
-  <div class="container scroll_area container_example pt-5" style="max-width: 2000px !important; background-color:green">
+  <div class="container scroll_area container_example pt-5" style="border-left: 2px solid black; border-bottom: 2px solid black; height:90vh !important; background-color:white; box-shadow: 13px 0px 16px -7px rgba(0,0,0,0.73);
+-webkit-box-shadow: 13px 0px 16px -7px rgba(0,0,0,0.73);
+-moz-box-shadow: 13px 0px 16px -7px rgba(0,0,0,0.73);">
     <div class="text-danger" style="margin-top:3%;">
       <?php if (isset($validation)): ?>
             <?php if ($validation->hasError('example')): ?>
@@ -147,7 +176,7 @@
         <?php foreach($example as $examples): ?>
 
     <?php $example_no++;  ?>
-          <div class="container example_area" style="">
+          <div class="container example_area" style="overflow-y:hidden;">
               <div class="row">
                   <div class="col">
                             <div class="row" style="margin-bottom:5%;">
@@ -339,12 +368,77 @@ $(document).ready(function () {
     }, 'fast');
 });
 
+$(document).ready(function () {
+    $('html, body').animate({
+        scrollTop: $('#scroll_container').offset().top
+    }, 1000);
+});
+
+
+
+$(window).scroll(example);
+
+function example() {
+scrollTop = window.pageYOffset;
+if (scrollTop == $('.navbar').offset().top) {
+    console.log('Hi');
+    $('html, body').stop(true, true).delay(2000).animate({
+        scrollTop: $('#scroll_container').offset().top
+    }, 500);
+  }}  ;
+
+
 </script>
 
 <style>
+
+#disc_img {
+  height: 40vh !important;
+  box-shadow: 0px 8px 19px 2px rgba(0,0,0,0.49);
+-webkit-box-shadow: 0px 8px 19px 2px rgba(0,0,0,0.49);
+-moz-box-shadow: 0px 8px 19px 2px rgba(0,0,0,0.49);
+}
+
 #scroll_container {
   scroll-snap-type: y mandatory;
   overflow: auto;
+  height: 100vh;
+  overflow-x:hidden !important;
+
+}
+
+#scroll_container::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+#scroll_container::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+#scroll_container::-webkit-scrollbar-thumb {
+  background: #8c6464;
+  border: 2px solid #ffffff;
+  border-radius: 46px;
+}
+#scroll_container::-webkit-scrollbar-thumb:hover {
+  background: #8c4040;
+}
+#scroll_container::-webkit-scrollbar-thumb:active {
+  background: #8c4040;
+}
+#scroll_container::-webkit-scrollbar-track {
+  background: #282f32;
+  border: 1px solid #ffffff;
+  border-radius: 50px;
+}
+#scroll_container::-webkit-scrollbar-track:hover {
+  background: #282f32;
+}
+#scroll_container::-webkit-scrollbar-track:active {
+  background: #393b3c;
+}
+#scroll_container::-webkit-scrollbar-corner {
+  background: transparent;
 }
 
 .scroll_area {
@@ -373,14 +467,20 @@ $(document).ready(function () {
   overflow-y: hidden;
   scroll-behavior: smooth;
   overflow: scroll;
-  height: 100vh;
+  height: 96vh;
+  background-color: #fdf9de;
 }
 
-.scroll_are {
+.scroll_area {
   scroll-snap-align: start;
 }
 
-</style>
+#bootoon > button:hover {
+  transform: translateY(-20px);
+  transition: all .3s ease;
+  border: 1px solid black;
+}
 
+</style>
 
 <?= $this->endSection() ?>

@@ -127,7 +127,7 @@
   $( "#sec1" ).click(function() {
     $( "#pop-up1").show();
     $('#sec1').css({
-        'cssText': 'background-color: rgba(100,255,100,0.5) !important'
+        'cssText': 'background-color: rgba(255,255,255,0.8) !important;'
     });
     $('#sec2').css({
         'cssText': 'background-color: rgba(255, 255, 255, 0.4) !important'
@@ -147,7 +147,7 @@
         'cssText': 'background-color: rgba(255, 255, 255, 0.4) !important'
     });
     $('#sec2').css({
-        'cssText': 'background-color: rgba(100,255,100,0.5) !important'
+        'cssText': 'background-color: rgba(255,255,255,0.8) !important'
     });
     $('#sec3').css({
         'cssText': 'background-color: rgba(255, 255, 255, 0.4) !important'
@@ -167,7 +167,7 @@
         'cssText': 'background-color: rgba(255, 255, 255, 0.4) !important'
     });
     $('#sec3').css({
-        'cssText': 'background-color: rgba(100,255,100,0.5) !important'
+        'cssText': 'background-color: rgba(255,255,255,0.8) !important'
     });
     $( "#pop-up1").hide();
     $( "#pop-up2").hide();
@@ -186,7 +186,7 @@ beepOne.play();
 var bgmusic = $("#bgmusic")[0];
 $(document).ready(function() {
   bgmusic.play();
-  bgmusic.volume = 0.05;
+  bgmusic.volume = 0.02;
 });
 
 $("#cntr").mousemove(function(e){
@@ -217,9 +217,17 @@ $(window).on('scroll', function() {
   border:3px solid #00acee;
   margin-bottom: 2%;
   border-radius: 5%;
-  background-color: white;
+  background-color: rgba(255,255,255,0.8);
   height: 10rem;
   max-height: 90%;
+}
+
+#cntr {
+  background-image: url("http://localhost/CapstoneCodeIgnter/Pulong/public/assets/images/pupil_bg.jpg") !important;
+  background-size: 110%;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100vh !important;
 }
 </style>
 

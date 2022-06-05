@@ -30,6 +30,17 @@
     <source src="<?=base_url()?>/public/assets/click2.mp3">
     <source src="audio/beep.ogg">
   </audio>
+  <audio id="bgmusic4viewmoduletable" hidden preload="auto" autoplay loop>
+    <source src="<?=base_url()?>/public/assets/bgmusic4viewmoduletable.mp3">
+    <source src="audio/beep.ogg">
+  </audio>
+  <script>
+    var bgmusic4viewmoduletable = $("#bgmusic4viewmoduletable")[0];
+$(document).ready(function() {
+  bgmusic4viewmoduletable.play();
+  bgmusic4viewmoduletable.volume = 0.05;
+});
+  </script>
 
    <?php if (session()->get('updatesuccess')): ?>
    <div class="alert alert-success" role="alert" style="margin-bottom:5%;">
@@ -53,10 +64,10 @@
       <!-- BUTTONS FOR TABLE POP UP -->
       <div class="buttonforunit col d-flex align-items-center">
         <h4 id="kwarter"> KWARTER: </h4>
-        <button class="btn btn-lg btn-unit" id="btn-unit1"> 1 </button>
-        <button class="btn btn-lg btn-unit" id="btn-unit2"> 2 </button>
-        <button class="btn btn-lg btn-unit" id="btn-unit3"> 3 </button>
-        <button class="btn btn-lg btn-unit" id="btn-unit4"> 4 </button>
+        <button class="btn btn-lg btn-unit" id="btn-unit1" style=""> 1 </button>
+        <button class="btn btn-lg btn-unit" id="btn-unit2" style="color: whitesmoke;"> 2 </button>
+        <button class="btn btn-lg btn-unit" id="btn-unit3" style="color: whitesmoke;"> 3 </button>
+        <button class="btn btn-lg btn-unit" id="btn-unit4" style="color: whitesmoke;"> 4 </button>
       </div>
     </div>
 
@@ -206,7 +217,10 @@
 
 <script>
   $( "#btn-unit1" ).click(function() {
-    $( "#btn-unit1" ).css({'cssText': 'background-color: whitesmoke !important'});
+    $( "#btn-unit1" ).css({'cssText': 'background-color: whitesmoke !important; color: black;'});
+    $( "#btn-unit2" ).css({'cssText':'color: whitesmoke;'});
+    $( "#btn-unit3" ).css({'cssText':'color: whitesmoke;'});
+    $( "#btn-unit4" ).css({'cssText':'color: whitesmoke;'});
     $( "#users-list").show();
     $( "#users-list2").hide();
     $( "#users-list3").hide();
@@ -216,7 +230,10 @@
     }, 0);
 });
 $( "#btn-unit2" ).click(function() {
-    $( "#btn-unit1" ).css({'cssText': 'background-color: rgba(255,255,255,0) !important'});
+    $( "#btn-unit1" ).css({'cssText': 'background-color: rgba(255,255,255,0) !important; color: whitesmoke;'});
+    $( "#btn-unit2" ).css({'cssText':'color: black;'});
+    $( "#btn-unit3" ).css({'cssText':'color: whitesmoke;'});
+    $( "#btn-unit4" ).css({'cssText':'color: whitesmoke;'});
     $( "#users-list").hide();
     $( "#users-list2").show();
     $( "#users-list3").hide();
@@ -226,7 +243,10 @@ $( "#btn-unit2" ).click(function() {
     }, 0);
 });
 $( "#btn-unit3" ).click(function() {
-    $( "#btn-unit1" ).css({'cssText': 'background-color: rgba(255,255,255,0) !important'});
+    $( "#btn-unit1" ).css({'cssText': 'background-color: rgba(255,255,255,0) !important; color: whitesmoke;'});
+    $( "#btn-unit2" ).css({'cssText':'color: whitesmoke;'});
+    $( "#btn-unit3" ).css({'cssText':'color: black;'});
+    $( "#btn-unit4" ).css({'cssText':'color: whitesmoke;'});
     $( "#users-list").hide();
     $( "#users-list2").hide();
     $( "#users-list3").show();
@@ -236,7 +256,10 @@ $( "#btn-unit3" ).click(function() {
     }, 0);
 });
 $( "#btn-unit4" ).click(function() {
-    $( "#btn-unit1" ).css({'cssText': 'background-color: rgba(255,255,255,0) !important'});
+    $( "#btn-unit1" ).css({'cssText': 'background-color: rgba(255,255,255,0) !important; color: whitesmoke;'});
+    $( "#btn-unit2" ).css({'cssText':'color: whitesmoke;'});
+    $( "#btn-unit3" ).css({'cssText':'color: whitesmoke;'});
+    $( "#btn-unit4" ).css({'cssText':'color: black;'});
     $( "#users-list").hide();
     $( "#users-list2").hide();
     $( "#users-list3").hide();
@@ -245,6 +268,7 @@ $( "#btn-unit4" ).click(function() {
         scrollTop: $('#conviewtable').offset().top
     }, 0);
 });
+
 
 var beepOne = $("#beep-one")[0];
 $(".btn-unit").click(function () {
@@ -257,6 +281,17 @@ $(document).ready(function () {
         scrollTop: $('#conviewtable').offset().top
     }, 1000);
 });
+
+$(window).scroll(example);
+
+function example() {
+scrollTop = window.pageYOffset;
+if (scrollTop == $('.navbar').offset().top) {
+    console.log('Hi');
+    $('html, body').stop(true, true).delay(2000).animate({
+        scrollTop: $('#conviewtable').offset().top
+    }, 500);
+  }}  ;
 
 </script>
 

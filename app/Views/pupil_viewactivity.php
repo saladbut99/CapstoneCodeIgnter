@@ -4,7 +4,7 @@
 
 <?php $example_no=0; ?>
 
-<div class="navbar" style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(<?=base_url()?>/public/assets/images/banner.png);">
+<div class="navbar mb-0" style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(<?=base_url()?>/public/assets/images/banner.png);">
        <nav class="nav row w-100 align-items-center">
            <div class="col-7">
                <a href="<?php echo base_url(); ?>/public/pupil/home" style="text-decoration: none; font-size:250%;"><b>Pulong</b></a>
@@ -28,16 +28,18 @@
 
 
 
-  <div class="container mt-5" style="margin-bottom:5%;">
+  <div class="container pt-5" style="margin-bottom:%; height:100vh;" id="conviewacts">
     <div class="mt-3">
-      <div class="backbutton col-2">
-          <a style="text-decoration: none; color: rgb(68, 68, 68); cursor:pointer" onclick = "history.back()">
-          <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
-          </svg>
-          </a>
-      </div>
-      <center>
+      <a id="bckbtn" style="text-decoration: none; color: rgb(68, 68, 68); cursor:pointer" onclick = "history.back()">
+        <div class="backbutton_lesson col-1 p-2  mt-2 d-flex align-items-center" style="background-color: teal; border: 1px solid black; border-radius: 20px; border-right: none; width: max-content;">         
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+            </svg>    
+            <h6 style="margin-left:1rem !important; margin-top: .5rem !important;"> Go Back </h6>
+        </div>
+      </a>
+
+    <center>
       <br>
        <h2 class="text-uppercase text-center">ACTIVITIES FOR MODULE: <?= $lesson->lesson_name; ?></h2>
       <?php if (!$users): ?>
@@ -94,7 +96,7 @@ function myFunction(imgs) {
     $('#form').toggle();
   });
 </script>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<//script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
 <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/rowreorder/1.2.8/css/rowReorder.dataTables.min.css">
@@ -163,5 +165,51 @@ function myFunction(imgs) {
   }
   </script>
 
+<script>
+
+$(document).ready(function () {
+    $('html, body').animate({
+        scrollTop: $('#conviewacts').offset().top
+    }, 1000);
+});
+
+$(window).scroll(example);
+
+function example() {
+scrollTop = window.pageYOffset;
+if (scrollTop == $('.navbar').offset().top) {
+    console.log('Hi');
+    $('html, body').stop(true, true).delay(2000).animate({
+        scrollTop: $('#conviewacts').offset().top
+    }, 500);
+  }}  ;
+</script>
+<style>
+  .backbutton_lesson:hover {
+    background-color: teal !important;
+    transform: scale(1.04);
+    transition: transform .2s ease-in-out;
+  }
+
+  .backbutton_lesson:hover > * {
+   color: whitesmoke;
+  }
+
+  #image-float {
+    position: fixed;
+    height: auto;
+    width: auto;
+    bottom: 0px;
+    right: 0px;
+    float: right;
+  }
+  #image-float > img {
+    height: 300px
+   }
+</style>
+
+<div id="image-float">
+  <img src="<?=base_url()?>/public/assets/images/pigs-image.png" alt="">
+</div>
 
 <?= $this->endSection() ?>
