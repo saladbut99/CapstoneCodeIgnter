@@ -8,7 +8,7 @@
     $display='block';
   ?>
 
-  <div class="navbar" style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(<?=base_url()?>/public/assets/images/banner.png);">
+  <div class="navbar my-0" style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(<?=base_url()?>/public/assets/images/banner.png);">
          <nav class="nav row w-100 align-items-center">
              <div class="col-7">
                  <a href="<?php echo base_url(); ?>/public/pupil/home" style="text-decoration: none; font-size:250%;"><b>Pulong</b></a>
@@ -21,6 +21,11 @@
                      <a href="#" class="dropdown"><img src="<?=base_url()?>/public/assets/images/student_logo.png" alt="" class="nav_img" height="60" width="60"></a>
                   </div>
              </div>
+              <script>
+                $( ".dropdown" ).click(function() {
+                  $( ".menu").toggle();
+              });
+              </script>
          </nav>
      </div>
      <div class="menu p-2 text-center">
@@ -34,11 +39,11 @@
 
   <div class="container h-100" style="margin-bottom:0%;" id="wrapper" >
      <div class="row">
-       <div class="backbutton col-1">
+       <div class="backbutton col-2 mt-5">
            <a onclick = "history.back()" style="text-decoration: none; color: rgb(68, 68, 68); cursor:pointer;">
            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
                <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
-           </svg>
+           </svg> Go Back
            </a>
        </div>
        <br><br><br>
@@ -63,6 +68,7 @@
              <hr style="width:100%;height:2px;color:#00acee">
              <h3 style="text-align:left"><?= $users->activity_instruction; ?></h3>
        </div>
+
        <!-- form for the lesson -->
       <div style="margin-top:2%;">
          <?php if (session()->get('updatesuccess')): ?>
@@ -72,26 +78,30 @@
          <?php endif; ?>
          <br>
     </div>
+
+<!-- QUESTIONS HERE -->   
 <center>
   <?php if (!$question): ?>
       <h1>This activity has no question yet, pleae try again later!</h1>
       <?php $display='none'; ?>
   <?php endif; ?>
+
   <form class=""  action="<?php echo site_url('pupil/check/'.$users->activity_id);?>" method="post" id="form" style="display:block; margin-bottom:5%;"  enctype="multipart/form-data">
     <?php foreach ($question as $questions): ?>
 
      <?php $question_no++;  ?>
 
-            <div class="container" style="width:80%;border:0.5px solid #00acee;margin-bottom:2.5%; border-radius:4px; box-shadow:2px 3px 2px grey;">
+            <div class="container p-5" style="width:80%;border:0.5px solid #00acee;margin-bottom:2.5%; border-radius:4px; box-shadow:2px 3px 2px grey;">
                 <div class="row">
                     <div class="col">
+                      <!--
                               <div class="row" style="margin-bottom:5%;">
                                   <div class="col-sm">
                                         <h3 style="text-align:left;margin-top:2%;margin-bottom:2%;">Question <?= $question_no; ?></h3>
                                   </div>
                               </div>
-
-                        <h1 style="margin-bottom:2%;"><?= $questions['activity_question']; ?></h1>
+                      -->
+                        <h1 style="margin-bottom:2%;"><?= $question_no; ?>. <?= $questions['activity_question']; ?></h1>
                         <?php foreach ($media as $medias): ?>
                           <?php if ($medias['activity_content_id']==$questions['activity_content_id']): ?>
                             <?php if (strcmp($medias['file_extension'],'mp4')==0): ?>
@@ -114,10 +124,10 @@
                           <?php if ($choices['activity_content_id']==$questions['activity_content_id']): ?>
 
 
-                                <div class="form-check" style="width:100%;">
-                                  <input class="form-check-input radiobtn-mc" type="radio" name="<?= $choice_id ?>[answer]" id="answer"  value="<?= $choices['choice']; ?>"  required >
+                                <div class="form-check d-flex justify-content-center" style="width:100%;" id="choice_radio">
+                                  <input class="form-check-input radiobtn-mc"  type="radio" name="<?= $choice_id ?>[answer]" id="answer"  value="<?= $choices['choice']; ?>"  required >
 
-                                  <label class="form-check-label" for="flexRadioDefault1" style="border: 2px solid grey; width:50%; border-radius:10px; color:grey">
+                                  <label class="form-check-label choice_label" for="flexRadioDefault1" style="border: 2px solid grey; width:50%; border-radius:10px; color:grey;" id="choice_label">
                                     <?= $choices['choice']; ?>
                                     <input type="hidden" name="<?= $choice_id ?>[activity_content_id]" value="<?= $choices['activity_content_id'] ?>">
                                 </div>
@@ -213,11 +223,7 @@ function hide(id) {
      image.src = URL.createObjectURL(event.target.files[0]);
       };
  </script>
-<script>
-  $( ".dropdown" ).click(function() {
-    $( ".menu").toggle();
-});
-</script>
+
 <script>
 function myFunction(imgs) {
   var expandImg = document.getElementById("expandedImg");
@@ -236,6 +242,7 @@ function myFunction(imgs) {
 <script src="https://cdn.datatables.net/rowreorder/1.2.8/js/dataTables.rowReorder.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
 <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
     $(document).ready( function () {
@@ -296,7 +303,59 @@ function myFunction(imgs) {
           return false;
       }
   }
+
+  $(document).ready(function(){
+  $("label").click(function(e){
+    e.preventDefault();
+    $check = $(this).prev();
+    if($check.prop('checked'))
+      $check.prop( "checked", false );
+    else 
+      $check.prop( "checked", true );
+  });
+});
+
+$(document).ready(function () {
+    $('html, body').animate({
+        scrollTop: $('#wrapper').offset().top
+    }, 1000);
+});
+
+
+
+$(window).scroll(example);
+
+function example() {
+scrollTop = window.pageYOffset;
+if (scrollTop == $('.navbar').offset().top) {
+    console.log('Hi');
+    $('html, body').stop(true, true).delay(2000).animate({
+        scrollTop: $('#wrapper').offset().top
+    }, 500);
+  }}  ;
   </script>
 
+
+<style>
+  #choice_label, #answer {
+    cursor: pointer;
+  }
+
+  #choice_label:hover {
+      background-color: rgba(0, 219, 0, 0.3);
+  }
+
+  #choice_label:active{
+      background-color: rgba(0, 219, 0, 1);
+  }
+
+  #choice_label:active > #answer:checked{
+      background-color: rgba(0, 219, 0, 1);
+  }
+
+  #answer:checked + label {
+    background-color: rgba(0, 219, 0, 0.3);
+  }
+</style>
 
 <?= $this->endSection() ?>

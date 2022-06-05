@@ -293,6 +293,11 @@ if (scrollTop == $('.navbar').offset().top) {
     }, 500);
   }}  ;
 
+
+  setTimeout(function() {
+    $('#notif-float').fadeOut('fast');
+}, 5000); // <-- time in milliseconds
+
 </script>
 
 <script>
@@ -330,10 +335,24 @@ if (scrollTop == $('.navbar').offset().top) {
   #image-float > img {
     height: 500px
    }
+
+   #notif-float {
+    position: absolute;
+    height: auto;
+    width: auto;
+    top: 25%;
+    left: 38%;
+    float: right;
+  }
+
   </style>
 
 <div id="image-float">
   <img src="<?=base_url()?>/public/assets/images/movie-2-custom-right.png" alt="">
+</div>
+
+<div id="notif-float">
+  <img src="<?=base_url()?>/public/assets/images/selectkwarter.png" alt="">
 </div>
 
 <?= $this->endSection() ?>

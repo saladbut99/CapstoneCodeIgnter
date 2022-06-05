@@ -275,13 +275,26 @@ $(document).ready(function () {
     }, 1000);
 });
 
+$(window).scroll(example);
+
+function example() {
+scrollTop = window.pageYOffset;
+if (scrollTop == $('.navbar').offset().top) {
+    console.log('Hi');
+    $('html, body').stop(true, true).delay(2000).animate({
+        scrollTop: $('#conviewmodact').offset().top
+    }, 500);
+  }}  ;
+
 var beepOne = $("#beep-one")[0];
 $(".btn-unit").click(function () {
 beepOne.currentTime=0;
 beepOne.play();
 });
 
-
+setTimeout(function() {
+    $('#notif-float').fadeOut('fast');
+}, 5000); // <-- time in milliseconds
 
   </script>
 
@@ -303,9 +316,23 @@ beepOne.play();
   #image-float > img {
     height: 400px
    }
+  
+   #notif-float {
+    position: absolute;
+    height: auto;
+    width: auto;
+    top: 25%;
+    left: 38%;
+    float: right;
+   }
   </style>
 
 <div id="image-float">
   <img src="<?=base_url()?>/public/assets/images/cast-image.png" alt="">
 </div>
+
+<div id="notif-float">
+  <img src="<?=base_url()?>/public/assets/images/selectkwarter.png" alt="">
+</div>
+
 <?= $this->endSection() ?>
