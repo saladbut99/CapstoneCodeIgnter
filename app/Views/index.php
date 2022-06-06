@@ -16,7 +16,7 @@
     <div class="container h-100">
       <div class="row h-100 align-items-center">
         <div class="col-md text-center">
-            
+
         </div>
         <div class="col-md-1 text-center">
 
@@ -36,7 +36,7 @@
       <div class="col-md text-center">
         <h1 style="color :#03256C;"><b>AN INTERACTIVE WEB APPLICATION TUTORIAL</b></h1>
         <br>
-        <h2 style="color :#554F4F; font-size:25px;">Learning the Mother Tongue Language is fun and interactive with Pulong.</h2>
+        <h2 style="color :#554F4F; font-size:25px;">Learning the Mother Tongue Language is fun with Pulong.</h2>
       </div>
     </div>
   </div>
@@ -86,5 +86,5 @@ function reveal(){
 
 <script>
 var x = document.getElementById("musicindex");
-x.volume = 0.05;  
+x.volume = 0.05;
 </script>
