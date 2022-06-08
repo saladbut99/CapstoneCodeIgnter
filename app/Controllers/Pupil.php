@@ -263,7 +263,7 @@ public function update(){
       $data['users'] = $activity_id->where(['lesson_id'=>$id])->findAll();
       $data['join'] = $activity_id->join('performance_records','performance_records.activity_id = activity_master.activity_id')
                                   ->join('pupil','pupil.pupil_id = performance_records.pupil_id')
-                                  ->where(['activity_master.lesson_id'=>$id])->orderBy('activity_master.activity_id', 'ASC')->findAll();
+                                  ->where(['activity_master.lesson_id'=>$id])->where(['pupil.pupil_id'=>session()->get('t_id')])->findAll();
 
       $userModel = new LessonMaster();
       $data['lesson'] = $userModel->where(['lesson_id'=>$id])->get()->getRow();

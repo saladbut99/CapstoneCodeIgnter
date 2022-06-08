@@ -87,7 +87,7 @@
   </div>
 </div>
 
-<div class="container" style="display:<?= $display ?>">
+<div class="container" style="display:<?= $display ?>;border:1px solid #00acee;border-radius:5%; width:90%;">
     <div class="row">
       <div class="col">
           <h1>Hi Admin!</h1>

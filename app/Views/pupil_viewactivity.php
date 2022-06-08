@@ -70,7 +70,7 @@
                    </svg>
                  </td>
                 </tr>
-
+                <?php $display='none';?>
            <?php endforeach; ?>
            <?php endif; ?>
        </table>

@@ -58,8 +58,9 @@
             <?php if($users): ?>
             <?php foreach($users as $user): ?>
               <?php foreach ($join as $joins): ?>
-                <?php if ($user['activity_id']==$joins['activity_id'] && $joins['pupil_id']==session()->get('t_id')): ?>
+                <?php if ($user['activity_id'] == $joins['activity_id']): ?>
                       <?php $display='block'; ?>
+
                 <?php endif; ?>
                 <?php endforeach; ?>
                 <tr style="text-align:center;">
@@ -69,7 +70,7 @@
                    </svg>
                  </td>
                   </tr>
-
+               <?php $display='none';?>
            <?php endforeach; ?>
            <?php endif; ?>
        </table>
