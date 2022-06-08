@@ -80,6 +80,10 @@
             <video controls>
                 <source src="<?=base_url()?>/public/uploads/images/<?= $image->file_name; ?>" type="video/mp4">
           </video>
+        <?php elseif (strcmp($image->file_extension,'mp3')==0): ?>
+            <audio controls>
+                <source src="<?=base_url()?>/public/uploads/images/<?= $image->file_name; ?>" type="audio/mpeg">
+          </audio>
           <?php else: ?>
                 <a href="<?=base_url()?>/public/uploads/images/<?= $image->file_name; ?>" target="_blank"><img src="<?=base_url()?>/public/uploads/images/<?= $image->file_name; ?>"  alt="" width="auto" height="auto" onclick="myFunction(this);" class="img-fluid"></a>
           <?php endif; ?>
@@ -159,6 +163,10 @@
                                      <source src="<?=base_url()?>/public/uploads/images/<?= $examples['file_name']; ?>" type="video/mp4">
                                </video>
                              </a>
+                           <?php elseif (strcmp($examples['file_extension'],'mp3')==0): ?>
+                               <audio controls>
+                                   <source src="<?=base_url()?>/public/uploads/images/<?= $examples['file_name']; ?>" type="audio/mpeg">
+                             </audio>
 
                            <?php else: ?>
                            <a href="<?=base_url()?>/public/uploads/images/<?= $examples['file_name']; ?>" target="_blank" style="margin-bottom:3%;">

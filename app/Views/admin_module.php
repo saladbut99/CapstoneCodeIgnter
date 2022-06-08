@@ -72,6 +72,10 @@
             <video controls>
                 <source src="<?=base_url()?>/public/uploads/images/<?= $image->file_name; ?>" type="video/mp4">
           </video>
+        <?php elseif (strcmp($image->file_extension,'mp3')==0): ?>
+            <audio controls>
+                <source src="<?=base_url()?>/public/uploads/images/<?= $image->file_name; ?>" type="audio/mpeg">
+          </audio>
           <?php else: ?>
                 <a href="<?=base_url()?>/public/uploads/images/<?= $image->file_name; ?>" target="_blank"><img src="<?=base_url()?>/public/uploads/images/<?= $image->file_name; ?>"  alt="" width="auto" height="auto" onclick="myFunction(this);" class="img-fluid"></a>
           <?php endif; ?>
@@ -129,6 +133,14 @@
                       </video>
                     </a>
                   </td>
+                <?php elseif (strcmp($examples['file_extension'],'mp3')==0): ?>
+                  <td style="text-align:center">
+                    <a href="<?=base_url()?>/public/uploads/images/<?= $examples['file_name']; ?>>" target="_blank">
+                      <audio controls>
+                          <source src="<?=base_url()?>/public/uploads/images/<?= $examples['file_name']; ?>" type="audio/mpeg">
+                    </audio>
+                  </a>
+                </td>
                   <?php else: ?>
                     <td style="text-align:center"> <a href="<?=base_url()?>/public/uploads/images/<?= $examples['file_name']; ?>" target="_blank">
                       <img src="<?=base_url()?>/public/uploads/images/<?= $examples['file_name']; ?>"  alt="" width="300" height="300" onclick="myFunction(this);" class="img-fluid">

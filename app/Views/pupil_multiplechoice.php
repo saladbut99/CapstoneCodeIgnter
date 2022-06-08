@@ -79,7 +79,7 @@
          <br>
     </div>
 
-<!-- QUESTIONS HERE -->   
+<!-- QUESTIONS HERE -->
 <center>
   <?php if (!$question): ?>
       <h1>This activity has no question yet, pleae try again later!</h1>
@@ -108,6 +108,10 @@
                               <video controls>
                                   <source src="<?=base_url()?>/public/uploads/images/<?= $medias['file_name'] ?>" type="video/mp4">
                             </video>
+                          <?php elseif (strcmp($medias['file_extension'],'mp3')==0): ?>
+                              <audio controls>
+                                  <source src="<?=base_url()?>/public/uploads/images/<?= $medias['file_name'] ?>" type="audio/mpeg">
+                            </audio>
                             <?php else: ?>
                                 <a href="<?=base_url()?>/public/uploads/images/<?= $medias['file_name']; ?>" target="_blank"><img src="<?=base_url()?>/public/uploads/images/<?= $medias['file_name']; ?>"  alt="" width="70%" height="70%" onclick="myFunction(this);" class="img-fluid"></a>
                             <?php endif; ?>
@@ -310,7 +314,7 @@ function myFunction(imgs) {
     $check = $(this).prev();
     if($check.prop('checked'))
       $check.prop( "checked", false );
-    else 
+    else
       $check.prop( "checked", true );
   });
 });

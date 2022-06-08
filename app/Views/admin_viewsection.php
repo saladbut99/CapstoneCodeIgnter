@@ -76,7 +76,7 @@
                 <br>
                 <h3 style="color:white;">Grade 1</h3>
                 <a href="viewadelfa" class=" btn btn-light btn-outline-primary" style="margin-top: 5%; margin-bottom: 5%;"> View Module</a>
-                </div>
+                  </div>
             </div>
             <div class="col text-center" >
                 <div class="dashboard_div section" style="  background-image:   linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url('<?=base_url()?>/public/assets/images/lily.jpg');  background-size: cover;">

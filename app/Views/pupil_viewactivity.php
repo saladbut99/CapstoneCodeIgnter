@@ -2,7 +2,9 @@
 
 <?= $this->section('content'); ?>
 
-<?php $example_no=0; ?>
+<?php $example_no=0;
+      $display='none';
+ ?>
 
 <div class="navbar mb-0" style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(<?=base_url()?>/public/assets/images/banner.png);">
        <nav class="nav row w-100 align-items-center">
@@ -31,10 +33,10 @@
   <div class="container pt-5" style="margin-bottom:%; height:100vh;" id="conviewacts">
     <div class="mt-3">
       <a id="bckbtn" style="text-decoration: none; color: rgb(68, 68, 68); cursor:pointer" onclick = "history.back()">
-        <div class="backbutton_lesson col-1 p-2  mt-2 d-flex align-items-center" style="background-color: teal; border: 1px solid black; border-radius: 20px; border-right: none; width: max-content;">         
+        <div class="backbutton_lesson col-1 p-2  mt-2 d-flex align-items-center" style="background-color: teal; border: 1px solid black; border-radius: 20px; border-right: none; width: max-content;">
             <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
-            </svg>    
+            </svg>
             <h6 style="margin-left:1rem !important; margin-top: .5rem !important;"> Go Back </h6>
         </div>
       </a>
@@ -47,17 +49,27 @@
      <?php else: ?>
 
        <table class="table table-borderless table-hover" id="users-list"  style=" border-bottom: none;">
-         <thead style="text-align:left; font-size:3rem">
+
             <tr>
                <th style="width:70%;">Activity Name</th>
+               <th></th>
             </tr>
-         </thead>
+
 
             <?php if($users): ?>
             <?php foreach($users as $user): ?>
-                <tr style="text-align:center;">
+              <?php foreach ($join as $joins): ?>
+                <?php if ($user['activity_id']==$joins['activity_id'] && $joins['pupil_id']==session()->get('t_id')): ?>
+                      <?php $display='block'; ?>
+                <?php endif; ?>
+              <?php endforeach; ?>
+                  <tr style="text-align:center;">
                    <td style="text-align:left"><a href="<?php echo base_url(); ?>/public/pupil/activitytype_checker/<?= $user['activity_id'] ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['activity_name']; ?></a>  </td>
-                  </tr>
+                   <td style="text-align:left;display:<?= $display ?>;"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="green" class="bi bi-check-lg" viewBox="0 0 16 16">
+                     <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                   </svg>
+                 </td>
+                </tr>
 
            <?php endforeach; ?>
            <?php endif; ?>

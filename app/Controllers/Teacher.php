@@ -749,7 +749,7 @@ public function viewmodule($id){
       //     'label'=>'Confirm Password',
       // ],
       'image'=>[
-        'rules'=> 'ext_in[image,png,jpg,gif,mp4]',
+        'rules'=> 'ext_in[image,png,jpg,gif,mp4,mp3]',
         'label'=>'Image',
       ],
       'example'=>[
@@ -1407,7 +1407,7 @@ public function addquestion($id){
          'label'=>'Activity Title',
        ],
        'image'=>[
-         'rules'=> 'ext_in[image,png,jpg,gif,mp4]',
+         'rules'=> 'ext_in[image,png,jpg,gif,mp4,mp3]',
          'label'=>'Image',
        ],
      //   'activity_instruction'=>[
@@ -1555,7 +1555,7 @@ public function addquestion($id){
 
 
 
-            return redirect()->to('teacher/multiplechoice/'.$id);
+        return redirect()->to('teacher/multiplechoice/'.$id);
 
 
 
@@ -1579,6 +1579,8 @@ public function addquestion_identification($id){
      return redirect()->to('pupil/home');
    }
 
+
+
    $model_master = new ActivityMaster();
 
      $activity_id = new ActivityContent();
@@ -1594,7 +1596,7 @@ public function addquestion_identification($id){
          'label'=>'Activity Title',
        ],
        'image'=>[
-         'rules'=> 'ext_in[image,png,jpg,gif,mp4]',
+         'rules'=> 'ext_in[image,png,jpg,gif,mp4,mp3]',
          'label'=>'Image',
        ],
      //   'activity_instruction'=>[
@@ -1702,10 +1704,7 @@ public function addquestion_identification($id){
 
 
 
-          if (strcmp($activity->activity_type,'identification')==0) {
-            return redirect()->to('teacher/identification/'.$id);
-
-          }
+        return redirect()->to('teacher/identification/'.$id);
 
 
 
@@ -1985,7 +1984,7 @@ public function update_question($id){
         'label'=>'Activity Title',
       ],
       'image'=>[
-        'rules'=> 'ext_in[image,png,jpg,gif,mp4]',
+        'rules'=> 'ext_in[image,png,jpg,gif,mp4,mp3]',
         'label'=>'Image',
       ],
     //   'activity_instruction'=>[
@@ -2156,7 +2155,7 @@ public function update_identification($id){
         'label'=>'Activity Title',
       ],
       'image'=>[
-        'rules'=> 'ext_in[image,png,jpg,gif,mp4]',
+        'rules'=> 'ext_in[image,png,jpg,gif,mp4,mp3]',
         'label'=>'Image',
       ],
 
