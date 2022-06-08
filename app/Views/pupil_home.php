@@ -53,7 +53,7 @@
     <div class="formcontainer pt-2 mt-0 pb-5" style="height:80vh !important; max-width:90%; background-color: rgba(255, 255, 255, 0.0); border:none; height:70vh;display:<?= $display ?>">
       <div class="container  h-100">
 
-      <div class="row justify-content-center h-10 align-items-center pt-3" style="width: 70vw;">
+      <div class="row justify-content-center h-10 align-items-center pt-3 section_menu_container" style="width: 70vw;">
           <div class="col-md text-center section_menu">
                 <div class="dashboard_div section_pupil" id="sec1">
                     <br>
@@ -206,6 +206,18 @@ $(window).on('scroll', function() {
     console.log( $(this).scrollTop() );
 });
 
+$(window).on('resize', function() {
+  var win = $(this);
+  if (win.width() > 480) {
+
+    $('.section_menu_container').addClass('row');
+    $('.section_menu').addClass('col');
+
+  } else {
+    $('.section_menu_container').removeClass('row');
+    $('.section_menu').removeClass('col-md');
+  }
+});
 
 
 </script>
@@ -218,7 +230,7 @@ $(window).on('scroll', function() {
   margin-bottom: 2%;
   border-radius: 5%;
   background-color: rgba(255,255,255,0.8);
-  height: 10rem;
+  height: 100%;
   max-height: 90%;
 }
 
@@ -229,6 +241,37 @@ $(window).on('scroll', function() {
   background-position: center;
   height: 100vh !important;
 }
+
+
+/* mobile */
+@media only screen and (max-width: 480px) {
+  #cntr {
+    background: none;
+  }
+
+  .section_pupil {
+    height: 70%;
+    width: 40%;
+  }
+  svg {
+    height: 24px;
+    width: 24px;
+  }
+  .section_h6 {
+    font-size: 12px;
+  }
+  .container {
+  }
+  #cntr {
+  background-image: url("http://localhost/CapstoneCodeIgnter/Pulong/public/assets/images/pupil_bg.jpg") !important;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  }
+
+  .section_menu_container {
+    display: flex;
+  }
 </style>
 
 <?= $this->endSection() ?>

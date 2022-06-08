@@ -197,7 +197,7 @@ transition: all 0.3 ease;
 
 .section_pupil {
   transition: transform .3s ease-in-out;
-  width: 10rem;
+  width: 60%;
   cursor: pointer;
   border-radius: 50% !important;
   transform: scale(1.2) !important;
