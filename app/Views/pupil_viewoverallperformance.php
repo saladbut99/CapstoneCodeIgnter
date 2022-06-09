@@ -76,7 +76,7 @@
 <?php endif; ?>
 
 <!-- form for the question -->
-<div class="container" style="display: <?= $display2 ?>">
+<div class="container" style="display: <?= $display2 ?>;">
   <div class="row">
       <div class="col">
           <h1>You haven't answered the activities yet <?= session()->get('firstname') ?></h1>
@@ -84,7 +84,7 @@
   </div>
 </div>
 
-<div class="container" style="display:<?= $display ?>">
+<div class="container" style="display:<?= $display ?>;width:80%;border:10px solid #00acee;margin-bottom:2.5%; border-radius:4px; box-shadow:2px 3px 2px grey;padding:5%;border-radius:5%;">
     <div class="row">
       <div class="col">
           <h1>Hi <?= session()->get('firstname') ?>!</h1>

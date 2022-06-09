@@ -1,6 +1,7 @@
 <?= $this->extend('layouts/main'); ?>
 
 <?= $this->section('content'); ?>
+<?php $display='none'; ?>
 
 <div class="navbar mb-1" style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(<?=base_url()?>/public/assets/images/banner.png);" style="marin-bottom:5%">
        <nav class="nav row w-100 align-items-center">
@@ -42,19 +43,29 @@
       <?php else: ?>
 
         <table class="table table-borderless table-hover" id="users-list"  style=" border-bottom: none;">
-          <thead style="text-align:left; font-size:3rem">
+
              <tr>
                 <th style="width:70%;">Activity Name</th>
-
+                <th></th>
              </tr>
-          </thead>
+
 
              <?php if($users): ?>
              <?php foreach($users as $user): ?>
+               <?php foreach ($join as $joins): ?>
+                 <?php if ($user['activity_id'] == $joins['activity_id']): ?>
+                       <?php $display='block';?>
+                 <?php endif; ?>
+                 <?php endforeach; ?>
+
                  <tr style="text-align:center;">
                     <td style="text-align:left"><a href="<?php echo base_url(); ?>/public/teacher/viewperformance/<?= $user['activity_id'] ?>/<?= $pupil->pupil_id ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['activity_name']; ?></a></td>
+                    <td style="text-align:left;display:<?= $display ?>;"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="green" class="bi bi-check-lg" viewBox="0 0 16 16">
+                      <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                    </svg>
+                  </td>
                    </tr>
-
+                <?php $display='none';?>
             <?php endforeach; ?>
             <?php endif; ?>
         </table>

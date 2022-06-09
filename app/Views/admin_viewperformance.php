@@ -55,11 +55,11 @@
       </div>
 
 <!-- form for the question -->
-<div class="container" style="margin-bottom:5%;">
+<div class="container" style="margin-bottom:5%; width:80%;border:10px solid #00acee;margin-bottom:2.5%; border-radius:4px; box-shadow:2px 3px 2px grey;padding:5%;">
     <div class="row">
       <div class="col">
-        <h1>Hi Admin! Here are there activity results for <?= $pupilmodel->pupil_firstname ?> </h1>
-        <h1>for <?= $id->activity_name ?> !</h1>
+        <h1>Hi Admin! These are there activity take results for <?= $pupilmodel->pupil_firstname ?> </h1>
+        <h1>for Module <?= $id->activity_name ?> !</h1>
       </div>
     </div>
 </div>
@@ -81,7 +81,7 @@
   <?php else: ?>
     <?php foreach ($users as $user): ?>
       <?php if ($user['pupil_id']==$pupil_id): ?>
-        <div class="container" style="border: 2px solid #00acee;border-radius:20px; width:60%; margin-bottom:5%;">
+        <div class="container" style="border: 2px solid #00acee;border-radius:20px; width:60%; margin-bottom:5%;margin-top:3%;">
           <div class="row" >
             <div class="col" style="margin-bottom:2%;">
                 <h1>Activity Take No. <?= $count ?></h1>

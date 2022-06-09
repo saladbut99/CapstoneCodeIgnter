@@ -55,13 +55,13 @@
           <?php $message='Whoops! Try the activity again!'; ?>
         <?php endif; ?>
         <br>
-        <div class="container p-5" style="border:2px solid black; height: 80vh;">
+        <div class="container" style="width:80%;border:10px solid #00acee;margin-bottom:2.5%; border-radius:4px; box-shadow:2px 3px 2px grey;">
           <div class="row" style="margin-bottom:2%;">
               <div class="col" style="">
                    <h1><b>Activity Name: <?= $users->activity_name; ?></b></h1>
               </div>
           </div>
-            <div class="row" style="margin-bottom:2%;">
+            <div class="row" style="margin-bottom:2%;" >
                 <div class="col">
                     <h1>Hi <?= session()->get('firstname') ?>!</h1>
                 </div>

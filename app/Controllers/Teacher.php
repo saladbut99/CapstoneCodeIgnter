@@ -2368,11 +2368,16 @@ public function teacher_activityperformance($id,$pupil_id){
                             ->orderBy('teacher.teacher_id', 'ASC')
                             ->where(['activity_master.lesson_id'=>$id])
                             ->findAll();
+
+  $activity_id = new ActivityMaster();
+  $data['join'] = $activity_id->join('performance_records','performance_records.activity_id = activity_master.activity_id')
+                              ->join('pupil','pupil.pupil_id = performance_records.pupil_id')
+                              ->where(['activity_master.lesson_id'=>$id]) ->where(['pupil.pupil_id'=>$pupil_id])->orderBy('activity_master.activity_id', 'ASC')->findAll();
   // $data['teacher']=$userModel->where(['section_id'=>$id])->get()->getRow();
   //
   // //
   //     echo "<pre>";
-  //   print_r($pupil_id);
+  //   print_r($data['join']);
   // echo "<pre>";
   // //
   //
@@ -2384,7 +2389,7 @@ public function teacher_activityperformance($id,$pupil_id){
   $userModel = new LessonMaster();
   $data['lesson'] = $userModel->where(['lesson_id'=>$id])->get()->getRow();
 
-  return view('teacher_viewactivity2', $data);
+return view('teacher_viewactivity2', $data);
 
 }
 
