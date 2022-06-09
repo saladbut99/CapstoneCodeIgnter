@@ -53,7 +53,7 @@
     <div class="formcontainer pt-2 mt-0 pb-5" style="height:80vh !important; max-width:90%; background-color: rgba(255, 255, 255, 0.0); border:none; height:70vh;display:<?= $display ?>">
       <div class="container  h-100">
 
-      <div class="row justify-content-center h-10 align-items-center pt-3 section_menu_container" style="width: 70vw;">
+      <div class="d-flex justify-content-center h-10 align-items-center pt-3 section_menu_container" style="width: 70vw;">
           <div class="col-md text-center section_menu">
                 <div class="dashboard_div section_pupil" id="sec1">
                     <br>
@@ -245,8 +245,16 @@ $(window).on('resize', function() {
 
 /* mobile */
 @media only screen and (max-width: 480px) {
+  body {
+  background-image: url("http://localhost/CapstoneCodeIgnter/Pulong/public/assets/images/pupil_bg.jpg") !important;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  }
+
   #cntr {
-    background: none;
+    background: none !important;
+    height: 100vh !important;
   }
 
   .section_pupil {
@@ -260,18 +268,31 @@ $(window).on('resize', function() {
   .section_h6 {
     font-size: 12px;
   }
-  .container {
-  }
-  #cntr {
-  background-image: url("http://localhost/CapstoneCodeIgnter/Pulong/public/assets/images/pupil_bg.jpg") !important;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
+ 
+  .formcontainer {
+    max-width: 90% !important;
   }
 
   .section_menu_container {
     display: flex;
+    width: 100% !important;
   }
+
+  .section_menu {
+    width: 100% !important;
+  }
+
+  .section_pupil {
+    width: 80% !important;
+  }
+
+  #pop-up3 {
+    height: 80% !important;
+  }
+  #pop-up3 > .pop-up {
+    height: 40% !important;
+  }
+}
 </style>
 
 <?= $this->endSection() ?>

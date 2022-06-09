@@ -333,7 +333,7 @@ if (scrollTop == $('.navbar').offset().top) {
     float: right;
   }
   #image-float > img {
-    height: 500px
+    height: 80vh;
    }
 
    #notif-float {
@@ -343,6 +343,26 @@ if (scrollTop == $('.navbar').offset().top) {
     top: 25%;
     left: 38%;
     float: right;
+  }
+
+  @media only screen and (max-width: 480px) {
+  #image-float > img {
+    height: 40vh;
+   }
+  #notif-float {
+    position: absolute;
+    height: auto;
+    width: auto;
+    top: 40%;
+    left: 38%;
+    float: right;
+  }
+  #notif-float > img {
+    height: 20vh;
+  }
+  .buttonforunit {
+    justify-content: center
+  }
   }
 
   </style>

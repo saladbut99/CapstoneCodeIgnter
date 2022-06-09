@@ -87,45 +87,42 @@
           <?php endif; ?>
           <br>
     </div>
-        <div class="mt-3">
           <br>
-
               <div class="container">
-
                 <div class="row align-items-center">
-                  <div class="col">
-                      <h1 style="text-align:left;font-size:80px;"><b><?= $users->lesson_name; ?></b></h1>
-                  </div>
-                  <div class="col" style="margin-left:5%;">
-                    <a  id="bootoon" href="<?php echo base_url(); ?>/public/pupil/viewactivity\<?= $users->lesson_id ?>" style="text-decoration:none;" class="align-middle">
-                      <button type="button" class="btn btn-outline-info"
-                      style="box-shadow: 0px 21px 13px -13px rgba(0,0,0,0.73);
-                          -webkit-box-shadow: 0px 21px 13px -13px rgba(0,0,0,0.73);
-                          -moz-box-shadow: 0px 21px 13px -13px rgba(0,0,0,0.73);">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                          <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                          <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                        </svg> <h3>View Activity</h3>
-                    </button>
-                    </a>
-                  </div>
-                  <script>
+                      <div class="col">
+                          <h1 style="text-align:left;font-size:80px;" id="lessonname"><b><?= $users->lesson_name; ?></b></h1>
+                      </div>
+                      <div class="col" style="margin-left:5%;">
+                        <a  id="bootoon" href="<?php echo base_url(); ?>/public/pupil/viewactivity\<?= $users->lesson_id ?>" style="text-decoration:none;" class="align-middle">
+                          <button type="button" class="btn btn-outline-info"
+                          style="box-shadow: 0px 21px 13px -13px rgba(0,0,0,0.73);
+                              -webkit-box-shadow: 0px 21px 13px -13px rgba(0,0,0,0.73);
+                              -moz-box-shadow: 0px 21px 13px -13px rgba(0,0,0,0.73);">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                            </svg> <h3>View Activity</h3>
+                        </button>
+                        </a>
+                      </div>
+                      <script>
 
-                    $("#bootoon").click(function(){
-                        if(confirm("Pindota ang 'Ok' kung nahuman na sa modyul. 'Cancel' kung wala pa.")){
-                          $("#bootoon");
-                        }
-                        else{
-                          return false;
-                        }
-                    });
-                  </script>
+                        $("#bootoon").click(function(){
+                            if(confirm("Pindota ang 'Ok' kung nahuman na sa modyul. 'Cancel' kung wala pa.")){
+                              $("#bootoon");
+                            }
+                            else{
+                              return false;
+                            }
+                        });
+                      </script>
                 </div>
-
-              </div>
-              <hr style="width:100%;height:2px;color:#00acee">
-              <h3 style="text-align:left"><?= $users->lesson_description; ?></h3>
-        </div>
+                <hr style="width:100%;height:2px;color:#00acee">
+                  <div class="mt-0" style="overflow-y: scroll;">
+                    <h3 style="text-align:left; height: 30vh;"><?= $users->lesson_description; ?></h3>
+                  </div>
+            </div>
 
         <!-- form for the lesson -->
         <div style="margin-top:2%;">
@@ -516,6 +513,32 @@ if (scrollTop == $('.navbar').offset().top) {
   transform: translateY(-20px);
   transition: all .3s ease;
   border: 1px solid black;
+}
+
+@media only screen and (max-width: 480px) {
+  #lessonname {
+    font-size: 55px !important
+  }
+
+  .example_area {
+    min-width: 70% !important;
+  }
+
+  .backbutton_lesson  {
+    position: fixed;
+    margin-left: 5px;
+    top: 2px;
+    left: 0;
+    width: 5rem;
+  }
+
+  .backbutton_lesson > svg {
+      display: none;
+  }
+
+  .navbar {
+    z-index: 999;
+  }
 }
 
 </style>

@@ -6,7 +6,7 @@
     $choice_id=0;
     $display='block';
  ?>
-<div class="navbar" style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(<?=base_url()?>/public/assets/images/banner.png);">
+<div class="navbar mb-1" style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(<?=base_url()?>/public/assets/images/banner.png);">
        <nav class="nav row w-100 align-items-center">
            <div class="col-7">
                <a href="<?php echo base_url(); ?>/public/pupil/home" style="text-decoration: none; font-size:250%;"><b>Pulong</b></a>
@@ -31,11 +31,11 @@
 
   <div class="container h-100" style="margin-bottom:0%;" id="wrapper" >
      <div class="row">
-       <div class="backbutton col-1">
+     <div class="backbutton_multiplec col-1 p-2  mt-2 d-flex align-items-center" style="background-color: teal; border: 1px solid black; border-radius: 20px; border-right: none; width: max-content;">
            <a onclick = "history.back()" style="text-decoration: none; color: rgb(68, 68, 68); cursor:pointer;">
            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
                <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
-           </svg>
+           </svg> Go Back
            </a>
        </div>
        <br><br><br>
@@ -311,6 +311,7 @@ function myFunction(imgs) {
 <script src="https://cdn.datatables.net/rowreorder/1.2.8/js/dataTables.rowReorder.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
 <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
     $(document).ready( function () {
@@ -362,5 +363,37 @@ function myFunction(imgs) {
   } );
 </script>
 
+<script>
+  $(document).ready(function () {
+    $('html, body').animate({
+        scrollTop: $('#wrapper').offset().top
+    }, 1000);
+});
+
+
+
+$(window).scroll(example);
+
+function example() {
+scrollTop = window.pageYOffset;
+if (scrollTop == $('.navbar').offset().top) {
+    console.log('Hi');
+    $('html, body').stop(true, true).delay(2000).animate({
+        scrollTop: $('#wrapper').offset().top
+    }, 500);
+  }}  ;
+</script>
+
+<style>
+  .backbutton_ident:hover {
+    background-color: teal !important;
+    transform: scale(1.04);
+    transition: transform .2s ease-in-out;
+  }
+
+  .backbutton_ident:hover > * {
+   color: whitesmoke !important;
+  }
+</style>
 
 <?= $this->endSection() ?>

@@ -7,7 +7,7 @@
     $choice_id=0;
   ?>
 
-  <div class="navbar" style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(<?=base_url()?>/public/assets/images/banner.png);">
+  <div class="navbar mb-0" style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(<?=base_url()?>/public/assets/images/banner.png);">
          <nav class="nav row w-100 align-items-center">
              <div class="col-7">
                  <a href="<?php echo base_url(); ?>/public/pupil/home" style="text-decoration: none; font-size:250%;"><b>Pulong</b></a>
@@ -34,11 +34,11 @@
 
   <div class="container h-100" style="margin-bottom:0%;" id="wrapper" >
      <div class="row">
-       <div class="backbutton col-1">
+       <div class="backbutton col d-flex align-items-center">
            <a href="<?php echo base_url(); ?>/public/pupil/viewmodule/<?= $users->lesson_id; ?>" style="text-decoration: none; color: rgb(68, 68, 68); cursor:pointer;">
            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
                <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
-           </svg>
+           </svg>Go Back
            </a>
        </div>
        <br><br><br>
@@ -55,10 +55,10 @@
           <?php $message='Whoops! Try the activity again!'; ?>
         <?php endif; ?>
         <br>
-        <div class="container">
+        <div class="container p-5" style="border:2px solid black; height: 80vh;">
           <div class="row" style="margin-bottom:2%;">
-              <div class="col">
-                   <h1><b> <?= $users->activity_name; ?></b></h1>
+              <div class="col" style="">
+                   <h1><b>Activity Name: <?= $users->activity_name; ?></b></h1>
               </div>
           </div>
             <div class="row" style="margin-bottom:2%;">
@@ -70,8 +70,14 @@
                 </div>
             </div>
             <div class="row" style="margin-bottom:2%;">
-                <div class="col">
-                    <h1><?= $performance->percentage_score ?>%</h1>
+                <div class="col" style="min-height: 60px;">
+                    <div class="metercontainer" style="min-height: 60px; width: 100%; text-align: start;">
+                      <div id="meterbody" style="min-height: 60px; width:<?= $performance->percentage_score ?>%; text-align: -webkit-right">
+                        <div id="meterhead" style="min-height: 60px; border: 2px solid black; border-radius: 50%; width: 4rem; display: flex; align-items: center;justify-content: center;">
+                          <h1 style="font-size:1.5rem;"><?= $performance->percentage_score ?>%</h1>
+                        </div>
+                      </div>
+                    </div> 
                 </div>
             </div>
             <div class="row">

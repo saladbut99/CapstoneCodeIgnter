@@ -717,3 +717,23 @@ overflow: auto;
   }
 
 }
+
+.metercontainer {
+  background-color: darksalmon;
+  border-radius: 40px;
+}
+
+#meterbody {
+  background-color: mediumseagreen;
+  border-radius: 40px 50px 50px 40px;
+}
+
+#meterhead {
+  background-color: teal;
+}
+
+#meterhead > h1 {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}

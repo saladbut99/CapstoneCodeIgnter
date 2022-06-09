@@ -93,6 +93,17 @@
               </div>
           </div>
           <div class="row">
+            <div class="col" style="min-height: 60px;">
+                <div class="metercontainer" style="min-height: 60px; width: 100%; text-align: start;">
+                  <div id="meterbody" style="min-height: 60px; width:<?= $user['percentage_score'] ?>%; text-align: -webkit-right">
+                    <div id="meterhead" style="min-height: 60px; border: 2px solid black; border-radius: 50%; width: 4rem; display: flex; align-items: center;justify-content: center;">
+                      <h1 style="font-size:1.5rem;"><?= $user['percentage_score'] ?>%</h1>
+                    </div>
+                  </div>
+                </div> 
+            </div>
+          </div>
+          <div class="row">
               <div class="col">
                   <h1>Your Score: <?= $user['activity_score'] ?>/<?= $user['activity_perfect_score'] ?></h1>
               </div>
