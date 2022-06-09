@@ -72,7 +72,7 @@
 <?php else: ?>
     <?php   $total_score=$total/$range*100; ?>
     <?php if ($total_score>=50): ?>
-        <?php $message='Theyre doing good, up the good work!'; ?>
+        <?php $message='Theyre doing good, keep up the good work!'; ?>
     <?php else: ?>
       <?php $message='Monitoring of pupil is advised!'; ?>
     <?php endif; ?>
@@ -87,7 +87,7 @@
   </div>
 </div>
 
-<div class="container" style="display:<?= $display ?>">
+<div class="container" style="display:<?= $display ?>;width:80%;border:10px solid #00acee;margin-bottom:2.5%; border-radius:4px; box-shadow:2px 3px 2px grey;padding:5%;border-radius:5%;">
     <div class="row">
       <div class="col">
           <h1>Hi <?= session()->get('firstname') ?>!</h1>
