@@ -166,7 +166,7 @@
        <div class="col-sm">
                <div class="form-group">
                  <label for="" style="font-size:25px; margin-bottom:3%;">Activity Question</label>
-                 <textarea class="form-control" style="width: 100%; border: 2px solid #00acee;" id="exampleFormControlTextarea1" placeholder="" rows="4" name="activity_question"></textarea>
+                 <textarea class="form-control" style="width: 100%; border: 2px solid #00acee;" id="exampleFormControlTextarea1" placeholder="" rows="4" name="activity_question" required></textarea>
                </div>
                <div class="text-danger" style="margin-top:3%;">
                  <?php if (isset($validation)): ?>
