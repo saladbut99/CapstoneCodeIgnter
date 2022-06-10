@@ -51,8 +51,8 @@
        <table class="table table-borderless table-hover" id="users-list"  style=" border-bottom: none;">
 
             <tr>
-               <th style="width:70%;">Activity Name</th>
-               <th></th>
+               <th style="width:50%;">Activity Name</th>
+               <th> Answered </th>
             </tr>
 
 
@@ -212,11 +212,22 @@ if (scrollTop == $('.navbar').offset().top) {
     height: auto;
     width: auto;
     bottom: 0px;
-    right: 0px;
+    right: -100px;
     float: right;
   }
   #image-float > img {
     height: 300px
+   }
+
+   @media only screen and (max-width: 480px) {
+    #image-float > img {
+    height: 200px
+   }
+
+   th {
+     font-size: 2rem !important;
+   }
+   
    }
 </style>
 

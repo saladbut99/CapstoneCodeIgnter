@@ -33,11 +33,12 @@
 
   <div class="container mt-5" style="margin-bottom:5%;">
     <div class="mt-3">
-      <div class="backbutton col-2">
-          <a style="text-decoration: none; color: rgb(68, 68, 68); cursor:pointer" onclick = "history.back()">
+      <div class="backbutton py-2 px-2" style="background-color:teal; width: 12%; border: 1px solid black; border-radius: 20px; border-right: none;">
+          <a style="text-decoration: none; color: rgb(68, 68, 68); cursor:pointer" href="<?php echo base_url(); ?>/public/pupil/viewmoduleactivity  " /onclick = "history.back()">
           <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
               <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
           </svg>
+          <h7>Go Back</h7> 
           </a>
       </div>
       <center>
@@ -176,6 +177,18 @@ function myFunction(imgs) {
       }
   }
   </script>
+
+<style>
+  .backbutton:hover {
+    background-color: teal !important;
+    transform: scale(1.04);
+    transition: transform .2s ease-in-out;
+  }
+
+  .backbutton:hover > * {
+   color: whitesmoke !important;
+  }
+</style>
 
 
 <?= $this->endSection() ?>

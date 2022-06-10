@@ -26,11 +26,10 @@
 
 <center>
 
-
-    <div class="formcontainer m-5 pb-5" style="height: 90vh; max-width:80%; background-color: white; border:none;">
+    <div class="formcontainer m-5 mt-0 py-5" style="height: 90vh; max-width:80%; background-color: white; border:none;">
       <div class="container  h-100">
-        <div class="row h-100 align-items-center ">
-            <div class="col-md text-center" >
+        <div class="row ">
+            <div class="col-md text-center dashboard_div section" >
                 <div class="">
                 <br>
                 <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="green" class="bi bi-person-plus" viewBox="0 0 16 16">
@@ -43,7 +42,7 @@
                 </div>
             </div>
 
-            <div class="col-md text-center">
+            <div class="col-md text-center dashboard_div section">
                 <div class="">
                 <br>
                 <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="green" class="bi bi-person-check" viewBox="0 0 16 16">
@@ -56,9 +55,9 @@
                 </div>
             </div>
 
-            <div class="row"></div>
+        <div class="row"></div>
 
-            <div class="col-md text-center">
+            <div class="col-md text-center dashboard_div section">
                 <div class="">
                     <br>
                     <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="green" class="bi bi-book" viewBox="0 0 16 16">
@@ -71,7 +70,7 @@
             </div>
 
 
-            <div class="col-md text-center">
+            <div class="col-md text-center dashboard_div section">
                 <div class="">
                 <br>
                 <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="green" class="bi bi-clipboard-check" viewBox="0 0 16 16">

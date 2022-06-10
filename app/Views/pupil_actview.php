@@ -314,7 +314,7 @@ setTimeout(function() {
     float: right;
   }
   #image-float > img {
-    height: 400px
+    height: 400px;
    }
   
    #notif-float {
@@ -325,6 +325,30 @@ setTimeout(function() {
     left: 38%;
     float: right;
    }
+   @media only screen and (max-width: 480px) {
+    #image-float > img {
+    height: 200px;
+   }
+   #image-float {
+     z-index: -1 !important;
+   }
+
+   #notif-float {
+    position: absolute;
+    height: auto;
+    width: auto;
+    top: 41%;
+    left: 27%;
+    float: right;
+   }
+   #notif-float > img {
+    height: 120px !important;
+   }
+
+   tbody > * {
+     background-color: rgba(255,255,255,0) !important;
+   }
+  }
   </style>
 
 <div id="image-float">

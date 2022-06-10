@@ -182,7 +182,7 @@ transition: all 0.3 ease;
 }
 
 .section:hover {
-  background-color:#fafdf3;
+  background-color:#acc9ff;
   color: black;
   transition: all ease-in .3s;
 }
@@ -197,7 +197,8 @@ transition: all 0.3 ease;
 
 .section_pupil {
   transition: transform .3s ease-in-out;
-  width: 10rem;
+  width: 50%;
+  height: 50%;
   cursor: pointer;
   border-radius: 50% !important;
   transform: scale(1.2) !important;
@@ -295,7 +296,7 @@ transition: all 0.3 ease;
 
 .dashboard_div{
   border:3px solid #00acee;
-  margin-bottom: 2%;
+  margin: 2%;
   border-radius: 5%;
   background-color: white;
   height: 16rem;
@@ -716,4 +717,24 @@ overflow: auto;
     background-size: cover;
   }
 
+}
+
+.metercontainer {
+  background-color: darksalmon;
+  border-radius: 40px;
+}
+
+#meterbody {
+  background-color: mediumseagreen;
+  border-radius: 40px 50px 50px 40px;
+}
+
+#meterhead {
+  background-color: teal;
+}
+
+#meterhead > h1 {
+  padding: 0;
+  margin: 0;
+  border: 0;
 }
