@@ -33,7 +33,7 @@
        <h1 style="text-align:center; font-size:500%;"><b>Grade 1 Adelfa</b></h1>
        <?php if ($users): ?>
           <?php foreach ($users as $user): ?>
-            <?php if ($user['section_id']==3): ?>
+            <?php if ($user['section_id']==3 && strcmp(strtoupper($user['account_status']),strtoupper('active'))==0): ?>
                   <?php $fname=$user['teacher_firstname'];
                         $lname=$user['teacher_lastname'];
                    ?>

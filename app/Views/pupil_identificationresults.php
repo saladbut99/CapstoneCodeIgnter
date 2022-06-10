@@ -49,8 +49,14 @@
 
    <?php if ($performance->percentage_score>=50): ?>
        <?php $message='Keep up the good work!'; ?>
+       <audio hidden autoplay>
+           <source src="<?=base_url()?>/public/assets/joy.mp3" type="audio/mpeg">
+       </audio>
    <?php else: ?>
      <?php $message='Whoops! Try the activity again!'; ?>
+     <audio hidden autoplay>
+         <source src="<?=base_url()?>/public/assets/sad.wav" type="audio/mpeg">
+     </audio>
    <?php endif; ?>
    <br>
    <div class="container">

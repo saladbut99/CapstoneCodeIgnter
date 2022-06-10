@@ -40,11 +40,20 @@
            </a>
        </div>
        <br>
+       <center>
        <?php if (session()->get('updatesuccess')): ?>
        <div class="alert alert-success" role="alert" style="margin-bottom:5%;">
            <h4><?= session()->get('updatesuccess') ?></h4>
        </div>
      <?php endif; ?>
+   </center>
+     <center>
+       <?php if (session()->get('danger')): ?>
+       <div class="alert alert-danger" role="alert" style="margin-bottom:5%;">
+           <h4><?= session()->get('danger') ?></h4>
+       </div>
+     <?php endif; ?>
+     </center>
        <br>
         <table  class="table table-bordered display nowrap" id="users-list"  cellspacing="0" style="width:100%;" >
           <thead style="font-size:5px;">

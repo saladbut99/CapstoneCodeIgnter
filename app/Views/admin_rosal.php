@@ -32,7 +32,7 @@
        <h1 style="text-align:center; font-size:500%;"><b>Grade 1 Rosal</b></h1>
        <?php if ($users): ?>
           <?php foreach ($users as $user): ?>
-            <?php if ($user['section_id']==2): ?>
+            <?php if ($user['section_id']==2 && strcmp(strtoupper($user['account_status']),strtoupper('active'))==0): ?>
                   <?php $fname=$user['teacher_firstname'];
                         $lname=$user['teacher_lastname'];
                    ?>

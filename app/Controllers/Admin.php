@@ -95,9 +95,33 @@ class Admin extends BaseController
             $section_id=$_POST['section_id'];
 
             $data['teacher']=$model->where(['section_id'=>$section_id])->get()->getRow();
+            $data['sample']=$model->where(['section_id'=>$section_id])->findAll();
+            $teacherarray=[
+              'new'=>'',
+            ];
 
-            if (empty($data['teacher'])) {
-              $_POST['account_status']='Active';
+            foreach ($data['sample'] as $teacher) {
+              if (strcmp(strtoupper($teacher['account_status']),strtoupper('active'))==0) {
+              //  echo "naay taos";
+                // $data['new']=$teacher;
+                $teacherarray=[
+                  'new'=>$teacher,
+                ];
+              }
+            }
+
+            // if (empty($teacherarray ['new'])) {
+            //   echo "wala";
+            // }else {
+            //   echo "<pre>";
+            //   print_r($teacherarray['new']);
+            //   echo "<pre>";
+            // }
+
+            if (empty($teacherarray['new'])) {
+
+              //echo "sud database ";
+             $_POST['account_status']='Active';
               $model->save($_POST);
               $session = session();
               $session->setFlashdata('success','Teacher Registration Successful ');
@@ -512,16 +536,53 @@ public function update(){
 
     $inactive='Inactive';
     $active='Active';
-
     if (strcmp($result,'Inactive')==0) {
-        $userModel->set('account_status',$active)->where(['teacher_id'=>$id])->update();
-    }elseif (strcmp($result,'Active')==0) {
-      $userModel->set('account_status',$inactive)->where(['teacher_id'=>$id])->update();
-    }
-    $session = session();
-    $session->setFlashdata('updatesuccess','Account Change Successful ');
-     return redirect()->to('admin/accountstatus');
 
+
+    $model = new TeacherRegistration();
+     $data['teacher']=$model->where(['teacher_id'=>$id])->get()->getRow();
+     $data['sample']=$model->where(['section_id'=>$data['teacher']->section_id])->where(['teacher_id!='=>$data['teacher']->teacher_id])->findAll();
+
+
+
+     $teacherarray=[
+       'new'=>'',
+     ];
+
+     foreach ($data['sample'] as $teacher) {
+       if (strcmp(strtoupper($teacher['account_status']),strtoupper('active'))==0) {
+         $teacherarray=[
+           'new'=>$teacher,
+         ];
+       }
+     }
+     if (empty($teacherarray['new'])) {
+
+    //   echo "change";
+         $userModel->set('account_status',$active)->where(['teacher_id'=>$id])->update();
+         $session = session();
+         $session->setFlashdata('updatesuccess','Account Change Successful ');
+
+     }else {
+        //$data['status']='There is already a active teacher for the section';
+        $session = session();
+        $session->setFlashdata('danger','There is already a active teacher for the section');
+
+     }
+
+     }elseif (strcmp($result,'Active')==0) {
+       $userModel->set('account_status',$inactive)->where(['teacher_id'=>$id])->update();
+     }
+
+
+    // if (strcmp($result,'Inactive')==0) {
+    //     $userModel->set('account_status',$active)->where(['teacher_id'=>$id])->update();
+    // }elseif (strcmp($result,'Active')==0) {
+    //   $userModel->set('account_status',$inactive)->where(['teacher_id'=>$id])->update();
+    // }
+
+return redirect()->to('admin/accountstatus');
+  //  return view('admin_changeteacheraccstat', $data);
   }
 
   public function manage(){
