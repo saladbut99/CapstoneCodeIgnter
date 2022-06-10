@@ -191,7 +191,7 @@ $(document).ready(function() {
 
 $("#cntr").mousemove(function(e){
     var amountMovedX = (e.pageX * -1 / 20);
-    var amountMovedY = (e.pageY * -10 / 50);
+    var amountMovedY = (e.pageY * -1 / 50);
     $(this).css('background-position', amountMovedX + 'px ' + amountMovedY + 'px');
 });
 
@@ -236,10 +236,14 @@ $(window).on('resize', function() {
 
 #cntr {
   background-image: url("http://localhost/CapstoneCodeIgnter/Pulong/public/assets/images/pupil_bg.jpg") !important;
-  background-size: 110%;
+  background-size: 150%;
   background-repeat: no-repeat;
   background-position: center;
   height: 100vh !important;
+}
+
+.section_h6 {
+  font-size:15px;
 }
 
 
@@ -266,7 +270,7 @@ $(window).on('resize', function() {
     width: 24px;
   }
   .section_h6 {
-    font-size: 12px;
+    font-size: 10px;
   }
  
   .formcontainer {

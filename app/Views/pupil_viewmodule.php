@@ -488,7 +488,7 @@ if (scrollTop == $('.navbar').offset().top) {
 }
 
 .example_area {
-  min-width: 30% !important;
+  min-width: 25rem !important;
   width: fit-content;
   border:0.5px solid #00acee;
   margin-bottom:2.5%;
