@@ -72,7 +72,7 @@
 <?php else: ?>
     <?php   $total_score=$total/$range*100; ?>
     <?php if ($total_score>=50): ?>
-        <?php $message='Theyre doing good, keep up the good work!'; ?>
+        <?php $message='The pupil doing good, keep up the good work!'; ?>
     <?php else: ?>
       <?php $message='Monitoring of pupil is advised!'; ?>
     <?php endif; ?>

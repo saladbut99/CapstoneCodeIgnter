@@ -162,6 +162,7 @@ class Mimes
             'audio/mpg',
             'audio/mpeg3',
             'audio/mp3',
+            'application/octet-stream',
         ],
         'aif' => [
             'audio/x-aiff',

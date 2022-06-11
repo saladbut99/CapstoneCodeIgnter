@@ -46,6 +46,13 @@
         <?php endif; ?>
         <br>
    </div>
+   <center>
+     <?php if (session()->get('danger')): ?>
+     <div class="alert alert-danger" role="alert" style="margin-bottom:5%;">
+         <h4><?= session()->get('danger') ?></h4>
+     </div>
+   <?php endif; ?>
+
        <div class="col mt">
          <br>
              <div class="row">
