@@ -90,7 +90,7 @@
         <hr style="width: 70vw;">
         <div class="row h-60 align-items-center mt-2 pop-up" style="" id="pop-up1">
           <h1 style="padding:20px; background-color: rgba(100,255,100,0.5)"> LEARN A LESSON </h1>
-          <h3><b>LEARN</b> FROM MODULES AND <b>ANSWER</b> ACTIVITIES.</h3>
+          <h3><b>LEARN CEBUANO</b> FROM MODULES AND <b>ANSWER</b> ACTIVITIES.</h3>
           <div class="pop-up d-flex">
           <a href="viewmoduletable" class=" btn btn-light btn-outline-primary" style="margin-top: 10%; margin-bottom: 10%;"> Learn Lesson</a>
           </div>
@@ -118,8 +118,16 @@
 </center>
 
 
-
+<style>
+  .menu {
+    display: block ;
+  }
+</style>
 <script>
+  setTimeout(function() {
+    $('.menu').fadeOut('fast');
+}, 2000); // <-- time in milliseconds
+
   $( ".dropdown" ).click(function() {
     $( ".menu").toggle();
 });
@@ -186,7 +194,7 @@ beepOne.play();
 var bgmusic = $("#bgmusic")[0];
 $(document).ready(function() {
   bgmusic.play();
-  bgmusic.volume = 0.02;
+  bgmusic.volume = 0.2;
 });
 
 $("#cntr").mousemove(function(e){
@@ -198,7 +206,7 @@ $("#cntr").mousemove(function(e){
 $(document).ready(function () {
     $('html, body').animate({
         scrollTop: $('#cntr').offset().top
-    }, 1000);
+    }, 2000);
 });
 
 
@@ -297,6 +305,56 @@ $(window).on('resize', function() {
     height: 40% !important;
   }
 }
+
+@media only screen and (min-width: 481px) and (max-width: 1024px) {
+  body {
+  background-image: url("http://localhost/CapstoneCodeIgnter/Pulong/public/assets/images/pupil_bg.jpg") !important;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  }
+
+  #cntr {
+    background: none !important;
+    height: 100vh !important;
+  }
+  .section_pupil {
+    height: 20vh;
+    width: 20vw;
+  }
+  svg {
+    height: 24px;
+    width: 24px;
+  }
+  .section_h6 {
+    font-size: 10px;
+  }
+ 
+  .formcontainer {
+    max-width: 90% !important;
+  }
+
+  .section_menu_container {
+    display: flex;
+    width: 100% !important;
+  }
+
+  .section_menu {
+    width: 100% !important;
+  }
+
+  .section_pupil {
+    width: 80% !important;
+  }
+
+  #pop-up3 {
+    height: 80% !important;
+  }
+  #pop-up3 > .pop-up {
+    height: 50% !important;
+  }
+}
+
 </style>
 
 <?= $this->endSection() ?>

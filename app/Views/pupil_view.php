@@ -38,7 +38,7 @@
     var bgmusic4viewmoduletable = $("#bgmusic4viewmoduletable")[0];
 $(document).ready(function() {
   bgmusic4viewmoduletable.play();
-  bgmusic4viewmoduletable.volume = 0.05;
+  bgmusic4viewmoduletable.volume = 0.25;
 });
   </script>
 
@@ -355,6 +355,25 @@ if (scrollTop == $('.navbar').offset().top) {
     width: auto;
     top: 40%;
     left: 38%;
+    float: right;
+  }
+  #notif-float > img {
+    height: 20vh;
+  }
+  .buttonforunit {
+    justify-content: center
+  }
+  }
+  @media only screen and (min-width: 481px) and (max-width: 1024px) {
+    #image-float > img {
+    height: 40vh;
+   }
+  #notif-float {
+    position: absolute;
+    height: auto;
+    width: auto;
+    top: 27%;
+    left: 48%;
     float: right;
   }
   #notif-float > img {

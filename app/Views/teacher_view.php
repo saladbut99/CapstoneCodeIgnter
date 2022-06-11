@@ -39,6 +39,15 @@
            </svg>
            </a>
        </div>
+       <!-- BUTTONS FOR TABLE POP UP -->
+      <div class="buttonforunit col d-flex align-items-center">
+        <h4 id="kwarter"> KWARTER: </h4>
+        <button class="btn btn-lg btn-unit" id="btn-unit1" style=""> 1 </button>
+        <button class="btn btn-lg btn-unit" id="btn-unit2" style="color: whitesmoke;"> 2 </button>
+        <button class="btn btn-lg btn-unit" id="btn-unit3" style="color: whitesmoke;"> 3 </button>
+        <button class="btn btn-lg btn-unit" id="btn-unit4" style="color: whitesmoke;"> 4 </button>
+      </div>
+
        <div class="container">
          <div class="row">
            <div class="mt-3" style="margin-left:1%;">
@@ -329,4 +338,63 @@
   }
   </script>
 
+  <style>
+
+  </style>
+
+
+<script>
+  $( "#btn-unit1" ).click(function() {
+    $( "#btn-unit1" ).css({'cssText': 'background-color: whitesmoke !important; color: black;'});
+    $( "#btn-unit2" ).css({'cssText':'color: whitesmoke;'});
+    $( "#btn-unit3" ).css({'cssText':'color: whitesmoke;'});
+    $( "#btn-unit4" ).css({'cssText':'color: whitesmoke;'});
+    $( "#users-list").show();
+    $( "#users-list2").hide();
+    $( "#users-list3").hide();
+    $( "#users-list4").hide();
+    $('html, body').animate({
+        scrollTop: $('#conviewtable').offset().top
+    }, 0);
+});
+$( "#btn-unit2" ).click(function() {
+    $( "#btn-unit1" ).css({'cssText': 'background-color: rgba(255,255,255,0) !important; color: whitesmoke;'});
+    $( "#btn-unit2" ).css({'cssText':'color: black;'});
+    $( "#btn-unit3" ).css({'cssText':'color: whitesmoke;'});
+    $( "#btn-unit4" ).css({'cssText':'color: whitesmoke;'});
+    $( "#users-list").hide();
+    $( "#users-list2").show();
+    $( "#users-list3").hide();
+    $( "#users-list4").hide();
+    $('html, body').animate({
+        scrollTop: $('#conviewtable').offset().top
+    }, 0);
+});
+$( "#btn-unit3" ).click(function() {
+    $( "#btn-unit1" ).css({'cssText': 'background-color: rgba(255,255,255,0) !important; color: whitesmoke;'});
+    $( "#btn-unit2" ).css({'cssText':'color: whitesmoke;'});
+    $( "#btn-unit3" ).css({'cssText':'color: black;'});
+    $( "#btn-unit4" ).css({'cssText':'color: whitesmoke;'});
+    $( "#users-list").hide();
+    $( "#users-list2").hide();
+    $( "#users-list3").show();
+    $( "#users-list4").hide();
+    $('html, body').animate({
+        scrollTop: $('#conviewtable').offset().top
+    }, 0);
+});
+$( "#btn-unit4" ).click(function() {
+    $( "#btn-unit1" ).css({'cssText': 'background-color: rgba(255,255,255,0) !important; color: whitesmoke;'});
+    $( "#btn-unit2" ).css({'cssText':'color: whitesmoke;'});
+    $( "#btn-unit3" ).css({'cssText':'color: whitesmoke;'});
+    $( "#btn-unit4" ).css({'cssText':'color: black;'});
+    $( "#users-list").hide();
+    $( "#users-list2").hide();
+    $( "#users-list3").hide();
+    $( "#users-list4").show();
+    $('html, body').animate({
+        scrollTop: $('#conviewtable').offset().top
+    }, 0);
+});
+</script>
 <?= $this->endSection() ?>

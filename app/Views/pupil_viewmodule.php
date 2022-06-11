@@ -25,6 +25,20 @@
         <a href="<?php echo base_url(); ?>/public/pupil/logout">Logout</a>
         </div>
 </div>
+
+<audio id="bgmusic4viewmodule" hidden preload="auto" autoplay loop>
+    <source src="<?=base_url()?>/public/assets/Angry_Birds _ Choose your Figther! _ ABFT.mp3">
+    <source src="audio/beep.ogg">
+</audio>
+<script>
+    var bgmusic4viewmodule = $("#bgmusic4viewmodule")[0];
+$(document).ready(function() {
+  bgmusic4viewmodule.play();
+  bgmusic4viewmodule.volume = 0.25;
+});
+  </script>
+
+
 <a href="<?php echo base_url(); ?>/public/pupil/viewmoduletable" style="text-decoration: none; color: rgb(68, 68, 68);">
 <div class="backbutton_lesson p-2 col-1 mt-2 d-flex align-items-center" style="background-color: teal; border: 1px solid black; border-radius: 20px; border-right: none;">
               <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
@@ -229,7 +243,7 @@
                                     <source src="<?=base_url()?>/public/uploads/images/<?= $examples['file_name']; ?>" type="audio/mpeg">
                               </audio>
                             </a>
-
+gi
                         <?php else: ?>
                         <a href="<?=base_url()?>/public/uploads/images/<?= $examples['file_name']; ?>" target="_blank" style="margin-bottom:3%;">
                             <img src="<?=base_url()?>/public/uploads/images/<?= $examples['file_name']; ?>"  alt="" width="auto" height="auto" onclick="myFunction(this);" class="img-fluid">
@@ -517,7 +531,7 @@ if (scrollTop == $('.navbar').offset().top) {
 
 @media only screen and (max-width: 480px) {
   #lessonname {
-    font-size: 55px !important
+    font-size: 7vh !important
   }
 
   .example_area {
@@ -539,6 +553,12 @@ if (scrollTop == $('.navbar').offset().top) {
   .navbar {
     z-index: 999;
   }
+}
+@media only screen and (min-width: 481px) and (max-width: 1024px) {
+  #lessonname {
+    font-size: 55px !important
+  }
+
 }
 
 </style>
