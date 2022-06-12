@@ -1066,7 +1066,7 @@ public function update_example($id){
 
     $rules=[
       'image'=>[
-        'rules'=> 'ext_in[image,png,jpg,gif,mp4]',
+        'rules'=> 'ext_in[image,png,jpg,gif,mp4,mp3,wav]',
         'label'=>'Image',
       ],
       'example'=>[
@@ -1992,7 +1992,7 @@ public function update_question($id){
         'label'=>'Activity Title',
       ],
       'image'=>[
-        'rules'=> 'ext_in[image,png,jpg,gif,mp4,mp3]',
+        'rules'=> 'ext_in[image,png,jpg,gif,mp4,mp3,wav]',
         'label'=>'Image',
       ],
     //   'activity_instruction'=>[
@@ -2163,7 +2163,7 @@ public function update_identification($id){
         'label'=>'Activity Title',
       ],
       'image'=>[
-        'rules'=> 'ext_in[image,png,jpg,gif,mp4,mp3]',
+        'rules'=> 'ext_in[image,png,jpg,gif,mp4,mp3,wav]',
         'label'=>'Image',
       ],
 
