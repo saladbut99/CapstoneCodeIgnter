@@ -1408,7 +1408,7 @@ public function addquestion($id){
          'label'=>'Activity Title',
        ],
        'image'=>[
-         'rules'=> 'ext_in[image,png,jpg,gif,mp4,mp3,m4a]',
+         'rules'=> 'ext_in[image,png,jpg,gif,mp4,mp3,m4a,wav]',
          'label'=>'Image',
        ],
      //   'activity_instruction'=>[
@@ -1599,7 +1599,7 @@ public function addquestion_identification($id){
          'label'=>'Activity Title',
        ],
        'image'=>[
-         'rules'=> 'ext_in[image,png,jpg,gif,mp4,mp3,m4a]',
+         'rules'=> 'ext_in[image,png,jpg,gif,mp4,mp3,m4a,wav]',
          'label'=>'Image',
        ],
      //   'activity_instruction'=>[

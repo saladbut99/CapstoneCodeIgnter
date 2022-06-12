@@ -113,7 +113,12 @@
                             </video>
                           <?php elseif (strcmp($medias['file_extension'],'mp3')==0): ?>
                               <audio controls>
-                                  <source src="<?=base_url()?>/public/uploads/images/<?= $medias['file_name']; ?>" type="audio/mpeg">
+
+                                  <source src="<?=base_url()?>/public/uploads/images/<?= $medias['file_name']; ?>" type="	audio/wav">
+                            </audio>
+                          <?php elseif (strcmp($medias['file_extension'],'wav')==0): ?>
+                              <audio controls>
+                                  <source src="<?=base_url()?>/public/uploads/images/<?= $medias['file_name']; ?>" type="	audio/wav">
                             </audio>
                             <?php else: ?>
                                 <a href="<?=base_url()?>/public/uploads/images/<?= $medias['file_name']; ?>" target="_blank"><img src="<?=base_url()?>/public/uploads/images/<?= $medias['file_name']; ?>"  alt="" width="70%" height="70%" onclick="myFunction(this);" class="img-fluid"></a>

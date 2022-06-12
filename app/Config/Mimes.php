@@ -161,8 +161,11 @@ class Mimes
             'audio/mpeg',
             'audio/mpg',
             'audio/mpeg3',
+            'audio/x-mpeg',
             'audio/mp3',
+            'application/force-download',
             'application/octet-stream',
+            'application/x-zip-compressed',
         ],
         'aif' => [
             'audio/x-aiff',
