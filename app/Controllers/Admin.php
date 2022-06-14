@@ -566,7 +566,7 @@ public function update(){
      }else {
         //$data['status']='There is already a active teacher for the section';
         $session = session();
-        $session->setFlashdata('danger','There is already a active teacher for the section');
+        $session->setFlashdata('danger','There is already an active teacher for the section');
 
      }
 

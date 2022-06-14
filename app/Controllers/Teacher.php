@@ -749,7 +749,7 @@ public function viewmodule($id){
       //     'label'=>'Confirm Password',
       // ],
       'image'=>[
-        'rules'=> 'ext_in[image,png,jpg,gif,mp4,mp3]',
+        'rules'=> 'ext_in[image,png,jpg,gif,mp4,mp3,m4a]',
         'label'=>'Image',
       ],
       'example'=>[
@@ -1066,7 +1066,7 @@ public function update_example($id){
 
     $rules=[
       'image'=>[
-        'rules'=> 'ext_in[image,png,jpg,gif,mp4]',
+        'rules'=> 'ext_in[image,png,jpg,gif,mp4,mp3,wav]',
         'label'=>'Image',
       ],
       'example'=>[
@@ -1399,6 +1399,7 @@ public function addquestion($id){
 
       $score=count($data['users']);
       $score+=1;
+       helper(['form']);
 
    $rules=[
 
@@ -1407,7 +1408,7 @@ public function addquestion($id){
          'label'=>'Activity Title',
        ],
        'image'=>[
-         'rules'=> 'ext_in[image,png,jpg,gif,mp4,mp3]',
+         'rules'=> 'ext_in[image,png,jpg,gif,mp4,mp3,m4a,wav]',
          'label'=>'Image',
        ],
      //   'activity_instruction'=>[
@@ -1421,7 +1422,7 @@ public function addquestion($id){
 
    ];
 
-   helper(['form']);
+
 
    if ($this->request->getMethod()=='post') {
 
@@ -1555,7 +1556,7 @@ public function addquestion($id){
 
 
 
-        return redirect()->to('teacher/multiplechoice/'.$id);
+
 
 
 
@@ -1564,10 +1565,12 @@ public function addquestion($id){
    }else{
      //if validation is not successfull
      //validator provies a list of errors
-     $data['validation']=$this->validator;
+     $session = session();
+     $session->setFlashdata('danger','Invalid file upload');
    }
  }
-
+         return redirect()->to('teacher/multiplechoice/'.$id);
+      // return view('teacher_multiplechoice', $data);
 }
 
 public function addquestion_identification($id){
@@ -1596,7 +1599,7 @@ public function addquestion_identification($id){
          'label'=>'Activity Title',
        ],
        'image'=>[
-         'rules'=> 'ext_in[image,png,jpg,gif,mp4,mp3]',
+         'rules'=> 'ext_in[image,png,jpg,gif,mp4,mp3,m4a,wav]',
          'label'=>'Image',
        ],
      //   'activity_instruction'=>[
@@ -1711,10 +1714,11 @@ public function addquestion_identification($id){
    }else{
      //if validation is not successfull
      //validator provies a list of errors
-     $data['validation']=$this->validator;
+     $session = session();
+     $session->setFlashdata('danger','Invalid file upload');
    }
  }
-
+     return redirect()->to('teacher/identification/'.$id);
 }
 
 //Delete Activity
@@ -1838,11 +1842,15 @@ public function delete_mainactivity($id){
    $activitymaster = new ActivityMaster;
    $model = new TeacherLesson();
 
-   $data['activity']=$activitymaster->get()->getRow();
+   $data['activity']=$activitymaster->where(['activity_id'=>$id])->get()->getRow();
    $lesson_id=$data['activity']->lesson_id;
 
     $lesson_content = new LessonMaster();
     $data['lesson']=$lesson_content->where(['lesson_id'=>$lesson_id])->get()->getRow();
+    //
+    // echo "<pre>";
+    //   print_r($data['activity']);
+    // echo "<pre>";
 
     if ($activitymaster) {
       $activitymaster->delete($id);
@@ -1850,7 +1858,7 @@ public function delete_mainactivity($id){
 
    $session = session();
    $session->setFlashdata('updatesuccess','Activity Successfully Deleted ');
-   return redirect()->to('teacher/viewactivity/'.$lesson_id);
+    return redirect()->to('teacher/viewactivity/'.$lesson_id);
 
 }
 
@@ -1984,7 +1992,7 @@ public function update_question($id){
         'label'=>'Activity Title',
       ],
       'image'=>[
-        'rules'=> 'ext_in[image,png,jpg,gif,mp4,mp3]',
+        'rules'=> 'ext_in[image,png,jpg,gif,mp4,mp3,wav]',
         'label'=>'Image',
       ],
     //   'activity_instruction'=>[
@@ -2155,7 +2163,7 @@ public function update_identification($id){
         'label'=>'Activity Title',
       ],
       'image'=>[
-        'rules'=> 'ext_in[image,png,jpg,gif,mp4,mp3]',
+        'rules'=> 'ext_in[image,png,jpg,gif,mp4,mp3,wav]',
         'label'=>'Image',
       ],
 

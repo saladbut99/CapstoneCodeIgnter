@@ -46,6 +46,13 @@
         <?php endif; ?>
         <br>
    </div>
+   <center>
+     <?php if (session()->get('danger')): ?>
+     <div class="alert alert-danger" role="alert" style="margin-bottom:5%;">
+         <h4><?= session()->get('danger') ?></h4>
+     </div>
+   <?php endif; ?>
+
        <div class="col mt">
          <br>
              <div class="row">
@@ -106,7 +113,12 @@
                             </video>
                           <?php elseif (strcmp($medias['file_extension'],'mp3')==0): ?>
                               <audio controls>
-                                  <source src="<?=base_url()?>/public/uploads/images/<?= $medias['file_name']; ?>" type="audio/mpeg">
+
+                                  <source src="<?=base_url()?>/public/uploads/images/<?= $medias['file_name']; ?>" type="	audio/wav">
+                            </audio>
+                          <?php elseif (strcmp($medias['file_extension'],'wav')==0): ?>
+                              <audio controls>
+                                  <source src="<?=base_url()?>/public/uploads/images/<?= $medias['file_name']; ?>" type="	audio/wav">
                             </audio>
                             <?php else: ?>
                                 <a href="<?=base_url()?>/public/uploads/images/<?= $medias['file_name']; ?>" target="_blank"><img src="<?=base_url()?>/public/uploads/images/<?= $medias['file_name']; ?>"  alt="" width="70%" height="70%" onclick="myFunction(this);" class="img-fluid"></a>
