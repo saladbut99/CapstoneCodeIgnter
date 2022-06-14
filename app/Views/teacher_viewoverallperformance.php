@@ -100,6 +100,16 @@
     </div>
     <div class="row" style="margin-top:3%;">
       <div class="col">
+      <div class="col" style="min-height: 60px;">
+                <div class="metercontainer" style="min-height: 60px; width: 100%; text-align: start;">
+                  <div id="meterbody" style="min-height: 60px; width:<?= number_format((float)$total_score, 2, '.', ''); ?>%; text-align: -webkit-right">
+                    <div id="" style="min-height: 60px; display: flex; align-items: center;justify-content: center;">
+                      <h1 style="font-size:2.5rem;"><?= number_format((float)$total_score, 2, '.', ''); ?>%</h1>
+                    </div>
+                  </div>
+                </div> 
+            </div>
+      </div>
           <h1><?= number_format((float)$total_score, 2, '.', ''); ?>%</h1>
       </div>
     </div>
