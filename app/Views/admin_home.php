@@ -2,6 +2,20 @@
 
 <?= $this->section('content'); ?>
 
+<!--
+$date1 = date_create(date('Y-m-d h:i:s'));
+$result2=date_format($date1, 'Y-m-d H:i:s');
+$date = date_create(date('Y-m-d h:i:s'));
+date_sub($date, date_interval_create_from_date_string('10 days'));
+$result=date_format($date, 'Y-m-d h:i:s');
+
+  $stmt=$conn->prepare("SELECT * FROM product where date_added>='$result' AND date_added<='$result2' and store_id='$storeid'");
+    $stmt->execute();
+    $arr_users = [];
+    if ($stmt->rowCount() > 0) {
+    $arr_users=$stmt->fetchAll();
+  } -->
+
 <div class="navbar" style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(<?=base_url()?>/public/assets/images/banner.png);">
        <nav class="nav row w-100 align-items-center">
            <div class="col-7">

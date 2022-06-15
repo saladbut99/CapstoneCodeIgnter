@@ -109,7 +109,7 @@
                   <div class="form-check grupouno">
                     <input class="form-check-input radiobtn-mc" type="radio" name="activity_answer" id="answer<?= $num ?>"  value="" required>
                     <label class="form-check-label" for="flexRadioDefault1" >
-                        <input type="text" id="question_<?= $num2 ?>" class="form-control input-mc" name="choice[]" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;" value="<?= $choice['choice'] ?>" required>
+                        <input type="text" id="question_<?= $num2 ?>" class="form-control input-mc" name="choice[]" maxlength="255" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;" value="<?= $choice['choice'] ?>" required>
                     </label>
                   </div>
                   <?php if (strcmp($activity->activity_answer,$choice['choice'])==0): ?>

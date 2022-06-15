@@ -360,7 +360,7 @@ public function addmodule()
         'label'=>'Image',
       ],
       'discussion'=>[
-        'rules'=>'required|is_unique[lesson_content.discussion]',
+        'rules'=>'required',
         'label'=>'Discussion Field',
       ],
     ];
@@ -370,17 +370,18 @@ public function addmodule()
         $_POST['lesson_description']=ucfirst($_POST['lesson_description']);
         $_POST['discussion']=ucfirst($_POST['discussion']);
         $model->save($_POST);
+        $les_id = $model->getInsertID();
 
         $db = db_connect();
         $custommodel = new CustomModel($db);
-        $teacher_lesson=$custommodel->showFK($_POST['lesson_name']);
+      //  $teacher_lesson=$custommodel->showFK($_POST['lesson_name']);
         $teachermodel = new TeacherModel();
         $getter = $teachermodel->select('teacher_id')->where(['teacher_id'=>session()->get('t_id')])->get()->getRow();
         $teacher_id = $getter->teacher_id;
         date_default_timezone_set('Asia/Manila');
          $myTime=date('Y-m-d h:i:s');
         $newData=[
-          'lesson_id' => $teacher_lesson,
+          'lesson_id' => $les_id,
           'teacher_id'=>$teacher_id,
           'lesson_upload_date' => $myTime,
 
@@ -394,7 +395,7 @@ public function addmodule()
 
           $db = db_connect();
           $customnew= new CustomModel($db);
-          $id=$customnew->getmoduleid($_POST['lesson_name']);
+        //  $id=$customnew->getmoduleid($_POST['lesson_name']);
 
                   $file = $this->request->getFile('image');
                   if ($file->isValid()&& !$file->hasMoved()) {
@@ -403,30 +404,31 @@ public function addmodule()
                   $filename = $file->getName();
                   $fileExt = pathinfo($filename, PATHINFO_EXTENSION);
 
-                  $db = db_connect();
-                  $getlessonid = new CustomModel($db);
-                  $id=$getlessonid->getlessonid($id);
+                  // $db = db_connect();
+                  // $getlessonid = new CustomModel($db);
+                  // $id=$getlessonid->getlessonid($id);
 
 
 
                   $_POST['file_name']=$filename;
-                  $_POST['lesson_id']=$id;
+                  $_POST['lesson_id']=  $les_id;
                   $_POST['file_targetDirectory']='./uploads/image';
                   $_POST['file_extension']=$fileExt;
 
                   $model1->save($_POST);
+                  $lescon_id = $model1->getInsertID();
 
                   $discussion=$_POST['discussion'];
-                  $db = db_connect();
-                  $getlessoncontentid = new CustomModel($db);
-                  $id2=$getlessoncontentid->getlessoncontentid($discussion);
-                  $_POST['lesson_content_id']=$id2;
+                  // $db = db_connect();
+                  // $getlessoncontentid = new CustomModel($db);
+                  // $id2=$getlessoncontentid->getlessoncontentid($discussion);
+                  $_POST['lesson_content_id']=$lescon_id;
                   $model2->save($_POST);
 
 
         $session = session();
         $session->setFlashdata('success','Module Upload Completed');
-          return redirect()->to('teacher/viewmodule/'.$id);
+          return redirect()->to('teacher/viewmodule/'.$les_id);
 
     }else{
       //if validation is not successfull
@@ -1201,6 +1203,7 @@ public function addactivity($id){
        $myTime=date('Y-m-d h:i:s');
        $_POST['activity_upload_date'] = $myTime;
        $model_activity->save($_POST);
+       $les_id = $model_activity->getInsertID();
        $session = session();
        $session->setFlashdata('success','Module Upload Completed');
 
@@ -1213,11 +1216,11 @@ public function addactivity($id){
        $id2=$result->activity_id;
 
        if (strcmp($_POST['activity_type'],'multiple_choice')==0) {
-         return redirect()->to('teacher/multiplechoice/'.$id2);
+         return redirect()->to('teacher/multiplechoice/'.$les_id );
        }elseif (strcmp($_POST['activity_type'],'enumeration')==0) {
-          return redirect()->to('teacher/enumeration/'.$id2);
+          return redirect()->to('teacher/enumeration/'.$les_id );
        }else {
-        return redirect()->to('teacher/identification/'.$id2);
+        return redirect()->to('teacher/identification/'.$les_id );
        }
 
   }else{
@@ -1461,6 +1464,7 @@ public function addquestion($id){
           $_POST['activity_perfect_score']=$score*2;
 
           $model_activity->save($_POST);
+          $les_id = $model_activity->getInsertID();
           $model_master->save($_POST);
 
           if (!is_uploaded_file($_FILES['image']['tmp_name'])) {
@@ -1483,7 +1487,7 @@ public function addquestion($id){
 
             $content = $builder1->get()->getRow();
             $_POST['file_name']='NoFile';
-            $_POST['activity_content_id']=$content->activity_content_id;
+            $_POST['activity_content_id']=$les_id;
             $_POST['file_targetDirectory']='NoFile';
             $_POST['file_extension']='NoFile';
 
@@ -1513,7 +1517,7 @@ public function addquestion($id){
           $content = $builder1->get()->getRow();
 
           $_POST['file_name']=$filename;
-          $_POST['activity_content_id']=$content->activity_content_id;
+          $_POST['activity_content_id']=$les_id;
           $_POST['file_targetDirectory']='./uploads/image';
           $_POST['file_extension']=$fileExt;
         }
@@ -1537,7 +1541,7 @@ public function addquestion($id){
             {
               $arre=[
                 'choice'=>$choice_ent[$i],
-                'activity_content_id'=>$content2->activity_content_id,
+                'activity_content_id'=>$les_id,
                 ];
               $model_choice->save($arre);
             }
@@ -1595,7 +1599,7 @@ public function addquestion_identification($id){
    $rules=[
 
        'activity_question'=>[
-         'rules'=>'required|is_unique[activity_content.activity_question]|alpha_space',
+         'rules'=>'required|is_unique[activity_content.activity_question]',
          'label'=>'Activity Title',
        ],
        'image'=>[
@@ -1650,6 +1654,7 @@ public function addquestion_identification($id){
           $_POST['activity_perfect_score']=$score*2;
 
           $model_activity->save($_POST);
+          $les_id = $model_activity->getInsertID();
           $model_master->save($_POST);
 
           if (!is_uploaded_file($_FILES['image']['tmp_name'])) {
@@ -1669,7 +1674,7 @@ public function addquestion_identification($id){
 
             $content = $builder1->get()->getRow();
             $_POST['file_name']='NoFile';
-            $_POST['activity_content_id']=$content->activity_content_id;
+            $_POST['activity_content_id']=$les_id;
             $_POST['file_targetDirectory']='NoFile';
             $_POST['file_extension']='NoFile';
 
@@ -1690,7 +1695,7 @@ public function addquestion_identification($id){
           $content = $builder1->get()->getRow();
 
           $_POST['file_name']=$filename;
-          $_POST['activity_content_id']=$content->activity_content_id;
+          $_POST['activity_content_id']=$les_id;
           $_POST['file_targetDirectory']='./uploads/image';
           $_POST['file_extension']=$fileExt;
         }
@@ -1716,6 +1721,7 @@ public function addquestion_identification($id){
      //validator provies a list of errors
      $session = session();
      $session->setFlashdata('danger','Invalid file upload');
+     $data['validation']=$this->validator;
    }
  }
      return redirect()->to('teacher/identification/'.$id);

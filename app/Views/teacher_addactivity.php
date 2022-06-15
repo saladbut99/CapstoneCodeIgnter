@@ -44,7 +44,7 @@
             <form action="" method="post" enctype="multipart/form-data">
               <div class="form-group">
                   <label for="" style="font-size:25px;">Activity Title</label>
-                  <input type="text" id="activity-txtarea" class="form-control" name="activity_name" style="height: 50px;" required>
+                  <input type="text" maxlength="255" id="activity-txtarea" class="form-control" name="activity_name" maxlength="255" style="height: 50px;" required>
               </div>
               <div class="text-danger" style="margin-top:3%;">
                 <?php if (isset($validation)): ?>
@@ -56,7 +56,7 @@
 
                 <div class="form-group">
                   <label for="" style="font-size:25px;">Activity Instruction</label>
-                  <textarea type="text" id="activity-txtarea" class="form-control" name="activity_instruction" rows="3" style="" required></textarea>
+                  <textarea type="text" id="activity-txtarea" class="form-control" name="activity_instruction" rows="3" style="" maxlength="255" required></textarea>
                 </div>
                 <div class="text-danger" style="margin-top:2%;margin-bottom:2%;">
                   <?php if (isset($validation)): ?>

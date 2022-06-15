@@ -29,7 +29,7 @@
         <a href="<?php echo base_url(); ?>/public/teacher/viewmoduletable" style="text-decoration: none; color: rgb(68, 68, 68);">
           <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
               <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
-          </svg> 
+          </svg>
           <h6>Go Back</h6>
         </a>
     </div>
@@ -43,7 +43,7 @@
 
   <div class="container h-100" style="margin-bottom:5%;" id="wrapper" >
      <div class="row">
-       
+
       <div>
         <?php if (session()->get('success')): ?>
           <div class="alert alert-success" role="alert" style="margin-bottom:5%;">
@@ -96,7 +96,7 @@
         <div id="imgtext"></div>
       </div> -->
       <div class="mt-3">
-        <h1 style="margin-top:5%;"><?= $discussion->discussion; ?></h1>
+        <h1 style="margin-top:5%; text-align: justify; text-justify: inter-word;"><?= $discussion->discussion; ?></h1>
       </div>
     </div>
 </div>
@@ -147,7 +147,7 @@
                                </div>
                            </div>
 
-                     <h1 style="margin-bottom:2%;"><?= $examples['example']; ?></h1>
+                     <h1 style="margin-bottom:2%; text-align: justify; text-justify: inter-word;"><?= $examples['example']; ?></h1>
                      <div style="margin-bottom:5%;">
                        <div class="strike" style="margin-bottom:3%;">
                          <span style="color:grey;">Media Example</span>
