@@ -29,6 +29,11 @@
        <h4><?= session()->get('updatesuccess') ?></h4>
    </div>
   <?php endif; ?>
+  <?php if (session()->get('danger')): ?>
+    <div class="alert alert-danger" role="alert" style="margin-bottom:2%;">
+        <h4><?= session()->get('danger') ?></h4>
+    </div>
+  <?php endif; ?>
 
    <div class="container mt-5" style="margin-bottom:5%;">
      <div class="mt-3">
@@ -49,6 +54,7 @@
           <thead style="text-align:left; font-size:3rem">
              <tr>
                 <th style="width:70%;">Activity Name</th>
+                <th style="width:10%;">Status</th>
                 <th></th>
              </tr>
           </thead>
@@ -57,7 +63,7 @@
              <?php foreach($users as $user): ?>
                  <tr style="text-align:center;">
                     <td style="text-align:left"><a href="<?php echo base_url(); ?>/public/teacher/activitytype_checker/<?= $user['activity_id'] ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['activity_name']; ?></a>  </td>
-
+                     <td style="text-align:center"><?php echo $user['status']; ?> </td>
                     <td class="d-grid gap-2 d-md-block">
                         <a href="<?php echo site_url('teacher/delete_mainactivity/'.$user['activity_id']);?>" onclick="return doconfirm()" style="text-decoration:none;">
                           <button type="button" class="btn btn-outline-danger">

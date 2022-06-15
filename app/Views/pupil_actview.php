@@ -83,7 +83,7 @@
 
              <?php if($users): ?>
              <?php foreach($users as $user): ?>
-              <?php if ($user['unit']==1 && $user['section_id']==$section_id): ?>
+              <?php if ($user['unit']==1 && $user['section_id']==$section_id && strcmp(strtoupper($user['status']),strtoupper('published'))==0): ?>
                  <tr style="text-align:center;">
                     <td style="text-align:left"><a href="viewactivitytable/<?= $user['lesson_id'] ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['lesson_name']; ?></a>  </td>
                   </tr>
@@ -103,7 +103,7 @@
              <?php foreach($users as $user): ?>
 
 
-               <?php if ($user['unit']==2 && $user['section_id']==$section_id): ?>
+               <?php if ($user['unit']==2 && $user['section_id']==$section_id && strcmp(strtoupper($user['status']),strtoupper('published'))==0): ?>
                  <tr style="text-align:center;">
                    <td style="text-align:left"><a href="viewactivitytable/<?= $user['lesson_id'] ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['lesson_name']; ?></a>  </td>
 
@@ -121,7 +121,7 @@
           </thead>
              <?php if($users): ?>
              <?php foreach($users as $user): ?>
-               <?php if ($user['unit']==3 && $user['section_id']==$section_id): ?>
+               <?php if ($user['unit']==3 && $user['section_id']==$section_id && strcmp(strtoupper($user['status']),strtoupper('published'))==0): ?>
                  <tr style="text-align:center;">
                    <td style="text-align:left"><a href="viewactivitytable/<?= $user['lesson_id'] ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['lesson_name']; ?></a>  </td>
 
@@ -140,7 +140,7 @@
           </thead>
              <?php if($users): ?>
              <?php foreach($users as $user): ?>
-               <?php if ($user['unit']==4 && $user['section_id']==$section_id): ?>
+               <?php if ($user['unit']==4 && $user['section_id']==$section_id && strcmp(strtoupper($user['status']),strtoupper('published'))==0): ?>
                  <tr style="text-align:center">
                    <td style="text-align:left"><a href="viewactivitytable/<?= $user['lesson_id'] ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['lesson_name']; ?></a>  </td>
 
@@ -165,7 +165,7 @@
             "bInfo" : false,
             "searching": false,
             "language": {
-              "emptyTable": "No uploaded module for Unit 1"
+              "emptyTable": "No uploaded or published module for Unit 1"
             },
              "responsive": true,
          });
@@ -174,7 +174,7 @@
             "bInfo" : false,
             "searching": false,
             "language": {
-              "emptyTable": "No uploaded module for Unit 2"
+              "emptyTable": "No uploaded or published module for Unit 2"
             },
              "responsive": true,
          });
@@ -183,7 +183,7 @@
             "bInfo" : false,
             "searching": false,
             "language": {
-              "emptyTable": "No uploaded module for Unit 3"
+              "emptyTable": "No uploaded or published module for Unit 3"
             },
              "responsive": true,
          });
@@ -192,7 +192,7 @@
             "bInfo" : false,
             "searching": false,
             "language": {
-              "emptyTable": "No uploaded module for Unit 4"
+              "emptyTable": "No uploaded or published module for Unit 4"
             },
              "responsive": true,
          });
@@ -304,7 +304,7 @@ setTimeout(function() {
       outline: none !important;
       box-shadow: none !important;
     }
-    
+
   #image-float {
     position: fixed;
     height: auto;
@@ -316,7 +316,7 @@ setTimeout(function() {
   #image-float > img {
     height: 400px;
    }
-  
+
    #notif-float {
     position: absolute;
     height: auto;

@@ -45,32 +45,33 @@
       <br>
        <h2 class="text-uppercase text-center">ACTIVITIES FOR MODULE: <?= $lesson->lesson_name; ?></h2>
       <?php if (!$users): ?>
-         <h1 style="text-align:center;">No Added Activity</h1>
+         <h1 style="text-align:center;">No Added or Published Activity</h1>
      <?php else: ?>
-
        <table class="table table-borderless table-hover" id="users-list"  style=" border-bottom: none;">
-
+         <thead style="text-align:left; font-size:3rem">
             <tr>
                <th style="width:50%;">Activity Name</th>
-               <th> Answered </th>
+               <th>Answered</th>
             </tr>
-
-
+          </thead>
             <?php if($users): ?>
             <?php foreach($users as $user): ?>
-              <?php foreach ($join as $joins): ?>
-                <?php if ($user['activity_id']==$joins['activity_id'] && $joins['pupil_id']==session()->get('t_id')): ?>
-                      <?php $display='block'; ?>
-                <?php endif; ?>
-              <?php endforeach; ?>
-                  <tr style="text-align:center;">
-                   <td style="text-align:left"><a href="<?php echo base_url(); ?>/public/pupil/activitytype_checker/<?= $user['activity_id'] ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['activity_name']; ?></a>  </td>
-                   <td style="text-align:left;display:<?= $display ?>;"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="green" class="bi bi-check-lg" viewBox="0 0 16 16">
-                     <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
-                   </svg>
-                 </td>
-                </tr>
-                <?php $display='none';?>
+              <?php if (strcmp(strtoupper($user['status']),strtoupper('published'))==0): ?>
+                <?php foreach ($join as $joins): ?>
+                  <?php if ($user['activity_id']==$joins['activity_id'] && $joins['pupil_id']==session()->get('t_id') ): ?>
+                        <?php $display='block'; ?>
+                  <?php endif; ?>
+                <?php endforeach; ?>
+
+                    <tr style="text-align:center;">
+                     <td style="text-align:left"><a href="<?php echo base_url(); ?>/public/pupil/activitytype_checker/<?= $user['activity_id'] ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['activity_name']; ?></a>  </td>
+                     <td style="text-align:left;display:<?= $display ?>;"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="green" class="bi bi-check-lg" viewBox="0 0 16 16">
+                       <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                     </svg>
+                   </td>
+                  </tr>
+                  <?php $display='none';?>
+              <?php endif; ?>
            <?php endforeach; ?>
            <?php endif; ?>
        </table>
@@ -120,11 +121,12 @@ function myFunction(imgs) {
     $(document).ready( function () {
       $('#users-list').DataTable({
          "bPaginate": false,
+         "ordering": false
          "bInfo" : false,
          "searching": false,
       //   dom: 'Bfrtip',
          "language": {
-           "emptyTable": "No examples uploaded"
+           "emptyTable": "No Added or Published Activity"
          },
        //   buttons: [
        //     {
@@ -136,33 +138,7 @@ function myFunction(imgs) {
        // ],
           "responsive": true,
       });
-      $('#users-list2').DataTable({
-         "bPaginate": false,
-         "bInfo" : false,
-         "searching": false,
-         "language": {
-           "emptyTable": "No uploaded module for Unit 2"
-         },
-          "responsive": true,
-      });
-      $('#users-list3').DataTable({
-         "bPaginate": false,
-         "bInfo" : false,
-         "searching": false,
-         "language": {
-           "emptyTable": "No uploaded module for Unit 3"
-         },
-          "responsive": true,
-      });
-      $('#users-list4').DataTable({
-         "bPaginate": false,
-         "bInfo" : false,
-         "searching": false,
-         "language": {
-           "emptyTable": "No uploaded module for Unit 4"
-         },
-          "responsive": true,
-      });
+
   } );
 </script>
 
@@ -227,7 +203,7 @@ if (scrollTop == $('.navbar').offset().top) {
    th {
      font-size: 2rem !important;
    }
-   
+
    }
 </style>
 

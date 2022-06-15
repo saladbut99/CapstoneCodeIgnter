@@ -15,7 +15,7 @@ class LessonMaster extends Model
     // protected $useSoftDeletes = true;
 
     //list of fields that can be manipulated from an outside class
-    protected $allowedFields = ['lesson_name','lesson_description', 'unit'];
+    protected $allowedFields = ['lesson_name','lesson_description', 'unit','status'];
 
     //specify dates
     // protected $useTimestamps = true;

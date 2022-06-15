@@ -69,13 +69,13 @@ class PupilModel extends Model
       $explode=$data['data']['pupil_firstname'];
       $pieces = explode(" ",$explode);
 
-      $username = implode("",$pieces);
-      $merge=$username;
-      $finalmerge='.'.$merge;
-      $mergeusername=$data['data']['pupil_lastname'].$finalmerge;
-      $getuser= $data['data']['pupil_username'];
-      $data['data']['pupil_username']=$getuser;
-      $data['data']['pupil_password']=password_hash($mergeusername, PASSWORD_DEFAULT);
+      // $username = implode("",$pieces);
+      // $merge=$username;
+      // $finalmerge='.'.$merge;
+      // $mergeusername=$data['data']['pupil_lastname'].$finalmerge;
+      // $getuser= $data['data']['pupil_username'];
+      // $data['data']['pupil_username']=$getuser;
+      // $data['data']['pupil_password']=password_hash($mergeusername, PASSWORD_DEFAULT);
 
       $secid=$data['data']['section_id'];
       $data['data']['section_id']=$secid;

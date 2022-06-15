@@ -38,14 +38,14 @@
           <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
               <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
           </svg>
-          <h7>Go Back</h7> 
+          <h7>Go Back</h7>
           </a>
       </div>
       <center>
       <br>
        <h2 class="text-uppercase text-center">ACTIVITIES FOR MODULE: <?= $lesson->lesson_name; ?></h2>
       <?php if (!$users): ?>
-         <h1 style="text-align:center;">No Added Activity</h1>
+         <h1 style="text-align:center;">No Added or Published Activity</h1>
      <?php else: ?>
 
        <table class="table table-borderless table-hover" id="users-list"  style=" border-bottom: none;">
@@ -58,20 +58,21 @@
 
             <?php if($users): ?>
             <?php foreach($users as $user): ?>
-              <?php foreach ($join as $joins): ?>
-                <?php if ($user['activity_id'] == $joins['activity_id']): ?>
-                      <?php $display='block'; ?>
-
-                <?php endif; ?>
+              <?php if (strcmp(strtoupper($user['status']),strtoupper('published'))==0): ?>
+                <?php foreach ($join as $joins): ?>
+                  <?php if ($user['activity_id']==$joins['activity_id'] && $joins['pupil_id']==session()->get('t_id') ): ?>
+                        <?php $display='block'; ?>
+                  <?php endif; ?>
                 <?php endforeach; ?>
-                <tr style="text-align:center;">
-                   <td style="text-align:left"><a href="<?php echo base_url(); ?>/public/pupil/viewperformance/<?= $user['activity_id'] ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['activity_name']; ?> </a>  </td>
-                   <td style="text-align:left;display:<?= $display ?>;"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="green" class="bi bi-check-lg" viewBox="0 0 16 16">
-                     <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
-                   </svg>
-                 </td>
+                    <tr style="text-align:center;">
+                     <td style="text-align:left"><a href="<?php echo base_url(); ?>/public/pupil/viewperformance/<?= $user['activity_id'] ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['activity_name']; ?></a>  </td>
+                     <td style="text-align:left;display:<?= $display ?>;"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="green" class="bi bi-check-lg" viewBox="0 0 16 16">
+                       <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                     </svg>
+                   </td>
                   </tr>
-               <?php $display='none';?>
+                  <?php $display='none';?>
+              <?php endif; ?>
            <?php endforeach; ?>
            <?php endif; ?>
        </table>
@@ -125,7 +126,7 @@ function myFunction(imgs) {
          "searching": false,
       //   dom: 'Bfrtip',
          "language": {
-           "emptyTable": "No examples uploaded"
+           "emptyTable": "No Added or Published Activity"
          },
        //   buttons: [
        //     {

@@ -97,9 +97,20 @@ class Teacher extends BaseController
          return redirect()->to('pupil/home');
        }
        helper(['form']);
-       $data=[
-         'meta_title'=>'Teacher | Register',
-       ];
+
+        $model = new PupilModel();
+        $data['count'] = $model->findAll();
+
+        $counter=0;
+        foreach ($data['count'] as $key) {
+          $counter+=1;
+        }
+        $counter=$counter+1000;
+        $data=[
+          'meta_title'=>'Teacher | Register',
+          'total'=>$counter,
+        ];
+
 
        // $section=[
        //   'Grade 1 - Rose','Grade 1 - Rosal', 'Grade 1 - Adelfa' ,'Grade 2 - Lily',  'Grade 2 - Gumamela',  'Grade 3 - Orchid',  'Grade 3 - Daisy'
@@ -114,7 +125,7 @@ class Teacher extends BaseController
        //    $model->save($_POST);
        // }
        if ($this->request->getMethod()=='post') {
-         $model = new PupilModel();
+
          $rules=[
            'pupil_firstname'=> [
              'rules'=>'required|alpha_space',
@@ -168,6 +179,7 @@ class Teacher extends BaseController
          if ($this->validate($rules)) {
              //Then do database insertion or loginuser
              $_POST['account_status']='Active';
+             $_POST['pupil_password']=password_hash($_POST['pupil_username'], PASSWORD_DEFAULT);
              $model->save($_POST);
              $session = session();
              $session->setFlashdata('success','Pupil Registration Successful ');
@@ -369,6 +381,7 @@ public function addmodule()
         $_POST['lesson_name']=ucfirst($_POST['lesson_name']);
         $_POST['lesson_description']=ucfirst($_POST['lesson_description']);
         $_POST['discussion']=ucfirst($_POST['discussion']);
+        $_POST['status']=ucfirst('unpublished');
         $model->save($_POST);
         $les_id = $model->getInsertID();
 
@@ -481,15 +494,25 @@ public function delete($id){
      return redirect()->to('pupil/home');
    }
    $lessonmaster = new LessonMaster;
-    $model = new TeacherLesson();
-    if ($lessonmaster) {
-      $lessonmaster->delete($id);
-    }
+   $data['users']=$lessonmaster->where(['lesson_id'=>$id])->get()->getRow();
+   //     echo "<pre>";
+   //   print_r($data['users']);
+   // echo "<pre>";
+   if (strcmp(strtoupper($data['users']->status),strtoupper('Published'))==0) {
+     $session = session();
+     $session->setFlashdata('danger','Published module Can not be deleted unpublish module first ');
+     return redirect()->to('teacher/viewmodule/'.$id);
+   }else {
+     $model = new TeacherLesson();
+     if ($lessonmaster) {
+       $lessonmaster->delete($id);
+     }
+    $session = session();
+    $session->setFlashdata('updatesuccess','Module Successfully Deleted ');
+    return redirect()->to('teacher/viewmoduletable');
+   }
 
 
-   $session = session();
-   $session->setFlashdata('updatesuccess','Module Successfully Deleted ');
-   return redirect()->to('teacher/viewmoduletable');
 
 }
 
@@ -1858,13 +1881,23 @@ public function delete_mainactivity($id){
     //   print_r($data['activity']);
     // echo "<pre>";
 
-    if ($activitymaster) {
-      $activitymaster->delete($id);
+
+
+    if (strcmp(strtoupper($data['activity']->status),strtoupper('Published'))==0) {
+      $session = session();
+      $session->setFlashdata('danger','Published activity Can not be deleted unpublish module first ');
+      return redirect()->to('teacher/viewactivity/'.$lesson_id);
+    }else {
+      if ($activitymaster) {
+        $activitymaster->delete($id);
+      }
+     $session = session();
+     $session->setFlashdata('updatesuccess','Activity Successfully Deleted ');
+     return redirect()->to('teacher/viewactivity/'.$lesson_id);
     }
 
-   $session = session();
-   $session->setFlashdata('updatesuccess','Activity Successfully Deleted ');
-    return redirect()->to('teacher/viewactivity/'.$lesson_id);
+
+
 
 }
 
@@ -2436,6 +2469,211 @@ public function viewperformance($id,$pupil_id){
 
 return view('teacher_viewperformance', $data);
 }
+
+public function publishactivity($id){
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+
+   $userModel = new LessonMaster();
+   $data['users'] = $userModel->where(['lesson_id'=>$id])->get()->getRow();
+
+           $lesson_master = [
+               'status' => ucfirst('published'),
+           ];
+
+            $db      = \Config\Database::connect();
+
+           $builder = $db->table('lesson_master');
+
+           $builder->where('lesson_id', $id);
+
+           $builder->update($lesson_master);
+
+           $session = session();
+           $session->setFlashdata('success','Module Successfully Published');
+             return redirect()->to('teacher/viewmodule/'.$id);
+
+  //
+  //
+  // return view('teacher_moduleperformance', $data);
+
+}
+public function unpublishactivity($id){
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+
+   $userModel = new LessonMaster();
+   $data['users'] = $userModel->where(['lesson_id'=>$id])->get()->getRow();
+
+           $lesson_master = [
+               'status' => ucfirst('unpublished'),
+           ];
+
+            $db      = \Config\Database::connect();
+
+           $builder = $db->table('lesson_master');
+
+           $builder->where('lesson_id', $id);
+
+           $builder->update($lesson_master);
+
+           $session = session();
+           $session->setFlashdata('success','Module Successfully Unpublished');
+             return redirect()->to('teacher/viewmodule/'.$id);
+
+  //
+  //
+  // return view('teacher_moduleperformance', $data);
+
+}
+
+public function unpublish_multiplechoice($id){
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+
+   $userModel = new ActivityMaster();
+   $data['users'] = $userModel->where(['lesson_id'=>$id])->get()->getRow();
+
+           $lesson_master = [
+               'status' => ucfirst('unpublished'),
+           ];
+
+            $db      = \Config\Database::connect();
+
+           $builder = $db->table('activity_master');
+
+           $builder->where('activity_id', $id);
+
+           $builder->update($lesson_master);
+
+           $session = session();
+           $session->setFlashdata('success','Activity Successfully Unpublished');
+             return redirect()->to('teacher/multiplechoice/'.$id);
+
+  //
+  //
+  // return view('teacher_moduleperformance', $data);
+
+}
+
+public function publish_multiplechoice($id){
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+
+   $userModel = new ActivityMaster();
+   $data['users'] = $userModel->where(['lesson_id'=>$id])->get()->getRow();
+
+           $lesson_master = [
+               'status' => ucfirst('published'),
+           ];
+
+            $db      = \Config\Database::connect();
+
+           $builder = $db->table('activity_master');
+
+           $builder->where('activity_id', $id);
+
+           $builder->update($lesson_master);
+
+           $session = session();
+           $session->setFlashdata('success','Activity Successfully Unpublished');
+             return redirect()->to('teacher/multiplechoice/'.$id);
+
+  //
+  //
+  // return view('teacher_moduleperformance', $data);
+
+}
+
+public function publish_identification($id){
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+
+   $userModel = new ActivityMaster();
+   $data['users'] = $userModel->where(['lesson_id'=>$id])->get()->getRow();
+
+           $lesson_master = [
+               'status' => ucfirst('published'),
+           ];
+
+            $db      = \Config\Database::connect();
+
+           $builder = $db->table('activity_master');
+
+           $builder->where('activity_id', $id);
+
+           $builder->update($lesson_master);
+
+           $session = session();
+           $session->setFlashdata('success','Activity Successfully Unpublished');
+             return redirect()->to('teacher/identification/'.$id);
+
+  //
+  //
+  // return view('teacher_moduleperformance', $data);
+
+}
+
+public function unpublish_identification($id){
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+
+   $userModel = new ActivityMaster();
+   $data['users'] = $userModel->where(['lesson_id'=>$id])->get()->getRow();
+
+           $lesson_master = [
+               'status' => ucfirst('unpublished'),
+           ];
+
+            $db      = \Config\Database::connect();
+
+           $builder = $db->table('activity_master');
+
+           $builder->where('activity_id', $id);
+
+           $builder->update($lesson_master);
+
+           $session = session();
+           $session->setFlashdata('success','Activity Successfully Unpublished');
+             return redirect()->to('teacher/identification/'.$id);
+
+  //
+  //
+  // return view('teacher_moduleperformance', $data);
+
+}
+
+
 
 
 

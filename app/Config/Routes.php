@@ -85,6 +85,12 @@ $routes->group('teacher', ["filter" => 'Auth'], function($routes){
   $routes->get('module/(:num)','Teacher::module/$1');
   $routes->get('viewmodule/(:num)','Teacher::viewmodule/$1');
   $routes->get('viewactivity/(:num)','Teacher::viewactivity/$1');
+  $routes->get('publishactivity/(:num)','Teacher::publishactivity/$1');
+  $routes->get('unpublish_multiplechoice/(:num)','Teacher::unpublish_multiplechoice/$1');
+  $routes->get('publish_multiplechoice/(:num)','Teacher::publish_multiplechoice/$1');
+  $routes->get('publish_identification/(:num)','Teacher::publish_identification/$1');
+  $routes->get('unpublish_identification/(:num)','Teacher::unpublish_identification/$1');
+  $routes->get('unpublishactivity/(:num)','Teacher::unpublishactivity/$1');
   $routes->get('delete_example/(:num)','Teacher::delete_example/$1');
   $routes->get('update_example/(:num)','Teacher::update_example/$1');
   $routes->add('removemodule','Teacher::removemodule');

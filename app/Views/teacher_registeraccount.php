@@ -52,7 +52,7 @@
 
                       <div class="form-outline mb-4 row align-items-center">
                         <label class="form-label col-4 p-0" for="form3Example1cg">First Name</label>
-                        <input type="text" id="pupil_firstname" name="pupil_firstname" class="form-control form-control-lg col" onblur="myFunction()"/>
+                        <input type="text" id="pupil_firstname" name="pupil_firstname" class="form-control form-control-lg col"/>
                         <center>
                         <div class="text-danger" style="margin-top:3%;">
                           <?php if (isset($validation)): ?>
@@ -94,7 +94,7 @@
 
                       <div class="form-outline mb-4 row align-items-center">
                         <label class="form-label col-4 p-0" for="form3Example4cg">Username</label>
-                        <input type="text" id="pupil_username" name="pupil_username" class="form-control form-control-lg col" readonly/>
+                        <input type="text" id="pupil_username" name="pupil_username" class="form-control form-control-lg col" value="<?= $total ?>" readonly/>
                         <center>
                         <div class="text-danger" style="margin-top:3%;">
                           <?php if (isset($validation)): ?>
@@ -213,10 +213,11 @@
               }
             var joined = split.join('');
 
+            var user = document.getElementById("pupil_username").value;
             var lastname = document.getElementById("pupil_lastname").value;
             var nameCapitalized = lastname.charAt(0).toUpperCase() + lastname.slice(1)
             var trimlastname=nameCapitalized.trim();
-            var username = trimlastname+'.'+joined;
+            var username = trimlastname+'.'+user;
              document.getElementById("pupil_username").value = username;
           }
         </script>
