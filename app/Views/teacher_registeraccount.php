@@ -49,6 +49,19 @@
                     </div>
                   <?php endif; ?>
                     <form  method="post" action="register">
+                      <div class="form-outline mb-4 row align-items-center">
+                        <label class="form-label col-4 p-0" for="form3Example4cg">Pupil Id</label>
+                        <input type="text" id="pupil_id"  class="form-control form-control-lg col" value="<?= $total ?>" readonly/>
+                        <center>
+                        <div class="text-danger" style="margin-top:3%;">
+                          <?php if (isset($validation)): ?>
+                                <?php if ($validation->hasError('pupil_username')): ?>
+                                      <p>  <?= $validation->getError('pupil_username') ?></p>
+                                <?php endif; ?>
+                          <?php endif; ?>
+                        </div>
+                      </center>
+                      </div>
 
                       <div class="form-outline mb-4 row align-items-center">
                         <label class="form-label col-4 p-0" for="form3Example1cg">First Name</label>
@@ -213,7 +226,7 @@
               }
             var joined = split.join('');
 
-            var user = document.getElementById("pupil_username").value;
+            var user = document.getElementById("pupil_id").value;
             var lastname = document.getElementById("pupil_lastname").value;
             var nameCapitalized = lastname.charAt(0).toUpperCase() + lastname.slice(1)
             var trimlastname=nameCapitalized.trim();

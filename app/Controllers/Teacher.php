@@ -368,8 +368,8 @@ public function addmodule()
         'label'=>'Lesson Unit',
       ],
       'image'=>[
-        'rules'=> 'uploaded[image]|ext_in[image,png,jpg,gif,mp4]',
-        'label'=>'Image',
+        'rules'=> 'uploaded[image]|ext_in[image,png,jpg,gif,mp4]|max_size[image,15000]',
+        'label'=>'File',
       ],
       'discussion'=>[
         'rules'=>'required',
@@ -568,7 +568,7 @@ public function module($id){
       //     'label'=>'Confirm Password',
       // ],
       'image'=>[
-        'rules'=> 'uploaded[image]|ext_in[image,png,jpg,gif,mp4]',
+        'rules'=> 'uploaded[image]|ext_in[image,png,jpg,gif,mp4]|max_size[image,15000]',
         'label'=>'Image',
       ],
       'discussion'=>[
@@ -774,7 +774,7 @@ public function viewmodule($id){
       //     'label'=>'Confirm Password',
       // ],
       'image'=>[
-        'rules'=> 'ext_in[image,png,jpg,gif,mp4,mp3,m4a]',
+        'rules'=> 'ext_in[image,png,jpg,gif,mp4,mp3,m4a,wav]|max_size[image,15000]',
         'label'=>'Image',
       ],
       'example'=>[
@@ -921,7 +921,7 @@ public function updatemodule($id){
           'label'=>'Lesson Unit',
         ],
       'image'=>[
-        'rules'=> 'ext_in[image,png,jpg,gif,mp4]',
+        'rules'=> 'ext_in[image,png,jpg,gif,mp4]|max_size[image,15000]',
         'label'=>'Image',
       ],
       // 'example'=>[
@@ -1091,8 +1091,8 @@ public function update_example($id){
 
     $rules=[
       'image'=>[
-        'rules'=> 'ext_in[image,png,jpg,gif,mp4,mp3,wav]',
-        'label'=>'Image',
+        'rules'=> 'ext_in[image,png,jpg,gif,mp4,mp3,wav]|max_size[image,15000]',
+        'label'=>'File',
       ],
       'example'=>[
         'rules'=>'required',
@@ -1434,8 +1434,8 @@ public function addquestion($id){
          'label'=>'Activity Title',
        ],
        'image'=>[
-         'rules'=> 'ext_in[image,png,jpg,gif,mp4,mp3,m4a,wav]',
-         'label'=>'Image',
+         'rules'=> 'ext_in[image,png,jpg,gif,mp4,mp3,m4a,wav]|max_size[image,15000]',
+         'label'=>'File',
        ],
      //   'activity_instruction'=>[
      //     'rules'=>'required',
@@ -1626,8 +1626,8 @@ public function addquestion_identification($id){
          'label'=>'Activity Title',
        ],
        'image'=>[
-         'rules'=> 'ext_in[image,png,jpg,gif,mp4,mp3,m4a,wav]',
-         'label'=>'Image',
+         'rules'=> 'ext_in[image,png,jpg,gif,mp4,mp3,m4a,wav]|max_size[image,15000]',
+         'label'=>'File',
        ],
      //   'activity_instruction'=>[
      //     'rules'=>'required',
@@ -2031,8 +2031,8 @@ public function update_question($id){
         'label'=>'Activity Title',
       ],
       'image'=>[
-        'rules'=> 'ext_in[image,png,jpg,gif,mp4,mp3,wav]',
-        'label'=>'Image',
+        'rules'=> 'ext_in[image,png,jpg,gif,mp4,mp3,wav]|max_size[image,15000]',
+        'label'=>'File',
       ],
     //   'activity_instruction'=>[
     //     'rules'=>'required',
@@ -2202,8 +2202,8 @@ public function update_identification($id){
         'label'=>'Activity Title',
       ],
       'image'=>[
-        'rules'=> 'ext_in[image,png,jpg,gif,mp4,mp3,wav]',
-        'label'=>'Image',
+        'rules'=> 'ext_in[image,png,jpg,gif,mp4,mp3,wav]|max_size[image,15000]',
+        'label'=>'File',
       ],
 
     'activity_answer'=>[
