@@ -51,7 +51,7 @@ $routes->group('admin', ["filter" => 'Auth'], function($routes){
   $routes->add('viewpupil_rose/(:alpha)','Admin::viewpupil_rose/$1');
   $routes->add('viewsectionperformance/(:alpha)','Admin::viewsectionperformance/$1');
   $routes->add('viewsection','Admin::viewsection');
-
+  $routes->get('viewmoduleperformance/(:alpha)','Admin::viewmoduleperformance/$1');
   $routes->add('viewperformance_section','Admin::viewperformance_section');
   $routes->add('viewgumamela','Admin::viewgumamela');
   $routes->add('viewrosal','Admin::viewrosal');

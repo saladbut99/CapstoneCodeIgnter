@@ -61,10 +61,13 @@
         </div>
       </div>
 <?php foreach ($pupil as $key ): ?>
- <?php
-        $total=$total+$key['activity_score'];
-        $range=$range+$key['perfect_score'];
-    ?>
+  <?php if (strcmp(strtoupper($key['account_status']),strtoupper('active'))==0): ?>
+    <?php
+           $total=$total+$key['activity_score'];
+           $range=$range+$key['perfect_score'];
+       ?>
+  <?php endif; ?>
+
 <?php endforeach; ?>
 <?php if ($total == 0 && $range==0): ?>
         <?php $display='none'; ?>
