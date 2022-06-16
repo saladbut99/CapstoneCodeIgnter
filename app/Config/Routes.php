@@ -102,6 +102,7 @@ $routes->group('teacher', ["filter" => 'Auth'], function($routes){
     $routes->match(['get','post'],'addexample','Teacher::addexample');
   $routes->add('manageaccount','Teacher::manage');
    $routes->match(['get','post'],'addmodule','Teacher::addmodule');
+   $routes->add('viewmoduleperformance/(:num)','Teacher::viewmoduleperformance/$1');
   $routes->add('pupilaccountstatus','Teacher::accountstatus');
    $routes->add('view/(:num)','Teacher::viewuser/$1');
    $routes->add('updatemodule/(:num)','Teacher::updatemodule/$1');

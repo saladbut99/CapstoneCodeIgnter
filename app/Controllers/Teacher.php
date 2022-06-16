@@ -2331,6 +2331,47 @@ public function viewpupil_section(){
 
   return view('teacher_pupilactivity', $data);
 }
+public function viewmoduleperformance($id){
+  $type = session()->get('usertype');
+   if ($type!='Teacher' && $type=='Admin'){
+      return redirect()->to('admin/home');
+    //  echo "hello";
+   }else if ($type!='Teacher' && $type=='Pupil') {
+     return redirect()->to('pupil/home');
+   }
+  $data=[
+    'meta_title'=>'Admin | View Module',
+    'section_id'=>$id,
+  ];
+  // $section_name =ucfirst($id);
+  //
+  $section = new Section();
+  $data['section']=$section->where(['section_id'=>$id])->get()->getRow();
+  //
+  $userModel = new TeacherRegistration();
+  $data['users']=$userModel->join('teacher_lesson', 'teacher.teacher_id = teacher_lesson.teacher_id')->join('lesson_master','teacher_lesson.lesson_id = lesson_master.lesson_id')->join('section','teacher.section_id = section.section_id')->orderBy('teacher.teacher_id', 'ASC')->findAll();
+  $data['teacher']=$userModel->where(['section_id'=>$id])->get()->getRow();
+  //
+  $activity_id = new PupilModel();
+  $data['join'] = $activity_id->join('performance_records','performance_records.pupil_id = pupil.pupil_id')
+                              ->join('activity_master','performance_records.activity_id = activity_master.activity_id')
+                              ->join('lesson_master','activity_master.lesson_id = lesson_master.lesson_id')
+                              // ->join('teacher_lesson', 'lesson_master.lesson_id = teacher_lesson.lesson_id')
+                              ->join('section','pupil.section_id = section.section_id')
+                            //  ->join('pupil','pupil.pupil_id = performance_records.pupil_id')
+                              ->findAll();
+
+
+  // $pupilmodel = new PupilModel();
+  // $data['pupil']=$pupilmodel->where(['pupil_id'=>$pupil_id])->get()->getRow();
+  // //
+  
+
+
+ return view('teacher_overallmoduleperformance', $data);
+
+}
+
 
 public function view_overallperformance($id){
   $type = session()->get('usertype');
