@@ -2394,6 +2394,7 @@ public function viewperformance_module($id){
 
 }
 
+
 public function teacher_activityperformance($id,$pupil_id){
   $type = session()->get('usertype');
    if ($type!='Teacher' && $type=='Admin'){
