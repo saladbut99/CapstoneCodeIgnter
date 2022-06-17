@@ -53,7 +53,7 @@
 
        <br>
        <?php if (!$users): ?>
-          <h1 style="text-align:center;">No Added Module</h1>
+          <h1 style="text-align:center;">No added pupils for this section!</h1>
       <?php else: ?>
         <a href="<?php echo base_url(); ?>/public/admin/viewsectionperformance\<?= $section='rose'; ?>" style="text-decoration:none;">
           <buttontype="button" class="btn btn-outline-success">
@@ -130,7 +130,7 @@
            "bInfo" : false,
            "searching": false,
            "language": {
-             "emptyTable": "No uploaded module for section Rose"
+             "emptyTable": "No pupil for section Rose"
            },
             "responsive": true,
             "order": [[ 1, "asc" ]],

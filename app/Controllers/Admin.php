@@ -760,8 +760,14 @@ return redirect()->to('admin/accountstatus');
       'meta_title'=>'Admin | Account Status',
       'section_name'=>$string,
     ];
+
+    $section_name =ucfirst($string);
+
+    $section = new Section();
+    $data['section']=$section->where(['section_name'=>$section_name])->get()->getRow();
+
     $userModel = new PupilModel();
-    $data['users'] = $userModel->join('section', 'pupil.section_id = section.section_id')->orderBy('pupil_id', 'DESC')->findAll();
+    $data['users'] = $userModel->join('section', 'pupil.section_id = section.section_id')->where(['section.section_id'=>$data['section']->section_id])->orderBy('pupil_id', 'DESC')->findAll();
 
 
     // $url1 = base_url(); // Site URL
@@ -770,6 +776,10 @@ return redirect()->to('admin/accountstatus');
     // $url4 = $this->uri->segment(3); // detail
     // $url5 = $this->uri->segment(4);
   //  echo $string;
+
+  //     echo "<pre>";
+  //   print_r($data['users']);
+  // echo "<pre>";
   if (strcmp(strtoupper($string),strtoupper('Rose'))==0) {
      return view('admin_viewperformancerose', $data);
   }elseif (strcmp(strtoupper($string),strtoupper('Rosal'))==0) {

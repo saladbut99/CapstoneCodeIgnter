@@ -29,7 +29,7 @@
 
    <?php $fname; $lname?>
 
-       <h1 style="text-align:center; font-size:500%;"><b>Grade 2 Orchid</b></h1>
+       <h1 style="text-align:center; font-size:500%;"><b>Grade 2 Daisy</b></h1>
        <?php if ($users): ?>
           <?php foreach ($users as $user): ?>
             <?php if ($user['section_id']==7 && strcmp(strtoupper($user['account_status']),strtoupper('active'))==0): ?>
@@ -76,7 +76,7 @@
 
                 <?php if($users): ?>
                 <?php foreach($users as $user): ?>
-                  <?php if ($user['section_id']==7): ?>
+                  <?php if ($user['section_id']==7 && strcmp(strtoupper($user['status']),strtoupper('published'))==0): ?>
 
                     <tr>
 

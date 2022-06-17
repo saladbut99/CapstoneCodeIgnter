@@ -30,6 +30,13 @@
        $( ".menu").toggle();
    });
    </script>
+   <div class="container">
+     <div class="row">
+        <div class="col">
+            <h1 style="text-align:center;">Section <?= $section->section_name ?></h1>
+        </div>
+     </div>
+   </div>
 
    <div class="container mt-5" style="margin-bottom:5%;">
      <div class="row mt-3s">
@@ -54,7 +61,7 @@
                  <th style="font-size:30px;">Pupil Id</th>
                  <th style="font-size:30px;" class="all">Firstname</th>
                  <th style="font-size:30px;" class="all">Lastname</th>
-                 <th style="font-size:30px;">Section Name</th>
+                 <th style="font-size:30px;">Username</th>
                  <th style="font-size:30px;">Address</th>
                  <th style="font-size:30px;">Parents/Guardian Name</th>
                  <th style="font-size:30px;" class="all">Status</th>
@@ -68,7 +75,7 @@
                  <td><?php echo $user['pupil_id']; ?></td>
                  <td><?php echo $user['pupil_firstname']; ?></td>
                  <td><?php echo $user['pupil_lastname']; ?></td>
-                 <td><?php echo $user['section_name']; ?></td>
+                 <td><?php echo $user['pupil_username']; ?></td>
                  <td><?php echo $user['pupil_address']; ?></td>
                  <td style="text-align:center;">Father: <?php echo $user['pupil_father_name']; ?><br>Mother: <?php echo $user['pupil_mother_name']; ?><br>Guardian: <?php echo $user['pupil_guardian_name']; ?></td>
                    <td style="text-align:center;"><?php echo $user['account_status']; ?></td>

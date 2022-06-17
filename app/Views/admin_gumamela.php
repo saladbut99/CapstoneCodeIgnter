@@ -73,7 +73,7 @@
 
                 <?php if($users): ?>
                 <?php foreach($users as $user): ?>
-                  <?php if ($user['section_id']==5): ?>
+                  <?php if ($user['section_id']==5 && strcmp(strtoupper($user['status']),strtoupper('published'))==0): ?>
 
                     <tr>
 
@@ -87,6 +87,7 @@
                               </svg> View Activity
                           </button>
                           </a></td>
+                          
                      </tr>
                   <?php endif; ?>
 

@@ -78,7 +78,7 @@
 
                 <?php if($users): ?>
                 <?php foreach($users as $user): ?>
-                  <?php if ($user['section_id']==$section->section_id): ?>
+                  <?php if ($user['section_id']==$section->section_id && strcmp(strtoupper($user['status']),strtoupper('published'))==0): ?>
                     <?php foreach ($join as $joins): ?>
                       <?php if ($joins['lesson_id']==$user['lesson_id']): ?>
                         <?php if (strcmp(strtoupper($joins['account_status']),strtoupper('active'))==0): ?>

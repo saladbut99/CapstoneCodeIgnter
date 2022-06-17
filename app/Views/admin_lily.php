@@ -74,7 +74,7 @@
 
                 <?php if($users): ?>
                 <?php foreach($users as $user): ?>
-                  <?php if ($user['section_id']==4): ?>
+                  <?php if ($user['section_id']==4 && strcmp(strtoupper($user['status']),strtoupper('published'))==0): ?>
                     <tr>
 
                         <td style="text-align:left"><a href="viewmodule/<?= $user['lesson_id'] ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['lesson_name']; ?></a> </td>

@@ -533,6 +533,9 @@ public function accountstatus(){
   $result3=$section_id->section_id;
   $pupilModel = new PupilModel();
   $data['users'] = $pupilModel->join('section', 'pupil.section_id = section.section_id')->where(['pupil.section_id'=>$result3])->orderBy('pupil_id', 'DESC')->findAll();
+  $section = new Section();
+  $data['section'] = $section->where(['section_id'=>session()->get('section_id')])->get()->getRow();
+
   return view('teacher_changeteacheraccstat', $data);
 }
 
@@ -2365,7 +2368,7 @@ public function viewmoduleperformance($id){
   // $pupilmodel = new PupilModel();
   // $data['pupil']=$pupilmodel->where(['pupil_id'=>$pupil_id])->get()->getRow();
   // //
-  
+
 
 
  return view('teacher_overallmoduleperformance', $data);
