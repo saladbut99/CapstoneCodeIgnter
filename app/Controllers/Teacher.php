@@ -57,8 +57,14 @@ class Teacher extends BaseController
 
 
       $teacher_id=session()->get('t_id');
-      $userModel = new TeacherLesson();
-      $data['users'] = $userModel->join('lesson_master', 'teacher_lesson.lesson_id = lesson_master.lesson_id')->where(['teacher_lesson.teacher_id'=>$teacher_id])->orderBy('lesson_master.lesson_id', 'ASC')->findAll();
+      //below is the condiftion for the if statement
+      //$user['section_id']==session()->get('section_id') &&$user['unit']==1
+      //$user['unit']==2
+      $userModel = new TeacherRegistration();
+      $data['users']=$userModel->join('teacher_lesson', 'teacher.teacher_id = teacher_lesson.teacher_id')->join('lesson_master','teacher_lesson.lesson_id = lesson_master.lesson_id')->join('section','teacher.section_id = section.section_id')->orderBy('lesson_master.unit', 'ASC')->findAll();
+      //below is the first array, di makita sa teacher ang uploaded module na inactive nga teacher
+    //  $userModel = new TeacherLesson();
+      //$data['users'] = $userModel->join('lesson_master', 'teacher_lesson.lesson_id = lesson_master.lesson_id')->where(['teacher_lesson.teacher_id'=>$teacher_id])->orderBy('lesson_master.lesson_id', 'ASC')->findAll();
       //     echo "<pre>";
       //   print_r($data['users']);
       // echo "<pre>";

@@ -423,9 +423,9 @@ setTimeout(function() {
   }
   </style>
 
-<div id="image-float">
-  <img src="<?=base_url()?>/public/assets/images/cast-image.png" alt="">
-</div>
+<!-- <div id="image-float">
+  <img src="/public/assets/images/cast-image.png" alt="">
+</div> -->
 
 <div id="notif-float">
   <img src="<?=base_url()?>/public/assets/images/selectkwarter.png" alt="">

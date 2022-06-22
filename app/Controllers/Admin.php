@@ -159,6 +159,7 @@ class Admin extends BaseController
 
       $userModel = new TeacherRegistration();
       $data['users']=$userModel->join('teacher_lesson', 'teacher.teacher_id = teacher_lesson.teacher_id')->join('lesson_master','teacher_lesson.lesson_id = lesson_master.lesson_id')->join('section','teacher.section_id = section.section_id')->orderBy('teacher.teacher_id', 'ASC')->findAll();
+      $data['teachers']=$userModel->findAll();
       return view('admin_rosal', $data);
     }
 
@@ -176,6 +177,11 @@ class Admin extends BaseController
 
       $userModel = new TeacherRegistration();
       $data['users']=$userModel->join('teacher_lesson', 'teacher.teacher_id = teacher_lesson.teacher_id')->join('lesson_master','teacher_lesson.lesson_id = lesson_master.lesson_id')->join('section','teacher.section_id = section.section_id')->orderBy('teacher.teacher_id', 'ASC')->findAll();
+      $data['teachers']=$userModel->findAll();
+
+      // echo "<pre>";
+      // print_r($data['teachers']);
+      // echo "<pre>";
       return view('admin_rose', $data);
     }
 
@@ -193,6 +199,7 @@ class Admin extends BaseController
 
       $userModel = new TeacherRegistration();
       $data['users']=$userModel->join('teacher_lesson', 'teacher.teacher_id = teacher_lesson.teacher_id')->join('lesson_master','teacher_lesson.lesson_id = lesson_master.lesson_id')->join('section','teacher.section_id = section.section_id')->orderBy('teacher.teacher_id', 'ASC')->findAll();
+      $data['teachers']=$userModel->findAll();
       return view('admin_adelfa', $data);
     }
 
@@ -210,6 +217,7 @@ class Admin extends BaseController
 
       $userModel = new TeacherRegistration();
       $data['users']=$userModel->join('teacher_lesson', 'teacher.teacher_id = teacher_lesson.teacher_id')->join('lesson_master','teacher_lesson.lesson_id = lesson_master.lesson_id')->join('section','teacher.section_id = section.section_id')->orderBy('lesson_master.unit', 'ASC')->findAll();
+      $data['teachers']=$userModel->findAll();
       return view('admin_lily', $data);
     }
 
@@ -227,6 +235,7 @@ class Admin extends BaseController
 
       $userModel = new TeacherRegistration();
       $data['users']=$userModel->join('teacher_lesson', 'teacher.teacher_id = teacher_lesson.teacher_id')->join('lesson_master','teacher_lesson.lesson_id = lesson_master.lesson_id')->join('section','teacher.section_id = section.section_id')->orderBy('lesson_master.unit', 'ASC')->findAll();
+      $data['teachers']=$userModel->findAll();
       return view('admin_gumamela', $data);
     }
 
@@ -248,7 +257,7 @@ class Admin extends BaseController
       // echo "<pre>";
       // print_r($data['users']);
       // echo "<pre>";
-
+      $data['teachers']=$userModel->findAll();
       return view('admin_orchid', $data);
     }
 
@@ -266,6 +275,7 @@ class Admin extends BaseController
 
       $userModel = new TeacherRegistration();
       $data['users']=$userModel->join('teacher_lesson', 'teacher.teacher_id = teacher_lesson.teacher_id')->join('lesson_master','teacher_lesson.lesson_id = lesson_master.lesson_id')->join('section','teacher.section_id = section.section_id')->orderBy('lesson_master.unit', 'ASC')->findAll();
+      $data['teachers']=$userModel->findAll();
       return view('admin_daisy', $data);
     }
 

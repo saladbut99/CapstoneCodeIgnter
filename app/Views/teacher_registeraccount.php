@@ -50,8 +50,8 @@
                   <?php endif; ?>
                     <form  method="post" action="register">
                       <div class="form-outline mb-4 row align-items-center">
-                        <label class="form-label col-4 p-0" for="form3Example4cg">Pupil Id</label>
-                        <input type="text" id="pupil_id"  class="form-control form-control-lg col" value="<?= $total ?>" readonly/>
+
+                        <input type="hidden" id="pupil_id"  class="form-control form-control-lg col" value="<?= $total ?>" readonly/>
                         <center>
                         <div class="text-danger" style="margin-top:3%;">
                           <?php if (isset($validation)): ?>
@@ -228,7 +228,12 @@
 
             var user = document.getElementById("pupil_id").value;
             var lastname = document.getElementById("pupil_lastname").value;
-            var nameCapitalized = lastname.charAt(0).toUpperCase() + lastname.slice(1)
+            var split = lastname.split(" ");
+            for (let i = 0; i < split.length; i++) {
+                split[i] = split[i][0].toUpperCase() + split[i].substr(1);
+              }
+            var joined_lastname = split.join('');
+            var nameCapitalized = joined_lastname.charAt(0).toUpperCase() + joined_lastname.slice(1)
             var trimlastname=nameCapitalized.trim();
             var username = trimlastname+'.'+user;
              document.getElementById("pupil_username").value = username;

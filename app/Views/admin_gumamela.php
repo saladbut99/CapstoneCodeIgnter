@@ -30,11 +30,11 @@
 
 <?php $fname; $lname?>
        <h1 style="text-align:center; font-size:500%;"><b>Grade 2 Gumamela</b></h1>
-       <?php if ($users): ?>
-          <?php foreach ($users as $user): ?>
-            <?php if ($user['section_id']==5 && strcmp(strtoupper($user['account_status']),strtoupper('active'))==0): ?>
-                  <?php $fname=$user['teacher_firstname'];
-                        $lname=$user['teacher_lastname'];
+       <?php if ($teachers): ?>
+          <?php foreach ($teachers as $teacher): ?>
+            <?php if ($teacher['section_id']==5 && strcmp(strtoupper($teacher['account_status']),strtoupper('active'))==0): ?>
+                  <?php $fname=$teacher['teacher_firstname'];
+                        $lname=$teacher['teacher_lastname'];
                    ?>
             <?php endif; ?>
           <?php endforeach; ?>
@@ -87,7 +87,7 @@
                               </svg> View Activity
                           </button>
                           </a></td>
-                          
+
                      </tr>
                   <?php endif; ?>
 

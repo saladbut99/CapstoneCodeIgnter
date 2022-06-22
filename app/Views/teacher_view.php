@@ -79,7 +79,7 @@
              <?php if($users): ?>
              <?php foreach($users as $user): ?>
 
-              <?php if ($user['unit']==1): ?>
+              <?php if ($user['section_id']==session()->get('section_id') &&$user['unit']==1): ?>
                  <tr style="text-align:center;">
                     <td style="text-align:left"><a href="viewmodule/<?= $user['lesson_id'] ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['lesson_name']; ?></a>  </td>
                       <td style="text-align:center"><?php echo $user['status']; ?> </td>
@@ -120,7 +120,7 @@
              <?php foreach($users as $user): ?>
 
 
-               <?php if ($user['unit']==2): ?>
+               <?php if ($user['section_id']==session()->get('section_id') &&$user['unit']==2): ?>
                  <tr style="text-align:center;">
                    <td style="text-align:left"><a href="viewmodule/<?= $user['lesson_id'] ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['lesson_name']; ?></a>  </td>
                     <td style="text-align:center"><?php echo $user['status']; ?> </td>
@@ -158,7 +158,7 @@
           </thead>
              <?php if($users): ?>
              <?php foreach($users as $user): ?>
-               <?php if ($user['unit']==3): ?>
+               <?php if ($user['section_id']==session()->get('section_id') &&$user['unit']==3): ?>
                  <tr style="text-align:center;">
                    <td style="text-align:left"><a href="viewmodule/<?= $user['lesson_id'] ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['lesson_name']; ?></a>  </td>
                    <td style="text-align:center"><?php echo $user['status']; ?> </td>
@@ -197,7 +197,7 @@
           </thead>
              <?php if($users): ?>
              <?php foreach($users as $user): ?>
-               <?php if ($user['unit']==4): ?>
+               <?php if ($user['section_id']==session()->get('section_id') &&$user['unit']==4): ?>
                  <tr style="text-align:center">
                    <td style="text-align:left"><a href="viewmodule/<?= $user['lesson_id'] ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['lesson_name']; ?></a>  </td>
                   <td style="text-align:left"><?php echo $user['status']; ?> </td>
