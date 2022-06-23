@@ -237,10 +237,13 @@ public function update(){
                                   ->join('lesson_master','activity_master.lesson_id = lesson_master.lesson_id')
                                   // ->join('teacher_lesson', 'lesson_master.lesson_id = teacher_lesson.lesson_id')
                                   ->join('section','pupil.section_id = section.section_id')
-                                  ->where(['pupil.pupil_id'=>$pupil_id])
+                                  ->where(['performance_records.pupil_id'=>$pupil_id])
                                 //  ->join('pupil','pupil.pupil_id = performance_records.pupil_id')
                                   ->findAll();
 
+                                  // echo "<pre>";
+                                  //   print_r($data['join']);
+                                  // echo "<pre";
       return view('pupil_actview', $data);
     }
 

@@ -933,6 +933,10 @@ public function updatemodule($id){
         'rules'=> 'ext_in[image,png,jpg,gif,mp4]|max_size[image,15000]',
         'label'=>'Image',
       ],
+      'discussion'=>[
+        'rules'=>'required',
+        'label'=>'Discussion Field',
+      ],
       // 'example'=>[
       //   'rules'=>'required|is_unique[lesson_example.example]',
       //   'label'=>'Examople Field',

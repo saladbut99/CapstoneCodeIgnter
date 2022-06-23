@@ -13,7 +13,7 @@
     $range=0;
     $total_score=0;
     $message='';
-    $message1='No module performance';
+    $message1='-';
 
  ?>
 
@@ -86,11 +86,12 @@
                                  $total=$total+$joins['activity_score'];
                                  $range=$range+$joins['perfect_score'];
                                  $total_score=$total/$range*100;
-                                 // if ($total_score>0) {
-                                 //   $message1= number_format((float)$total_score, 2, '.', '');
-                                 // }else {
-                                 //   $message1='No module performance';
-                                 // }
+                                 if ($total_score>0) {
+                                   $number = number_format((float)$total_score, 2, '.', '');
+                                   $message1= $number.'%';
+                                 }else {
+                                   $message1='-';
+                                 }
                              ?>
                         <?php endif; ?>
                       <?php endif; ?>
@@ -99,12 +100,14 @@
                     <tr>
                         <td style="text-align:left"><?php echo $user['lesson_name']; ?></td>
                         <td style="text-align:center"><?php echo $user['unit']; ?></td>
-                        <!-- <td style="text-align:center"> //$message1 </td> -->
-                         <td style="text-align:center"><?= number_format((float)$total_score, 2, '.', '') ?>%</td>
+                        <td style="text-align:center"> <?= $message1 ?> </td>
+                         <!-- <td style="text-align:center"> number_format((float)$total_score, 2, '.', '') ?>%</td> -->
                      </tr>
                   <?php endif; ?>
-                  <?php $total_score=0; ?>
-                  <?php //$message1='No module performance'; ?>
+                  <?php $total_score=0;
+                  $total=0;
+                   $range=0; ?>
+                  <?php $message1='-'; ?>
                <?php endforeach; ?>
                <?php endif; ?>
            </table>

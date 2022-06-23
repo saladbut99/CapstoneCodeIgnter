@@ -37,6 +37,26 @@
           </div>
           <div>
           <h2 class="text-uppercase text-center">ADD MODULE</h2>
+          <center>
+            <div class="text-danger" style="margin-top:3%; ">
+              <?php if (isset($validation)): ?>
+                    <?php if ($validation->hasError('image')): ?>
+                          <p style="font-size:25px;">  <?= $validation->getError('image') ?></p>
+                    <?php endif; ?>
+              <?php endif; ?>
+            </div>
+          </div>
+          </center>
+          <center>
+            <div class="text-danger" style="margin-top:3%;">
+              <?php if (isset($validation)): ?>
+                    <?php if ($validation->hasError('discussion')): ?>
+                          <p style="font-size:25px;">  <?= $validation->getError('discussion') ?></p>
+                    <?php endif; ?>
+              <?php endif; ?>
+            </div>
+          </center>
+
 
         <br>
       </div>
@@ -89,6 +109,7 @@
                   <center>
                   <img id="output" width="350" />
                 </center>
+                  <div class="text-danger" style="margin-top:3%;">
                     <?php if (isset($validation)): ?>
                           <?php if ($validation->hasError('image')): ?>
                                 <p>  <?= $validation->getError('image') ?></p>

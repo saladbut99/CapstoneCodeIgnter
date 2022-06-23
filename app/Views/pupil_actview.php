@@ -6,6 +6,7 @@
       $total_score=0;
       $total=0;
       $range=0;
+      $message1='-';
 ;?>
 
 <div class="navbar mb-0" style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(<?=base_url()?>/public/assets/images/banner.png);">
@@ -95,21 +96,25 @@
                              $total=$total+$joins['activity_score'];
                              $range=$range+$joins['perfect_score'];
                              $total_score=$total/$range*100;
-                             // if ($total_score>0) {
-                             //   $message1= number_format((float)$total_score, 2, '.', '');
-                             // }else {
-                             //   $message1='No module performance';
-                             // }
+                             if ($total_score>0) {
+                               $number = number_format((float)$total_score, 2, '.', '');
+                               $message1= $number.'%';
+                             }else {
+                               $message1='-';
+                             }
                          ?>
                     <?php endif; ?>
                   <?php endif; ?>
                 <?php endforeach; ?>
                  <tr style="text-align:center;">
                     <td style="text-align:left"><a href="viewactivitytable/<?= $user['lesson_id'] ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['lesson_name']; ?></a>  </td>
-                     <td style="text-align:center"><?= number_format((float)$total_score, 2, '.', '') ?>%</td>
+                    <td style="text-align:center"> <?= $message1 ?> </td>
                   </tr>
                <?php endif; ?>
-              <?php $total_score=0; ?>
+              <?php $total_score=0;
+              $total=0;
+               $range=0; ?>
+                 <?php $message1='-'; ?>
             <?php endforeach; ?>
             <?php endif; ?>
         </table>
@@ -133,21 +138,25 @@
                               $total=$total+$joins['activity_score'];
                               $range=$range+$joins['perfect_score'];
                               $total_score=$total/$range*100;
-                              // if ($total_score>0) {
-                              //   $message1= number_format((float)$total_score, 2, '.', '');
-                              // }else {
-                              //   $message1='No module performance';
-                              // }
+                              if ($total_score>0) {
+                                $number = number_format((float)$total_score, 2, '.', '');
+                                $message1= $number.'%';
+                              }else {
+                                $message1='-';
+                              }
                           ?>
                      <?php endif; ?>
                    <?php endif; ?>
                  <?php endforeach; ?>
                  <tr style="text-align:center;">
                    <td style="text-align:left"><a href="viewactivitytable/<?= $user['lesson_id'] ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['lesson_name']; ?></a>  </td>
-                   <td style="text-align:center"><?= number_format((float)$total_score, 2, '.', '') ?>%</td>
+                   <td style="text-align:center"> <?= $message1 ?> </td>
                   </tr>
               <?php endif; ?>
-              <?php $total_score=0; ?>
+              <?php $total_score=0;
+              $total=0;
+               $range=0; ?>
+               <?php $message1='-'; ?>
             <?php endforeach; ?>
             <?php endif; ?>
         </table>
@@ -168,21 +177,25 @@
                               $total=$total+$joins['activity_score'];
                               $range=$range+$joins['perfect_score'];
                               $total_score=$total/$range*100;
-                              // if ($total_score>0) {
-                              //   $message1= number_format((float)$total_score, 2, '.', '');
-                              // }else {
-                              //   $message1='No module performance';
-                              // }
+                              if ($total_score>0) {
+                                $number = number_format((float)$total_score, 2, '.', '');
+                                $message1= $number.'%';
+                              }else {
+                                $message1='-';
+                              }
                           ?>
                      <?php endif; ?>
                    <?php endif; ?>
                  <?php endforeach; ?>
                  <tr style="text-align:center;">
                    <td style="text-align:left"><a href="viewactivitytable/<?= $user['lesson_id'] ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['lesson_name']; ?></a>  </td>
-                   <td style="text-align:center"><?= number_format((float)$total_score, 2, '.', '') ?>%</td>
+                   <td style="text-align:center"> <?= $message1 ?> </td>
                   </tr>
               <?php endif; ?>
-              <?php $total_score=0; ?>
+              <?php $total_score=0;
+              $total=0;
+               $range=0; ?>
+               <?php $message1='-'; ?>
             <?php endforeach; ?>
             <?php endif; ?>
         </table>
@@ -198,26 +211,30 @@
                <?php if ($user['unit']==4 && $user['section_id']==$section_id && strcmp(strtoupper($user['status']),strtoupper('published'))==0): ?>
                  <?php foreach ($join as $joins): ?>
                    <?php if ($joins['lesson_id']==$user['lesson_id']): ?>
-                     <?php if (strcmp(strtoupper($joins['account_status']),strtoupper('active'))==0): ?>
+
                        <?php
                               $total=$total+$joins['activity_score'];
                               $range=$range+$joins['perfect_score'];
                               $total_score=$total/$range*100;
-                              // if ($total_score>0) {
-                              //   $message1= number_format((float)$total_score, 2, '.', '');
-                              // }else {
-                              //   $message1='No module performance';
-                              // }
+                              if ($total_score>0) {
+                                $number = number_format((float)$total_score, 2, '.', '');
+                                $message1= $number.'%';
+                              }else {
+                                $message1='-';
+                              }
                           ?>
-                     <?php endif; ?>
+
                    <?php endif; ?>
                  <?php endforeach; ?>
                  <tr style="text-align:center">
                    <td style="text-align:left"><a href="viewactivitytable/<?= $user['lesson_id'] ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['lesson_name']; ?></a>  </td>
-                   <td style="text-align:center"><?= number_format((float)$total_score, 2, '.', '') ?>%</td>
+                   <td style="text-align:center"> <?= $message1 ?> </td>
                   </tr>
               <?php endif; ?>
-              <?php $total_score=0; ?>
+              <?php $total_score=0;
+               $total=0;
+                $range=0; ?>
+                <?php $message1='-'; ?>
             <?php endforeach; ?>
             <?php endif; ?>
         </table>
