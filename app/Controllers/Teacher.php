@@ -1898,7 +1898,7 @@ public function delete_mainactivity($id){
 
     if (strcmp(strtoupper($data['activity']->status),strtoupper('Published'))==0) {
       $session = session();
-      $session->setFlashdata('danger','Published activity Can not be deleted unpublish module first ');
+      $session->setFlashdata('danger','Published activity Can not be deleted unpublish activity first ');
       return redirect()->to('teacher/viewactivity/'.$lesson_id);
     }else {
       if ($activitymaster) {
