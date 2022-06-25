@@ -71,8 +71,8 @@
           <thead style="text-align:left; font-size:3rem">
              <tr>
                <th style="width:50%;">Unit 1</th>
-               <th style="width:10%;">Status</th>
-               <th></th>
+               <th style="width:25%;">Status</th>
+               <th style="width:25%;"></th>
              </tr>
           </thead>
 
@@ -111,8 +111,8 @@
           <thead style="text-align:left; font-size:3rem">
              <tr>
                <th style="width:50%;">Unit 2</th>
-               <th style="width:10%;">Status</th>
-               <th></th>
+               <th style="width:25%;">Status</th>
+               <th style="width:25%;"></th>
              </tr>
           </thead>
 
@@ -151,8 +151,8 @@
           <thead style="text-align:left; font-size:3rem">
              <tr>
                 <th style="width:50%;">Unit 3</th>
-                <th style="width:10%;">Status</th>
-                <th></th>
+                <th style="width:25%;">Status</th>
+                <th style="width:25%;"></th>
 
              </tr>
           </thead>
@@ -191,8 +191,8 @@
           <thead style="text-align:left; font-size:3rem">
              <tr>
                <th style="width:50%;">Unit 4</th>
-               <th style="width:10%;">Status</th>
-               <th></th>
+               <th style="width:25%;">Status</th>
+               <th style="width:25%;"></th>
              </tr>
           </thead>
              <?php if($users): ?>
