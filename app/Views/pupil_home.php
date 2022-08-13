@@ -29,7 +29,7 @@
    </div>
 
     <audio id="bgmusic" hidden autoplay loop> 
-      <source src="<?=base_url()?>/public/assets/AngryBirdsTheme.mp3">
+      <source src="<?=base_url()?>/public/assets/pupilhomebgmusic.mp3">
     </audio>
     <audio id="beep-one" hidden preload="auto">
       <source src="<?=base_url()?>/public/assets/clickar.mp3">
