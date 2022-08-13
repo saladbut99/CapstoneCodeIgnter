@@ -26,6 +26,7 @@
        $( ".menu").toggle();
    });
    </script>
+   
 <div class="mask d-flex align-items-center h-100 gradient-custom-3 m-5 pb-5">
       <div class="container h-100" >
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -61,6 +62,20 @@
                 <form method="post" action="register">
 
                   <div class="form-outline mb-4 row align-items-center">
+
+                    <input type="hidden" id="teacher_id"  class="form-control form-control-lg col" value="<?= $total ?>" readonly/>
+                    <center>
+                    <div class="text-danger" style="margin-top:3%;">
+                      <?php if (isset($validation)): ?>
+                            <?php if ($validation->hasError('pupil_username')): ?>
+                                  <p>  <?= $validation->getError('pupil_username') ?></p>
+                            <?php endif; ?>
+                      <?php endif; ?>
+                    </div>
+                  </center>
+                  </div>
+
+                  <div class="form-outline mb-4 row align-items-center">
                     <label class="form-label col-4 p-0" for="form3Example1cg">First Name</label>
                     <input type="text" id="teacher_firstname" name='teacher_firstname' class="form-control form-control-lg col" onblur="myFunction()"/>
                     <center>
@@ -89,17 +104,17 @@
                   </div>
 
                   <div class="form-outline mb-4 row align-items-center">
-                        <label class="form-label col-4 p-0" for="form3Example3cg">Username</label>
-                        <input type="text" id="teacher_username" name='teacher_username' class="form-control form-control-lg col" readonly />
-                        <center>
-                        <div class="text-danger" style="margin-top:3%;">
-                          <?php if (isset($validation)): ?>
-                                <?php if ($validation->hasError('teacher_username')): ?>
-                                      <p>  <?= $validation->getError('teacher_username') ?></p>
-                                <?php endif; ?>
-                          <?php endif; ?>
-                        </div>
-                      </center>
+                    <label class="form-label col-4 p-0" for="form3Example4cg">Username</label>
+                    <input type="text" id="teacher_username" name="teacher_username" class="form-control form-control-lg col" value="<?= $total ?>" readonly/>
+                    <center>
+                    <div class="text-danger" style="margin-top:3%;">
+                      <?php if (isset($validation)): ?>
+                            <?php if ($validation->hasError('teacher_username')): ?>
+                                  <p>  <?= $validation->getError('teacher_username') ?></p>
+                            <?php endif; ?>
+                      <?php endif; ?>
+                    </div>
+                  </center>
                   </div>
                   <div class="form-outline mb-4 row align-items-center">
                         <label class="form-label col-4 p-0" for="form3Example3cg">Password</label><br>
@@ -131,7 +146,7 @@
 
                 </form>
 
-                  <script type="text/javascript">
+                  <!-- <script type="text/javascript">
 
                     function myFunction(){
                       var firstname = document.getElementById("teacher_firstname").value;
@@ -147,6 +162,31 @@
                       var nameCapitalized = lastname.charAt(0).toUpperCase() + lastname.slice(1)
                       var trimlastname=nameCapitalized.trim();
                       var username = trimlastname+'.'+joined;
+                       document.getElementById("teacher_username").value = username;
+                    }
+                  </script> -->
+                  <script type="text/javascript">
+
+                    function myFunction(){
+                      var firstname = document.getElementById("teacher_firstname").value;
+                    //  trim(firstname);
+                    var trimfirstname=firstname.trim();
+                      var split = trimfirstname.split(" ");
+                      for (let i = 0; i < split.length; i++) {
+                          split[i] = split[i][0].toUpperCase() + split[i].substr(1);
+                        }
+                      var joined = split.join('');
+
+                      var user = document.getElementById("teacher_id").value;
+                      var lastname = document.getElementById("teacher_lastname").value;
+                      var split = lastname.split(" ");
+                      for (let i = 0; i < split.length; i++) {
+                          split[i] = split[i][0].toUpperCase() + split[i].substr(1);
+                        }
+                      var joined_lastname = split.join('');
+                      var nameCapitalized = joined_lastname.charAt(0).toUpperCase() + joined_lastname.slice(1)
+                      var trimlastname=nameCapitalized.trim();
+                      var username = trimlastname+'.'+user;
                        document.getElementById("teacher_username").value = username;
                     }
                   </script>

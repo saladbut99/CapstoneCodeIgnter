@@ -37,6 +37,8 @@
           </div>
           <div>
           <h2 class="text-uppercase text-center">ADD MODULE</h2>
+          <p style="text-align:center;">Required (<span style="color:red;">*</span>)</p>
+
           <center>
             <div class="text-danger" style="margin-top:3%; ">
               <?php if (isset($validation)): ?>
@@ -63,7 +65,7 @@
           <div class="col-10 col-md-8 offset-md-2">
             <form action="addmodule" method="post" enctype="multipart/form-data">
               <div class="form-group">
-                  <label for="" style="font-size:25px;">Title</label>
+                  <label for="" style="font-size:25px;">Title <span style="color:red">*</span></label>
                   <input type="text" id="" class="form-control" name="lesson_name" style="border-color: #00acee; border-width: 2px; border-radius:15px; height: 50px;">
               </div>
               <div class="text-danger" style="margin-top:3%;">
@@ -75,7 +77,7 @@
               </div>
 
                 <div class="form-group">
-                  <label for="" style="font-size:25px;">Description/Instruction</label>
+                  <label for="" style="font-size:25px;">Description/Instruction <span style="color:red">*</span></label>
                   <textarea type="text" id="" class="form-control" name="lesson_description" rows="3" style="border-color: #00acee; border-width: 2px; border-radius:15px;"></textarea>
                 </div>
                 <div class="text-danger" style="margin-top:2%;margin-bottom:2%;">
@@ -87,7 +89,7 @@
                 </div>
 
                 <div class="form-group">
-                  <label class="form-check-label mx-1" for="gradelevel" style="font-size:25px;"> Unit  </label>
+                  <label class="form-check-label mx-1" for="gradelevel" style="font-size:25px;"> Unit <span style="color:red">*</span>  </label>
                   <br>
                    <input type="number" style="margin-left: auto;width: 50%; height: 50px; text-align: center; border: solid 2px #00acee; border-radius:15px;" id="unit" name="unit" placeholder="" class="mt-1" min='1' max='4'/> <br>
                 </div>
@@ -99,7 +101,7 @@
                   <?php endif; ?>
                 </div>
                 <div class="form-group">
-                  <label for="" style="font-size:25px; margin-bottom:3%;">Media</label>
+                  <label for="" style="font-size:25px; margin-bottom:3%;">Media <span style="color:red">*</span></label>
 
                   <div class="text-danger" style="margin-top:3%;">
                     <label class="btn btn-primary">
@@ -119,7 +121,7 @@
                 </div>
                 <br>
                 <div class="form-group">
-                  <label for="" style="font-size:25px; margin-bottom:3%;">Discussion</label>
+                  <label for="" style="font-size:25px; margin-bottom:3%;">Discussion <span style="color:red">*</span></label>
                   <textarea class="form-control" style="width: 100%; border: 2px solid #00acee;" id="exampleFormControlTextarea1" placeholder="Discussion" rows="4" name="discussion"></textarea>
                   <div class="text-danger" style="margin-top:3%;">
                     <?php if (isset($validation)): ?>

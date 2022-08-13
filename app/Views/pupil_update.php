@@ -126,7 +126,7 @@
 
 
                   <div class="d-flex justify-content-center">
-                    <button type="submit" class="btn btn-outline-primary btn-block btn-lg registerbutton">Update</button>
+                    <button type="submit" class="btn btn-outline-primary btn-block btn-lg registerbutton" onclick="return doconfirm()">Update</button>
                   </div>
 
                 </form>
@@ -142,6 +142,17 @@
                        document.getElementById("teacher_username").value = username;
                     }
                   </script>
+
+                  <script>
+                    function doconfirm()
+                    {
+                        job=confirm("You are about to change your password, please do not proceed without parent supervision!");
+                        if(job!=true)
+                        {
+                            return false;
+                        }
+                    }
+                    </script>
 
 
               </div>

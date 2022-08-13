@@ -81,7 +81,7 @@
 
               <?php if ($user['section_id']==session()->get('section_id') &&$user['unit']==1): ?>
                  <tr style="text-align:center;">
-                    <td style="text-align:left"><a href="viewmodule/<?= $user['lesson_id'] ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['lesson_name']; ?></a>  </td>
+                    <td style="text-align:left"><a href="<?php echo base_url(); ?>/Public/teacher/viewmodule/<?= $user['lesson_id'] ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['lesson_name']; ?></a>  </td>
                       <td style="text-align:center"><?php echo $user['status']; ?> </td>
                     <td class="d-grid gap-2 d-md-block">
 
@@ -122,7 +122,7 @@
 
                <?php if ($user['section_id']==session()->get('section_id') &&$user['unit']==2): ?>
                  <tr style="text-align:center;">
-                   <td style="text-align:left"><a href="viewmodule/<?= $user['lesson_id'] ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['lesson_name']; ?></a>  </td>
+                   <td style="text-align:left"><a href="<?php echo base_url(); ?>/Public/teacher/viewmodule/<?= $user['lesson_id'] ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['lesson_name']; ?></a>  </td>
                     <td style="text-align:center"><?php echo $user['status']; ?> </td>
                       <td class="d-grid gap-2 d-md-block">
                      <a href="addactivity\<?= $user['lesson_id'] ?>" style="text-decoration:none;">
@@ -160,7 +160,7 @@
              <?php foreach($users as $user): ?>
                <?php if ($user['section_id']==session()->get('section_id') &&$user['unit']==3): ?>
                  <tr style="text-align:center;">
-                   <td style="text-align:left"><a href="viewmodule/<?= $user['lesson_id'] ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['lesson_name']; ?></a>  </td>
+                   <td style="text-align:left"><a href="<?php echo base_url(); ?>/Public/teacher/viewmodule/<?= $user['lesson_id'] ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['lesson_name']; ?></a>  </td>
                    <td style="text-align:center"><?php echo $user['status']; ?> </td>
                    <td class="d-grid gap-2 d-md-block">
 
@@ -199,7 +199,7 @@
              <?php foreach($users as $user): ?>
                <?php if ($user['section_id']==session()->get('section_id') &&$user['unit']==4): ?>
                  <tr style="text-align:center">
-                   <td style="text-align:left"><a href="viewmodule/<?= $user['lesson_id'] ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['lesson_name']; ?></a>  </td>
+                   <td style="text-align:left"><a href="<?php echo base_url(); ?>/Public/teacher/viewmodule/<?= $user['lesson_id'] ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['lesson_name']; ?></a>  </td>
                   <td style="text-align:left"><?php echo $user['status']; ?> </td>
                    <td class="d-grid gap-2 d-md-block">
 

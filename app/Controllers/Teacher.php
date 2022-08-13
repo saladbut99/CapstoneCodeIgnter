@@ -787,7 +787,7 @@ public function viewmodule($id){
         'label'=>'Image',
       ],
       'example'=>[
-        'rules'=>'required|is_unique[lesson_example.example]',
+        'rules'=>'required',
         'label'=>'Examople Field',
       ],
     ];
@@ -857,11 +857,12 @@ public function viewmodule($id){
         $_POST['file_targetDirectory']='./uploads/image';
         $_POST['file_extension']=$fileExt;
       }
-          $model_lesson->save($_POST);
+        $model_lesson->save($_POST);
          $session = session();
          $session->setFlashdata('updatesuccess','Example added successfully ');
         //  return redirect()->to('teacher/viewmodule/'.$id);
         return redirect()->to('teacher/viewmodule/'.$id);
+
 
         // echo '<script type="text/javascript">
         //       alert("Account Creation Successful!");
@@ -1238,6 +1239,7 @@ public function addactivity($id){
        date_default_timezone_set('Asia/Manila');
        $myTime=date('Y-m-d h:i:s');
        $_POST['activity_upload_date'] = $myTime;
+       $_POST['status']=ucfirst('unpublished');
        $model_activity->save($_POST);
        $les_id = $model_activity->getInsertID();
        $session = session();

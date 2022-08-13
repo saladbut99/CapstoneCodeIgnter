@@ -53,6 +53,7 @@
                  <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
                </svg> View Module Performance</button>
             </a>
+            <br><br>
         <table class="table table-borderless table-hover" id="users-list"  style=" border-bottom: none;">
           <thead style="text-align:left; font-size:3rem">
              <tr>
@@ -100,9 +101,9 @@
       <script>
       $(document).ready( function () {
         $('#users-list').DataTable({
-           "bPaginate": false,
+        //   "bPaginate": false,
            "bInfo" : false,
-           "searching": false,
+          // "searching": false,
            "language": {
              "emptyTable": "No uploaded module for section Rose"
            },

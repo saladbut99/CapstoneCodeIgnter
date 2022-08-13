@@ -130,7 +130,7 @@
         $('#users-list').DataTable({
            "bPaginate": false,
            "bInfo" : false,
-           "searching": false,
+          // "searching": false,
            "language": {
              "emptyTable": "No pupil for section Lily"
            },

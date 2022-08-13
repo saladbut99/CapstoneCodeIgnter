@@ -240,7 +240,7 @@
 
    <br>
  </div>
- <form class="" action="<?php echo site_url('teacher/viewmodule/'.$users->lesson_id);?>" method="post" id="form" style="display:none;"  enctype="multipart/form-data">
+ <form class="" action="<?php echo site_url('teacher/viewmodule/'.$users->lesson_id);?>" method="post" id="form" style="display:none; margin-bottom:5%;"  enctype="multipart/form-data">
    <div class="container" style="margin-top:5%;">
      <div class="row">
        <div class="col-sm">
@@ -260,7 +260,7 @@
            <center>
               <img id="output" width="350" />
           </center>
-
+          <h7>For audio upload problems, please convert your file first to mp3.</h7>
          </div>
        </div>
 

@@ -75,7 +75,11 @@
                 <td><?php echo $user['teacher_lastname']; ?></td>
                 <td><?php echo $user['section_name']; ?></td>
                 <td style="text-align:center;"><?php echo $user['account_status']; ?></td>
-                <td style="text-align:center;"><a href="view/<?= $user['teacher_id'] ?>" style="text-decoration:none; font-size:15px;" class="btn btn-primary">Change Status</a></td>
+                <td style="text-align:center;">
+                  <a href="view/<?= $user['teacher_id'] ?>" style="text-decoration:none; font-size:15px;" class="btn btn-primary">Change Status</a>
+                  <a href="updateinfo/<?= $user['teacher_id'] ?>" style="text-decoration:none; font-size:15px;" class="btn btn-primary">Update Information</a>
+                  <a href="changesection/<?= $user['teacher_id'] ?>" style="text-decoration:none; font-size:15px;" class="btn btn-primary">Change Section</a>
+                </td>
              </tr>
             <?php endforeach; ?>
             <?php endif; ?>

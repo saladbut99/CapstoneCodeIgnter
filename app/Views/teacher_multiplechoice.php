@@ -41,7 +41,7 @@
   <div class="container h-100" style="margin-bottom:0%;" id="wrapper" >
      <div class="row">
        <div class="backbutton col-1">
-           <a href="<?php echo base_url(); ?>/public/teacher/viewmoduletable" style="text-decoration: none; color: rgb(68, 68, 68);">
+           <a onclick="history.back()" style="text-decoration: none; color: rgb(68, 68, 68);">
            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
                <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
            </svg>
@@ -234,6 +234,7 @@
              <label class="btn btn-success" style="margin-top:10%;margin-bottom:3%">
                 <i class="fa fa-image"></i> Add Media<input type="file" style="display: none;" name="image" id="image" class="form-control-file" onchange="loadFile(event)" class="align-middle" style="border-top:5%;">
              </label>
+
              <div class="text-danger" style="margin-top:3%;">
                <?php if (isset($validation)): ?>
                      <?php if ($validation->hasError('image')): ?>
@@ -244,6 +245,7 @@
            <center>
               <img id="output" width="350" />
           </center>
+          <h7>For audio upload problems, please convert your file first to mp3.</h7>
 
          </div>
        </div>

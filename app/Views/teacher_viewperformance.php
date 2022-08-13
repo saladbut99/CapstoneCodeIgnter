@@ -89,7 +89,13 @@
           </div>
           <div class="row">
               <div class="col" style="margin-bottom:2%;">
-                  <h1><?= $user['performed_activity_date'] ?></h1>
+                <?php
+
+                    $date = $user['performed_activity_date'];
+                    $display_date = date('d F Y - g:i ', strtotime(str_replace('/', '-', $date)));
+
+                 ?>
+                 <h1><?= $display_date ?></h1>
               </div>
           </div>
           <div class="row">
