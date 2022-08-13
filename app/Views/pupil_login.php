@@ -62,7 +62,7 @@ body {
             <?php if (isset($status)): ?>
                 <div class="col-10" style="margin-bottom:5%;">
                   <div class="alert alert-danger" role="aler">
-                            <p>Account Disabled</p>
+                            <p>Your account is currently disabled.</p>
                       </div>
                   </div>
               <?php endif; ?>

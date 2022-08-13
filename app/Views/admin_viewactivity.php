@@ -54,10 +54,11 @@
 
              <?php if($users): ?>
              <?php foreach($users as $user): ?>
+               <?php if (strcmp(strtoupper($user['status']),strtoupper('published'))==0): ?>
                  <tr style="text-align:center;">
                     <td style="text-align:left"><a href="<?php echo base_url(); ?>/public/admin/activitytype_checker/<?= $user['activity_id'] ?>" style="text-decoration:none; font-size:20px;"><?php echo $user['activity_name']; ?></a></td>
                    </tr>
-
+               <?php endif; ?>
             <?php endforeach; ?>
             <?php endif; ?>
         </table>

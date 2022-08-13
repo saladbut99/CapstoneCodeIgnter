@@ -46,6 +46,8 @@ $routes->group('admin', ["filter" => 'Auth'], function($routes){
  $routes->add('home','Admin::index');
  // $routes->add('register','Admin::register');
   $routes->match(['get','post'],'register','Admin::register');
+  $routes->match(['get','post'],'updateinfo/(:num)','Admin::updateinfo/$1');
+  $routes->match(['get','post'],'changesection/(:num)','Admin::changesection/$1');
   $routes->match(['get','post'],'update','Admin::update');
   $routes->add('viewrose','Admin::viewrose');
   $routes->add('viewpupil_rose/(:alpha)','Admin::viewpupil_rose/$1');
@@ -67,6 +69,7 @@ $routes->group('admin', ["filter" => 'Auth'], function($routes){
   $routes->get('view_overallmoduleperformance/(:num)/(:num)','Admin::view_overallmoduleperformance/$1/$2');
   $routes->get('viewmodule/(:num)','Admin::viewmodule/$1');
   $routes->get('view_overallperformance/(:num)','Admin::view_overallperformance/$1');
+  $routes->add('viewpupil_section/(:alpha)','Admin::viewpupil_section/$1');
   $routes->add('manage','Admin::manage');
   $routes->add('accountstatus','Admin::accountstatus');
 //  $routes->add('viewmodule','Admin::viewmodule');
@@ -83,7 +86,8 @@ $routes->group('teacher', ["filter" => 'Auth'], function($routes){
   $routes->add('viewpupil_section','Teacher::viewpupil_section');
   $routes->add('viewperformance_module/(:num)','Teacher::viewperformance_module/$1');
   $routes->get('module/(:num)','Teacher::module/$1');
-  $routes->get('viewmodule/(:num)','Teacher::viewmodule/$1');
+//  $routes->get('viewmodule/(:num)','Teacher::viewmodule/$1');
+  $routes->match(['get','post'],'viewmodule/(:num)','Teacher::viewmodule/$1');
   $routes->get('viewactivity/(:num)','Teacher::viewactivity/$1');
   $routes->get('publishactivity/(:num)','Teacher::publishactivity/$1');
   $routes->get('unpublish_multiplechoice/(:num)','Teacher::unpublish_multiplechoice/$1');

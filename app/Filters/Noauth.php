@@ -14,6 +14,7 @@ class Noauth implements FilterInterface
         // if (session()->get('isLoggedIn')) {
         // return  redirect()->to('dashboard');
         // }
+        //if user is logged in
         if (session()->get('isLoggedIn')) {
           if (session()->get('usertype')=='Pupil') {
             return redirect()->to('pupil/home');

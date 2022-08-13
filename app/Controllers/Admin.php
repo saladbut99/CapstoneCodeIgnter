@@ -47,9 +47,21 @@ class Admin extends BaseController
       }else if ($type!='Admin' && $type=='Pupil') {
          return redirect()->to('pupil/home');
        }
+
+       $model = new TeacherRegistration();
+       $data['count'] = $model->findAll();
+
+       $counter=0;
+       foreach ($data['count'] as $key) {
+         $counter+=1;
+       }
+       $counter=$counter+1000;
+       $counter+=1;
+
       helper(['form']);
       $data=[
         'meta_title'=>'Admin | Register',
+         'total'=>$counter,
       ];
 
       $section=[
@@ -122,6 +134,7 @@ class Admin extends BaseController
 
               //echo "sud database ";
              $_POST['account_status']='Active';
+             $_POST['teacher_password']=password_hash($_POST['teacher_username'], PASSWORD_DEFAULT);
               $model->save($_POST);
               $session = session();
               $session->setFlashdata('success','Teacher Registration Successful ');
@@ -143,6 +156,225 @@ class Admin extends BaseController
 
 
        return view('admin_registeraccount', $data);
+    }
+
+    public function updateinfo($id){
+      $type = session()->get('usertype');
+       if ($type!='Admin' && $type=='Teacher'){
+          return redirect()->to('teacher/home');
+        //  echo "hello";
+      }else if ($type!='Admin' && $type=='Pupil') {
+         return redirect()->to('pupil/home');
+       }
+
+        $db      = \Config\Database::connect();
+
+       $data=[
+         'meta_title'=>'Admin | Update Info',
+       ];
+
+       $model = new TeacherRegistration();
+       $data['user'] = $model->where(['teacher_id'=>$id])->get()->getRow();
+
+       $section = new Section();
+       $data['user_section'] = $section->where(['section_id'=>$data['user']->section_id])->get()->getRow();
+
+       // $counter=0;
+       // foreach ($data['count'] as $key) {
+       //   $counter+=1;
+       // }
+       // $counter=$counter+1000;
+       // $counter+=1;
+         //
+         // echo "<pre>";
+         //     print_r($data['section']);
+         //     echo "<pre>";
+
+
+      helper(['form']);
+
+
+      $section=[
+        'Rose','Rosal', 'Adelfa' ,'Lily',  'Gumamela',  'Orchid',  'Daisy'
+      ];
+      $data['section']=$section;
+      //
+      //
+      // // if ($this->request->getMethod()=='post') {
+      // //   $model = new TeacherRegistration();
+      // //    $model->save($_POST);
+      // // }
+
+
+      if ($this->request->getMethod()=='post') {
+        $model = new TeacherRegistration();
+        $rules=[
+          'teacher_firstname'=> [
+            'rules'=>'alpha_space',
+            'label'=>'Teacher Firstname',
+          ],
+          'teacher_lastname'=>[
+            'rules'=>'alpha',
+            'label'=>'Teacher Lastname',
+            'errors'=>[
+                  'alpha' => 'This field must not contain spaces.',
+                ]
+          ],
+
+
+
+          // 'teacher_username'=>[
+          //
+          //   'label'=>'Teacher Username',
+          //
+          // ],
+
+          // 'section_id'=>[
+          //   'rules'=>'required',
+          //   'label'=>'Section',
+          // ],
+        ];
+        if ($this->validate($rules)) {
+            //Then do database insertion or loginuser
+
+
+              //echo "sud database ";
+              $newData=[
+                'teacher_firstname' => trim(ucfirst($_POST['teacher_firstname'])),
+                'teacher_lastname'=>trim(ucfirst($_POST['teacher_lastname'])),
+                'teacher_username'=>$_POST['teacher_username'],
+                'teacher_password'=>password_hash($_POST['teacher_username'], PASSWORD_DEFAULT),
+
+              ];
+              $builder = $db->table('teacher');
+
+              $builder->where('teacher_id', $id);
+
+              $builder->update($newData);
+
+              $session = session();
+              $session->setFlashdata('success','Teacher Update Successful ');
+               return redirect()->to('admin/updateinfo/'.$id);
+
+        }else{
+          //if validation is not successfull
+          //validator provies a list of errors
+          $data['validation']=$this->validator;
+        }
+
+      }
+
+       return view('admin_updateinfo', $data);
+    }
+
+    public function changesection($id){
+      $type = session()->get('usertype');
+       if ($type!='Admin' && $type=='Teacher'){
+          return redirect()->to('teacher/home');
+        //  echo "hello";
+      }else if ($type!='Admin' && $type=='Pupil') {
+         return redirect()->to('pupil/home');
+       }
+
+        $db      = \Config\Database::connect();
+
+       $data=[
+         'meta_title'=>'Admin | Update Info',
+       ];
+
+       $model = new TeacherRegistration();
+       $data['user'] = $model->where(['teacher_id'=>$id])->get()->getRow();
+
+       $section = new Section();
+       $data['user_section'] = $section->where(['section_id'=>$data['user']->section_id])->get()->getRow();
+
+       // $counter=0;
+       // foreach ($data['count'] as $key) {
+       //   $counter+=1;
+       // }
+       // $counter=$counter+1000;
+       // $counter+=1;
+         //
+         // echo "<pre>";
+         //     print_r($data['section']);
+         //     echo "<pre>";
+
+
+      helper(['form']);
+
+
+      $section=[
+        'Rose','Rosal', 'Adelfa' ,'Lily',  'Gumamela',  'Orchid',  'Daisy'
+      ];
+
+      $data['section']=$section;
+
+            if ($this->request->getMethod()=='post') {
+              $model = new TeacherRegistration();
+              $rules=[
+
+
+                'section_id'=>[
+                  'rules'=>'required',
+                  'label'=>'Section',
+                ],
+              ];
+              if ($this->validate($rules)) {
+                  //Then do database insertion or loginuser
+
+
+                    //echo "sud database ";
+                    $section_id=$_POST['section_id'];
+
+                    $data['teacher']=$model->where(['section_id'=>$section_id])->get()->getRow();
+                    $data['sample']=$model->where(['section_id'=>$section_id])->findAll();
+                    $teacherarray=[
+                      'new'=>'',
+                    ];
+
+                    foreach ($data['sample'] as $teacher) {
+                      if (strcmp(strtoupper($teacher['account_status']),strtoupper('active'))==0) {
+                      //  echo "naay taos";
+                        // $data['new']=$teacher;
+                        $teacherarray=[
+                          'new'=>$teacher,
+                        ];
+                      }
+                    }
+
+
+
+                    if (empty($teacherarray['new'])) {
+
+                      //echo "sud database ";
+                      $newData=[
+                        'section_id'=>$_POST['section_id'],
+                      ];
+                      $builder = $db->table('teacher');
+
+                      $builder->where('teacher_id', $id);
+
+                      $builder->update($newData);
+
+                      $session = session();
+                      $session->setFlashdata('success','Section Update Successful ');
+                       return redirect()->to('admin/changesection/'.$id);
+                    }else {
+                        $data['status']='Account Inactive';
+                    }
+
+                  }else{
+                  //if validation is not successfull
+                  //validator provies a list of errors
+                  $data['validation']=$this->validator;
+                  }
+
+
+            }
+
+
+
+      return view('admin_changesection', $data);
     }
 
     public function viewrosal(){

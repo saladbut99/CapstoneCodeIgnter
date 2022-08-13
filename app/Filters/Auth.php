@@ -11,6 +11,7 @@ class Auth implements FilterInterface
     public function before(RequestInterface $request, $arguments = null)
     {
         //Do something here
+        //If user is not loggedin
         if (! session()->get('isLoggedIn')) {
         return  redirect()->to('homepage');
       }//else if (session()->get('usertype')=='Pupil') {

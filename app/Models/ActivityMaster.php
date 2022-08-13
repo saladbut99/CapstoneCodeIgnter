@@ -15,7 +15,7 @@ class ActivityMaster extends Model
     // protected $useSoftDeletes = true;
 
     //list of fields that can be manipulated from an outside class
-    protected $allowedFields = ['activity_name','activity_type', 'activity_instruction', 'lesson_id', 'activity_upload_date', 'activity_perfect_score'];
+    protected $allowedFields = ['activity_name','activity_type', 'activity_instruction', 'lesson_id', 'activity_upload_date', 'activity_perfect_score','status'];
 
     //specify dates
     // protected $useTimestamps = true;
